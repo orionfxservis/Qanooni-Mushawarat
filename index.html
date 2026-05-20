@@ -57,7 +57,7 @@
         }
         
         .law-slider {
-            animation: lawSlide 30s infinite linear;
+            animation: lawSlide 60s infinite linear;
         }
         
         @keyframes lawSlide {
@@ -351,22 +351,9 @@
     <nav class="flex justify-between items-center py-2">
 
         <!-- Logo -->
-        <div class="flex items-center gap-3">
-
-            <div class="w-11 h-11 bg-secondary rounded-lg flex items-center justify-center shadow-lg">
-                <i class="fas fa-balance-scale text-primary text-xl"></i>
-            </div>
-
-            <div>
-                <h1 class="text-xl font-bold text-white leading-tight">
-                    LegalEase
-                </h1>
-
-                <p class="text-[11px] text-secondary urdu-text leading-none" id="logoTagline">
-                    قانونی مشاورت
-                </p>
-            </div>
-        </div>
+        <a href="#home" class="flex items-center">
+            <img src="./images/logo/logo-02.png" alt="Qanooni Mushawarat Logo" class="h-14 md:h-16 w-auto object-contain">
+        </a>
 
         <!-- Desktop Menu -->
         <div class="hidden lg:flex items-center gap-7">
@@ -619,6 +606,30 @@
         </div>
     </div>
 </section>
+
+    <!-- Scrolling Image Gallery Section -->
+    <section class="py-12 bg-[#f8f9fa] border-b border-gray-200 overflow-hidden">
+        <div class="relative overflow-hidden w-full">
+            <!-- Using existing law-slider animation for seamless scrolling -->
+            <div class="law-slider flex gap-6 items-center w-max">
+                <!-- Original set of 6 images -->
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                
+                <!-- Duplicated set of 6 images for seamless loop -->
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
+            </div>
+        </div>
+    </section>
 
     <!-- Laws Carousel -->
     <section id="laws" class="py-16 bg-white">
@@ -1141,9 +1152,7 @@
 
     <div class="container mx-auto px-4">
 
-    <!-- Main Grid (Outer Box) -->
-    <div class="bg-gradient-to-br from-[#f0f7ff] to-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-[40px] p-6 md:p-12 lg:p-14">
-
+    <!-- Main Grid -->
         <!-- Top Heading (Moved Inside) -->
         <div class="mb-14">
 
@@ -1261,22 +1270,22 @@
                 <div class="grid md:grid-cols-2 gap-5">
 
                     <!-- Lawyer 1 -->
-                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="family">
-                        <div class="flex items-center gap-5">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                    <div class="lawyer-card bg-white rounded-[28px] p-4 shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="family">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" class="w-20 h-20 rounded-[14px] object-cover flex-shrink-0" alt="Lawyer">
                             <div class="flex-1">
-                                <span class="inline-block bg-[#e8f3ec] text-[#1f6036] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                <span class="inline-block bg-[#e8f3ec] text-[#1f6036] px-3 py-1 rounded-full text-[10px] font-extrabold tracking-wider mb-1.5">
                                     FAMILY SPECIALIST
                                 </span>
-                                <h3 class="text-xl font-bold text-primary mb-1">
+                                <h3 class="text-lg font-bold text-primary mb-0.5">
                                     Barrister Asma Naeem
                                 </h3>
-                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
-                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                <p class="text-gray-500 flex items-center gap-1.5 text-[13px] mb-1.5">
+                                    <i class="fas fa-location-dot text-[#d4b996] text-[11px]"></i>
                                     Lahore High Court
                                 </p>
-                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
-                                    <i class="fas fa-star"></i>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-[13px] font-bold">
+                                    <i class="fas fa-star text-[11px]"></i>
                                     4.9 (124 reviews)
                                 </div>
                             </div>
@@ -1284,22 +1293,22 @@
                     </div>
 
                     <!-- Lawyer 2 -->
-                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="criminal">
-                        <div class="flex items-center gap-5">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                    <div class="lawyer-card bg-white rounded-[28px] p-4 shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="criminal">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500" class="w-20 h-20 rounded-[14px] object-cover flex-shrink-0" alt="Lawyer">
                             <div class="flex-1">
-                                <span class="inline-block bg-[#fdedeb] text-[#a12323] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                <span class="inline-block bg-[#fdedeb] text-[#a12323] px-3 py-1 rounded-full text-[10px] font-extrabold tracking-wider mb-1.5">
                                     CRIMINAL ADVOCATE
                                 </span>
-                                <h3 class="text-xl font-bold text-primary mb-1">
+                                <h3 class="text-lg font-bold text-primary mb-0.5">
                                     Adv. Sikandar Hayat
                                 </h3>
-                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
-                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                <p class="text-gray-500 flex items-center gap-1.5 text-[13px] mb-1.5">
+                                    <i class="fas fa-location-dot text-[#d4b996] text-[11px]"></i>
                                     Islamabad High Court
                                 </p>
-                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
-                                    <i class="fas fa-star"></i>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-[13px] font-bold">
+                                    <i class="fas fa-star text-[11px]"></i>
                                     4.8 (89 reviews)
                                 </div>
                             </div>
@@ -1307,22 +1316,22 @@
                     </div>
 
                     <!-- Lawyer 3 -->
-                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="immigration">
-                        <div class="flex items-center gap-5">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                    <div class="lawyer-card bg-white rounded-[28px] p-4 shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="immigration">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500" class="w-20 h-20 rounded-[14px] object-cover flex-shrink-0" alt="Lawyer">
                             <div class="flex-1">
-                                <span class="inline-block bg-[#eaf0fc] text-[#1d4c9e] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                <span class="inline-block bg-[#eaf0fc] text-[#1d4c9e] px-3 py-1 rounded-full text-[10px] font-extrabold tracking-wider mb-1.5">
                                     UK COMMONWEALTH
                                 </span>
-                                <h3 class="text-xl font-bold text-primary mb-1">
+                                <h3 class="text-lg font-bold text-primary mb-0.5">
                                     Barrister Sarah Malik
                                 </h3>
-                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
-                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                <p class="text-gray-500 flex items-center gap-1.5 text-[13px] mb-1.5">
+                                    <i class="fas fa-location-dot text-[#d4b996] text-[11px]"></i>
                                     Karachi & London Chambers
                                 </p>
-                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
-                                    <i class="fas fa-star"></i>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-[13px] font-bold">
+                                    <i class="fas fa-star text-[11px]"></i>
                                     5.0 (205 reviews)
                                 </div>
                             </div>
@@ -1330,22 +1339,22 @@
                     </div>
 
                     <!-- Lawyer 4 -->
-                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="property">
-                        <div class="flex items-center gap-5">
-                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                    <div class="lawyer-card bg-white rounded-[28px] p-4 shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="property">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500" class="w-20 h-20 rounded-[14px] object-cover flex-shrink-0" alt="Lawyer">
                             <div class="flex-1">
-                                <span class="inline-block bg-[#fdf8e8] text-[#8e6b18] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                <span class="inline-block bg-[#fdf8e8] text-[#8e6b18] px-3 py-1 rounded-full text-[10px] font-extrabold tracking-wider mb-1.5">
                                     PROPERTY LAW
                                 </span>
-                                <h3 class="text-xl font-bold text-primary mb-1">
+                                <h3 class="text-lg font-bold text-primary mb-0.5">
                                     Adv. Chaudhry Tariq
                                 </h3>
-                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
-                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                <p class="text-gray-500 flex items-center gap-1.5 text-[13px] mb-1.5">
+                                    <i class="fas fa-location-dot text-[#d4b996] text-[11px]"></i>
                                     Rawalpindi Bench
                                 </p>
-                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
-                                    <i class="fas fa-star"></i>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-[13px] font-bold">
+                                    <i class="fas fa-star text-[11px]"></i>
                                     4.7 (63 reviews)
                                 </div>
                             </div>
