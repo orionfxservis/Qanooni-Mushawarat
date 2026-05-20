@@ -269,6 +269,74 @@
     min-width:100%;
 }
 
+<style>
+
+#home{
+    overflow:hidden;
+    margin:0;
+    padding:0;
+}
+
+#heroSlider{
+    display:flex;
+    height:100%;
+    width:100%;
+}
+
+#heroSlider > div{
+    min-width:100%;
+    height:100%;
+    position:relative;
+    overflow:hidden;
+}
+
+/* HERO IMAGES */
+#heroSlider img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center center;
+    display:block;
+}
+
+/* Prevent stretched images */
+@media(min-width:1400px){
+
+    #heroSlider img{
+        object-position:center top;
+    }
+
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+    #home{
+        margin-top:0;
+        padding-top:0;
+    }
+
+    #heroSlider{
+        height:72vh;
+    }
+
+    #heroSlider img{
+        object-fit:cover;
+        object-position:center;
+    }
+
+    #home h2{
+        font-size:2.3rem;
+        line-height:1.1;
+    }
+
+    #home p{
+        font-size:1rem;
+    }
+
+}
+
+</style>
     </style>
 </head>
 <body class="bg-light">
@@ -298,7 +366,6 @@
                     قانونی مشاورت
                 </p>
             </div>
-
         </div>
 
         <!-- Desktop Menu -->
@@ -309,14 +376,14 @@
                Home
             </a>
 
-            <a href="#services" class="nav-link text-white hover:text-secondary transition"
-               data-en="Services" data-ur="خدمات">
-               Services
-            </a>
-
             <a href="#laws" class="nav-link text-white hover:text-secondary transition"
                data-en="Laws" data-ur="قوانین">
                Laws
+            </a>
+			
+			<a href="#services" class="nav-link text-white hover:text-secondary transition"
+               data-en="Services" data-ur="خدمات">
+               Services
             </a>
 
             <a href="#client-form" class="nav-link text-white hover:text-secondary transition"
@@ -338,7 +405,6 @@
                data-en="Contact" data-ur="رابطہ">
                Contact
             </a>
-
         </div>
 
         <!-- Right Side -->
@@ -347,9 +413,7 @@
             <!-- Urdu Toggle -->
             <button onclick="toggleLanguage()"
                 class="w-10 h-10 rounded-full border border-white/20 text-white hover:bg-secondary hover:text-primary transition flex items-center justify-center">
-
                 <i class="fas fa-language text-sm"></i>
-
             </button>
 
             <!-- Theme Toggle -->
@@ -357,7 +421,6 @@
                 class="w-10 h-10 rounded-full border border-white/20 text-white hover:bg-secondary hover:text-primary transition flex items-center justify-center">
 
                 <i class="fas fa-moon text-sm" id="themeIcon"></i>
-
             </button>
 
             <!-- Live Chat -->
@@ -369,7 +432,6 @@
                 <span data-en="Live Chat" data-ur="چیٹ">
                     Live Chat
                 </span>
-
             </button>
 
             <!-- Consultation -->
@@ -381,7 +443,6 @@
                 Consultation
 
             </a>
-
         </div>
 
         <!-- Mobile Menu Button -->
@@ -389,11 +450,8 @@
             class="lg:hidden text-white text-2xl">
 
             <i class="fas fa-bars" id="menuIcon"></i>
-
         </button>
-
     </nav>
-
 </div>
         
         <!-- Mobile Menu -->
@@ -401,8 +459,8 @@
             <div class="container mx-auto px-4 py-6">
                 <div class="flex flex-col gap-4">
                     <a href="#home" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Home" data-ur="ہوم">Home</a>
-                    <a href="#services" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Services" data-ur="خدمات">Services</a>
                     <a href="#laws" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Laws" data-ur="قوانین">Laws</a>
+					<a href="#services" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Services" data-ur="خدمات">Services</a>
                     <a href="#client-form" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Submit Case" data-ur="کیس جمع کریں">Submit Case</a>
                     <a href="#lawyers" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Lawyers" data-ur="وکلاء">Lawyers</a>
                     <a href="#faq" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="FAQ" data-ur="عمومی سوالات">FAQ</a>
@@ -443,10 +501,9 @@
                 <div class="absolute inset-0 bg-black/60"></div>
 
                 <!-- Content -->
-                <div class="relative z-10 container mx-auto px-6 md:px-10">
+                <div class="relative z-10 container mx-auto px-6 md:px-10 pt-20 md:pt-28">
 
                     <div class="max-w-3xl">
-
                         <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
                             Welcome to LegalEase
                         </span>
@@ -460,7 +517,6 @@
                         </p>
 
                         <div class="flex flex-wrap gap-4">
-
                             <a href="#client-form"
                                class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
                                 Get Free Consultation
@@ -470,13 +526,9 @@
                                class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition">
                                 Our Services
                             </a>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 			
 			<!-- Slide 2 -->
@@ -493,8 +545,7 @@
                 <div class="absolute inset-0 bg-black/60"></div>
 
                 <!-- Content -->
-                <div class="relative z-10 container mx-auto px-6 md:px-10">
-
+                <div class="relative z-10 container mx-auto px-6 md:px-10 pt-20 md:pt-28">
                     <div class="max-w-3xl">
                         <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
                             Welcome to LegalEase
@@ -509,7 +560,6 @@
                         </p>
 
                         <div class="flex flex-wrap gap-4">
-
                             <a href="#client-form"
                                class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
                                 Get Free Consultation
@@ -538,8 +588,7 @@
                 <div class="absolute inset-0 bg-black/60"></div>
 
                 <!-- Content -->
-                <div class="relative z-10 container mx-auto px-6 md:px-10">
-
+                <div class="relative z-10 container mx-auto px-6 md:px-10 pt-20 md:pt-28">
                     <div class="max-w-3xl">
                         <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
                             Welcome to LegalEase
@@ -554,7 +603,6 @@
                         </p>
 
                         <div class="flex flex-wrap gap-4">
-
                             <a href="#client-form"
                                class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
                                 Get Free Consultation
@@ -1053,7 +1101,7 @@
     </section>
 
     <!-- Statistics Section -->
-    <section class="py-16 bg-white">
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center">
@@ -1088,201 +1136,359 @@
         </div>
     </section>
 
-    <!-- Lawyers Panel -->
-    <section id="lawyers" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="JOIN OUR NETWORK" data-ur="ہمارے نیٹ ورک میں شامل ہوں">JOIN OUR NETWORK</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Lawyers Registration Panel" data-ur="وکلاء رجسٹریشن پینل">Lawyers Registration Panel</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto" data-en="Join our network of legal professionals and serve clients across Pakistan and beyond" data-ur="قانونی پیشہ ورنوں کے ہمارے نیٹ ورک میں شامل ہوں اور پاکستان اور اس سے باہر کلائنٹس کی خدمت کریں">Join our network of legal professionals and serve clients across Pakistan and beyond</p>
+    <!-- Lawyers Network Section -->
+<section id="lawyers" class="py-20 bg-gradient-to-b from-slate-50 to-gray-100 overflow-hidden">
+
+    <div class="container mx-auto px-4">
+
+    <!-- Main Grid (Outer Box) -->
+    <div class="bg-gradient-to-br from-[#f0f7ff] to-white/90 backdrop-blur-xl border border-white/40 shadow-2xl rounded-[40px] p-6 md:p-12 lg:p-14">
+
+        <!-- Top Heading (Moved Inside) -->
+        <div class="mb-14">
+
+            <span class="inline-block bg-secondary/20 text-primary px-5 py-2 rounded-full text-sm font-semibold uppercase tracking-wide mb-4"
+                  data-en="Vetted Professionals"
+                  data-ur="تجربہ کار وکلاء">
+
+                Vetted Professionals
+
+            </span>
+
+            <div class="grid lg:grid-cols-2 gap-10 items-start">
+
+                <!-- Left Heading -->
+                <div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary leading-tight mb-4"
+                        data-en="Active Attorneys Panel"
+                        data-ur="فعال وکلاء پینل">
+
+                        Active Attorneys Panel
+
+                    </h2>
+
+                    <p class="text-gray-600 text-lg leading-relaxed max-w-3xl"
+                       data-en="Browse our approved bar advocates. Every advocate displayed on our platform is officially licensed by Bar Councils and verified manually by our administrative board."
+                       data-ur="ہمارے منظور شدہ وکلاء کو براؤز کریں۔ پلیٹ فارم پر موجود تمام وکلاء بار کونسل سے تصدیق شدہ ہیں۔">
+
+                        Browse our approved bar advocates. Every advocate displayed on our platform is officially licensed by Bar Councils and verified manually by our administrative board.
+
+                    </p>
+
+                </div>
+
+                <!-- Right Badge -->
+                <div class="hidden lg:flex justify-end">
+
+                    <div class="bg-white rounded-[35px] px-8 py-5 shadow-xl border border-gray-100">
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center">
+                                <i class="fas fa-scale-balanced text-primary text-2xl"></i>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-primary text-lg">
+                                    Verified Legal Network
+                                </h4>
+
+                                <p class="text-gray-500 text-sm">
+                                    Trusted Lawyers Across Pakistan
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-            
-            <div class="max-w-5xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Registration Form -->
-                    <div class="bg-white rounded-3xl p-8 shadow-xl">
-                        <h3 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
-                            <div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center">
-                                <i class="fas fa-user-plus text-primary text-xl"></i>
+
+        </div>
+
+		<div class="grid lg:grid-cols-12 gap-10">
+
+
+            <!-- LEFT SIDE -->
+            <div class="lg:col-span-7">
+
+                <!-- Search Panel -->
+                <div class="bg-white rounded-[24px] p-4 shadow-xl border border-gray-100 mb-8">
+
+                    <div class="grid md:grid-cols-3 gap-4">
+
+                        <!-- Search -->
+                        <div class="md:col-span-2 relative">
+
+                            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+                            <input
+                                type="text"
+                                placeholder="Search lawyer by name, city, specialization..."
+                                class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-200 focus:outline-none focus:border-secondary text-base"
+                            >
+
+                        </div>
+
+                        <!-- Filter -->
+                        <div>
+
+                            <select
+    id="specializationFilter"
+    onchange="filterLawyers()"
+    class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:outline-none focus:border-secondary text-base bg-white">
+
+    <option value="all">All Specializations</option>
+    <option value="family">Family Law</option>
+    <option value="criminal">Criminal Defense</option>
+    <option value="corporate">Corporate Law</option>
+    <option value="civil">Civil Litigation</option>
+    <option value="property">Property Law</option>
+    <option value="immigration">Immigration</option>
+
+</select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Lawyers Cards -->
+                <div class="grid md:grid-cols-2 gap-5">
+
+                    <!-- Lawyer 1 -->
+                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="family">
+                        <div class="flex items-center gap-5">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                            <div class="flex-1">
+                                <span class="inline-block bg-[#e8f3ec] text-[#1f6036] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                    FAMILY SPECIALIST
+                                </span>
+                                <h3 class="text-xl font-bold text-primary mb-1">
+                                    Barrister Asma Naeem
+                                </h3>
+                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
+                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                    Lahore High Court
+                                </p>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
+                                    <i class="fas fa-star"></i>
+                                    4.9 (124 reviews)
+                                </div>
                             </div>
-                            <span data-en="Register as Lawyer" data-ur="وکیل کے طور پر رجسٹر کریں">Register as Lawyer</span>
-                        </h3>
-                        
-                        <form id="lawyerForm" class="space-y-4">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-1" data-en="Full Name *" data-ur="مکمل نام *">Full Name *</label>
-                                    <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="Enter full name">
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-1" data-en="CNIC *" data-ur="شناختی کارڈ *">CNIC *</label>
-                                    <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="XXXXX-XXXXXXX-X">
-                                </div>
-                            </div>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-1" data-en="Phone *" data-ur="فون *">Phone *</label>
-                                    <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="+92-3XX-XXXXXXX">
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-1" data-en="Email *" data-ur="ای میل *">Email *</label>
-                                    <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="your@email.com">
+                        </div>
+                    </div>
+
+                    <!-- Lawyer 2 -->
+                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="criminal">
+                        <div class="flex items-center gap-5">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                            <div class="flex-1">
+                                <span class="inline-block bg-[#fdedeb] text-[#a12323] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                    CRIMINAL ADVOCATE
+                                </span>
+                                <h3 class="text-xl font-bold text-primary mb-1">
+                                    Adv. Sikandar Hayat
+                                </h3>
+                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
+                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                    Islamabad High Court
+                                </p>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
+                                    <i class="fas fa-star"></i>
+                                    4.8 (89 reviews)
                                 </div>
                             </div>
-                            
+                        </div>
+                    </div>
+
+                    <!-- Lawyer 3 -->
+                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="immigration">
+                        <div class="flex items-center gap-5">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                            <div class="flex-1">
+                                <span class="inline-block bg-[#eaf0fc] text-[#1d4c9e] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                    UK COMMONWEALTH
+                                </span>
+                                <h3 class="text-xl font-bold text-primary mb-1">
+                                    Barrister Sarah Malik
+                                </h3>
+                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
+                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                    Karachi & London Chambers
+                                </p>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
+                                    <i class="fas fa-star"></i>
+                                    5.0 (205 reviews)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lawyer 4 -->
+                    <div class="lawyer-card bg-white rounded-[30px] p-6 shadow-xl border border-gray-100 hover:-translate-y-1 transition duration-300" data-category="property">
+                        <div class="flex items-center gap-5">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500" class="w-24 h-24 rounded-2xl object-cover flex-shrink-0" alt="Lawyer">
+                            <div class="flex-1">
+                                <span class="inline-block bg-[#fdf8e8] text-[#8e6b18] px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-wider mb-2">
+                                    PROPERTY LAW
+                                </span>
+                                <h3 class="text-xl font-bold text-primary mb-1">
+                                    Adv. Chaudhry Tariq
+                                </h3>
+                                <p class="text-gray-500 flex items-center gap-2 text-sm mb-2">
+                                    <i class="fas fa-location-dot text-[#d4b996]"></i>
+                                    Rawalpindi Bench
+                                </p>
+                                <div class="flex items-center gap-1.5 text-[#22a356] text-sm font-bold">
+                                    <i class="fas fa-star"></i>
+                                    4.7 (63 reviews)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="lg:col-span-5">
+
+                <div class="bg-white rounded-[38px] p-8 md:p-10 shadow-2xl border border-gray-100 sticky top-28">
+
+                    <!-- Top Badge -->
+                    <span class="inline-block bg-green-100 text-green-800 px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wide mb-6">
+
+                        Expand Your Legal Practice
+
+                    </span>
+
+                    <h3 class="text-4xl font-bold text-primary leading-tight mb-5"
+                        data-en="Join our National Lawyer Network"
+                        data-ur="ہمارے قومی وکلاء نیٹ ورک میں شامل ہوں">
+
+                        Join our National Lawyer Network
+
+                    </h3>
+
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+
+                        Register today and receive verified legal leads directly from nearby clients looking for legal consultation.
+
+                    </p>
+
+                    <!-- Form -->
+                    <form class="space-y-4">
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                                Full Professional Name *
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="e.g. Adv. Zainab Qureshi"
+                                class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
+                            >
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+
                             <div>
-                                <label class="block text-gray-700 font-medium mb-1" data-en="Bar License Number *" data-ur="بُرس لائسنس نمبر *">Bar License Number *</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="Enter your bar license number">
+                                <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                                    Bar License Number *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="e.g. LHC-98012-H"
+                                    class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
+                                >
                             </div>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-1" data-en="Specialization *" data-ur="مہارت *">Specialization *</label>
-                                    <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
-                                        <option value="">Select</option>
-                                        <option value="family">Family Law</option>
-                                        <option value="criminal">Criminal Defense</option>
-                                        <option value="civil">Civil Litigation</option>
-                                        <option value="corporate">Corporate Law</option>
-                                        <option value="property">Real Estate</option>
-                                        <option value="labor">Labor Law</option>
-                                        <option value="tax">Tax Law</option>
-                                        <option value="immigration">Immigration</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-gray-700 font-medium mb-1" data-en="Experience *" data-ur="تجربہ *">Experience *</label>
-                                    <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
-                                        <option value="">Select</option>
-                                        <option value="0-2">0-2 Years</option>
-                                        <option value="3-5">3-5 Years</option>
-                                        <option value="6-10">6-10 Years</option>
-                                        <option value="10+">10+ Years</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
+
                             <div>
-                                <label class="block text-gray-700 font-medium mb-1" data-en="City *" data-ur="شہر *">City *</label>
-                                <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
-                                    <option value="">Select City</option>
-                                    <option value="karachi">Karachi</option>
-                                    <option value="lahore">Lahore</option>
-                                    <option value="islamabad">Islamabad</option>
-                                    <option value="rawalpindi">Rawalpindi</option>
-                                    <option value="faisalabad">Faisalabad</option>
-                                    <option value="multan">Multan</option>
-                                    <option value="peshawar">Peshawar</option>
-                                    <option value="quetta">Quetta</option>
+                                <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                                    Specialization *
+                                </label>
+
+                                <select class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
+
+                                    <option>Family Matters</option>
+                                    <option>Corporate Law</option>
+                                    <option>Criminal Defense</option>
+                                    <option>Property Law</option>
+
                                 </select>
                             </div>
-                            
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-1" data-en="Upload Bar License (PDF/JPG) *" data-ur="بُرس لائسنس اپلوڈ کریں *">Upload Bar License (PDF/JPG) *</label>
-                                <div class="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-secondary transition cursor-pointer" onclick="this.querySelector('input').click()">
-                                    <input type="file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="this.parentElement.querySelector('span').textContent = this.files[0]?.name || 'Click or drag to upload'">
-                                    <i class="fas fa-upload text-gray-400 mb-2"></i>
-                                    <span class="text-sm text-gray-500" data-en="Click or drag to upload license" data-ur="لائسنس اپلوڈ کرنے کے لیے کلک یا ڈرا کریں">Click or drag to upload license</span>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-1" data-en="Brief Bio" data-ur="مختصر تعارف">Brief Bio</label>
-                                <textarea rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition resize-none" placeholder="Tell us about yourself and your practice areas..." data-placeholder-en="Tell us about yourself and your practice areas..." data-placeholder-ur="اپنے بارے میں بتائیں اور اپنی پریکٹس کے شعبے..."></textarea>
-                            </div>
-                            
-                            <div class="flex items-start gap-3">
-                                <input type="checkbox" required class="w-5 h-5 mt-1 text-secondary rounded border-gray-300 focus:ring-secondary">
-                                <span class="text-sm text-gray-600" data-en="I confirm that all information provided is accurate and I agree to the terms of service" data-ur="میں تصدیق کرتا/کرتی ہوں کہ تمام فراہم کردہ معلومات درست ہیں اور میں خدمات کی شرائط سے اتفاق کرتا/کرتی ہوں">I confirm that all information provided is accurate and I agree to the terms of service</span>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-semibold hover:from-secondary hover:to-secondary hover:text-primary transition flex items-center justify-center gap-2">
-                                <i class="fas fa-user-plus"></i>
-                                <span data-en="Register as Lawyer" data-ur="وکیل کے طور پر رجسٹر کریں">Register as Lawyer</span>
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <!-- Benefits & Info -->
-                    <div class="space-y-6">
-                        <div class="bg-gradient-to-br from-primary to-accent rounded-3xl p-8 text-white">
-                            <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                                <i class="fas fa-gift text-secondary"></i>
-                                <span data-en="Why Join LegalEase?" data-ur="لیگل ایز میں کیوں شامل ہوں؟">Why Join LegalEase?</span>
-                            </h3>
-                            
-                            <div class="space-y-4">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-globe text-secondary"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold mb-1" data-en="Pan-Pakistan Reach" data-ur="ملک بھر میں پہنچ">Pan-Pakistan Reach</h4>
-                                        <p class="text-white/70 text-sm" data-en="Connect with clients from all major cities across Pakistan" data-ur="پاکستان کے تمام بڑے شہروں سے کلائنٹس سے رابطہ کریں">Connect with clients from all major cities across Pakistan</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-chart-line text-secondary"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold mb-1" data-en="Grow Your Practice" data-ur="اپنا کاروبار بڑھائیں">Grow Your Practice</h4>
-                                        <p class="text-white/70 text-sm" data-en="Increase your client base and grow your legal practice" data-ur="اپنا کلائنٹ بیس بڑھائیں اور اپنا قانونی کاروبار بڑھائیں">Increase your client base and grow your legal practice</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-shield-alt text-secondary"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold mb-1" data-en="Verified Profile" data-ur="تصدیق شدہ پروفائل">Verified Profile</h4>
-                                        <p class="text-white/70 text-sm" data-en="Get verified badge to build trust with potential clients" data-ur="ممکنہ کلائنٹس کے ساتھ اعتماد استوار کرنے کے لیے تصدیق شدہ بیج حاصل کریں">Get verified badge to build trust with potential clients</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-money-bill-wave text-secondary"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold mb-1" data-en="Competitive Fees" data-ur="مقابلے کی فیس">Competitive Fees</h4>
-                                        <p class="text-white/70 text-sm" data-en="Set your own rates and manage your earnings" data-ur="اپنی شرح خود طے کریں اور اپ کی کمائی کا انتظام کریں">Set your own rates and manage your earnings</p>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
-                        
-                        <!-- Stats -->
-                        <div class="bg-white rounded-3xl p-8 shadow-xl">
-                            <h3 class="text-xl font-bold text-primary mb-6" data-en="Our Network at a Glance" data-ur="ہمارا نیٹ ورک ایک نظر میں">Our Network at a Glance</h3>
-                            
-                            <div class="grid grid-cols-2 gap-6">
-                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
-                                    <div class="text-3xl font-bold text-primary mb-1">200+</div>
-                                    <p class="text-sm text-gray-600" data-en="Active Lawyers" data-ur="فعال وکلاء">Active Lawyers</p>
-                                </div>
-                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
-                                    <div class="text-3xl font-bold text-primary mb-1">15+</div>
-                                    <p class="text-sm text-gray-600" data-en="Cities Covered" data-ur="شہر کور کیے">Cities Covered</p>
-                                </div>
-                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
-                                    <div class="text-3xl font-bold text-primary mb-1">500+</div>
-                                    <p class="text-sm text-gray-600" data-en="Cases Handled" data-ur="ہینڈل شدہ کیسز">Cases Handled</p>
-                                </div>
-                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
-                                    <div class="text-3xl font-bold text-primary mb-1">98%</div>
-                                    <p class="text-sm text-gray-600" data-en="Success Rate" data-ur="کامیابی کی شرح">Success Rate</p>
-                                </div>
-                            </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                                Official Email Address *
+                            </label>
+
+                            <input
+                                type="email"
+                                placeholder="e.g. advocate@example.com"
+                                class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
+                            >
                         </div>
-                    </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                                    Contact / WhatsApp *
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    placeholder="+92 300 1234567"
+                                    class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
+                                >
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                                    City of Practice *
+                                </label>
+
+                                <select class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
+
+                                    <option>Karachi</option>
+                                    <option>Lahore</option>
+                                    <option>Islamabad</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full h-10 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-bold text-sm hover:from-secondary hover:to-secondary hover:text-primary transition duration-300">
+
+                            Register as Lawyer
+
+                        </button>
+
+                    </form>
+
                 </div>
+
             </div>
+
         </div>
-    </section>
+
+    </div>
+
+</section>
 
     <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-white">
@@ -1921,6 +2127,33 @@ setInterval(nextSlide, 5000);
             uploadedFiles = [];
             document.getElementById('uploadedFiles').innerHTML = '';
         }
+		
+		function filterLawyers(){
+
+    const filterValue =
+        document.getElementById('specializationFilter').value;
+
+    const lawyerCards =
+        document.querySelectorAll('.lawyer-card');
+
+    lawyerCards.forEach(card => {
+
+        const category =
+            card.getAttribute('data-category');
+
+        if(filterValue === 'all' || category === filterValue){
+
+            card.style.display = 'block';
+
+        }else{
+
+            card.style.display = 'none';
+
+        }
+
+    });
+
+}
         
         // FAQ
         function toggleFaq(button) {
