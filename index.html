@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalEase Pakistan - قانونی مشاورت</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#c9a227',
+                        accent: '#2d5a87',
+                        dark: '#0f1c2e',
+                        light: '#f8f9fa'
+                    },
+                    fontFamily: {
+                        urdu: ['Noto Nastaliq Urdu', 'serif'],
+                        english: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .urdu-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            direction: rtl;
+        }
+        
+        .slider {
+            animation: slide 20s infinite;
+        }
+        
+        @keyframes slide {
+            0%, 10% { transform: translateX(0); }
+            12%, 22% { transform: translateX(-100%); }
+            24%, 34% { transform: translateX(-200%); }
+            36%, 46% { transform: translateX(-300%); }
+            48%, 58% { transform: translateX(-400%); }
+            60%, 70% { transform: translateX(-500%); }
+            72%, 82% { transform: translateX(-600%); }
+            84%, 94% { transform: translateX(-700%); }
+            96%, 100% { transform: translateX(0); }
+        }
+        
+        .law-slider {
+            animation: lawSlide 30s infinite linear;
+        }
+        
+        @keyframes lawSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .voice-btn {
+            animation: ripple 1.5s infinite;
+        }
+        
+        @keyframes ripple {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.7); }
+            50% { box-shadow: 0 0 0 20px rgba(201, 162, 39, 0); }
+        }
+        
+        .counter {
+            transition: all 0.5s ease;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e3a5f, #c9a227);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c9a227;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .upload-zone {
+            border: 2px dashed #c9a227;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #1e3a5f;
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #1e3a5f, #c9a227);
+        }
+        
+        .sticky-header {
+            transition: all 0.3s ease;
+        }
+        
+        .sticky-header.scrolled {
+            background: rgba(30, 58, 95, 0.98);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #1e3a5f;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c9a227;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+		
+		.slider img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+}
+
+@media(max-width:768px){
+
+    #home h2{
+        font-size:2.5rem;
+        line-height:1.2;
+    }
+
+    #home p{
+        font-size:1rem;
+    }
+
+}
+
+#heroSlider{
+    width:100%;
+}
+
+#heroSlider > div{
+    min-width:100%;
+}
+
+#heroSlider img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+}
+
+@media(max-width:768px){
+
+    #home{
+        padding-top:70px;
+    }
+
+    #home h2{
+        font-size:2.5rem;
+        line-height:1.2;
+    }
+
+    #home p{
+        font-size:1rem;
+    }
+
+}
+
+#heroSlider > div{
+    min-width:100%;
+}
+
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Language Direction Helper -->
+    <span id="langDirection" class="hidden">ltr</span>
+
+    <!-- Header -->
+    <header id="header" class="sticky-header fixed top-0 left-0 right-0 z-50 bg-primary">
+        <div class="container mx-auto px-4">
+
+    <!-- Main Nav -->
+    <nav class="flex justify-between items-center py-2">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+
+            <div class="w-11 h-11 bg-secondary rounded-lg flex items-center justify-center shadow-lg">
+                <i class="fas fa-balance-scale text-primary text-xl"></i>
+            </div>
+
+            <div>
+                <h1 class="text-xl font-bold text-white leading-tight">
+                    LegalEase
+                </h1>
+
+                <p class="text-[11px] text-secondary urdu-text leading-none" id="logoTagline">
+                    قانونی مشاورت
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center gap-7">
+
+            <a href="#home" class="nav-link text-white hover:text-secondary transition"
+               data-en="Home" data-ur="ہوم">
+               Home
+            </a>
+
+            <a href="#services" class="nav-link text-white hover:text-secondary transition"
+               data-en="Services" data-ur="خدمات">
+               Services
+            </a>
+
+            <a href="#laws" class="nav-link text-white hover:text-secondary transition"
+               data-en="Laws" data-ur="قوانین">
+               Laws
+            </a>
+
+            <a href="#client-form" class="nav-link text-white hover:text-secondary transition"
+               data-en="Submit Case" data-ur="کیس جمع کریں">
+               Submit Case
+            </a>
+
+            <a href="#lawyers" class="nav-link text-white hover:text-secondary transition"
+               data-en="Lawyers" data-ur="وکلاء">
+               Lawyers
+            </a>
+
+            <a href="#faq" class="nav-link text-white hover:text-secondary transition"
+               data-en="FAQ" data-ur="عمومی سوالات">
+               FAQ
+            </a>
+
+            <a href="#contact" class="nav-link text-white hover:text-secondary transition"
+               data-en="Contact" data-ur="رابطہ">
+               Contact
+            </a>
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="hidden lg:flex items-center gap-3">
+
+            <!-- Urdu Toggle -->
+            <button onclick="toggleLanguage()"
+                class="w-10 h-10 rounded-full border border-white/20 text-white hover:bg-secondary hover:text-primary transition flex items-center justify-center">
+
+                <i class="fas fa-language text-sm"></i>
+
+            </button>
+
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()"
+                class="w-10 h-10 rounded-full border border-white/20 text-white hover:bg-secondary hover:text-primary transition flex items-center justify-center">
+
+                <i class="fas fa-moon text-sm" id="themeIcon"></i>
+
+            </button>
+
+            <!-- Live Chat -->
+            <button onclick="openLiveChat()"
+                class="bg-secondary text-primary px-4 py-2 rounded-full text-sm font-semibold hover:bg-white transition flex items-center gap-2">
+
+                <i class="fas fa-comments text-sm"></i>
+
+                <span data-en="Live Chat" data-ur="چیٹ">
+                    Live Chat
+                </span>
+
+            </button>
+
+            <!-- Consultation -->
+            <a href="#client-form"
+               class="bg-white text-primary px-4 py-2 rounded-full text-sm font-semibold hover:bg-secondary hover:text-white transition"
+               data-en="Consultation"
+               data-ur="مشاورت">
+
+                Consultation
+
+            </a>
+
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleMobileMenu()"
+            class="lg:hidden text-white text-2xl">
+
+            <i class="fas fa-bars" id="menuIcon"></i>
+
+        </button>
+
+    </nav>
+
+</div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="lg:hidden hidden bg-dark/95">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col gap-4">
+                    <a href="#home" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Home" data-ur="ہوم">Home</a>
+                    <a href="#services" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Services" data-ur="خدمات">Services</a>
+                    <a href="#laws" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Laws" data-ur="قوانین">Laws</a>
+                    <a href="#client-form" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Submit Case" data-ur="کیس جمع کریں">Submit Case</a>
+                    <a href="#lawyers" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Lawyers" data-ur="وکلاء">Lawyers</a>
+                    <a href="#faq" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="FAQ" data-ur="عمومی سوالات">FAQ</a>
+                    <a href="#contact" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Contact" data-ur="رابطہ">Contact</a>
+                    <div class="flex gap-4 pt-4">
+                        <button onclick="toggleLanguage()" class="flex-1 bg-secondary text-primary py-2 rounded-full font-semibold">
+                            <span id="mobileLangBtn">اردو</span>
+                        </button>
+                        <button onclick="toggleTheme()" class="flex-1 bg-white/10 text-white py-2 rounded-full">
+                            <i class="fas fa-moon" id="mobileThemeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+<section id="home" class="relative overflow-hidden">
+
+    <!-- Slider Wrapper -->
+    <div class="relative w-full h-[88vh] md:h-[100vh] overflow-hidden">
+
+        <!-- Slides Container -->
+        <div id="heroSlider" class="flex h-full transition-transform duration-700 ease-in-out">
+
+            <!-- Slide 1 -->
+            <div class="min-w-full h-full relative flex items-center overflow-hidden">
+
+                <!-- Background -->
+                <img 
+                    src="./images/slide-show/lhc-new.jpg"
+                    alt="Legal Justice"
+                    class="absolute inset-0 w-full h-full object-cover object-center"
+                >
+
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-black/60"></div>
+
+                <!-- Content -->
+                <div class="relative z-10 container mx-auto px-6 md:px-10">
+
+                    <div class="max-w-3xl">
+
+                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
+                            Welcome to LegalEase
+                        </span>
+
+                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                            Your Trusted Legal Partner in Pakistan
+                        </h2>
+
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                            Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4">
+
+                            <a href="#client-form"
+                               class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
+                                Get Free Consultation
+                            </a>
+
+                            <a href="#services"
+                               class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition">
+                                Our Services
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+			
+			<!-- Slide 2 -->
+            <div class="min-w-full h-full relative flex items-center overflow-hidden">
+
+                <!-- Background -->
+                <img 
+                    src="./images/slide-show/law-liabrary.jpg"
+                    alt="Legal Justice"
+                    class="absolute inset-0 w-full h-full object-cover object-center"
+                >
+
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-black/60"></div>
+
+                <!-- Content -->
+                <div class="relative z-10 container mx-auto px-6 md:px-10">
+
+                    <div class="max-w-3xl">
+                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
+                            Welcome to LegalEase
+                        </span>
+
+                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                            Your Trusted Legal Partner in Pakistan
+                        </h2>
+
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                            Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4">
+
+                            <a href="#client-form"
+                               class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
+                                Get Free Consultation
+                            </a>
+
+                            <a href="#services"
+                               class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition">
+                                Our Services
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+			<!-- Slide 3 -->
+            <div class="min-w-full h-full relative flex items-center overflow-hidden">
+
+                <!-- Background -->
+                <img 
+                    src="./images/slide-show/pakistan-lawyers.jpg"
+                    alt="Legal Justice"
+                    class="absolute inset-0 w-full h-full object-cover object-center"
+                >
+
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-black/60"></div>
+
+                <!-- Content -->
+                <div class="relative z-10 container mx-auto px-6 md:px-10">
+
+                    <div class="max-w-3xl">
+                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
+                            Welcome to LegalEase
+                        </span>
+
+                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                            Your Trusted Legal Partner in Pakistan
+                        </h2>
+
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                            Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4">
+
+                            <a href="#client-form"
+                               class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
+                                Get Free Consultation
+                            </a>
+
+                            <a href="#services"
+                               class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition">
+                                Our Services
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Laws Carousel -->
+    <section id="laws" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="KNOW THE LAWS" data-ur="قوانین جانیں">KNOW THE LAWS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Important Laws of Pakistan" data-ur="پاکستان کے اہم قوانین">Important Laws of Pakistan</h2>
+                <p class="text-gray-600" data-en="Click on any law to learn more from official sources" data-ur="مزید جاننے کے لیے کسی بھی قانون پر کلک کریں">Click on any law to learn more from official sources</p>
+            </div>
+            
+            <div class="relative overflow-hidden">
+                <div class="law-slider flex gap-6" id="lawSlider">
+                    <!-- Law Cards - Doubled for seamless loop -->
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-primary to-accent rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400" alt="Constitution" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Constitution of Pakistan" data-ur="پاکستان کا آئین">Constitution of Pakistan</h3>
+                            <p class="text-white/70 text-sm" data-en="The supreme law of the land" data-ur="ملک کا اعلیٰ ترین قانون">The supreme law of the land</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-accent to-primary rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400" alt="Criminal Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Pakistan Penal Code" data-ur="پاکستان پینل کوڈ">Pakistan Penal Code</h3>
+                            <p class="text-white/70 text-sm" data-en="Criminal offenses and punishments" data-ur="کریمنل جرائم اور سزائیں">Criminal offenses and punishments</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-primary to-accent rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400" alt="Family Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Family Laws" data-ur="خاندانی قوانین">Family Laws</h3>
+                            <p class="text-white/70 text-sm" data-en="Marriage, divorce, custody" data-ur="شادی، طلاق، حضانت">Marriage, divorce, custody</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-accent to-primary rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400" alt="Civil Procedure" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Civil Procedure Code" data-ur="سول پروسیجر کوڈ">Civil Procedure Code</h3>
+                            <p class="text-white/70 text-sm" data-en="Civil court procedures" data-ur="سول کورٹ کے طریقہ کار">Civil court procedures</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-primary to-accent rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400" alt="Evidence Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Qanoon-e-Shahadat" data-ur="قانون شہادت">Qanoon-e-Shahadat</h3>
+                            <p class="text-white/70 text-sm" data-en="Law of Evidence" data-ur="ثبوت کا قانون">Law of Evidence</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-accent to-primary rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400" alt="Labor Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Labor Laws" data-ur="لیبر قوانین">Labor Laws</h3>
+                            <p class="text-white/70 text-sm" data-en="Employment and labor rights" data-ur="ملازمت اور لیبر حقوق">Employment and labor rights</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-primary to-accent rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400" alt="Tax Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Income Tax Ordinance" data-ur="انکم ٹیکس آرڈیننس">Income Tax Ordinance</h3>
+                            <p class="text-white/70 text-sm" data-en="Tax regulations and compliance" data-ur="ٹیکس کے قواعد اور تعمیل">Tax regulations and compliance</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-accent to-primary rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400" alt="Property Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Transfer of Property" data-ur="جائیداد کا کاروبار">Transfer of Property</h3>
+                            <p class="text-white/70 text-sm" data-en="Property registration and transfer" data-ur="جائیداد کی رجسٹریشن اور منتقلی">Property registration and transfer</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Duplicate for seamless loop -->
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-primary to-accent rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400" alt="Constitution" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Constitution of Pakistan" data-ur="پاکستان کا آئین">Constitution of Pakistan</h3>
+                            <p class="text-white/70 text-sm" data-en="The supreme law of the land" data-ur="ملک کا اعلیٰ ترین قانون">The supreme law of the land</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-accent to-primary rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400" alt="Criminal Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Pakistan Penal Code" data-ur="پاکستان پینل کوڈ">Pakistan Penal Code</h3>
+                            <p class="text-white/70 text-sm" data-en="Criminal offenses and punishments" data-ur="کریمنل جرائم اور سزائیں">Criminal offenses and punishments</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-primary to-accent rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400" alt="Family Law" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Family Laws" data-ur="خاندانی قوانین">Family Laws</h3>
+                            <p class="text-white/70 text-sm" data-en="Marriage, divorce, custody" data-ur="شادی، طلاق، حضانت">Marriage, divorce, custody</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-accent to-primary rounded-2xl overflow-hidden hover-lift group">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400" alt="Civil Procedure" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2" data-en="Civil Procedure Code" data-ur="سول پروسیجر کوڈ">Civil Procedure Code</h3>
+                            <p class="text-white/70 text-sm" data-en="Civil court procedures" data-ur="سول کورٹ کے طریقہ کار">Civil court procedures</p>
+                            <div class="mt-4 flex items-center text-secondary">
+                                <span data-en="Read More" data-ur="مزید پڑھیں">Read More</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="OUR SERVICES" data-ur="ہماری خدمات">OUR SERVICES</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Comprehensive Legal Solutions" data-ur="جامع قانونی حل">Comprehensive Legal Solutions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-en="We provide expert legal services across multiple domains to meet all your legal needs" data-ur="ہم آپ کی تمام قانونی ضروریات کو پورا کرنے کے لیے متعدد دائرے میں ماہر قانونی خدمات فراہم کرتے ہیں">We provide expert legal services across multiple domains to meet all your legal needs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-users text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Family Law" data-ur="خاندانی قانون">Family Law</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Divorce, custody, inheritance, nikah, domestic violence cases" data-ur="طلاق، حضانت، وراثت، نکاح، گھریلو تشدد کے کیسز">Divorce, custody, inheritance, nikah, domestic violence cases</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-gavel text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Criminal Defense" data-ur="کریمنل ڈیفنس">Criminal Defense</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Bail, criminal charges, FIR, police cases, anti-terrorism" data-ur="بیل، کریمنل چارجز، ایف آئی آر، پولیس کیسز، اینٹی ٹیررازم">Bail, criminal charges, FIR, police cases, anti-terrorism</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-building text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Corporate Law" data-ur="کارپوریٹ قانون">Corporate Law</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Company registration, contracts, mergers, compliance" data-ur="کمپنی کی رجسٹریشن، کنٹریکٹس، مارجرس، تعمیل">Company registration, contracts, mergers, compliance</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-file-contract text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Civil Litigation" data-ur="سول لیٹیگیشن">Civil Litigation</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Property disputes, contract breach, debt recovery" data-ur="جائیداد کے تنازعات، کنٹریکٹ کی خلاف ورزی، قرض کی وصولی">Property disputes, contract breach, debt recovery</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-home text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Real Estate" data-ur="رئیل اسٹیٹ">Real Estate</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Property transfer, rental agreements, land disputes" data-ur="جائیداد کی منتقلی، کرائے کے معاہدے، زمین کے تنازعات">Property transfer, rental agreements, land disputes</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-briefcase text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Labor Law" data-ur="لیبر قانون">Labor Law</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Employment disputes, workers rights, labor court" data-ur="ملازمت کے تنازعات، ورکرز کے حقوق، لیبر کورٹ">Employment disputes, workers rights, labor court</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-chart-line text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Tax Law" data-ur="ٹیکس قانون">Tax Law</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Income tax, sales tax, federal taxes, FBR matters" data-ur="انکم ٹیکس، سیلز ٹیکس، وفاقی ٹیکس، ایف بی آر معاملات">Income tax, sales tax, federal taxes, FBR matters</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-globe text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="International Law" data-ur="بین الاقوامی قانون">International Law</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Immigration, British laws, international disputes" data-ur="امیگریشن، برٹش قوانین، بین الاقوامی تنازعات">Immigration, British laws, international disputes</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Submission Form -->
+    <section id="client-form" class="py-20 bg-gradient-to-br from-primary to-dark">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-secondary text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="SUBMIT YOUR CASE" data-ur="اپنا کیس جمع کریں">SUBMIT YOUR CASE</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-2" data-en="Get Legal Consultation" data-ur="قانونی مشاورت حاصل کریں">Get Legal Consultation</h2>
+                    <p class="text-white/70" data-en="Submit your legal matter and our experts will get back to you within 24 hours" data-ur="اپنا قانونی معاملہ جمع کروائیں اور ہمارے ماہرین 24 گھنٹے کے اندر آپ سے رابطہ کریں گے">Submit your legal matter and our experts will get back to you within 24 hours</p>
+                </div>
+                
+                <form id="clientForm" class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
+                    <!-- Progress Bar -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm text-gray-500" data-en="Step 1 of 3" data-ur="مرحلہ 1 از 3">Step 1 of 3</span>
+                            <span class="text-sm text-primary font-semibold" id="progressPercent">33%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="progressBar" class="progress-bar h-2 rounded-full transition-all duration-500" style="width: 33%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 1: Basic Info -->
+                    <div id="step1" class="step">
+                        <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                            <span class="w-8 h-8 bg-secondary text-primary rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                            <span data-en="Personal Information" data-ur="ذاتی معلومات">Personal Information</span>
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2" data-en="Full Name *" data-ur="مکمل نام *">Full Name *</label>
+                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="Enter your full name">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2" data-en="CNIC Number *" data-ur="شناختی کارڈ نمبر *">CNIC Number *</label>
+                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="XXXXX-XXXXXXX-X">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2" data-en="Phone Number *" data-ur="فون نمبر *">Phone Number *</label>
+                                <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="+92-3XX-XXXXXXX">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2" data-en="Email Address" data-ur="ای میل ایڈریس">Email Address</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="City *" data-ur="شہر *">City *</label>
+                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
+                                <option value="">Select City</option>
+                                <option value="karachi">Karachi</option>
+                                <option value="lahore">Lahore</option>
+                                <option value="islamabad">Islamabad</option>
+                                <option value="rawalpindi">Rawalpindi</option>
+                                <option value="faisalabad">Faisalabad</option>
+                                <option value="multan">Multan</option>
+                                <option value="peshawar">Peshawar</option>
+                                <option value="quetta">Quetta</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" onclick="nextStep(1)" class="w-full bg-primary text-white py-4 rounded-xl font-semibold hover:bg-secondary hover:text-primary transition flex items-center justify-center gap-2">
+                            <span data-en="Next Step" data-ur="اگلا مرحلہ">Next Step</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Step 2: Case Details -->
+                    <div id="step2" class="step hidden">
+                        <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                            <span class="w-8 h-8 bg-secondary text-primary rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                            <span data-en="Case Details" data-ur="کیس کی تفصیلات">Case Details</span>
+                        </h3>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Legal Matter Type *" data-ur="قانونی معاملے کی قسم *">Legal Matter Type *</label>
+                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
+                                <option value="">Select Matter Type</option>
+                                <option value="family">Family Law (خاندانی قانون)</option>
+                                <option value="criminal">Criminal Defense (کریمنل ڈیفنس)</option>
+                                <option value="civil">Civil Litigation (سول لیٹیگیشن)</option>
+                                <option value="corporate">Corporate Law (کارپوریٹ قانون)</option>
+                                <option value="property">Property/Real Estate (جائیداد)</option>
+                                <option value="labor">Labor Law (لیبر قانون)</option>
+                                <option value="tax">Tax Matters (ٹیکس معاملات)</option>
+                                <option value="immigration">Immigration (امیگریشن)</option>
+                                <option value="other">Other (دیگر)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Case Priority *" data-ur="کیس کی ترجیح *">Case Priority *</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <label class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
+                                    <input type="radio" name="priority" value="low" class="hidden peer">
+                                    <div class="text-center">
+                                        <i class="fas fa-clock text-gray-400 text-2xl mb-2"></i>
+                                        <p class="font-semibold" data-en="Low" data-ur="کم">Low</p>
+                                        <p class="text-xs text-gray-500" data-en="General inquiry" data-ur="عمومی پوچھ">General inquiry</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
+                                    <input type="radio" name="priority" value="medium" class="hidden peer" checked>
+                                    <div class="text-center">
+                                        <i class="fas fa-exclamation-triangle text-yellow-500 text-2xl mb-2"></i>
+                                        <p class="font-semibold" data-en="Medium" data-ur="درمیانہ">Medium</p>
+                                        <p class="text-xs text-gray-500" data-en="Need attention" data-ur="توجہ درکار">Need attention</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
+                                    <input type="radio" name="priority" value="high" class="hidden peer">
+                                    <div class="text-center">
+                                        <i class="fas fa-fire text-red-500 text-2xl mb-2"></i>
+                                        <p class="font-semibold" data-en="Urgent" data-ur="جلدی">Urgent</p>
+                                        <p class="text-xs text-gray-500" data-en="Emergency" data-ur="ایمرجنسی">Emergency</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Describe Your Legal Matter *" data-ur="اپنا قانونی معاملہ بیان کریں *">Describe Your Legal Matter *</label>
+                            <div class="relative">
+                                <textarea required rows="5" id="caseDescription" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition resize-none" placeholder="Describe your legal matter in detail..." data-placeholder-en="Describe your legal matter in detail..." data-placeholder-ur="اپنا قانونی معاملہ تفصیل سے بیان کریں..."></textarea>
+                                <button type="button" id="voiceBtn" onclick="startVoiceInput()" class="voice-btn absolute bottom-4 right-4 w-12 h-12 bg-secondary text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2 flex items-center gap-2">
+                                <i class="fas fa-info-circle"></i>
+                                <span data-en="Click microphone to record your voice or type your matter" data-ur="اپنی آواز ریکارڈ کرنے کے لیے مائیکروفون پر کلک کریں یا اپنا معاملہ ٹائپ کریں">Click microphone to record your voice or type your matter</span>
+                            </p>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <button type="button" onclick="prevStep(2)" class="flex-1 bg-gray-200 text-primary py-4 rounded-xl font-semibold hover:bg-gray-300 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-arrow-left"></i>
+                                <span data-en="Previous" data-ur="پچھلا">Previous</span>
+                            </button>
+                            <button type="button" onclick="nextStep(2)" class="flex-1 bg-primary text-white py-4 rounded-xl font-semibold hover:bg-secondary hover:text-primary transition flex items-center justify-center gap-2">
+                                <span data-en="Next Step" data-ur="اگلا مرحلہ">Next Step</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Document Upload -->
+                    <div id="step3" class="step hidden">
+                        <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                            <span class="w-8 h-8 bg-secondary text-primary rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                            <span data-en="Upload Documents" data-ur="دستاویزات اپلوڈ کریں">Upload Documents</span>
+                        </h3>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2" data-en="Upload Legal Documents (Optional)" data-ur="قانونی دستاویزات اپلوڈ کریں (اختیاری)">Upload Legal Documents (Optional)</label>
+                            <div id="uploadZone" class="upload-zone rounded-2xl p-8 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()">
+                                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" class="hidden" onchange="handleFileUpload(event)">
+                                <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-cloud-upload-alt text-primary text-2xl"></i>
+                                </div>
+                                <p class="text-lg font-semibold text-primary mb-2" data-en="Drop your files here or click to upload" data-ur="اپنی فائلیں یہاں ڈرا کریں یا اپلوڈ کرنے کے لیے کلک کریں">Drop your files here or click to upload</p>
+                                <p class="text-sm text-gray-500" data-en="Supported: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)" data-ur="سپورٹڈ: پی ڈی ایف، ڈی او سی، جے پی جی، پی این جی (زیادہ سے زیادہ 10 ایم بی)">Supported: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)</p>
+                            </div>
+                            
+                            <!-- Uploaded Files Preview -->
+                            <div id="uploadedFiles" class="mt-4 space-y-2"></div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" required class="w-5 h-5 text-secondary rounded border-gray-300 focus:ring-secondary">
+                                <span class="text-gray-700" data-en="I agree to the terms and conditions and privacy policy *" data-ur="میں شرائط و ضوابط اور رازداری کی پالیسی سے اتفاق کرتا/کرتی ہوں *">I agree to the terms and conditions and privacy policy *</span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <button type="button" onclick="prevStep(3)" class="flex-1 bg-gray-200 text-primary py-4 rounded-xl font-semibold hover:bg-gray-300 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-arrow-left"></i>
+                                <span data-en="Previous" data-ur="پچھلا">Previous</span>
+                            </button>
+                            <button type="submit" class="flex-1 bg-secondary text-primary py-4 rounded-xl font-semibold hover:bg-primary hover:text-white transition flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                <span data-en="Submit Case" data-ur="کیس جمع کروائیں">Submit Case</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Success Message -->
+                <div id="successMessage" class="hidden bg-white rounded-3xl p-12 text-center shadow-2xl">
+                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-check text-green-500 text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4" data-en="Case Submitted Successfully!" data-ur="کیس کامیابی سے جمع ہو گیا!">Case Submitted Successfully!</h3>
+                    <p class="text-gray-600 mb-6" data-en="Your case has been submitted and is pending admin approval. Our team will contact you within 24 hours." data-ur="آپ کا کیس جمع ہو گیا ہے اور ایڈمن کی منظوری کا منتظر ہے۔ ہماری ٹیم 24 گھنٹے کے اندر آپ سے رابطہ کرے گی۔">Your case has been submitted and is pending admin approval. Our team will contact you within 24 hours.</p>
+                    <p class="text-sm text-gray-500 mb-6" data-en="Reference Number:" data-ur="رجنسٹریشن نمبر:">Reference Number:</p>
+                    <div class="bg-gray-100 inline-block px-6 py-3 rounded-xl font-mono text-xl text-primary font-bold mb-6">LE-<span id="refNumber">2024-XXXXX</span></div>
+                    <br>
+                    <button onclick="resetForm()" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-secondary hover:text-primary transition" data-en="Submit Another Case" data-ur="ایک اور کیس جمع کروائیں">Submit Another Case</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-primary text-2xl"></i>
+                    </div>
+                    <div class="text-3xl md:text-4xl font-bold text-primary counter" data-target="5000">0</div>
+                    <p class="text-gray-600 mt-2" data-en="Happy Clients" data-ur="خوش کلائنٹس">Happy Clients</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-briefcase text-primary text-2xl"></i>
+                    </div>
+                    <div class="text-3xl md:text-4xl font-bold text-primary counter" data-target="3500">0</div>
+                    <p class="text-gray-600 mt-2" data-en="Cases Won" data-ur="جیتے ہوئے کیسز">Cases Won</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-tie text-primary text-2xl"></i>
+                    </div>
+                    <div class="text-3xl md:text-4xl font-bold text-primary counter" data-target="200">0</div>
+                    <p class="text-gray-600 mt-2" data-en="Expert Lawyers" data-ur="ماہر وکلاء">Expert Lawyers</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-primary text-2xl"></i>
+                    </div>
+                    <div class="text-3xl md:text-4xl font-bold text-primary">4.9<span class="text-secondary">/5</span></div>
+                    <p class="text-gray-600 mt-2" data-en="Client Rating" data-ur="کلائنٹ ریٹنگ">Client Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lawyers Panel -->
+    <section id="lawyers" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="JOIN OUR NETWORK" data-ur="ہمارے نیٹ ورک میں شامل ہوں">JOIN OUR NETWORK</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Lawyers Registration Panel" data-ur="وکلاء رجسٹریشن پینل">Lawyers Registration Panel</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-en="Join our network of legal professionals and serve clients across Pakistan and beyond" data-ur="قانونی پیشہ ورنوں کے ہمارے نیٹ ورک میں شامل ہوں اور پاکستان اور اس سے باہر کلائنٹس کی خدمت کریں">Join our network of legal professionals and serve clients across Pakistan and beyond</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Registration Form -->
+                    <div class="bg-white rounded-3xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+                            <div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center">
+                                <i class="fas fa-user-plus text-primary text-xl"></i>
+                            </div>
+                            <span data-en="Register as Lawyer" data-ur="وکیل کے طور پر رجسٹر کریں">Register as Lawyer</span>
+                        </h3>
+                        
+                        <form id="lawyerForm" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-1" data-en="Full Name *" data-ur="مکمل نام *">Full Name *</label>
+                                    <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="Enter full name">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-1" data-en="CNIC *" data-ur="شناختی کارڈ *">CNIC *</label>
+                                    <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="XXXXX-XXXXXXX-X">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-1" data-en="Phone *" data-ur="فون *">Phone *</label>
+                                    <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="+92-3XX-XXXXXXX">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-1" data-en="Email *" data-ur="ای میل *">Email *</label>
+                                    <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="your@email.com">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-1" data-en="Bar License Number *" data-ur="بُرس لائسنس نمبر *">Bar License Number *</label>
+                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="Enter your bar license number">
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-1" data-en="Specialization *" data-ur="مہارت *">Specialization *</label>
+                                    <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
+                                        <option value="">Select</option>
+                                        <option value="family">Family Law</option>
+                                        <option value="criminal">Criminal Defense</option>
+                                        <option value="civil">Civil Litigation</option>
+                                        <option value="corporate">Corporate Law</option>
+                                        <option value="property">Real Estate</option>
+                                        <option value="labor">Labor Law</option>
+                                        <option value="tax">Tax Law</option>
+                                        <option value="immigration">Immigration</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-1" data-en="Experience *" data-ur="تجربہ *">Experience *</label>
+                                    <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
+                                        <option value="">Select</option>
+                                        <option value="0-2">0-2 Years</option>
+                                        <option value="3-5">3-5 Years</option>
+                                        <option value="6-10">6-10 Years</option>
+                                        <option value="10+">10+ Years</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-1" data-en="City *" data-ur="شہر *">City *</label>
+                                <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
+                                    <option value="">Select City</option>
+                                    <option value="karachi">Karachi</option>
+                                    <option value="lahore">Lahore</option>
+                                    <option value="islamabad">Islamabad</option>
+                                    <option value="rawalpindi">Rawalpindi</option>
+                                    <option value="faisalabad">Faisalabad</option>
+                                    <option value="multan">Multan</option>
+                                    <option value="peshawar">Peshawar</option>
+                                    <option value="quetta">Quetta</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-1" data-en="Upload Bar License (PDF/JPG) *" data-ur="بُرس لائسنس اپلوڈ کریں *">Upload Bar License (PDF/JPG) *</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-secondary transition cursor-pointer" onclick="this.querySelector('input').click()">
+                                    <input type="file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="this.parentElement.querySelector('span').textContent = this.files[0]?.name || 'Click or drag to upload'">
+                                    <i class="fas fa-upload text-gray-400 mb-2"></i>
+                                    <span class="text-sm text-gray-500" data-en="Click or drag to upload license" data-ur="لائسنس اپلوڈ کرنے کے لیے کلک یا ڈرا کریں">Click or drag to upload license</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-1" data-en="Brief Bio" data-ur="مختصر تعارف">Brief Bio</label>
+                                <textarea rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition resize-none" placeholder="Tell us about yourself and your practice areas..." data-placeholder-en="Tell us about yourself and your practice areas..." data-placeholder-ur="اپنے بارے میں بتائیں اور اپنی پریکٹس کے شعبے..."></textarea>
+                            </div>
+                            
+                            <div class="flex items-start gap-3">
+                                <input type="checkbox" required class="w-5 h-5 mt-1 text-secondary rounded border-gray-300 focus:ring-secondary">
+                                <span class="text-sm text-gray-600" data-en="I confirm that all information provided is accurate and I agree to the terms of service" data-ur="میں تصدیق کرتا/کرتی ہوں کہ تمام فراہم کردہ معلومات درست ہیں اور میں خدمات کی شرائط سے اتفاق کرتا/کرتی ہوں">I confirm that all information provided is accurate and I agree to the terms of service</span>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-semibold hover:from-secondary hover:to-secondary hover:text-primary transition flex items-center justify-center gap-2">
+                                <i class="fas fa-user-plus"></i>
+                                <span data-en="Register as Lawyer" data-ur="وکیل کے طور پر رجسٹر کریں">Register as Lawyer</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Benefits & Info -->
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-primary to-accent rounded-3xl p-8 text-white">
+                            <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                                <i class="fas fa-gift text-secondary"></i>
+                                <span data-en="Why Join LegalEase?" data-ur="لیگل ایز میں کیوں شامل ہوں؟">Why Join LegalEase?</span>
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-globe text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold mb-1" data-en="Pan-Pakistan Reach" data-ur="ملک بھر میں پہنچ">Pan-Pakistan Reach</h4>
+                                        <p class="text-white/70 text-sm" data-en="Connect with clients from all major cities across Pakistan" data-ur="پاکستان کے تمام بڑے شہروں سے کلائنٹس سے رابطہ کریں">Connect with clients from all major cities across Pakistan</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-chart-line text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold mb-1" data-en="Grow Your Practice" data-ur="اپنا کاروبار بڑھائیں">Grow Your Practice</h4>
+                                        <p class="text-white/70 text-sm" data-en="Increase your client base and grow your legal practice" data-ur="اپنا کلائنٹ بیس بڑھائیں اور اپنا قانونی کاروبار بڑھائیں">Increase your client base and grow your legal practice</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-shield-alt text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold mb-1" data-en="Verified Profile" data-ur="تصدیق شدہ پروفائل">Verified Profile</h4>
+                                        <p class="text-white/70 text-sm" data-en="Get verified badge to build trust with potential clients" data-ur="ممکنہ کلائنٹس کے ساتھ اعتماد استوار کرنے کے لیے تصدیق شدہ بیج حاصل کریں">Get verified badge to build trust with potential clients</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-money-bill-wave text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold mb-1" data-en="Competitive Fees" data-ur="مقابلے کی فیس">Competitive Fees</h4>
+                                        <p class="text-white/70 text-sm" data-en="Set your own rates and manage your earnings" data-ur="اپنی شرح خود طے کریں اور اپ کی کمائی کا انتظام کریں">Set your own rates and manage your earnings</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="bg-white rounded-3xl p-8 shadow-xl">
+                            <h3 class="text-xl font-bold text-primary mb-6" data-en="Our Network at a Glance" data-ur="ہمارا نیٹ ورک ایک نظر میں">Our Network at a Glance</h3>
+                            
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
+                                    <div class="text-3xl font-bold text-primary mb-1">200+</div>
+                                    <p class="text-sm text-gray-600" data-en="Active Lawyers" data-ur="فعال وکلاء">Active Lawyers</p>
+                                </div>
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
+                                    <div class="text-3xl font-bold text-primary mb-1">15+</div>
+                                    <p class="text-sm text-gray-600" data-en="Cities Covered" data-ur="شہر کور کیے">Cities Covered</p>
+                                </div>
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
+                                    <div class="text-3xl font-bold text-primary mb-1">500+</div>
+                                    <p class="text-sm text-gray-600" data-en="Cases Handled" data-ur="ہینڈل شدہ کیسز">Cases Handled</p>
+                                </div>
+                                <div class="text-center p-4 bg-gray-50 rounded-2xl">
+                                    <div class="text-3xl font-bold text-primary mb-1">98%</div>
+                                    <p class="text-sm text-gray-600" data-en="Success Rate" data-ur="کامیابی کی شرح">Success Rate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="FAQ" data-ur="عمومی سوالات">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Frequently Asked Questions" data-ur="عمومی سوالات">Frequently Asked Questions</h2>
+                <p class="text-gray-600" data-en="Find answers to common questions about our services" data-ur="ہماری خدمات کے بارے میں عام سوالات کے جوابات تلاش کریں">Find answers to common questions about our services</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-primary pr-4" data-en="How do I submit my legal matter?" data-ur="میں اپنا قانونی معاملہ کیسے جمع کرواؤں؟">How do I submit my legal matter?</span>
+                        <i class="fas fa-plus text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600" data-en="You can submit your legal matter through our online form by clicking the 'Submit Case' section. You can describe your matter in text, upload relevant documents, or even record your voice to explain your situation. Once submitted, our team will review it and contact you within 24 hours." data-ur="آپ 'کیس جمع کریں' سیکشن پر کلک کرکے آن لائن فارم کے ذریعے اپنا قانونی معاملہ جمع کرواسکتے ہیں۔ آپ اپنا معاملہ ٹیکسٹ میں بیان کر سکتے ہیں، متعلقہ دستاویزات اپلوڈ کر سکتے ہیں، یا اپنی صورتحال کی وضاحت کے لیے اپنی آواز بھی ریکارڈ کر سکتے ہیں۔ ایک بار جمع ہونے کے بعد، ہماری ٹیم اس کا جائزہ لے کر 24 گھنٹے کے اندر آپ سے رابطہ کرے گی۔">You can submit your legal matter through our online form by clicking the "Submit Case" section. You can describe your matter in text, upload relevant documents, or even record your voice to explain your situation. Once submitted, our team will review it and contact you within 24 hours.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-primary pr-4" data-en="Is my information kept confidential?" data-ur="کیا میری معلومات کو秘密 رکھا جاتا ہے؟">Is my information kept confidential?</span>
+                        <i class="fas fa-plus text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600" data-en="Yes, absolutely. All information shared with LegalEase is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent." data-ur="جی ہاں، بلاشبہ۔ لیگل ایز کے ساتھ شیئر کی گئی تمام معلومات کو سختی سے خفیہ رکھا جاتا ہے۔ ہم سخت رازداری کے پروٹوکول فالو کرتے ہیں اور آپ کی ذاتی اور کیس کی تفصیلات کبھی بھی آپ کی واضح رضامندی کے بغیر کسی تیسرے فریق کے ساتھ شیئر نہیں کی جاتیں۔">Yes, absolutely. All information shared with LegalEase is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-primary pr-4" data-en="How much does consultation cost?" data-ur="مشاورت کتنی لاگت ہے؟">How much does consultation cost?</span>
+                        <i class="fas fa-plus text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600" data-en="Initial consultation fees vary depending on the type of legal matter and complexity. We offer competitive rates and provide a free initial assessment for most cases. You will be informed about applicable fees before any consultation begins." data-ur="ابتدائی مشاورت کی فیس قسم اور پیچیدگی کے لحاظ سے مختلف ہوتی ہے۔ ہم مسابقتی نرخ پیش کرتے ہیں اور زیادہ تر کیسز کے لیے مفت ابتدائی تشخیص فراہم کرتے ہیں۔ آپ کو مشاورت شروع ہونے سے پہلے لاگو فیس کے بارے میں بتایا جائے گا۔">Initial consultation fees vary depending on the type of legal matter and complexity. We offer competitive rates and provide a free initial assessment for most cases. You will be informed about applicable fees before any consultation begins.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-primary pr-4" data-en="How can I become a verified lawyer on your platform?" data-ur="میں آپ کے پلیٹ فارم پر تصدیق شدہ وکیل کیسے بن سکتا ہوں؟">How can I become a verified lawyer on your platform?</span>
+                        <i class="fas fa-plus text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600" data-en="To become a verified lawyer, you need to complete the registration form in the 'Lawyers' section. Submit your bar license and credentials for verification. Once approved by our admin team, you will receive a verified badge and can start receiving client inquiries." data-ur="تصدیق شدہ وکیل بننے کے لیے، آپ کو 'وکلاء' سیکشن میں رجسٹریشن فارم مکمل کرنا ہوگا۔ تصدیق کے لیے اپنا بُرس لائسنس اور اسناد جمع کروائیں۔ ایک بار ہماری ایڈمن ٹیم کی منظوری کے بعد، آپ کو ایک تصدیق شدہ بیج ملے گا اور آپ کلائنٹ کی پوچھ گاہ حاصل کرنا شروع کر سکیں گے۔">To become a verified lawyer, you need to complete the registration form in the "Lawyers" section. Submit your bar license and credentials for verification. Once approved by our admin team, you will receive a verified badge and can start receiving client inquiries.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
+                        <span class="font-semibold text-primary pr-4" data-en="Do you handle international legal matters?" data-ur="کیا آپ بین الاقوامی قانونی معاملات سنبھالتے ہیں؟">Do you handle international legal matters?</span>
+                        <i class="fas fa-plus text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600" data-en="Yes, we handle international legal matters including immigration cases, British law consultations, and international disputes. Our network includes experts in various international legal systems to provide comprehensive guidance." data-ur="جی ہاں، ہم بین الاقوامی قانونی معاملات کو سنبھالتے ہیں جن میں امیگریشن کیسز، برٹش قانون کی مشاورت، اور بین الاقوامی تنازعات شامل ہیں۔ ہمارے نیٹ ورک میں جامع رہنمائی فراہم کرنے کے لیے مختلف بین الاقوامی قانونی نظاموں میں ماہرین شامل ہیں۔">Yes, we handle international legal matters including immigration cases, British law consultations, and international disputes. Our network includes experts in various international legal systems to provide comprehensive guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="TESTIMONIALS" data-ur="رائے / تبصرے">TESTIMONIALS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="What Our Clients Say" data-ur="ہمارے کلائنٹس کیا کہتے ہیں">What Our Clients Say</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-en="Excellent service! The team helped me with my family matter very professionally. They kept my information confidential and guided me through the entire process." data-ur="بہترین سروس! ٹیم نے میرے خاندانی معاملے میں بہت پیشہ ورانہ طریقے سے مدد کی۔ انہوں نے میری معلومات کو خفیہ رکھا اور پورے عمل میں میری رہنمائی کی۔">Excellent service! The team helped me with my family matter very professionally. They kept my information confidential and guided me through the entire process.</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">AK</div>
+                        <div>
+                            <h4 class="font-semibold text-primary">Ahmed Khan</h4>
+                            <p class="text-sm text-gray-500">Lahore</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-en="Very responsive and knowledgeable lawyers. I was facing a property dispute and they resolved it quickly. Highly recommend their services." data-ur="بہت ذمہ دار اور علمی وکیل۔ مجھے جائیداد کا تنازعہ تھا اور انہوں نے اسے جلد حل کیا۔ ان کی خدمات کی بہت سفارش کرتا ہوں۔">Very responsive and knowledgeable lawyers. I was facing a property dispute and they resolved it quickly. Highly recommend their services.</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-primary font-bold">SF</div>
+                        <div>
+                            <h4 class="font-semibold text-primary">Sarah Fatima</h4>
+                            <p class="text-sm text-gray-500">Karachi</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-en="Great platform for connecting with verified lawyers. The voice input feature is very helpful for those who cannot type easily. Amazing initiative!" data-ur="تصدیق شدہ وکیلوں سے جڑنے کے لیے بہترین پلیٹ فارم۔ ووائس ان پٹ فیچر ان لوگوں کے لیے بہت مددگار ہے جو آسانی سے ٹائپ نہیں کر سکتے۔ حیرت انگیز اقدام!">Great platform for connecting with verified lawyers. The voice input feature is very helpful for those who cannot type easily. Amazing initiative!</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold">MR</div>
+                        <div>
+                            <h4 class="font-semibold text-primary">Muhammad Rizwan</h4>
+                            <p class="text-sm text-gray-500">Islamabad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="CONTACT US" data-ur="ہم سے رابطہ کریں">CONTACT US</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Get in Touch" data-ur="رابطے میں رہیں">Get in Touch</h2>
+                    <p class="text-gray-600" data-en="Have questions? We're here to help 24/7" data-ur="سوال ہیں؟ ہم یہاں 24/7 مدد کے لیے ہیں">Have questions? We're here to help 24/7</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <a href="tel:+923211234567" class="bg-gray-50 p-6 rounded-2xl text-center hover-lift group">
+                        <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-secondary transition">
+                            <i class="fas fa-phone-alt text-primary text-2xl group-hover:text-white transition"></i>
+                        </div>
+                        <h4 class="font-semibold text-primary mb-2" data-en="Call Us" data-ur="کال کریں">Call Us</h4>
+                        <p class="text-gray-600">+92-321-1234567</p>
+                    </a>
+                    
+                    <a href="https://wa.me/923211234567" target="_blank" class="bg-gray-50 p-6 rounded-2xl text-center hover-lift group">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition">
+                            <i class="fab fa-whatsapp text-green-500 text-2xl group-hover:text-white transition"></i>
+                        </div>
+                        <h4 class="font-semibold text-primary mb-2" data-en="WhatsApp" data-ur="واٹس ایپ">WhatsApp</h4>
+                        <p class="text-gray-600">+92-321-1234567</p>
+                    </a>
+                    
+                    <a href="mailto:info@legalease.pk" class="bg-gray-50 p-6 rounded-2xl text-center hover-lift group">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition">
+                            <i class="fas fa-envelope text-blue-500 text-2xl group-hover:text-white transition"></i>
+                        </div>
+                        <h4 class="font-semibold text-primary mb-2" data-en="Email Us" data-ur="ای میل کریں">Email Us</h4>
+                        <p class="text-gray-600">info@legalease.pk</p>
+                    </a>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 md:p-12 text-center text-white">
+                    <h3 class="text-2xl font-bold mb-4" data-en="Subscribe to Our Newsletter" data-ur="ہمارے نیوز لیٹر کو سبسکرائب کریں">Subscribe to Our Newsletter</h3>
+                    <p class="text-white/70 mb-6" data-en="Get latest legal updates, news, and tips delivered to your inbox" data-ur="تازہ ترین قانونی اپڈیٹس، خبریں اور تجاویز اپنے ان باکس میں حاصل کریں">Get latest legal updates, news, and tips delivered to your inbox</p>
+                    <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+                        <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-full text-primary focus:outline-none">
+                        <button type="submit" class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition" data-en="Subscribe" data-ur="سبسکرائب کریں">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-balance-scale text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">LegalEase</h3>
+                            <p class="text-xs text-secondary urdu-text">قانونی مشاورت</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6" data-en="Your trusted legal partner in Pakistan. We provide comprehensive legal consultancy services for individuals and businesses." data-ur="پاکستان میں آپ کا قابل اعتماد قانونی پارٹنر۔ ہم افراد اور کاروبار کے لیے جامع قانونی مشاورت خدمات فراہم کرتے ہیں۔">Your trusted legal partner in Pakistan. We provide comprehensive legal consultancy services for individuals and businesses.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-secondary hover:text-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-secondary hover:text-primary transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-secondary hover:text-primary transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-secondary hover:text-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-secondary hover:text-primary transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6" data-en="Quick Links" data-ur="فوری لنکس">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-secondary transition" data-en="Home" data-ur="ہوم">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-secondary transition" data-en="Services" data-ur="خدمات">Services</a></li>
+                        <li><a href="#laws" class="text-gray-400 hover:text-secondary transition" data-en="Laws" data-ur="قوانین">Laws</a></li>
+                        <li><a href="#client-form" class="text-gray-400 hover:text-secondary transition" data-en="Submit Case" data-ur="کیس جمع کریں">Submit Case</a></li>
+                        <li><a href="#lawyers" class="text-gray-400 hover:text-secondary transition" data-en="For Lawyers" data-ur="وکلاء کے لیے">For Lawyers</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-secondary transition" data-en="FAQ" data-ur="عمومی سوالات">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal Services -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6" data-en="Legal Services" data-ur="قانونی خدمات">Legal Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition" data-en="Family Law" data-ur="خاندانی قانون">Family Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition" data-en="Criminal Defense" data-ur="کریمنل ڈیفنس">Criminal Defense</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition" data-en="Corporate Law" data-ur="کارپوریٹ قانون">Corporate Law</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition" data-en="Civil Litigation" data-ur="سول لیٹیگیشن">Civil Litigation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition" data-en="Real Estate" data-ur="رئیل اسٹیٹ">Real Estate</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition" data-en="Immigration" data-ur="امیگریشن">Immigration</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6" data-en="Contact Info" data-ur="رابطہ کی معلومات">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-secondary mt-1"></i>
+                            <span class="text-gray-400" data-en="Office #123, Business Center, Main Boulevard, Lahore, Pakistan" data-ur="آفس #123، بزنس سینٹر، مین بوولیورڈ، لاہور، پاکستان">Office #123, Business Center, Main Boulevard, Lahore, Pakistan</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone-alt text-secondary"></i>
+                            <a href="tel:+923211234567" class="text-gray-400 hover:text-secondary transition">+92-321-1234567</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-secondary"></i>
+                            <a href="mailto:info@legalease.pk" class="text-gray-400 hover:text-secondary transition">info@legalease.pk</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-clock text-secondary"></i>
+                            <span class="text-gray-400" data-en="Mon - Sat: 9:00 AM - 6:00 PM" data-ur="پیر - ہفتہ: صبح 9:00 - شام 6:00">Mon - Sat: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-white/10 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-gray-400 text-sm text-center md:text-left" data-en="© 2024 LegalEase Pakistan. All rights reserved." data-ur="© 2024 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">© 2024 LegalEase Pakistan. All rights reserved.</p>
+                    <div class="flex gap-6">
+                        <a href="#" class="text-gray-400 hover:text-secondary transition text-sm" data-en="Privacy Policy" data-ur="رازداری کی پالیسی">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition text-sm" data-en="Terms of Service" data-ur="خدمات کی شرائط">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition text-sm" data-en="Cookie Policy" data-ur="کوکی پالیسی">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-btn flex flex-col gap-3">
+        <button onclick="scrollToTop()" id="scrollTopBtn" class="w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-secondary hover:text-primary transition opacity-0 invisible">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <a href="https://wa.me/923211234567" target="_blank" class="w-14 h-14 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition pulse-animation">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- Live Chat Modal -->
+    <div id="liveChatModal" class="modal">
+        <div class="bg-white rounded-3xl w-full max-w-md mx-4 overflow-hidden">
+            <div class="bg-primary p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+                        <i class="fas fa-headset text-primary"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold">LegalEase Support</h4>
+                        <div class="flex items-center gap-1">
+                            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                            <span class="text-white/70 text-sm">Online</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeLiveChat()" class="text-white hover:text-secondary transition">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="h-80 p-4 overflow-y-auto bg-gray-50" id="chatMessages">
+                <div class="flex items-start gap-3 mb-4">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs">LE</div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm max-w-[80%]">
+                        <p class="text-gray-700" data-en="Hello! Welcome to LegalEase. How can we help you today?" data-ur="سلام! لیگل ایز میں خوش آمدید۔ آج ہم آپ کی کیسے مدد کر سکتے ہیں؟">Hello! Welcome to LegalEase. How can we help you today?</p>
+                        <span class="text-xs text-gray-400 mt-1">10:30 AM</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t">
+                <form id="chatForm" class="flex gap-2">
+                    <input type="text" id="chatInput" placeholder="Type your message..." class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-primary" data-placeholder-en="Type your message..." data-placeholder-ur="اپنا پیغام ٹائپ کریں...">
+                    <button type="submit" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentLanguage = 'en';
+        let isDarkTheme = false;
+        let currentStep = 1;
+        let uploadedFiles = [];
+        let isRecording = false;
+        let recognition = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                const scrollBtn = document.getElementById('scrollTopBtn');
+                
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                    scrollBtn.classList.remove('opacity-0', 'invisible');
+                    scrollBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    header.classList.remove('scrolled');
+                    scrollBtn.classList.add('opacity-0', 'invisible');
+                    scrollBtn.classList.remove('opacity-100', 'visible');
+                }
+            });
+            
+            // Initialize counters
+            initCounters();
+            
+            // Form submissions
+            document.getElementById('clientForm').addEventListener('submit', handleClientSubmit);
+            document.getElementById('lawyerForm').addEventListener('submit', handleLawyerSubmit);
+            document.getElementById('chatForm').addEventListener('submit', handleChatSubmit);
+            
+            // File upload drag & drop
+            const uploadZone = document.getElementById('uploadZone');
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('dragover');
+            });
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.classList.remove('dragover');
+            });
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            // Language direction
+            updateLanguageDirection();
+        });
+        
+        // Language Toggle
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+            const html = document.documentElement;
+            
+            if (currentLanguage === 'ur') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ur');
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+            }
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLanguage}`);
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+                el.placeholder = el.getAttribute(`data-placeholder-${currentLanguage}`);
+            });
+            
+            // Update buttons
+            document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+            document.getElementById('mobileLangBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+            document.getElementById('logoTagline').textContent = currentLanguage === 'en' ? 'قانونی مشاورت' : 'Legal Consultancy';
+            
+            updateLanguageDirection();
+        }
+        
+        function updateLanguageDirection() {
+            const direction = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+            document.body.setAttribute('dir', direction);
+        }
+        
+        // Theme Toggle
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const icon = document.getElementById('themeIcon');
+            const mobileIcon = document.getElementById('mobileThemeIcon');
+            
+            if (isDarkTheme) {
+                document.body.classList.add('dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                mobileIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                document.body.classList.remove('dark');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                mobileIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+        
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
+        
+        
+
+// Slider Functions
+let currentSlide = 0;
+
+const slider = document.getElementById('heroSlider');
+const slides = document.querySelectorAll('#heroSlider > div');
+const sliderElements = document.querySelectorAll('.slider-dot');
+
+const totalSlides = slides.length;
+
+// Go To Specific Slide
+function goToSlide(index){
+
+    currentSlide = index;
+
+    updateSlider();
+
+}
+
+// Previous Slide
+function prevSlide(){
+
+    currentSlide--;
+
+    if(currentSlide < 0){
+        currentSlide = totalSlides - 1;
+    }
+
+    updateSlider();
+
+}
+
+// Next Slide
+function nextSlide(){
+
+    currentSlide++;
+
+    if(currentSlide >= totalSlides){
+        currentSlide = 0;
+    }
+
+    updateSlider();
+
+}
+
+// Update Slider Position
+function updateSlider(){
+
+    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    sliderElements.forEach((dot, i) => {
+
+        dot.classList.toggle('bg-secondary', i === currentSlide);
+        dot.classList.toggle('bg-white/50', i !== currentSlide);
+
+    });
+
+}
+
+// Auto Slide
+setInterval(nextSlide, 5000);
+        
+        // Form Steps
+        function nextStep(step) {
+            document.getElementById(`step${step}`).classList.add('hidden');
+            document.getElementById(`step${step + 1}`).classList.remove('hidden');
+            currentStep = step + 1;
+            updateProgress();
+        }
+        
+        function prevStep(step) {
+            document.getElementById(`step${step}`).classList.add('hidden');
+            document.getElementById(`step${step - 1}`).classList.remove('hidden');
+            currentStep = step - 1;
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const percent = (currentStep / 3) * 100;
+            document.getElementById('progressBar').style.width = `${percent}%`;
+            document.getElementById('progressPercent').textContent = `${Math.round(percent)}%`;
+        }
+        
+        // File Upload
+        function handleFileUpload(event) {
+            handleFiles(event.target.files);
+        }
+        
+        function handleFiles(files) {
+            const container = document.getElementById('uploadedFiles');
+            
+            Array.from(files).forEach(file => {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('File size must be less than 10MB');
+                    return;
+                }
+                
+                uploadedFiles.push(file);
+                
+                const fileElement = document.createElement('div');
+                fileElement.className = 'flex items-center justify-between bg-gray-100 p-3 rounded-xl';
+                fileElement.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-file text-primary"></i>
+                        <span class="text-sm text-gray-700">${file.name}</span>
+                    </div>
+                    <button type="button" onclick="removeFile(this, '${file.name}')" class="text-red-500 hover:text-red-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                container.appendChild(fileElement);
+            });
+        }
+        
+        function removeFile(element, filename) {
+            element.parentElement.remove();
+            uploadedFiles = uploadedFiles.filter(f => f.name !== filename);
+        }
+        
+        // Voice Input
+        function startVoiceInput() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('Voice input not supported in your browser. Please use Chrome.');
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = currentLanguage === 'en' ? 'en-US' : 'ur-PK';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            recognition.onstart = () => {
+                isRecording = true;
+                document.getElementById('voiceBtn').classList.add('bg-red-500', 'text-white');
+                document.getElementById('voiceBtn').innerHTML = '<i class="fas fa-stop"></i>';
+            };
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                const textarea = document.getElementById('caseDescription');
+                textarea.value += (textarea.value ? ' ' : '') + transcript;
+            };
+            
+            recognition.onend = () => {
+                isRecording = false;
+                document.getElementById('voiceBtn').classList.remove('bg-red-500', 'text-white');
+                document.getElementById('voiceBtn').innerHTML = '<i class="fas fa-microphone"></i>';
+            };
+            
+            recognition.onerror = (event) => {
+                console.log('Speech recognition error:', event.error);
+                isRecording = false;
+            };
+            
+            recognition.start();
+        }
+        
+        // Form Submissions
+        function handleClientSubmit(e) {
+            e.preventDefault();
+            
+            // Generate reference number
+            const refNum = 'LE-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('refNumber').textContent = refNum;
+            
+            // Show success message
+            document.getElementById('clientForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+        }
+        
+        function handleLawyerSubmit(e) {
+            e.preventDefault();
+            alert('Registration submitted successfully! Your profile will be reviewed and published after admin approval.');
+            e.target.reset();
+        }
+        
+        function resetForm() {
+            document.getElementById('clientForm').classList.remove('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('clientForm').reset();
+            currentStep = 1;
+            updateProgress();
+            document.querySelectorAll('.step').forEach((step, i) => {
+                step.classList.toggle('hidden', i !== 0);
+            });
+            uploadedFiles = [];
+            document.getElementById('uploadedFiles').innerHTML = '';
+        }
+        
+        // FAQ
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            answer.classList.toggle('hidden');
+            icon.classList.toggle('fa-plus');
+            icon.classList.toggle('fa-minus');
+        }
+        
+        // Counters
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        animateCounter(counter, target);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+        
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString() + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 30);
+        }
+        
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Live Chat
+        function openLiveChat() {
+            document.getElementById('liveChatModal').classList.add('active');
+        }
+        
+        function closeLiveChat() {
+            document.getElementById('liveChatModal').classList.remove('active');
+        }
+        
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'flex items-start gap-3 mb-4 justify-end';
+            userMsg.innerHTML = `
+                <div class="bg-primary text-white p-4 rounded-2xl max-w-[80%]">
+                    <p>${message}</p>
+                    <span class="text-xs text-white/70 mt-1">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                </div>
+            `;
+            chatMessages.appendChild(userMsg);
+            
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulate bot response
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'flex items-start gap-3 mb-4';
+                botMsg.innerHTML = `
+                    <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-primary text-xs">LE</div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm max-w-[80%]">
+                        <p class="text-gray-700">${currentLanguage === 'en' ? 'Thank you for your message. An agent will respond shortly.' : 'آپ کے پیغام کا شکریہ۔ ایک ایجنٹ جلد جواب دے گا۔'}</p>
+                        <span class="text-xs text-gray-400 mt-1">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                `;
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+        
+        // Close modal on outside click
+        document.getElementById('liveChatModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLiveChat();
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
