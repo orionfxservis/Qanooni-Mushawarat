@@ -6,7 +6,8 @@
     <title>LegalEase Pakistan - قانونی مشاورت</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -35,10 +36,36 @@
             font-family: 'Inter', sans-serif;
         }
         
-        .urdu-text {
-            font-family: 'Noto Nastaliq Urdu', serif;
-            direction: rtl;
-        }
+        @font-face {
+    font-family: 'JameelNoori';
+    src: url('./fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Urdu Styling */
+.urdu-text{
+    font-family:'JameelNoori', serif;
+    direction: rtl;
+    line-height: 2.5;
+    letter-spacing: 0;
+}
+
+.urdu-heading{
+    font-family:'JameelNoori', serif;
+    line-height: 2.3;
+}
+
+.urdu-ui{
+    font-family:'JameelNoori', serif;
+    line-height: 2;
+}
+
+body{
+    font-family:'Inter', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
         
         .slider {
             animation: slide 20s infinite;
@@ -269,8 +296,6 @@
     min-width:100%;
 }
 
-<style>
-
 #home{
     overflow:hidden;
     margin:0;
@@ -278,25 +303,35 @@
 }
 
 #heroSlider{
-    display:flex;
+    display:block !important;
+    position:relative;
     height:100%;
     width:100%;
 }
 
 #heroSlider > div{
-    min-width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
     height:100%;
-    position:relative;
     overflow:hidden;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#heroSlider > div:first-child {
+    opacity: 1;
 }
 
 /* HERO IMAGES */
 #heroSlider img{
     width:100%;
     height:100%;
-    object-fit:cover;
+    object-fit:contain;
     object-position:center center;
     display:block;
+    background-color: #000;
 }
 
 /* Prevent stretched images */
@@ -321,8 +356,9 @@
     }
 
     #heroSlider img{
-        object-fit:cover;
+        object-fit:contain;
         object-position:center;
+        background-color: #000;
     }
 
     #home h2{
@@ -335,9 +371,8 @@
     }
 
 }
-
 </style>
-    </style>
+    
 </head>
 <body class="bg-light">
     <!-- Language Direction Helper -->
@@ -412,7 +447,7 @@
 
             <!-- Live Chat -->
             <button onclick="openLiveChat()"
-                class="bg-secondary text-primary px-4 py-2 rounded-full text-sm font-semibold hover:bg-white transition flex items-center gap-2">
+                class="bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-white transition flex items-center gap-2 border-2 border-secondary">
 
                 <i class="fas fa-comments text-sm"></i>
 
@@ -423,11 +458,12 @@
 
             <!-- Consultation -->
             <a href="#client-form"
-               class="bg-white text-primary px-4 py-2 rounded-full text-sm font-semibold hover:bg-secondary hover:text-white transition"
+               class="bg-transparent border-2 border-white text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2"
                data-en="Consultation"
                data-ur="مشاورت">
 
-                Consultation
+                <i class="fas fa-user-tie text-sm"></i>
+                <span data-en="Consultation" data-ur="مشاورت">Consultation</span>
 
             </a>
         </div>
@@ -479,7 +515,7 @@
 
                 <!-- Background -->
                 <img 
-                    src="./images/slide-show/lhc-new.jpg"
+                    src="./images/bg-slide-show/family-law.jpg"
                     alt="Legal Justice"
                     class="absolute inset-0 w-full h-full object-cover object-center"
                 >
@@ -505,13 +541,15 @@
 
                         <div class="flex flex-wrap gap-4">
                             <a href="#client-form"
-                               class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
-                                Get Free Consultation
+                               class="bg-secondary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-white transition flex items-center gap-2 border-2 border-secondary">
+                                <i class="fas fa-keyboard"></i>
+                                Ask Your Free Question Now
                             </a>
 
-                            <a href="#services"
-                               class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition">
-                                Our Services
+                            <a href="#lawyers"
+                               class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2">
+                                <i class="fas fa-user-tie"></i>
+                                Explore Expert Lawyers Directory
                             </a>
                         </div>
                     </div>
@@ -523,7 +561,7 @@
 
                 <!-- Background -->
                 <img 
-                    src="./images/slide-show/law-liabrary.jpg"
+                    src="./images/bg-slide-show/inheritance-laws.jpg"
                     alt="Legal Justice"
                     class="absolute inset-0 w-full h-full object-cover object-center"
                 >
@@ -548,13 +586,15 @@
 
                         <div class="flex flex-wrap gap-4">
                             <a href="#client-form"
-                               class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
-                                Get Free Consultation
+                               class="bg-secondary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-white transition flex items-center gap-2 border-2 border-secondary">
+                                <i class="fas fa-keyboard"></i>
+                                Ask Your Free Question Now
                             </a>
 
-                            <a href="#services"
-                               class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition">
-                                Our Services
+                            <a href="#lawyers"
+                               class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2">
+                                <i class="fas fa-user-tie"></i>
+                                Explore Expert Lawyers Directory
                             </a>
                         </div>
                     </div>
@@ -566,7 +606,7 @@
 
                 <!-- Background -->
                 <img 
-                    src="./images/slide-show/pakistan-lawyers.jpg"
+                    src="./images/bg-slide-show/property-law.jpg"
                     alt="Legal Justice"
                     class="absolute inset-0 w-full h-full object-cover object-center"
                 >
@@ -591,13 +631,15 @@
 
                         <div class="flex flex-wrap gap-4">
                             <a href="#client-form"
-                               class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition">
-                                Get Free Consultation
+                               class="bg-secondary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-white transition flex items-center gap-2 border-2 border-secondary">
+                                <i class="fas fa-keyboard"></i>
+                                Ask Your Free Question Now
                             </a>
 
-                            <a href="#services"
-                               class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition">
-                                Our Services
+                            <a href="#lawyers"
+                               class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2">
+                                <i class="fas fa-user-tie"></i>
+                                Explore Expert Lawyers Directory
                             </a>
                         </div>
                     </div>
@@ -1995,7 +2037,17 @@ function nextSlide(){
 // Update Slider Position
 function updateSlider(){
 
-    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    slides.forEach((slide, i) => {
+        if(i === currentSlide) {
+            slide.style.opacity = 1;
+            slide.style.zIndex = 2;
+            slide.style.pointerEvents = 'auto';
+        } else {
+            slide.style.opacity = 0;
+            slide.style.zIndex = 1;
+            slide.style.pointerEvents = 'none';
+        }
+    });
 
     sliderElements.forEach((dot, i) => {
 
@@ -2005,6 +2057,9 @@ function updateSlider(){
     });
 
 }
+
+// Initialize first slide
+updateSlider();
 
 // Auto Slide
 setInterval(nextSlide, 5000);
