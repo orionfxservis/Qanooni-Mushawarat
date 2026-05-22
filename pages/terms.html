@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Service - LegalEase Pakistan</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="./assets/css/theme.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#c9a227',
+                        accent: '#2d5a87',
+                        dark: '#0f1c2e',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- HEADER -->
+<header class="bg-primary shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+
+        <!-- NAVBAR -->
+        <nav class="flex justify-between items-center py-3">
+
+            <!-- LOGO -->
+            <a href="index.html" class="flex items-center">
+                <img src="./images/logo/logo-02.png"
+                     alt="LegalEase Logo"
+                     class="h-14 md:h-16 w-auto object-contain">
+            </a>
+
+            <!-- MENU -->
+            <div class="hidden lg:flex items-center gap-8">
+
+                <a href="index.html"
+                   class="text-white hover:text-secondary transition font-medium">
+                    Home
+                </a>
+
+                <a href="policy.html"
+                   class="text-white hover:text-secondary transition font-medium">
+                    Privacy Policy
+                </a>
+
+                <a href="terms.html"
+                   class="text-secondary font-semibold">
+                    Terms of Service
+                </a>
+
+                <a href="index.html#contact"
+                   class="text-white hover:text-secondary transition font-medium">
+                    Contact
+                </a>
+
+            </div>
+
+            <!-- LANGUAGE BUTTON -->
+            <button onclick="toggleLanguage()"
+                    id="langBtn"
+                    class="border border-secondary text-secondary px-5 py-2 rounded-lg hover:bg-secondary hover:text-primary transition font-medium">
+                اردو
+            </button>
+
+        </nav>
+
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="bg-gradient-to-r from-primary via-accent to-primary py-20 relative overflow-hidden">
+
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+
+        <div class="inline-block border border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-semibold mb-6">
+            LegalEase Pakistan
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6"
+            data-en="Terms of Service"
+            data-ur="خدمات کی شرائط">
+            Terms of Service
+        </h1>
+
+        <p class="text-white/80 max-w-3xl mx-auto text-lg leading-relaxed urdu-text"
+           data-en="Please read these Terms of Service carefully before using LegalEase Pakistan."
+           data-ur="براہِ کرم لیگل ایز پاکستان استعمال کرنے سے پہلے خدمات کی ان شرائط کو غور سے پڑھیں۔">
+            Please read these Terms of Service carefully before using LegalEase Pakistan.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- TERMS SECTION -->
+<section class="py-16">
+
+    <div class="container mx-auto px-4">
+
+        <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12">
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="1. Acceptance of Terms"
+                    data-ur="1. شرائط کی منظوری">
+                    1. Acceptance of Terms
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="By accessing or using LegalEase Pakistan, you agree to comply with these Terms of Service and all applicable laws and regulations."
+                   data-ur="لیگل ایز پاکستان استعمال کرنے کے ذریعے آپ ان خدمات کی شرائط اور تمام قابلِ اطلاق قوانین و ضوابط کی پابندی کرنے سے اتفاق کرتے ہیں۔">
+                    By accessing or using LegalEase Pakistan, you agree to comply with these Terms of Service and all applicable laws and regulations.
+                </p>
+
+            </div>
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="2. Legal Services Disclaimer"
+                    data-ur="2. قانونی خدمات سے متعلق وضاحت">
+                    2. Legal Services Disclaimer
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="LegalEase Pakistan acts as a platform connecting clients with independent lawyers and legal consultants. We do not guarantee legal outcomes."
+                   data-ur="لیگل ایز پاکستان ایک پلیٹ فارم ہے جو کلائنٹس کو آزاد وکلاء اور قانونی مشیروں سے جوڑتا ہے۔ ہم کسی بھی قانونی نتیجے کی ضمانت نہیں دیتے۔">
+                    LegalEase Pakistan acts as a platform connecting clients with independent lawyers and legal consultants. We do not guarantee legal outcomes.
+                </p>
+
+            </div>
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="3. User Responsibilities"
+                    data-ur="3. صارف کی ذمہ داریاں">
+                    3. User Responsibilities
+                </h2>
+
+                <ul class="space-y-4 text-gray-700 leading-loose">
+
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-secondary mt-1"></i>
+
+                        <span class="urdu-text"
+                              data-en="Users must provide accurate and truthful information."
+                              data-ur="صارفین درست اور حقیقی معلومات فراہم کرنے کے پابند ہیں۔">
+                            Users must provide accurate and truthful information.
+                        </span>
+                    </li>
+
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-secondary mt-1"></i>
+
+                        <span class="urdu-text"
+                              data-en="Users may not misuse the platform for unlawful activities."
+                              data-ur="صارفین پلیٹ فارم کو غیر قانونی سرگرمیوں کے لیے استعمال نہیں کر سکتے۔">
+                            Users may not misuse the platform for unlawful activities.
+                        </span>
+                    </li>
+
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-secondary mt-1"></i>
+
+                        <span class="urdu-text"
+                              data-en="Users are responsible for maintaining confidentiality of account details."
+                              data-ur="صارفین اپنے اکاؤنٹ کی معلومات کی رازداری برقرار رکھنے کے ذمہ دار ہیں۔">
+                            Users are responsible for maintaining confidentiality of account details.
+                        </span>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="4. Intellectual Property"
+                    data-ur="4. دانشورانہ املاک">
+                    4. Intellectual Property
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="All content, branding, logos, and website materials are the property of LegalEase Pakistan and may not be copied without permission."
+                   data-ur="تمام مواد، برانڈنگ، لوگوز اور ویب سائٹ کا مواد لیگل ایز پاکستان کی ملکیت ہے اور اجازت کے بغیر نقل نہیں کیا جا سکتا۔">
+                    All content, branding, logos, and website materials are the property of LegalEase Pakistan and may not be copied without permission.
+                </p>
+
+            </div>
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="5. Limitation of Liability"
+                    data-ur="5. ذمہ داری کی حد">
+                    5. Limitation of Liability
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="LegalEase Pakistan shall not be liable for any indirect, incidental, or consequential damages arising from the use of the platform."
+                   data-ur="لیگل ایز پاکستان پلیٹ فارم کے استعمال سے پیدا ہونے والے کسی بھی بالواسطہ یا نتیجہ خیز نقصان کا ذمہ دار نہیں ہوگا۔">
+                    LegalEase Pakistan shall not be liable for any indirect, incidental, or consequential damages arising from the use of the platform.
+                </p>
+
+            </div>
+
+            <!-- SECTION -->
+            <div>
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="6. Changes to Terms"
+                    data-ur="6. شرائط میں تبدیلی">
+                    6. Changes to Terms
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="We reserve the right to update or modify these Terms of Service at any time without prior notice."
+                   data-ur="ہم کسی بھی وقت بغیر پیشگی اطلاع کے ان خدمات کی شرائط میں تبدیلی یا ترمیم کرنے کا حق محفوظ رکھتے ہیں۔">
+                    We reserve the right to update or modify these Terms of Service at any time without prior notice.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white pt-14 pb-8">
+
+    <div class="container mx-auto px-4">
+
+        <div class="grid md:grid-cols-3 gap-10">
+
+            <!-- BRAND -->
+            <div>
+
+                <img src="./images/logo/logo-02.png"
+                     alt="LegalEase Logo"
+                     class="h-16 mb-5">
+
+                <p class="text-white/70 leading-loose urdu-text"
+                   data-en="LegalEase Pakistan provides trusted legal consultation services across Pakistan."
+                   data-ur="لیگل ایز پاکستان پورے پاکستان میں قابلِ اعتماد قانونی مشاورتی خدمات فراہم کرتا ہے۔">
+                    LegalEase Pakistan provides trusted legal consultation services across Pakistan.
+                </p>
+
+            </div>
+
+            <!-- LINKS -->
+            <div>
+
+                <h3 class="text-xl font-semibold mb-5 text-secondary"
+                    data-en="Quick Links"
+                    data-ur="اہم روابط">
+                    Quick Links
+                </h3>
+
+                <ul class="space-y-3 text-white/70">
+
+                    <li><a href="index.html" class="hover:text-secondary transition">Home</a></li>
+                    <li><a href="policy.html" class="hover:text-secondary transition">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="hover:text-secondary transition">Terms of Service</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- CONTACT -->
+            <div>
+
+                <h3 class="text-xl font-semibold mb-5 text-secondary"
+                    data-en="Contact Us"
+                    data-ur="رابطہ کریں">
+                    Contact Us
+                </h3>
+
+                <div class="space-y-4 text-white/70">
+
+                    <p>
+                        <i class="fas fa-envelope text-secondary mr-2"></i>
+                        info@legalease.pk
+                    </p>
+
+                    <p>
+                        <i class="fas fa-phone text-secondary mr-2"></i>
+                        +92-300-0000000
+                    </p>
+
+                    <p class="urdu-text"
+                       data-en="Karachi, Pakistan"
+                       data-ur="کراچی، پاکستان">
+                        Karachi, Pakistan
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="border-t border-white/10 mt-12 pt-6 text-center text-white/60">
+
+            <p class="urdu-text"
+               data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
+               data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
+                © 2026 LegalEase Pakistan. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- LANGUAGE SCRIPT -->
+<script>
+
+let currentLanguage = 'en';
+
+function toggleLanguage(){
+
+    currentLanguage =
+        currentLanguage === 'en' ? 'ur' : 'en';
+
+    const html = document.documentElement;
+
+    if(currentLanguage === 'ur'){
+
+        html.setAttribute('dir','rtl');
+        html.setAttribute('lang','ur');
+
+    }else{
+
+        html.setAttribute('dir','ltr');
+        html.setAttribute('lang','en');
+
+    }
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+
+        el.textContent =
+            el.getAttribute(`data-${currentLanguage}`);
+
+    });
+
+    document.getElementById('langBtn').textContent =
+        currentLanguage === 'en'
+            ? 'اردو'
+            : 'English';
+
+}
+
+</script>
+
+</body>
+</html>

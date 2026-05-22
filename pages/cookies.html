@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie Policy - LegalEase Pakistan</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="./assets/css/theme.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#c9a227',
+                        accent: '#2d5a87',
+                        dark: '#0f1c2e',
+                        light: '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- HEADER -->
+<header class="bg-primary shadow-lg sticky top-0 z-50">
+
+    <div class="container mx-auto px-4">
+
+        <!-- NAVBAR -->
+        <nav class="flex justify-between items-center py-3">
+
+            <!-- LOGO -->
+            <a href="index.html" class="flex items-center">
+                <img src="./images/logo/logo-02.png"
+                     alt="LegalEase Logo"
+                     class="h-14 md:h-16 w-auto object-contain">
+            </a>
+
+            <!-- MENU -->
+            <div class="hidden lg:flex items-center gap-8">
+
+                <a href="index.html"
+                   class="text-white hover:text-secondary transition font-medium">
+                    Home
+                </a>
+
+                <a href="policy.html"
+                   class="text-white hover:text-secondary transition font-medium">
+                    Privacy Policy
+                </a>
+
+                <a href="terms.html"
+                   class="text-white hover:text-secondary transition font-medium">
+                    Terms
+                </a>
+
+                <a href="cookies.html"
+                   class="text-secondary font-semibold">
+                    Cookie Policy
+                </a>
+
+                <a href="index.html#contact"
+                   class="text-white hover:text-secondary transition font-medium">
+                    Contact
+                </a>
+
+            </div>
+
+            <!-- LANGUAGE BUTTON -->
+            <button onclick="toggleLanguage()"
+                    id="langBtn"
+                    class="border border-secondary text-secondary px-5 py-2 rounded-lg hover:bg-secondary hover:text-primary transition font-medium">
+                اردو
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<!-- HERO -->
+<section class="bg-gradient-to-r from-primary via-accent to-primary py-20 relative overflow-hidden">
+
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+
+        <div class="inline-block border border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-semibold mb-6">
+            LegalEase Pakistan
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6"
+            data-en="Cookie Policy"
+            data-ur="کوکی پالیسی">
+            Cookie Policy
+        </h1>
+
+        <p class="text-white/80 max-w-3xl mx-auto text-lg leading-relaxed urdu-text"
+           data-en="This Cookie Policy explains how LegalEase Pakistan uses cookies and similar technologies to improve your browsing experience."
+           data-ur="یہ کوکی پالیسی وضاحت کرتی ہے کہ لیگل ایز پاکستان آپ کے براؤزنگ تجربے کو بہتر بنانے کے لیے کوکیز اور مشابہ ٹیکنالوجیز کیسے استعمال کرتا ہے۔">
+            This Cookie Policy explains how LegalEase Pakistan uses cookies and similar technologies to improve your browsing experience.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CONTENT -->
+<section class="py-16">
+
+    <div class="container mx-auto px-4">
+
+        <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12">
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="1. What Are Cookies?"
+                    data-ur="1. کوکیز کیا ہیں؟">
+                    1. What Are Cookies?
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and improve user experience."
+                   data-ur="کوکیز چھوٹی ٹیکسٹ فائلیں ہوتی ہیں جو ویب سائٹ وزٹ کرنے پر آپ کے ڈیوائس میں محفوظ کی جاتی ہیں۔ یہ ویب سائٹس کو آپ کی ترجیحات یاد رکھنے اور صارف کے تجربے کو بہتر بنانے میں مدد دیتی ہیں۔">
+                    Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and improve user experience.
+                </p>
+
+            </div>
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="2. How We Use Cookies"
+                    data-ur="2. ہم کوکیز کیسے استعمال کرتے ہیں">
+                    2. How We Use Cookies
+                </h2>
+
+                <ul class="space-y-4 text-gray-700 leading-loose">
+
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-cookie-bite text-secondary mt-1"></i>
+
+                        <span class="urdu-text"
+                              data-en="To improve website performance and speed."
+                              data-ur="ویب سائٹ کی کارکردگی اور رفتار بہتر بنانے کے لیے۔">
+                            To improve website performance and speed.
+                        </span>
+                    </li>
+
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-cookie-bite text-secondary mt-1"></i>
+
+                        <span class="urdu-text"
+                              data-en="To remember language and user preferences."
+                              data-ur="زبان اور صارف کی ترجیحات یاد رکھنے کے لیے۔">
+                            To remember language and user preferences.
+                        </span>
+                    </li>
+
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-cookie-bite text-secondary mt-1"></i>
+
+                        <span class="urdu-text"
+                              data-en="To analyze website traffic and visitor behavior."
+                              data-ur="ویب سائٹ ٹریفک اور وزیٹر کے رویے کا تجزیہ کرنے کے لیے۔">
+                            To analyze website traffic and visitor behavior.
+                        </span>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="3. Third-Party Cookies"
+                    data-ur="3. تھرڈ پارٹی کوکیز">
+                    3. Third-Party Cookies
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="Some third-party services integrated into our website may use their own cookies, including analytics and social media tools."
+                   data-ur="ہماری ویب سائٹ میں شامل بعض تھرڈ پارٹی سروسز اپنی کوکیز استعمال کر سکتی ہیں، جن میں اینالیٹکس اور سوشل میڈیا ٹولز شامل ہیں۔">
+                    Some third-party services integrated into our website may use their own cookies, including analytics and social media tools.
+                </p>
+
+            </div>
+
+            <!-- SECTION -->
+            <div class="mb-10">
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="4. Managing Cookies"
+                    data-ur="4. کوکیز کا انتظام">
+                    4. Managing Cookies
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="You can manage or disable cookies through your browser settings. However, disabling cookies may affect some website functionality."
+                   data-ur="آپ اپنے براؤزر کی سیٹنگز کے ذریعے کوکیز کو منظم یا غیر فعال کر سکتے ہیں۔ تاہم، کوکیز بند کرنے سے ویب سائٹ کی بعض خصوصیات متاثر ہو سکتی ہیں۔">
+                    You can manage or disable cookies through your browser settings. However, disabling cookies may affect some website functionality.
+                </p>
+
+            </div>
+
+            <!-- SECTION -->
+            <div>
+
+                <h2 class="text-2xl font-bold text-primary mb-4"
+                    data-en="5. Policy Updates"
+                    data-ur="5. پالیسی میں تبدیلیاں">
+                    5. Policy Updates
+                </h2>
+
+                <p class="text-gray-700 leading-loose urdu-text"
+                   data-en="LegalEase Pakistan may update this Cookie Policy periodically. Continued use of the website indicates acceptance of updated policies."
+                   data-ur="لیگل ایز پاکستان وقتاً فوقتاً اس کوکی پالیسی کو اپڈیٹ کر سکتا ہے۔ ویب سائٹ کا مسلسل استعمال اپڈیٹ شدہ پالیسی کی منظوری تصور ہوگا۔">
+                    LegalEase Pakistan may update this Cookie Policy periodically. Continued use of the website indicates acceptance of updated policies.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white pt-14 pb-8">
+
+    <div class="container mx-auto px-4">
+
+        <div class="grid md:grid-cols-3 gap-10">
+
+            <!-- BRAND -->
+            <div>
+
+                <img src="./images/logo/logo-02.png"
+                     alt="LegalEase Logo"
+                     class="h-16 mb-5">
+
+                <p class="text-white/70 leading-loose urdu-text"
+                   data-en="LegalEase Pakistan provides trusted legal consultation services across Pakistan."
+                   data-ur="لیگل ایز پاکستان پورے پاکستان میں قابلِ اعتماد قانونی مشاورتی خدمات فراہم کرتا ہے۔">
+                    LegalEase Pakistan provides trusted legal consultation services across Pakistan.
+                </p>
+
+            </div>
+
+            <!-- LINKS -->
+            <div>
+
+                <h3 class="text-xl font-semibold mb-5 text-secondary"
+                    data-en="Quick Links"
+                    data-ur="اہم روابط">
+                    Quick Links
+                </h3>
+
+                <ul class="space-y-3 text-white/70">
+
+                    <li><a href="index.html" class="hover:text-secondary transition">Home</a></li>
+                    <li><a href="policy.html" class="hover:text-secondary transition">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="hover:text-secondary transition">Terms</a></li>
+                    <li><a href="cookies.html" class="hover:text-secondary transition">Cookie Policy</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- CONTACT -->
+            <div>
+
+                <h3 class="text-xl font-semibold mb-5 text-secondary"
+                    data-en="Contact Us"
+                    data-ur="رابطہ کریں">
+                    Contact Us
+                </h3>
+
+                <div class="space-y-4 text-white/70">
+
+                    <p>
+                        <i class="fas fa-envelope text-secondary mr-2"></i>
+                        info@legalease.pk
+                    </p>
+
+                    <p>
+                        <i class="fas fa-phone text-secondary mr-2"></i>
+                        +92-300-0000000
+                    </p>
+
+                    <p class="urdu-text"
+                       data-en="Karachi, Pakistan"
+                       data-ur="کراچی، پاکستان">
+                        Karachi, Pakistan
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="border-t border-white/10 mt-12 pt-6 text-center text-white/60">
+
+            <p class="urdu-text"
+               data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
+               data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
+                © 2026 LegalEase Pakistan. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- LANGUAGE SCRIPT -->
+<script>
+
+let currentLanguage = 'en';
+
+function toggleLanguage(){
+
+    currentLanguage =
+        currentLanguage === 'en' ? 'ur' : 'en';
+
+    const html = document.documentElement;
+
+    if(currentLanguage === 'ur'){
+
+        html.setAttribute('dir','rtl');
+        html.setAttribute('lang','ur');
+
+    }else{
+
+        html.setAttribute('dir','ltr');
+        html.setAttribute('lang','en');
+
+    }
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+
+        el.textContent =
+            el.getAttribute(`data-${currentLanguage}`);
+
+    });
+
+    document.getElementById('langBtn').textContent =
+        currentLanguage === 'en'
+            ? 'اردو'
+            : 'English';
+
+}
+
+</script>
+
+</body>
+</html>

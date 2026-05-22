@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - LegalEase Pakistan</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="./theme.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#c9a227',
+                        accent: '#2d5a87',
+                        dark: '#0f172a',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50">
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="main-navbar">
+
+    <div class="container-standard">
+
+        <nav class="flex justify-between items-center py-3">
+
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center">
+                <img src="./images/logo/logo-02.png"
+                     alt="LegalEase Logo"
+                     class="h-14 md:h-16 w-auto object-contain">
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-8">
+
+                <a href="index.html"
+                   class="nav-link text-white"
+                   data-en="Home"
+                   data-ur="ہوم">
+                    Home
+                </a>
+
+                <a href="index.html#services"
+                   class="nav-link text-white"
+                   data-en="Services"
+                   data-ur="خدمات">
+                    Services
+                </a>
+
+                <a href="index.html#laws"
+                   class="nav-link text-white"
+                   data-en="Laws"
+                   data-ur="قوانین">
+                    Laws
+                </a>
+
+                <a href="index.html#lawyers"
+                   class="nav-link text-white"
+                   data-en="Lawyers"
+                   data-ur="وکلاء">
+                    Lawyers
+                </a>
+
+                <a href="contact.html"
+                   class="nav-link text-white"
+                   data-en="Contact"
+                   data-ur="رابطہ">
+                    Contact
+                </a>
+
+            </div>
+
+            <!-- Right Buttons -->
+            <div class="flex items-center gap-3">
+
+                <!-- Language -->
+                <button onclick="toggleLanguage()"
+                        class="btn-outline text-sm px-4 py-2"
+                        id="langBtn">
+                    اردو
+                </button>
+
+                <!-- Consultation -->
+                <a href="index.html#client-form"
+                   class="btn-gold hidden lg:flex">
+                    <i class="fas fa-scale-balanced"></i>
+
+                    <span data-en="Get Consultation"
+                          data-ur="مشاورت حاصل کریں">
+                        Get Consultation
+                    </span>
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+
+<section class="relative pt-40 pb-24 overflow-hidden bg-gradient-to-br from-primary via-accent to-dark">
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/50"></div>
+
+    <div class="container-standard relative z-10">
+
+        <div class="max-w-4xl mx-auto text-center">
+
+            <!-- Badge -->
+            <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-bold mb-6 urdu-ui"
+                  data-en="LEGAL INFORMATION"
+                  data-ur="قانونی معلومات">
+                LEGAL INFORMATION
+            </span>
+
+            <!-- Heading -->
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6 urdu-heading"
+                data-en="Privacy Policy"
+                data-ur="رازداری کی پالیسی">
+                Privacy Policy
+            </h1>
+
+            <!-- Description -->
+            <p class="text-white/80 text-lg md:text-xl leading-relaxed urdu-text"
+               data-en="Your privacy and legal confidentiality are important to us. Learn how LegalEase Pakistan collects, uses, and protects your information."
+               data-ur="آپ کی رازداری اور قانونی معلومات کی حفاظت ہمارے لیے انتہائی اہم ہے۔ جانیں کہ لیگل ایز پاکستان آپ کی معلومات کو کیسے جمع، استعمال اور محفوظ رکھتا ہے۔">
+                Your privacy and legal confidentiality are important to us.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     POLICY SECTION
+========================= -->
+
+<section class="py-20">
+
+    <div class="container-standard">
+
+        <div class="max-w-5xl mx-auto">
+
+            <div class="theme-card rounded-[34px] p-6 md:p-12">
+
+                <!-- Intro -->
+                <div class="mb-12">
+
+                    <div class="flex items-center gap-4 mb-5">
+
+                        <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary text-2xl">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+
+                        <div>
+
+                            <h2 class="text-3xl font-bold text-primary urdu-heading"
+                                data-en="Privacy & Data Protection"
+                                data-ur="رازداری اور ڈیٹا تحفظ">
+                                Privacy & Data Protection
+                            </h2>
+
+                            <p class="text-gray-500 mt-1 urdu-ui"
+                               data-en="Last Updated: June 2026"
+                               data-ur="آخری اپڈیٹ: جون 2026">
+                                Last Updated: June 2026
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <p class="text-gray-600 leading-8 urdu-text"
+                       data-en="LegalEase Pakistan values your trust and privacy. This Privacy Policy explains how we collect, use, protect, and manage your personal information while using our legal consultancy platform."
+                       data-ur="لیگل ایز پاکستان آپ کے اعتماد اور رازداری کی قدر کرتا ہے۔ یہ رازداری پالیسی وضاحت کرتی ہے کہ ہم آپ کی معلومات کو کیسے جمع، استعمال، محفوظ اور منظم کرتے ہیں۔">
+
+                        LegalEase Pakistan values your trust and privacy.
+
+                    </p>
+
+                </div>
+
+                <!-- Sections -->
+                <div class="space-y-10">
+
+                    <!-- SECTION -->
+                    <div>
+
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3 urdu-heading"
+                            data-en="Information We Collect"
+                            data-ur="ہم کون سی معلومات جمع کرتے ہیں">
+
+                            <i class="fas fa-database text-secondary"></i>
+
+                            <span>
+                                Information We Collect
+                            </span>
+
+                        </h3>
+
+                        <p class="text-gray-600 leading-8 urdu-text"
+                           data-en="We may collect your name, contact information, CNIC details, legal case information, uploaded documents, and communication records."
+                           data-ur="ہم آپ کا نام، رابطہ معلومات، شناختی کارڈ کی تفصیلات، قانونی کیس کی معلومات، اپلوڈ شدہ دستاویزات اور رابطے کا ریکارڈ جمع کر سکتے ہیں۔">
+
+                            We may collect your name...
+
+                        </p>
+
+                    </div>
+
+                    <!-- SECTION -->
+                    <div>
+
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3 urdu-heading"
+                            data-en="Confidentiality"
+                            data-ur="رازداری">
+
+                            <i class="fas fa-user-lock text-secondary"></i>
+
+                            <span>
+                                Confidentiality
+                            </span>
+
+                        </h3>
+
+                        <p class="text-gray-600 leading-8 urdu-text"
+                           data-en="All legal information shared through LegalEase Pakistan is treated confidentially and securely."
+                           data-ur="لیگل ایز پاکستان کے ذریعے شیئر کی گئی تمام قانونی معلومات کو مکمل رازداری اور تحفظ کے ساتھ رکھا جاتا ہے۔">
+
+                            All legal information shared...
+
+                        </p>
+
+                    </div>
+
+                    <!-- SECTION -->
+                    <div>
+
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3 urdu-heading"
+                            data-en="Use of Information"
+                            data-ur="معلومات کا استعمال">
+
+                            <i class="fas fa-file-shield text-secondary"></i>
+
+                            <span>
+                                Use of Information
+                            </span>
+
+                        </h3>
+
+                        <p class="text-gray-600 leading-8 urdu-text"
+                           data-en="Your information helps us provide legal consultations, lawyer connections, and customer support."
+                           data-ur="آپ کی معلومات ہمیں قانونی مشاورت، وکیل رابطہ اور کسٹمر سپورٹ فراہم کرنے میں مدد دیتی ہیں۔">
+
+                            Your information helps us...
+
+                        </p>
+
+                    </div>
+
+                    <!-- SECTION -->
+                    <div>
+
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3 urdu-heading"
+                            data-en="Cookies & Analytics"
+                            data-ur="کوکیز اور تجزیات">
+
+                            <i class="fas fa-cookie-bite text-secondary"></i>
+
+                            <span>
+                                Cookies & Analytics
+                            </span>
+
+                        </h3>
+
+                        <p class="text-gray-600 leading-8 urdu-text"
+                           data-en="Our website may use cookies and analytics tools to improve website performance and user experience."
+                           data-ur="ہماری ویب سائٹ کارکردگی اور صارف تجربہ بہتر بنانے کے لیے کوکیز اور اینالیٹکس استعمال کر سکتی ہے۔">
+
+                            Our website may use cookies...
+
+                        </p>
+
+                    </div>
+
+                    <!-- SECTION -->
+                    <div>
+
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3 urdu-heading"
+                            data-en="Policy Updates"
+                            data-ur="پالیسی اپڈیٹس">
+
+                            <i class="fas fa-repeat text-secondary"></i>
+
+                            <span>
+                                Policy Updates
+                            </span>
+
+                        </h3>
+
+                        <p class="text-gray-600 leading-8 urdu-text"
+                           data-en="LegalEase Pakistan may update this Privacy Policy at any time without prior notice."
+                           data-ur="لیگل ایز پاکستان اس رازداری پالیسی کو کسی بھی وقت بغیر پیشگی اطلاع کے اپڈیٹ کر سکتا ہے۔">
+
+                            LegalEase Pakistan may update...
+
+                        </p>
+
+                    </div>
+
+                    <!-- SECTION -->
+                    <div>
+
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3 urdu-heading"
+                            data-en="Contact Us"
+                            data-ur="ہم سے رابطہ کریں">
+
+                            <i class="fas fa-envelope text-secondary"></i>
+
+                            <span>
+                                Contact Us
+                            </span>
+
+                        </h3>
+
+                        <p class="text-gray-600 leading-8 urdu-text"
+                           data-en="For privacy related questions, contact LegalEase Pakistan support team."
+                           data-ur="رازداری سے متعلق سوالات کے لیے لیگل ایز پاکستان سپورٹ ٹیم سے رابطہ کریں۔">
+
+                            For privacy related questions...
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer-theme">
+
+    <div class="container-standard">
+
+        <div class="grid md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+
+            <!-- Logo -->
+            <div>
+
+                <img src="./images/logo/logo-02.png"
+                     alt="LegalEase Logo"
+                     class="h-16 mb-5">
+
+                <p class="text-gray-400 leading-7 urdu-text"
+                   data-en="Pakistan's trusted digital legal consultation and lawyer directory platform."
+                   data-ur="پاکستان کا قابل اعتماد ڈیجیٹل قانونی مشاورت اور وکلاء ڈائریکٹری پلیٹ فارم۔">
+
+                    Pakistan's trusted digital legal consultation platform.
+
+                </p>
+
+            </div>
+
+            <!-- Links -->
+            <div>
+
+                <h4 class="text-xl font-bold mb-5"
+                    data-en="Quick Links"
+                    data-ur="اہم لنکس">
+                    Quick Links
+                </h4>
+
+                <ul class="space-y-3">
+
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Contact -->
+            <div>
+
+                <h4 class="text-xl font-bold mb-5"
+                    data-en="Contact"
+                    data-ur="رابطہ">
+                    Contact
+                </h4>
+
+                <ul class="space-y-4 text-gray-400">
+
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-phone text-secondary"></i>
+                        +92-300-0000000
+                    </li>
+
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-secondary"></i>
+                        info@legalease.pk
+                    </li>
+
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-location-dot text-secondary"></i>
+                        Karachi, Pakistan
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom -->
+        <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
+
+            <p>
+                © 2026 LegalEase Pakistan. All Rights Reserved.
+            </p>
+
+            <div class="flex items-center gap-5">
+
+                <a href="#" class="hover:text-secondary transition">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="#" class="hover:text-secondary transition">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+
+                <a href="#" class="hover:text-secondary transition">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- =========================
+     LANGUAGE SCRIPT
+========================= -->
+
+<script>
+
+let currentLanguage = 'en';
+
+function toggleLanguage(){
+
+    currentLanguage =
+        currentLanguage === 'en' ? 'ur' : 'en';
+
+    const html = document.documentElement;
+
+    if(currentLanguage === 'ur'){
+
+        html.setAttribute('dir','rtl');
+        html.setAttribute('lang','ur');
+
+    }else{
+
+        html.setAttribute('dir','ltr');
+        html.setAttribute('lang','en');
+
+    }
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+
+        el.textContent =
+            el.getAttribute(`data-${currentLanguage}`);
+
+    });
+
+    document.getElementById('langBtn').textContent =
+        currentLanguage === 'en'
+        ? 'اردو'
+        : 'English';
+
+}
+
+</script>
+
+</body>
+</html>

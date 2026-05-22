@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Qanooni Mushawarat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#c9a227',
+                        accent: '#2d5a87',
+                        dark: '#0f1c2e',
+                        light: '#f8f9fa'
+                    },
+                    fontFamily: {
+                        english: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .tab-btn.active { background-color: #c9a227; color: #1e3a5f; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-gray-800">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-primary text-white flex flex-col hidden md:flex">
+        <div class="h-20 flex items-center justify-center border-b border-white/10">
+            <img src="../images/logo/logo-03.jpg" alt="Logo" class="h-10 w-10 rounded-full mr-2 object-cover">
+            <h1 class="text-xl font-bold tracking-wider">Admin Panel</h1>
+        </div>
+        
+        <nav class="flex-1 px-4 py-6 space-y-2">
+            <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="tab-btn active w-full flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-white/10 text-left">
+                <i class="fas fa-chart-line w-5 text-center"></i>
+                <span class="font-medium">Dashboard</span>
+            </button>
+            <button onclick="switchTab('users')" id="tab-btn-users" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-white/10 text-left">
+                <i class="fas fa-users w-5 text-center"></i>
+                <span class="font-medium">Manage Users</span>
+            </button>
+            <button onclick="switchTab('lawyers')" id="tab-btn-lawyers" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-white/10 text-left">
+                <i class="fas fa-gavel w-5 text-center"></i>
+                <span class="font-medium">Manage Lawyers</span>
+            </button>
+        </nav>
+        
+        <div class="p-4 border-t border-white/10">
+            <a href="../index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-red-500 hover:text-white text-left text-gray-300">
+                <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                <span class="font-medium">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-gray-50">
+        
+        <!-- Top Header -->
+        <header class="h-20 bg-white shadow-sm flex items-center justify-between px-8 shrink-0">
+            <h2 id="pageTitle" class="text-2xl font-bold text-primary">Dashboard Overview</h2>
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">A</div>
+                <span class="font-semibold text-gray-700">Admin</span>
+            </div>
+        </header>
+        
+        <!-- Content Area -->
+        <div class="flex-1 overflow-y-auto p-8">
+            
+            <!-- Dashboard Tab -->
+            <div id="tab-dashboard" class="tab-content active space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 text-2xl">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Total Users</p>
+                            <h3 class="text-2xl font-bold text-gray-800">1,245</h3>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary text-2xl">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Registered Lawyers</p>
+                            <h3 id="dash-lawyer-count" class="text-2xl font-bold text-gray-800">0</h3>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-green-600 text-2xl">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Active Cases</p>
+                            <h3 class="text-2xl font-bold text-gray-800">328</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mt-8">
+                    <h3 class="text-xl font-bold text-primary mb-4">Welcome to Qanooni Mushawarat Admin Panel</h3>
+                    <p class="text-gray-600 leading-relaxed">From this dashboard, you can manage users, approve newly registered lawyers, and oversee all platform activities. Use the sidebar to navigate between sections.</p>
+                </div>
+            </div>
+            
+            <!-- Users Tab -->
+            <div id="tab-users" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-primary">Manage Users</h3>
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-accent transition">Add User</button>
+                    </div>
+                    <p class="text-gray-500 mb-8">This section will list all regular clients. Integration with Google Sheets pending.</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-gray-400 border-b border-gray-100">
+                                    <th class="pb-4 font-medium">Name</th>
+                                    <th class="pb-4 font-medium">Email</th>
+                                    <th class="pb-4 font-medium">Status</th>
+                                    <th class="pb-4 font-medium text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-50">
+                                    <td class="py-4 font-medium text-gray-800">Ali Raza</td>
+                                    <td class="py-4 text-gray-500">ali@example.com</td>
+                                    <td class="py-4"><span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Active</span></td>
+                                    <td class="py-4 text-right">
+                                        <button class="text-gray-400 hover:text-primary"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lawyers Tab -->
+            <div id="tab-lawyers" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-primary">Lawyer Network Applications</h3>
+                        <span class="text-sm text-gray-500"><i class="fas fa-info-circle mr-1"></i> Data synced from localStorage</span>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-gray-400 border-b border-gray-100">
+                                    <th class="pb-4 font-medium">Lawyer Name</th>
+                                    <th class="pb-4 font-medium">License Number</th>
+                                    <th class="pb-4 font-medium">Specialization</th>
+                                    <th class="pb-4 font-medium">City</th>
+                                    <th class="pb-4 font-medium text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lawyersTableBody">
+                                <!-- Data will be injected here via JS -->
+                            </tbody>
+                        </table>
+                        <div id="noLawyersMsg" class="text-center py-8 text-gray-400 hidden">
+                            No applications received yet.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected content
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            // Highlight selected button
+            const activeBtn = document.getElementById('tab-btn-' + tabId);
+            activeBtn.classList.add('active');
+            
+            // Update Title
+            const titles = {
+                'dashboard': 'Dashboard Overview',
+                'users': 'Manage Users',
+                'lawyers': 'Manage Lawyers Network'
+            };
+            document.getElementById('pageTitle').textContent = titles[tabId];
+            
+            if(tabId === 'lawyers' || tabId === 'dashboard') loadLawyers();
+        }
+
+        // Load Lawyers from LocalStorage
+        function loadLawyers() {
+            const tableBody = document.getElementById('lawyersTableBody');
+            const noMsg = document.getElementById('noLawyersMsg');
+            
+            let lawyers = [];
+            try {
+                lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+            } catch(e) {}
+            
+            // Update dashboard count
+            document.getElementById('dash-lawyer-count').textContent = lawyers.length;
+
+            if (lawyers.length === 0) {
+                if(tableBody) tableBody.innerHTML = '';
+                if(noMsg) noMsg.classList.remove('hidden');
+                return;
+            }
+            
+            if(noMsg) noMsg.classList.add('hidden');
+            if(tableBody) {
+                tableBody.innerHTML = '';
+                lawyers.forEach(l => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b border-gray-50 hover:bg-gray-50 transition';
+                    tr.innerHTML = `
+                        <td class="py-4 font-medium text-gray-800">${l.name}</td>
+                        <td class="py-4 text-gray-600 font-mono text-sm">${l.license}</td>
+                        <td class="py-4 text-gray-500">${l.specialization || 'N/A'}</td>
+                        <td class="py-4 text-gray-500">${l.city || 'N/A'}</td>
+                        <td class="py-4 text-right">
+                            <button class="px-3 py-1 bg-secondary text-primary rounded text-xs font-bold mr-2 hover:opacity-80">Approve</button>
+                            <button class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+        }
+        
+        // Initial load
+        window.onload = function() {
+            loadLawyers();
+        };
+    </script>
+</body>
+</html>
