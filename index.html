@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalEase Pakistan - قانونی مشاورت</title>
+    <title>Qanooni Mushawarat Pakistan - قانونی مشاورت</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -27,7 +26,7 @@
             }
         }
     </script>
-    <style>
+     <style>
         * {
             scroll-behavior: smooth;
         }
@@ -38,33 +37,50 @@
         
         @font-face {
     font-family: 'JameelNoori';
-    src: url('./fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    src: url('./images/font/JameelNooriNastaleeq.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-/* Urdu Styling */
-.urdu-text{
-    font-family:'JameelNoori', serif;
-    direction: rtl;
-    line-height: 2.5;
-    letter-spacing: 0;
+/* =========================
+   URDU FONT
+========================= */
+
+@font-face{
+    font-family:'JameelNoori';
+    src:url('./images/font/JameelNooriNastaleeq.ttf') format('truetype');
+    font-weight:normal;
+    font-style:normal;
 }
+
+/* Urdu Text */
+
+.urdu-text,
+.urdu-heading,
+.urdu-ui{
+    font-family:'JameelNoori' !important;
+    direction:rtl;
+    font-weight:normal;
+    letter-spacing:0;
+}
+
+/* Paragraph Urdu */
+
+.urdu-text{
+    line-height:2.6;
+    font-size:1.15rem;
+}
+
+/* Urdu Headings */
 
 .urdu-heading{
-    font-family:'JameelNoori', serif;
-    line-height: 2.3;
+    line-height:2.8;
 }
+
+/* Urdu UI */
 
 .urdu-ui{
-    font-family:'JameelNoori', serif;
-    line-height: 2;
-}
-
-body{
-    font-family:'Inter', sans-serif;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
+    line-height:2.2;
 }
         
         .slider {
@@ -371,6 +387,10 @@ body{
     }
 
 }
+
+.lawyer-search-wrap{
+    background:#1e3a5f;
+}
 </style>
     
 </head>
@@ -387,7 +407,7 @@ body{
 
         <!-- Logo -->
         <a href="#home" class="flex items-center">
-            <img src="./images/logo/logo-02.png" alt="Qanooni Mushawarat Logo" class="h-14 md:h-16 w-auto object-contain">
+            <img src="./images/logo/logo-02.png" alt="Qanooni Mushawarat Logo" class="h-10 w-auto object-contain">
         </a>
 
         <!-- Desktop Menu -->
@@ -458,7 +478,7 @@ body{
 
             <!-- Consultation -->
             <a href="#client-form"
-               class="bg-transparent border-2 border-white text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2"
+               class="bg-transparent border-2 border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2"
                data-en="Consultation"
                data-ur="مشاورت">
 
@@ -466,6 +486,29 @@ body{
                 <span data-en="Consultation" data-ur="مشاورت">Consultation</span>
 
             </a>
+
+            <!-- Login Dropdown -->
+            <div class="relative group">
+                <button class="bg-transparent border-2 border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2">
+                    <i class="fas fa-user text-sm"></i>
+                    <span data-en="Login" data-ur="لاگ ان">Login</span>
+                    <i class="fas fa-chevron-down text-xs ml-1 transition-transform group-hover:rotate-180"></i>
+                </button>
+                <!-- Dropdown Menu -->
+                <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right scale-95 group-hover:scale-100 z-50">
+                    <div class="p-2 space-y-1">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition" data-en="Users" data-ur="صارفین">
+                            <i class="fas fa-users w-5"></i> Users
+                        </a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition" data-en="Lawyers" data-ur="وکلاء">
+                            <i class="fas fa-gavel w-5"></i> Lawyers
+                        </a>
+                        <a href="./pages/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition" data-en="Admin" data-ur="ایڈمن">
+                            <i class="fas fa-user-shield w-5"></i> Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -527,15 +570,15 @@ body{
                 <div class="relative z-10 container mx-auto px-6 md:px-10 pt-20 md:pt-28">
 
                     <div class="max-w-3xl">
-                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
-                            Welcome to LegalEase
-                        </span>
+                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold mb-5 border border-secondary shadow-md" data-en="Welcome to Qanooni Mushawarat" data-ur="قانونی مشاورت میں خوش آمدید">
+							  Welcome to Qanooni Mushawarat
+						</span>
 
-                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" data-en="Your Trusted Legal Partner in Pakistan" data-ur="پاکستان میں آپ کا قابلِ اعتماد قانونی ساتھی">
                             Your Trusted Legal Partner in Pakistan
                         </h2>
 
-                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed" data-en="Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services." data-ur="خاندانی قوانین، فوجداری دفاع، دیوانی مقدمات اور کارپوریٹ قانونی خدمات سمیت اپنے تمام معاملات کے لیے ماہر قانونی مشاورت حاصل کریں۔">
                             Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services.
                         </p>
 
@@ -547,10 +590,10 @@ body{
                             </a>
 
                             <a href="#lawyers"
-                               class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2">
-                                <i class="fas fa-user-tie"></i>
-                                Explore Expert Lawyers Directory
-                            </a>
+							   class="bg-transparent border-2 border-secondary text-secondary px-6 py-3 rounded-lg font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2">
+							   <i class="fas fa-user-tie"></i>
+							   Explore Expert Lawyers Directory
+							</a>
                         </div>
                     </div>
                 </div>
@@ -572,15 +615,15 @@ body{
                 <!-- Content -->
                 <div class="relative z-10 container mx-auto px-6 md:px-10 pt-20 md:pt-28">
                     <div class="max-w-3xl">
-                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
-                            Welcome to LegalEase
-                        </span>
+                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold mb-5 border border-secondary shadow-md" data-en="Welcome to Qanooni Mushawarat" data-ur="قانونی مشاورت میں خوش آمدید">
+							  Welcome to Qanooni Mushawarat
+						</span>
 
-                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" data-en="Your Trusted Legal Partner in Pakistan" data-ur="پاکستان میں آپ کا قابلِ اعتماد قانونی ساتھی">
                             Your Trusted Legal Partner in Pakistan
                         </h2>
 
-                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed" data-en="Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services." data-ur="خاندانی قوانین، فوجداری دفاع، دیوانی مقدمات اور کارپوریٹ قانونی خدمات سمیت اپنے تمام معاملات کے لیے ماہر قانونی مشاورت حاصل کریں۔">
                             Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services.
                         </p>
 
@@ -592,10 +635,10 @@ body{
                             </a>
 
                             <a href="#lawyers"
-                               class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2">
-                                <i class="fas fa-user-tie"></i>
-                                Explore Expert Lawyers Directory
-                            </a>
+							   class="bg-transparent border-2 border-secondary text-secondary px-6 py-3 rounded-lg font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2">
+							   <i class="fas fa-user-tie"></i>
+							   Explore Expert Lawyers Directory
+							</a>
                         </div>
                     </div>
                 </div>
@@ -617,15 +660,15 @@ body{
                 <!-- Content -->
                 <div class="relative z-10 container mx-auto px-6 md:px-10 pt-20 md:pt-28">
                     <div class="max-w-3xl">
-                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-full text-sm font-semibold mb-5">
-                            Welcome to LegalEase
-                        </span>
+                        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold mb-5 border border-secondary shadow-md" data-en="Welcome to Qanooni Mushawarat" data-ur="قانونی مشاورت میں خوش آمدید">
+							  Welcome to Qanooni Mushawarat
+						</span>
 
-                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" data-en="Your Trusted Legal Partner in Pakistan" data-ur="پاکستان میں آپ کا قابلِ اعتماد قانونی ساتھی">
                             Your Trusted Legal Partner in Pakistan
                         </h2>
 
-                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed" data-en="Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services." data-ur="خاندانی قوانین، فوجداری دفاع، دیوانی مقدمات اور کارپوریٹ قانونی خدمات سمیت اپنے تمام معاملات کے لیے ماہر قانونی مشاورت حاصل کریں۔">
                             Get expert legal consultation for all your matters including family law, criminal defense, civil cases, and corporate legal services.
                         </p>
 
@@ -637,10 +680,10 @@ body{
                             </a>
 
                             <a href="#lawyers"
-                               class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center gap-2">
-                                <i class="fas fa-user-tie"></i>
-                                Explore Expert Lawyers Directory
-                            </a>
+							   class="bg-transparent border-2 border-secondary text-secondary px-6 py-3 rounded-lg font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2">
+							   <i class="fas fa-user-tie"></i>
+							   Explore Expert Lawyers Directory
+							</a>
                         </div>
                     </div>
                 </div>
@@ -650,6 +693,7 @@ body{
 </section>
 
     <!-- Scrolling Image Gallery Section -->
+	
     <section class="py-12 bg-[#f8f9fa] border-b border-gray-200 overflow-hidden">
         <div class="relative overflow-hidden w-full">
             <!-- Using existing law-slider animation for seamless scrolling -->
@@ -677,7 +721,7 @@ body{
     <section id="laws" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="KNOW THE LAWS" data-ur="قوانین جانیں">KNOW THE LAWS</span>
+                <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="KNOW THE LAWS" data-ur="قوانین جانیں">KNOW THE LAWS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Important Laws of Pakistan" data-ur="پاکستان کے اہم قوانین">Important Laws of Pakistan</h2>
                 <p class="text-gray-600" data-en="Click on any law to learn more from official sources" data-ur="مزید جاننے کے لیے کسی بھی قانون پر کلک کریں">Click on any law to learn more from official sources</p>
             </div>
@@ -862,7 +906,7 @@ body{
     <section id="services" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="OUR SERVICES" data-ur="ہماری خدمات">OUR SERVICES</span>
+                <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="OUR SERVICES" data-ur="ہماری خدمات">OUR SERVICES</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Comprehensive Legal Solutions" data-ur="جامع قانونی حل">Comprehensive Legal Solutions</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto" data-en="We provide expert legal services across multiple domains to meet all your legal needs" data-ur="ہم آپ کی تمام قانونی ضروریات کو پورا کرنے کے لیے متعدد دائرے میں ماہر قانونی خدمات فراہم کرتے ہیں">We provide expert legal services across multiple domains to meet all your legal needs</p>
             </div>
@@ -948,7 +992,7 @@ body{
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
-                    <span class="bg-secondary text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="SUBMIT YOUR CASE" data-ur="اپنا کیس جمع کریں">SUBMIT YOUR CASE</span>
+                    <span class="bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="SUBMIT YOUR CASE" data-ur="اپنا کیس جمع کریں">SUBMIT YOUR CASE</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-2" data-en="Get Legal Consultation" data-ur="قانونی مشاورت حاصل کریں">Get Legal Consultation</h2>
                     <p class="text-white/70" data-en="Submit your legal matter and our experts will get back to you within 24 hours" data-ur="اپنا قانونی معاملہ جمع کروائیں اور ہمارے ماہرین 24 گھنٹے کے اندر آپ سے رابطہ کریں گے">Submit your legal matter and our experts will get back to you within 24 hours</p>
                 </div>
@@ -1198,7 +1242,7 @@ body{
         <!-- Top Heading (Moved Inside) -->
         <div class="mb-14">
 
-            <span class="inline-block bg-secondary/20 text-primary px-5 py-2 rounded-full text-sm font-semibold uppercase tracking-wide mb-4"
+            <span class="inline-block bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold uppercase tracking-wide mb-4"
                   data-en="Vetted Professionals"
                   data-ur="تجربہ کار وکلاء">
 
@@ -1232,13 +1276,11 @@ body{
                 <!-- Right Badge -->
                 <div class="hidden lg:flex justify-end">
 
-                    <div class="bg-white rounded-[35px] px-8 py-5 shadow-xl border border-gray-100">
+                    <div class="bg-white rounded-[35px] px-8 py-5 shadow-xl border-2 border-primary">
 
                         <div class="flex items-center gap-4">
 
-                            <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center">
-                                <i class="fas fa-scale-balanced text-primary text-2xl"></i>
-                            </div>
+                            <img src="./images/logo/logo-03.jpg" alt="Verified Logo" class="w-20 h-20 rounded-full shadow-sm object-cover">
 
                             <div>
                                 <h4 class="font-bold text-primary text-lg">
@@ -1267,9 +1309,9 @@ body{
             <div class="lg:col-span-7">
 
                 <!-- Search Panel -->
-                <div class="bg-white rounded-[24px] p-4 shadow-xl border border-gray-100 mb-8">
+                <div class="bg-[#1e3a5f] rounded-[24px] p-4 shadow-xl border border-gray-100 mb-8">
 
-                    <div class="grid md:grid-cols-3 gap-4">
+					<div class="grid md:grid-cols-3 gap-4">
 
                         <!-- Search -->
                         <div class="md:col-span-2 relative">
@@ -1410,10 +1452,10 @@ body{
             <!-- RIGHT SIDE -->
             <div class="lg:col-span-5">
 
-                <div class="bg-white rounded-[38px] p-8 md:p-10 shadow-2xl border border-gray-100 sticky top-28">
+                <div class="bg-white rounded-[38px] p-8 md:p-10 shadow-2xl border-2 border-primary sticky top-28">
 
                     <!-- Top Badge -->
-                    <span class="inline-block bg-green-100 text-green-800 px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wide mb-6">
+                    <span class="inline-block bg-green-100 text-green-800 px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide mb-6">
 
                         Expand Your Legal Practice
 
@@ -1434,7 +1476,7 @@ body{
                     </p>
 
                     <!-- Form -->
-                    <form class="space-y-4">
+                    <form id="lawyerRegistrationForm" class="space-y-4" onsubmit="handleLawyerRegistration(event)">
 
                         <div>
                             <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
@@ -1442,7 +1484,9 @@ body{
                             </label>
 
                             <input
+                                id="regLawyerName"
                                 type="text"
+                                required
                                 placeholder="e.g. Adv. Zainab Qureshi"
                                 class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
                             >
@@ -1456,7 +1500,9 @@ body{
                                 </label>
 
                                 <input
+                                    id="regLawyerLicense"
                                     type="text"
+                                    required
                                     placeholder="e.g. LHC-98012-H"
                                     class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
                                 >
@@ -1467,7 +1513,7 @@ body{
                                     Specialization *
                                 </label>
 
-                                <select class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
+                                <select id="regLawyerSpec" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
 
                                     <option>Family Matters</option>
                                     <option>Corporate Law</option>
@@ -1485,7 +1531,9 @@ body{
                             </label>
 
                             <input
+                                id="regLawyerEmail"
                                 type="email"
+                                required
                                 placeholder="e.g. advocate@example.com"
                                 class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
                             >
@@ -1499,7 +1547,9 @@ body{
                                 </label>
 
                                 <input
+                                    id="regLawyerPhone"
                                     type="tel"
+                                    required
                                     placeholder="+92 300 1234567"
                                     class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
                                 >
@@ -1510,7 +1560,7 @@ body{
                                     City of Practice *
                                 </label>
 
-                                <select class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
+                                <select id="regLawyerCity" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
 
                                     <option>Karachi</option>
                                     <option>Lahore</option>
@@ -1545,7 +1595,7 @@ body{
     <section id="faq" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="FAQ" data-ur="عمومی سوالات">FAQ</span>
+                <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="FAQ" data-ur="عمومی سوالات">FAQ</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Frequently Asked Questions" data-ur="عمومی سوالات">Frequently Asked Questions</h2>
                 <p class="text-gray-600" data-en="Find answers to common questions about our services" data-ur="ہماری خدمات کے بارے میں عام سوالات کے جوابات تلاش کریں">Find answers to common questions about our services</p>
             </div>
@@ -1567,7 +1617,7 @@ body{
                         <i class="fas fa-plus text-secondary transition-transform"></i>
                     </button>
                     <div class="faq-answer hidden px-6 pb-6">
-                        <p class="text-gray-600" data-en="Yes, absolutely. All information shared with LegalEase is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent." data-ur="جی ہاں، بلاشبہ۔ لیگل ایز کے ساتھ شیئر کی گئی تمام معلومات کو سختی سے خفیہ رکھا جاتا ہے۔ ہم سخت رازداری کے پروٹوکول فالو کرتے ہیں اور آپ کی ذاتی اور کیس کی تفصیلات کبھی بھی آپ کی واضح رضامندی کے بغیر کسی تیسرے فریق کے ساتھ شیئر نہیں کی جاتیں۔">Yes, absolutely. All information shared with LegalEase is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent.</p>
+                        <p class="text-gray-600" data-en="Yes, absolutely. All information shared with Qanooni Mushawarat is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent." data-ur="جی ہاں، بلاشبہ۔ لیگل ایز کے ساتھ شیئر کی گئی تمام معلومات کو سختی سے خفیہ رکھا جاتا ہے۔ ہم سخت رازداری کے پروٹوکول فالو کرتے ہیں اور آپ کی ذاتی اور کیس کی تفصیلات کبھی بھی آپ کی واضح رضامندی کے بغیر کسی تیسرے فریق کے ساتھ شیئر نہیں کی جاتیں۔">Yes, absolutely. All information shared with Qanooni Mushawarat is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent.</p>
                     </div>
                 </div>
                 
@@ -1608,7 +1658,7 @@ body{
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="TESTIMONIALS" data-ur="رائے / تبصرے">TESTIMONIALS</span>
+                <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="TESTIMONIALS" data-ur="رائے / تبصرے">TESTIMONIALS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="What Our Clients Say" data-ur="ہمارے کلائنٹس کیا کہتے ہیں">What Our Clients Say</h2>
             </div>
             
@@ -1675,7 +1725,7 @@ body{
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
-                    <span class="bg-secondary/20 text-primary px-4 py-1 rounded-full text-sm font-semibold" data-en="CONTACT US" data-ur="ہم سے رابطہ کریں">CONTACT US</span>
+                    <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="CONTACT US" data-ur="ہم سے رابطہ کریں">CONTACT US</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Get in Touch" data-ur="رابطے میں رہیں">Get in Touch</h2>
                     <p class="text-gray-600" data-en="Have questions? We're here to help 24/7" data-ur="سوال ہیں؟ ہم یہاں 24/7 مدد کے لیے ہیں">Have questions? We're here to help 24/7</p>
                 </div>
@@ -1686,15 +1736,15 @@ body{
                             <i class="fas fa-phone-alt text-primary text-2xl group-hover:text-white transition"></i>
                         </div>
                         <h4 class="font-semibold text-primary mb-2" data-en="Call Us" data-ur="کال کریں">Call Us</h4>
-                        <p class="text-gray-600">+92-321-1234567</p>
+                        <p class="text-gray-600">+92-333-0360487</p>
                     </a>
                     
-                    <a href="https://wa.me/923211234567" target="_blank" class="bg-gray-50 p-6 rounded-2xl text-center hover-lift group">
+                    <a href="https://wa.me/+923330360487" target="_blank" class="bg-gray-50 p-6 rounded-2xl text-center hover-lift group">
                         <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition">
                             <i class="fab fa-whatsapp text-green-500 text-2xl group-hover:text-white transition"></i>
                         </div>
                         <h4 class="font-semibold text-primary mb-2" data-en="WhatsApp" data-ur="واٹس ایپ">WhatsApp</h4>
-                        <p class="text-gray-600">+92-321-1234567</p>
+                        <p class="text-gray-600">+92-333-0360487</p>
                     </a>
                     
                     <a href="mailto:info@legalease.pk" class="bg-gray-50 p-6 rounded-2xl text-center hover-lift group">
@@ -1730,7 +1780,7 @@ body{
                             <i class="fas fa-balance-scale text-primary text-2xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-white">LegalEase</h3>
+                            <h3 class="text-xl font-bold text-white">Qanooni Mushawarat</h3>
                             <p class="text-xs text-secondary urdu-text">قانونی مشاورت</p>
                         </div>
                     </div>
@@ -1790,7 +1840,7 @@ body{
                         </li>
                         <li class="flex items-center gap-3">
                             <i class="fas fa-phone-alt text-secondary"></i>
-                            <a href="tel:+923211234567" class="text-gray-400 hover:text-secondary transition">+92-321-1234567</a>
+                            <a href="tel:+9233330360487" class="text-gray-400 hover:text-secondary transition">+92-333-0360487</a>
                         </li>
                         <li class="flex items-center gap-3">
                             <i class="fas fa-envelope text-secondary"></i>
@@ -1807,7 +1857,7 @@ body{
             <!-- Bottom Bar -->
             <div class="border-t border-white/10 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p class="text-gray-400 text-sm text-center md:text-left" data-en="© 2024 LegalEase Pakistan. All rights reserved." data-ur="© 2024 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">© 2024 LegalEase Pakistan. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm text-center md:text-left" data-en="© 2024 Qanooni Mushawarat Pakistan. All rights reserved." data-ur="© 2024 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">© 2024 Qanooni Mushawarat Pakistan. All rights reserved.</p>
                     <div class="flex gap-6">
                         <a href="#" class="text-gray-400 hover:text-secondary transition text-sm" data-en="Privacy Policy" data-ur="رازداری کی پالیسی">Privacy Policy</a>
                         <a href="#" class="text-gray-400 hover:text-secondary transition text-sm" data-en="Terms of Service" data-ur="خدمات کی شرائط">Terms of Service</a>
@@ -1824,7 +1874,7 @@ body{
             <i class="fas fa-arrow-up"></i>
         </button>
         
-        <a href="https://wa.me/923211234567" target="_blank" class="w-14 h-14 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition pulse-animation">
+        <a href="https://wa.me/+923330360487" target="_blank" class="w-14 h-14 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition pulse-animation">
             <i class="fab fa-whatsapp text-2xl"></i>
         </a>
     </div>
@@ -1838,7 +1888,7 @@ body{
                         <i class="fas fa-headset text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white font-semibold">LegalEase Support</h4>
+                        <h4 class="text-white font-semibold">Qanooni Mushawarat Support</h4>
                         <div class="flex items-center gap-1">
                             <span class="w-2 h-2 bg-green-400 rounded-full"></span>
                             <span class="text-white/70 text-sm">Online</span>
@@ -1854,7 +1904,7 @@ body{
                 <div class="flex items-start gap-3 mb-4">
                     <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs">LE</div>
                     <div class="bg-white p-4 rounded-2xl shadow-sm max-w-[80%]">
-                        <p class="text-gray-700" data-en="Hello! Welcome to LegalEase. How can we help you today?" data-ur="سلام! لیگل ایز میں خوش آمدید۔ آج ہم آپ کی کیسے مدد کر سکتے ہیں؟">Hello! Welcome to LegalEase. How can we help you today?</p>
+                        <p class="text-gray-700" data-en="Hello! Welcome to Qanooni Mushawarat. How can we help you today?" data-ur="سلام! قانونی مشاورت میں خوش آمدید۔ آج ہم آپ کی کیسے مدد کر سکتے ہیں؟">Hello! Welcome to Qanooni Mushawarat. How can we help you today?</p>
                         <span class="text-xs text-gray-400 mt-1">10:30 AM</span>
                     </div>
                 </div>
@@ -2320,6 +2370,27 @@ setInterval(nextSlide, 5000);
                 closeLiveChat();
             }
         });
+
+        // Handle Lawyer Registration
+        function handleLawyerRegistration(e) {
+            e.preventDefault();
+            const newLawyer = {
+                name: document.getElementById('regLawyerName').value,
+                license: document.getElementById('regLawyerLicense').value,
+                specialization: document.getElementById('regLawyerSpec').value,
+                email: document.getElementById('regLawyerEmail').value,
+                phone: document.getElementById('regLawyerPhone').value,
+                city: document.getElementById('regLawyerCity').value,
+                date: new Date().toISOString()
+            };
+            
+            let lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+            lawyers.push(newLawyer);
+            localStorage.setItem('registeredLawyers', JSON.stringify(lawyers));
+            
+            alert(currentLanguage === 'en' ? 'Registration Successful! Your application is under review.' : 'رجسٹریشن کامیاب! آپ کی درخواست زیر غور ہے۔');
+            e.target.reset();
+        }
         
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
