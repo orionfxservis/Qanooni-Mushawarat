@@ -37,61 +37,46 @@
 <body class="bg-gray-50 text-gray-800">
 
 <!-- HEADER -->
-<header class="bg-primary shadow-lg sticky top-0 z-50">
-
+<header class="bg-primary shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4">
 
         <!-- NAVBAR -->
-        <nav class="flex justify-between items-center py-3">
+        <nav class="grid grid-cols-3 items-center py-2">
 
-            <!-- LOGO -->
-            <a href="index.html" class="flex items-center">
-                <img src="./images/logo/logo-02.png"
-                     alt="LegalEase Logo"
-                     class="h-14 md:h-16 w-auto object-contain">
-            </a>
+            <!-- LEFT : LOGO + HOME -->
+			<div class="flex items-center gap-5">
 
-            <!-- MENU -->
-            <div class="hidden lg:flex items-center gap-8">
+				<!-- LOGO -->
+				<a href="../index.html" class="flex items-center">
+					<img src="../images/logo/logo-02.png"
+						alt="LegalEase Logo"
+						class="h-7 md:h-9 w-auto object-contain">
+				</a>
 
-                <a href="index.html"
-                   class="text-white hover:text-secondary transition font-medium">
-                    Home
-                </a>
+				<!-- HOME BUTTON -->
+				<a href="../index.html"
+					class="text-white hover:text-secondary transition font-medium text-sm md:text-base">
+					Home
+				</a>
+			</div>
 
-                <a href="policy.html"
-                   class="text-white hover:text-secondary transition font-medium">
-                    Privacy Policy
-                </a>
-
-                <a href="terms.html"
-                   class="text-white hover:text-secondary transition font-medium">
-                    Terms
-                </a>
-
-                <a href="cookies.html"
-                   class="text-secondary font-semibold">
+            <!-- CENTER : PAGE TITLE -->
+            <div class="flex justify-center">
+                <h1 class="text-white text-lg md:text-xl font-semibold text-center">
                     Cookie Policy
-                </a>
-
-                <a href="index.html#contact"
-                   class="text-white hover:text-secondary transition font-medium">
-                    Contact
-                </a>
-
+                </h1>
             </div>
 
-            <!-- LANGUAGE BUTTON -->
-            <button onclick="toggleLanguage()"
-                    id="langBtn"
-                    class="border border-secondary text-secondary px-5 py-2 rounded-lg hover:bg-secondary hover:text-primary transition font-medium">
-                اردو
-            </button>
-
+            <!-- RIGHT : LANGUAGE BUTTON -->
+            <div class="flex justify-end">
+                <button onclick="toggleLanguage()"
+                        id="langBtn"
+                        class="border border-secondary text-secondary px-4 py-1.5 rounded-lg hover:bg-secondary hover:text-primary transition text-sm font-medium">
+                    اردو
+                </button>
+            </div>
         </nav>
-
     </div>
-
 </header>
 
 <!-- HERO -->
@@ -247,91 +232,16 @@
 
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-dark text-white pt-14 pb-8">
+<!-- SIMPLE INNER PAGE FOOTER -->
+<footer class="bg-primary border-t border-secondary/20 py-3">
 
     <div class="container mx-auto px-4">
 
-        <div class="grid md:grid-cols-3 gap-10">
-
-            <!-- BRAND -->
-            <div>
-
-                <img src="./images/logo/logo-02.png"
-                     alt="LegalEase Logo"
-                     class="h-16 mb-5">
-
-                <p class="text-white/70 leading-loose urdu-text"
-                   data-en="LegalEase Pakistan provides trusted legal consultation services across Pakistan."
-                   data-ur="لیگل ایز پاکستان پورے پاکستان میں قابلِ اعتماد قانونی مشاورتی خدمات فراہم کرتا ہے۔">
-                    LegalEase Pakistan provides trusted legal consultation services across Pakistan.
-                </p>
-
-            </div>
-
-            <!-- LINKS -->
-            <div>
-
-                <h3 class="text-xl font-semibold mb-5 text-secondary"
-                    data-en="Quick Links"
-                    data-ur="اہم روابط">
-                    Quick Links
-                </h3>
-
-                <ul class="space-y-3 text-white/70">
-
-                    <li><a href="index.html" class="hover:text-secondary transition">Home</a></li>
-                    <li><a href="policy.html" class="hover:text-secondary transition">Privacy Policy</a></li>
-                    <li><a href="terms.html" class="hover:text-secondary transition">Terms</a></li>
-                    <li><a href="cookies.html" class="hover:text-secondary transition">Cookie Policy</a></li>
-
-                </ul>
-
-            </div>
-
-            <!-- CONTACT -->
-            <div>
-
-                <h3 class="text-xl font-semibold mb-5 text-secondary"
-                    data-en="Contact Us"
-                    data-ur="رابطہ کریں">
-                    Contact Us
-                </h3>
-
-                <div class="space-y-4 text-white/70">
-
-                    <p>
-                        <i class="fas fa-envelope text-secondary mr-2"></i>
-                        info@legalease.pk
-                    </p>
-
-                    <p>
-                        <i class="fas fa-phone text-secondary mr-2"></i>
-                        +92-300-0000000
-                    </p>
-
-                    <p class="urdu-text"
-                       data-en="Karachi, Pakistan"
-                       data-ur="کراچی، پاکستان">
-                        Karachi, Pakistan
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- COPYRIGHT -->
-        <div class="border-t border-white/10 mt-12 pt-6 text-center text-white/60">
-
-            <p class="urdu-text"
-               data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
-               data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
-                © 2026 LegalEase Pakistan. All Rights Reserved.
-            </p>
-
-        </div>
+        <p class="text-center text-white/70 text-xs md:text-sm urdu-text"
+           data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
+           data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
+            © 2026 LegalEase Pakistan. All Rights Reserved.
+        </p>
 
     </div>
 
