@@ -42,7 +42,7 @@
 
     @font-face{
         font-family:'JameelNoori';
-        src:url('./fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
 }
@@ -428,44 +428,133 @@
             <img src="./images/logo/logo-02.png" alt="Qanooni Mushawarat Logo" class="h-7 md:h-9 w-auto object-contain">
         </a>
 
-        <!-- Desktop Menu -->
-        <div class="hidden lg:flex items-center gap-7">
+        <!-- DESKTOP MENU -->
+<nav class="hidden lg:flex items-center gap-7">
 
-            <a href="#home" class="nav-link text-white hover:text-secondary transition"
-               data-en="Home" data-ur="ہوم">
-               Home
-            </a>
+    <!-- HOME -->
+    <a href="#home"
+        class="text-white text-[15px] font-medium hover:text-secondary transition duration-300 relative group">
 
-            <a href="#laws" class="nav-link text-white hover:text-secondary transition"
-               data-en="Laws" data-ur="قوانین">
-               Laws
+        Home
+        <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
+    </a>
+
+    <!-- LEGAL SERVICES -->
+    <div class="relative group">
+
+        <button
+            class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
+
+            Legal Services
+            <i class="fas fa-chevron-down text-[10px] mt-[2px]"></i>
+        </button>
+
+        <!-- DROPDOWN -->
+        <div
+            class="absolute top-full left-0 mt-4 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
+
+            <a href="#services"
+                class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
+                <i class="fas fa-comments text-secondary text-[13px]"></i>
+
+                Our Services
             </a>
 			
-			<a href="#services" class="nav-link text-white hover:text-secondary transition"
-               data-en="Services" data-ur="خدمات">
-               Services
+			<a href="#consultation"
+                class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
+                <i class="fas fa-comments text-secondary text-[13px]"></i>
+
+                Consultation
             </a>
 
-            <a href="#client-form" class="nav-link text-white hover:text-secondary transition"
-               data-en="Submit Case" data-ur="کیس جمع کریں">
-               Submit Case
-            </a>
+            <a href="#client-form"
+    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
 
-            <a href="#lawyers" class="nav-link text-white hover:text-secondary transition"
-               data-en="Lawyers" data-ur="وکلاء">
-               Lawyers
-            </a>
+    <i class="fas fa-file-signature text-secondary text-[13px]"></i>
 
-            <a href="#faq" class="nav-link text-white hover:text-secondary transition"
-               data-en="FAQ" data-ur="عمومی سوالات">
-               FAQ
-            </a>
+    Submit Case
 
-            <a href="#contact" class="nav-link text-white hover:text-secondary transition"
-               data-en="Contact" data-ur="رابطہ">
-               Contact
+</a>
+        </div>
+    </div>
+
+    <!-- LAWYERS NETWORK -->
+    <div class="relative group">
+
+        <button
+            class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
+            Lawyers Network
+            <i class="fas fa-chevron-down text-[10px] mt-[2px]"></i>
+        </button>
+
+        <!-- DROPDOWN -->
+        <div
+            class="absolute top-full left-0 mt-4 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
+            <a 	href="#lawyers"
+				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
+			<i 	class="fas fa-user-tie text-secondary text-[13px]"></i>
+				Find Lawyer
+			</a>
+
+            <a href="javascript:void(0)"
+    onclick="openLawyerModal()"
+    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
+
+    <i class="fas fa-user-plus text-secondary text-[13px]"></i>
+
+    Register As Lawyer
+
+</a>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <a href="#faq"
+        class="text-white text-[15px] font-medium hover:text-secondary transition duration-300 relative group">
+
+        FAQ
+        <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
+    </a>
+
+    <!-- COMPANY -->
+    <div class="relative group">
+        <button
+            class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
+
+            Company
+            <i class="fas fa-chevron-down text-[10px] mt-[2px]"></i>
+        </button>
+
+        <!-- DROPDOWN -->
+        <div
+            class="absolute top-full left-0 mt-4 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
+            <a href="./pages/about.html"
+    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
+
+    <i class="fas fa-circle-info text-secondary text-[13px]"></i>
+
+    About Us
+
+</a>
+
+            <a href="./pages/policy.html"
+    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
+
+    <i class="fas fa-shield-halved text-secondary text-[13px]"></i>
+
+    Privacy Policy
+
+</a>
+
+            <a href="#contact"
+                class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
+
+                <i class="fas fa-envelope text-secondary text-[13px]"></i>
+                Contact Us
             </a>
         </div>
+    </div>
+</nav>
 
         <!-- Right Side -->
         <div class="hidden lg:flex items-center gap-3">
@@ -942,7 +1031,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-12 bg-gray-50">
+    <section id="services" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="OUR SERVICES" data-ur="ہماری خدمات">OUR SERVICES</span>
@@ -1027,7 +1116,7 @@
     </section>
 
     <!-- Client Submission Form -->
-    <section id="client-form" class="py-12 bg-gradient-to-br from-primary to-dark">
+    <section id="client-form" class="py-20 bg-gradient-to-br from-primary to-dark">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
@@ -1273,7 +1362,7 @@
     </section>
 
     <!-- Lawyers Network Section -->
-<section id="lawyers" class="py-12 bg-gradient-to-b from-slate-50 to-gray-100 overflow-hidden">
+<section id="lawyers" class="py-20 bg-gradient-to-b from-slate-50 to-gray-100 overflow-hidden">
 
     <div class="container mx-auto px-4">
 
@@ -1537,23 +1626,23 @@
 				</button>
 			</div>
 
-<!-- POPUP MODAL -->
-<div
-    id="lawyerModal"
-    class="fixed inset-0 z-[99999] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+			<!-- POPUP MODAL -->
+			<div
+				id="lawyerModal"
+				class="fixed inset-0 z-[99999] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
 
-    <!-- MODAL BOX -->
-    <div
-        class="relative w-full max-w-3xl max-h-[95vh] overflow-y-auto bg-white rounded-[28px] shadow-2xl border-2 border-primary">
+	<!-- MODAL BOX -->
+	<div
+		class="relative w-full max-w-3xl max-h-[95vh] overflow-y-auto bg-white rounded-[28px] shadow-2xl border-2 border-primary">
 
-        <!-- CLOSE BUTTON -->
-        <button
-            onclick="closeLawyerModal()"
-            class="absolute top-5 right-5 w-10 h-10 rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition duration-300">
+			<!-- CLOSE BUTTON -->
+			<button
+				onclick="closeLawyerModal()"
+				class="absolute top-5 right-5 w-10 h-10 rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition duration-300">
 
-            <i class="fas fa-xmark text-lg"></i>
+				<i class="fas fa-xmark text-lg"></i>
 
-        </button>
+			</button>
 
         <!-- FORM CONTENT -->
         <div class="p-8 md:p-10">
@@ -1682,7 +1771,7 @@
 </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-12 bg-white">
+    <section id="faq" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="FAQ" data-ur="عمومی سوالات">FAQ</span>
@@ -1745,7 +1834,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="py-12 bg-gray-50">
+    <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="TESTIMONIALS" data-ur="رائے / تبصرے">TESTIMONIALS</span>
@@ -1811,7 +1900,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-12 bg-white">
+    <section id="contact" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
