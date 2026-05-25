@@ -83,30 +83,45 @@ body{
     padding-right:16px;
 }
 
-/* =========================
-   URDU FONT SYSTEM
+//* =========================
+   URDU FONT
 ========================= */
+
+@font-face{
+    font-family:'JameelNoori';
+    src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    font-weight:normal;
+    font-style:normal;
+}
+
+/* ALL URDU ELEMENTS */
 
 .urdu-text,
 .urdu-heading,
 .urdu-ui{
-    font-family:'JameelNoori',serif !important;
+    font-family:'JameelNoori', serif !important;
     direction:rtl;
-    letter-spacing:0;
     font-weight:normal;
+    letter-spacing:0;
 }
+
+/* PARAGRAPHS */
 
 .urdu-text{
     line-height:2.5;
     font-size:1.15rem;
 }
 
+/* HEADINGS */
+
 .urdu-heading{
-    line-height:2.7;
+    line-height:2.8;
 }
 
+/* BUTTONS / UI */
+
 .urdu-ui{
-    line-height:2.1;
+    line-height:2.2;
 }
 
 /* =========================

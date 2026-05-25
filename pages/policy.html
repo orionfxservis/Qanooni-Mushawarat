@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - LegalEase Pakistan</title>
+    <title>Privacy Policy - Qanooni Mushawarat Pakistan</title>
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,6 +16,58 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="./theme.css">
+	
+	<style>
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#f8fafc;
+        }
+
+        /* URDU FONT */
+        @font-face{
+            font-family:'JameelNoori';
+            src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        }
+
+        .urdu-text,
+        .urdu-heading,
+        .urdu-ui{
+            font-family:'JameelNoori', serif !important;
+            direction:rtl;
+        }
+
+        .urdu-text{
+            line-height:2.4;
+            font-size:1.15rem;
+        }
+
+        .urdu-heading{
+            line-height:2.6;
+        }
+
+        :root{
+            --primary:#1e3a5f;
+            --secondary:#d4b06a;
+        }
+
+        .bg-primary{
+            background:var(--primary);
+        }
+
+        .text-primary{
+            color:var(--primary);
+        }
+
+        .bg-secondary{
+            background:var(--secondary);
+        }
+
+        .text-secondary{
+            color:var(--secondary);
+        }
+
+    </style>
 
     <script>
         tailwind.config = {
@@ -47,25 +99,33 @@
 			<div class="flex items-center gap-5">
 
 				<!-- LOGO -->
-				<a href="../index.html" class="flex items-center">
-					<img src="../images/logo/logo-02.png"
-						alt="LegalEase Logo"
-						class="h-7 md:h-9 w-auto object-contain">
-				</a>
+                <a href="../index.html" class="flex items-center">
+                    <img src="../images/logo/logo-02.png"
+                         alt="LegalEase Logo"
+                         class="h-8 md:h-10 w-auto object-contain">
+                </a>
 
-				<!-- HOME BUTTON -->
-				<a href="../index.html"
-					class="text-white hover:text-secondary transition font-medium text-sm md:text-base">
-					Home
-				</a>
+                <!-- HOME -->
+                <a href="../index.html"
+                   class="text-white hover:text-secondary transition font-medium text-sm md:text-base"
+                   data-en="Home"
+                   data-ur="ہوم">
+                    Home
+                </a>
+
+				
 			</div>
 
             <!-- CENTER : PAGE TITLE -->
-            <div class="flex justify-center">
-                <h1 class="text-white text-lg md:text-xl font-semibold text-center">
-                    Privacy Policy
-                </h1>
-            </div>
+<div class="flex justify-center">
+    <h1 class="text-white text-lg md:text-xl font-semibold text-center urdu-heading"
+        data-en="Privacy Policy"
+        data-ur="رازداری کی پالیسی">
+
+        Privacy Policy
+
+    </h1>
+</div>
 
             <!-- RIGHT : LANGUAGE BUTTON -->
             <div class="flex justify-end">
@@ -323,7 +383,7 @@
         <p class="text-center text-white/70 text-xs md:text-sm urdu-text"
            data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
            data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
-            © 2026 LegalEase Pakistan. All Rights Reserved.
+            © 2026 Qanooni Mushawarat Pakistan. All Rights Reserved.
         </p>
 
     </div>

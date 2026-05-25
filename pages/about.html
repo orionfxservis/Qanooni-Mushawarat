@@ -1,0 +1,424 @@
+<!-- =========================
+ABOUT US PAGE CONTENT
+File: about.html
+========================= -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us - LegalEase Pakistan</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#f8fafc;
+        }
+
+        /* URDU FONT */
+        @font-face{
+            font-family:'JameelNoori';
+            src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        }
+
+        .urdu-text,
+        .urdu-heading,
+        .urdu-ui{
+            font-family:'JameelNoori', serif !important;
+            direction:rtl;
+        }
+
+        .urdu-text{
+            line-height:2.4;
+            font-size:1.15rem;
+        }
+
+        .urdu-heading{
+            line-height:2.6;
+        }
+
+        :root{
+            --primary:#1e3a5f;
+            --secondary:#d4b06a;
+        }
+
+        .bg-primary{
+            background:var(--primary);
+        }
+
+        .text-primary{
+            color:var(--primary);
+        }
+
+        .bg-secondary{
+            background:var(--secondary);
+        }
+
+        .text-secondary{
+            color:var(--secondary);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header class="bg-primary shadow-lg sticky top-0 z-50">
+
+    <div class="container mx-auto px-4">
+
+        <nav class="flex items-center justify-between py-2">
+
+            <!-- LEFT -->
+            <div class="flex items-center gap-5">
+
+                <!-- LOGO -->
+                <a href="../index.html" class="flex items-center">
+                    <img src="../images/logo/logo-02.png"
+                         alt="LegalEase Logo"
+                         class="h-8 md:h-10 w-auto object-contain">
+                </a>
+
+                <!-- HOME -->
+                <a href="../index.html"
+                   class="text-white hover:text-secondary transition font-medium text-sm md:text-base"
+                   data-en="Home"
+                   data-ur="ہوم">
+                    Home
+                </a>
+
+            </div>
+
+            <!-- CENTER -->
+            <div class="absolute left-1/2 -translate-x-1/2">
+
+                <h1 class="text-white font-semibold text-base md:text-lg"
+                    data-en="About Us"
+                    data-ur="ہمارے بارے میں">
+                    About Us
+                </h1>
+
+            </div>
+
+            <!-- RIGHT -->
+            <button onclick="toggleLanguage()"
+                    id="langBtn"
+                    class="border border-secondary text-secondary px-4 py-1.5 rounded-lg hover:bg-secondary hover:text-primary transition font-medium text-sm">
+                اردو
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="relative py-20 bg-primary overflow-hidden">
+
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute -top-10 -left-10 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+
+        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider mb-6"
+              data-en="Trusted Legal Platform"
+              data-ur="قابل اعتماد قانونی پلیٹ فارم">
+
+            Trusted Legal Platform
+
+        </span>
+
+        <h2 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6"
+            data-en="About LegalEase Pakistan"
+            data-ur="لیگل ایز پاکستان کے بارے میں">
+
+            About LegalEase Pakistan
+
+        </h2>
+
+        <p class="max-w-4xl mx-auto text-lg md:text-xl text-gray-200 leading-relaxed"
+           data-en="LegalEase Pakistan is a modern legal consultancy platform connecting clients with verified lawyers across Pakistan."
+           data-ur="لیگل ایز پاکستان ایک جدید قانونی پلیٹ فارم ہے جو پاکستان بھر کے مستند وکلاء کو عوام سے جوڑتا ہے۔">
+
+            LegalEase Pakistan is a modern legal consultancy platform connecting clients with verified lawyers across Pakistan.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =========================
+ABOUT CONTENT
+========================= -->
+
+<section class="py-20">
+
+    <div class="container mx-auto px-4">
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+            <!-- IMAGE -->
+            <div>
+                <img src="https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?q=80&w=1200"
+                     alt="Legal Team"
+                     class="rounded-[28px] shadow-2xl w-full object-cover">
+            </div>
+
+            <!-- CONTENT -->
+            <div>
+
+                <span class="inline-block border border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide mb-5"
+                      data-en="Who We Are"
+                      data-ur="ہم کون ہیں">
+
+                    Who We Are
+
+                </span>
+
+                <h3 class="text-3xl md:text-5xl font-black text-primary leading-tight mb-6"
+                    data-en="Making Legal Services More Accessible"
+                    data-ur="قانونی خدمات کو آسان بنانا">
+
+                    Making Legal Services More Accessible
+
+                </h3>
+
+                <p class="text-gray-600 text-lg leading-relaxed mb-5 urdu-text"
+                   data-en="Our mission is to simplify legal consultation and connect individuals, families, and businesses with experienced legal professionals."
+                   data-ur="ہمارا مقصد قانونی مشاورت کو آسان بنانا اور افراد، خاندانوں اور کاروباری اداروں کو تجربہ کار وکلاء سے جوڑنا ہے۔">
+
+                    Our mission is to simplify legal consultation and connect individuals, families, and businesses with experienced legal professionals.
+
+                </p>
+
+                <p class="text-gray-600 text-lg leading-relaxed urdu-text"
+                   data-en="We provide a secure and professional platform where users can seek legal advice, upload case documents, and communicate with trusted advocates online."
+                   data-ur="ہم ایک محفوظ اور پروفیشنل پلیٹ فارم فراہم کرتے ہیں جہاں صارفین قانونی مشورہ حاصل کر سکتے ہیں، کیس دستاویزات اپلوڈ کر سکتے ہیں اور مستند وکلاء سے رابطہ کر سکتے ہیں۔">
+
+                    We provide a secure and professional platform where users can seek legal advice, upload case documents, and communicate with trusted advocates online.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+MISSION SECTION
+========================= -->
+
+<section class="py-20 bg-white">
+
+    <div class="container mx-auto px-4">
+
+        <div class="text-center mb-14">
+
+            <span class="inline-block border border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide mb-5"
+                  data-en="Our Mission"
+                  data-ur="ہمارا مقصد">
+
+                Our Mission
+
+            </span>
+
+            <h2 class="text-4xl md:text-5xl font-black text-primary mb-5"
+                data-en="Professional Legal Support Across Pakistan"
+                data-ur="پاکستان بھر میں پروفیشنل قانونی خدمات">
+
+                Professional Legal Support Across Pakistan
+
+            </h2>
+
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <!-- CARD -->
+            <div class="bg-slate-50 rounded-[24px] p-8 border border-gray-100 shadow-lg">
+
+                <div class="w-16 h-16 rounded-2xl bg-primary text-white flex items-center justify-center text-2xl mb-6">
+                    <i class="fas fa-scale-balanced"></i>
+                </div>
+
+                <h3 class="text-2xl font-bold text-primary mb-4"
+                    data-en="Trusted Lawyers"
+                    data-ur="مستند وکلاء">
+
+                    Trusted Lawyers
+
+                </h3>
+
+                <p class="text-gray-600 leading-relaxed urdu-text"
+                   data-en="All advocates on our platform are verified and professionally reviewed."
+                   data-ur="ہمارے پلیٹ فارم پر موجود تمام وکلاء کی تصدیق اور جانچ پڑتال کی جاتی ہے۔">
+
+                    All advocates on our platform are verified and professionally reviewed.
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="bg-slate-50 rounded-[24px] p-8 border border-gray-100 shadow-lg">
+
+                <div class="w-16 h-16 rounded-2xl bg-primary text-white flex items-center justify-center text-2xl mb-6">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+
+                <h3 class="text-2xl font-bold text-primary mb-4"
+                    data-en="Secure Communication"
+                    data-ur="محفوظ رابطہ">
+
+                    Secure Communication
+
+                </h3>
+
+                <p class="text-gray-600 leading-relaxed urdu-text"
+                   data-en="Client privacy and legal confidentiality are our top priorities."
+                   data-ur="صارفین کی رازداری اور قانونی معلومات کا تحفظ ہماری اولین ترجیح ہے۔">
+
+                    Client privacy and legal confidentiality are our top priorities.
+
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="bg-slate-50 rounded-[24px] p-8 border border-gray-100 shadow-lg">
+
+                <div class="w-16 h-16 rounded-2xl bg-primary text-white flex items-center justify-center text-2xl mb-6">
+                    <i class="fas fa-globe"></i>
+                </div>
+
+                <h3 class="text-2xl font-bold text-primary mb-4"
+                    data-en="Nationwide Network"
+                    data-ur="ملک گیر نیٹ ورک">
+
+                    Nationwide Network
+
+                </h3>
+
+                <p class="text-gray-600 leading-relaxed urdu-text"
+                   data-en="Connecting clients with legal experts from all major cities of Pakistan."
+                   data-ur="پاکستان کے بڑے شہروں کے قانونی ماہرین کو عوام سے جوڑنا۔">
+
+                    Connecting clients with legal experts from all major cities of Pakistan.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer class="bg-primary py-4 mt-10">
+
+    <div class="container mx-auto px-4 text-center">
+
+        <p class="text-white text-sm"
+           data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
+           data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
+
+            © 2026 LegalEase Pakistan. All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+<!-- =========================
+LANGUAGE SCRIPT
+========================= -->
+
+<script>
+
+let currentLanguage = 'en';
+
+function toggleLanguage(){
+
+    currentLanguage =
+        currentLanguage === 'en' ? 'ur' : 'en';
+
+    document.documentElement.lang =
+        currentLanguage;
+
+    document.documentElement.dir =
+        currentLanguage === 'ur' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-en]')
+        .forEach(el => {
+
+            el.textContent =
+                el.getAttribute(`data-${currentLanguage}`);
+
+        });
+
+    document.getElementById('langBtn').textContent =
+        currentLanguage === 'en'
+        ? 'اردو'
+        : 'English';
+
+    if(currentLanguage === 'ur'){
+
+        document.querySelectorAll('h1,h2,h3,h4,p,a,button,span')
+            .forEach(el => {
+
+                el.classList.add('urdu-text');
+
+            });
+
+    }else{
+
+        document.querySelectorAll('h1,h2,h3,h4,p,a,button,span')
+            .forEach(el => {
+
+                el.classList.remove('urdu-text');
+
+            });
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
