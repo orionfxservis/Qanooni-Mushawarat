@@ -181,20 +181,20 @@
                         <!-- Image Upload -->
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-1">Profile Image</label>
-                            <input type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
+                            <input type="file" id="profileImageInput" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
                         </div>
                         
                         <div class="grid md:grid-cols-2 gap-4">
                             <!-- Full Name -->
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-1">Full Name *</label>
-                                <input type="text" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                                <input type="text" id="fullNameInput" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
                             </div>
                             
                             <!-- Phone No -->
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-1">Phone No *</label>
-                                <input type="tel" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                                <input type="tel" id="phoneInput" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
                             </div>
                         </div>
                         
@@ -202,7 +202,7 @@
                             <!-- Email -->
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-1">Email *</label>
-                                <input type="email" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                                <input type="email" id="emailInput" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
                             </div>
                             
                             <!-- Profession -->
@@ -271,16 +271,13 @@
                                     <th class="pb-4 font-medium text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="border-b border-gray-50">
-                                    <td class="py-4 font-medium text-gray-800">Ali Raza</td>
-                                    <td class="py-4 text-gray-500">ali@example.com</td>
-                                    <td class="py-4"><span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Active</span></td>
-                                    <td class="py-4 text-right">
-                                        <button class="text-gray-400 hover:text-primary"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr>
+                            <tbody id="usersTableBody">
+                                <!-- Users will be dynamically injected here from Supabase -->
                             </tbody>
+                        </table>
+                        <div id="noUsersMsg" class="hidden text-center py-8 text-gray-400">
+                            No users found in the database.
+                        </div>
                         </table>
                     </div>
                 </div>
@@ -375,7 +372,16 @@
         </div>
     </main>
 
+	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+	<script src="../js/supabase.js"></script>
+
+	<script src="../js/dashboard.js"></script>
+
+    <!-- Supabase Core Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Our Custom Supabase Config -->
+    <script src="../js/supabase-config.js"></script>
 
     <script>
         // Tab Switching Logic
@@ -455,7 +461,62 @@
         // Initial load
         window.onload = function() {
             loadLawyers();
+            fetchUsers();
         };
+
+        // Fetch Users from Supabase
+        async function fetchUsers() {
+            const tableBody = document.getElementById('usersTableBody');
+            const noMsg = document.getElementById('noUsersMsg');
+            
+            if (!supabaseClient || SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') return;
+
+            try {
+                const { data: users, error } = await supabaseClient
+                    .from('users')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (!users || users.length === 0) {
+                    if (tableBody) tableBody.innerHTML = '';
+                    if (noMsg) noMsg.classList.remove('hidden');
+                    return;
+                }
+
+                if (noMsg) noMsg.classList.add('hidden');
+                if (tableBody) {
+                    tableBody.innerHTML = '';
+                    
+                    users.forEach(u => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'border-b border-gray-50 hover:bg-gray-50 transition';
+                        
+                        // Avatar HTML
+                        let avatarHtml = `<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500 flex-shrink-0">${u.full_name ? u.full_name.charAt(0).toUpperCase() : '?'}</div>`;
+                        if (u.profile_image) {
+                            avatarHtml = `<img src="${u.profile_image}" class="w-8 h-8 rounded-full object-cover flex-shrink-0" alt="avatar">`;
+                        }
+                        
+                        tr.innerHTML = `
+                            <td class="py-4 flex items-center gap-3">
+                                ${avatarHtml}
+                                <span class="font-medium text-gray-800">${u.full_name || 'N/A'} <span class="text-xs text-gray-400 ml-1">(${u.profession || 'User'})</span></span>
+                            </td>
+                            <td class="py-4 text-gray-500">${u.email || 'N/A'}</td>
+                            <td class="py-4"><span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Active</span></td>
+                            <td class="py-4 text-right">
+                                <button class="text-gray-400 hover:text-primary"><i class="fas fa-edit"></i></button>
+                            </td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
 
         // Add User Form Logic
         function toggleProfessionFields() {
@@ -482,11 +543,87 @@
             }
         }
         
-        function handleAddUser(e) {
+        async function handleAddUser(e) {
             e.preventDefault();
-            alert("User saved successfully! (Frontend Simulation)");
-            document.getElementById('addUserForm').reset();
-            toggleProfessionFields();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Saving...";
+            submitBtn.disabled = true;
+
+            try {
+                // Ensure Supabase client is initialized properly (keys are added)
+                if (!supabaseClient || SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') {
+                    alert("Supabase is not configured yet. Please add your API keys to js/supabase-config.js");
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                // 1. Get Form Values
+                const fullName = document.getElementById('fullNameInput').value;
+                const phone = document.getElementById('phoneInput').value;
+                const email = document.getElementById('emailInput').value;
+                const profession = document.getElementById('userProfession').value;
+                const companyName = document.getElementById('companyNameInput').value;
+                const companyAddress = document.getElementById('companyAddressInput').value;
+                const specialization = document.getElementById('specializationInput').value;
+                
+                // 2. Handle Image Upload (if any)
+                let profileImageUrl = null;
+                const imageFile = document.getElementById('profileImageInput').files[0];
+                
+                if (imageFile) {
+                    const fileExt = imageFile.name.split('.').pop();
+                    const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+                    const filePath = `${fileName}`;
+                    
+                    const { error: uploadError } = await supabaseClient.storage
+                        .from('avatars')
+                        .upload(filePath, imageFile);
+                        
+                    if (uploadError) {
+                        throw uploadError;
+                    }
+                    
+                    // Get public URL
+                    const { data } = supabaseClient.storage.from('avatars').getPublicUrl(filePath);
+                    profileImageUrl = data.publicUrl;
+                }
+                
+                // 3. Insert Record into Users Table
+                const { error: insertError } = await supabaseClient
+                    .from('users')
+                    .insert([
+                        { 
+                            full_name: fullName, 
+                            phone: phone, 
+                            email: email, 
+                            profession: profession,
+                            company_name: profession === 'Business' ? companyName : null,
+                            company_address: profession === 'Business' ? companyAddress : null,
+                            specialization: profession === 'Lawyer' ? specialization : null,
+                            profile_image: profileImageUrl
+                        }
+                    ]);
+                    
+                if (insertError) throw insertError;
+                
+                alert("User saved successfully to Supabase!");
+                document.getElementById('addUserForm').reset();
+                toggleProfessionFields();
+                
+                // Refresh the table with new data
+                fetchUsers();
+                
+                
+            } catch (error) {
+                console.error("Error saving user:", error);
+                alert("Error saving user: " + error.message);
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
         }
     </script>
 </body>
