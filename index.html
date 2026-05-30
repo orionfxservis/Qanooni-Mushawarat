@@ -632,12 +632,14 @@
             <div class="container mx-auto px-4 py-6">
                 <div class="flex flex-col gap-4">
                     <a href="#home" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Home" data-ur="ہوم">Home</a>
-                    <a href="#laws" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Laws" data-ur="قوانین">Laws</a>
-					<a href="#services" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Services" data-ur="خدمات">Services</a>
+                    <a href="#services" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Our Services" data-ur="ہماری خدمات">Our Services</a>
+                    <a href="#consultation" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Consultation" data-ur="مشاورت">Consultation</a>
                     <a href="#client-form" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Submit Case" data-ur="کیس جمع کریں">Submit Case</a>
-                    <a href="#lawyers" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Lawyers" data-ur="وکلاء">Lawyers</a>
+                    <a href="#lawyers" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Lawyers Network" data-ur="وکلاء کا نیٹ ورک">Lawyers Network</a>
                     <a href="#faq" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="FAQ" data-ur="عمومی سوالات">FAQ</a>
-                    <a href="#contact" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Contact" data-ur="رابطہ">Contact</a>
+                    <a href="./pages/about.html" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="About Us" data-ur="ہمارے بارے میں">About Us</a>
+                    <a href="./pages/policy.html" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Privacy Policy" data-ur="رازداری کی پالیسی">Privacy Policy</a>
+                    <a href="#contact" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Contact Us" data-ur="ہم سے رابطہ کریں">Contact Us</a>
                     <div class="flex gap-4 pt-4">
                         <button onclick="toggleLanguage()" class="flex-1 bg-secondary text-primary py-2 rounded-full font-semibold">
                             <span id="mobileLangBtn">اردو</span>
@@ -798,6 +800,8 @@
         </div>
     </div>
 </section>
+
+<button onclick="testSupabase()">Test</button>
 
 				<!-- Know Your Rights Section -->
 				<section class="py-20 bg-[#f8f9fa] border-b border-gray-200 overflow-hidden">
@@ -2132,8 +2136,23 @@
             </div>
         </div>
     </div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+	
+	<script src="../js/supabase.js"></script>
+	
+	<script src="js/supabase.js"></script>
 
     <script>
+	async function testSupabase() {
+
+    const { data, error } = await supabase
+        .from("lawyer_registration")
+        .select("*");
+
+    console.log(data);
+    console.log(error);
+}
         // State
         let currentLanguage = 'en';
         let isDarkTheme = false;
