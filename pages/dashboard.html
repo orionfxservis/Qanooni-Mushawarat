@@ -49,60 +49,70 @@
     </div>
 
     <!-- MENU -->
-    <nav class="flex-1 px-3 py-4 space-y-1.5">
+    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
 
-        <button onclick="switchTab('dashboard')"
-                id="tab-btn-dashboard"
-                class="tab-btn active w-full flex items-center gap-2 px-3 py-2 rounded-lg transition hover:bg-white/10 text-left">
-
-            <i class="fas fa-chart-line w-4 text-center text-sm"></i>
-
-            <span class="font-medium text-sm">
-                Dashboard
-            </span>
-
+        <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="tab-btn active w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-chart-line w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Dashboard</span>
         </button>
 
-        <button onclick="switchTab('users')"
-                id="tab-btn-users"
-                class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition hover:bg-white/10 text-left">
-
-            <i class="fas fa-users w-4 text-center text-sm"></i>
-
-            <span class="font-medium text-sm">
-                Manage Users
-            </span>
-
+        <button onclick="switchTab('users')" id="tab-btn-users" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-users w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Manage Users</span>
         </button>
 
-        <button onclick="switchTab('lawyers')"
-                id="tab-btn-lawyers"
-                class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition hover:bg-white/10 text-left">
+        <button onclick="switchTab('lawyers')" id="tab-btn-lawyers" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-gavel w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Manage Lawyers</span>
+        </button>
+        
+        <div class="pt-2 pb-1 border-t border-white/10 mt-2 mb-1">
+            <span class="text-[10px] uppercase text-white/50 tracking-wider px-3 font-bold">Content Management</span>
+        </div>
 
-            <i class="fas fa-gavel w-4 text-center text-sm"></i>
+        <button onclick="switchTab('know-rights')" id="tab-btn-know-rights" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-user-shield w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Know Your Rights</span>
+        </button>
 
-            <span class="font-medium text-sm">
-                Manage Lawyers
-            </span>
+        <button onclick="switchTab('know-laws')" id="tab-btn-know-laws" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-book w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Know The Laws</span>
+        </button>
 
+        <button onclick="switchTab('services')" id="tab-btn-services" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-briefcase w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Our Services</span>
+        </button>
+
+        <button onclick="switchTab('case-submission')" id="tab-btn-case-submission" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-file-signature w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Case Submition</span>
+        </button>
+
+        <button onclick="switchTab('lawyers-pannel')" id="tab-btn-lawyers-pannel" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-user-tie w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Lawyers Pannel</span>
+        </button>
+
+        <button onclick="switchTab('testimonials')" id="tab-btn-testimonials" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-star w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Testimonials</span>
+        </button>
+
+        <button onclick="switchTab('subscription')" id="tab-btn-subscription" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
+            <i class="fas fa-crown w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Subscription</span>
         </button>
 
     </nav>
 
     <!-- LOGOUT -->
     <div class="p-3 border-t border-white/10">
-
-        <a href="../index.html"
-           class="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition hover:bg-red-500 hover:text-white text-left text-gray-300">
-
-            <i class="fas fa-sign-out-alt w-4 text-center text-sm"></i>
-
-            <span class="font-medium text-sm">
-                Logout
-            </span>
-
+        <a href="../index.html" class="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-red-500 hover:text-white text-left text-gray-300">
+            <i class="fas fa-sign-out-alt w-4 text-center text-[13px]"></i>
+            <span class="font-medium text-[13px]">Logout</span>
         </a>
-
     </div>
 
 </aside>
@@ -162,10 +172,92 @@
             
             <!-- Users Tab -->
             <div id="tab-users" class="tab-content">
+                <!-- ADD NEW USER FORM (Inline) -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mb-8">
+                    <h3 class="text-xl font-bold text-primary mb-6">Add New User</h3>
+                    
+                    <form id="addUserForm" class="space-y-4" onsubmit="handleAddUser(event)">
+                        
+                        <!-- Image Upload -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Profile Image</label>
+                            <input type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <!-- Full Name -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Full Name *</label>
+                                <input type="text" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                            </div>
+                            
+                            <!-- Phone No -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Phone No *</label>
+                                <input type="tel" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <!-- Email -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Email *</label>
+                                <input type="email" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                            </div>
+                            
+                            <!-- Profession -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Profession *</label>
+                                <select id="userProfession" onchange="toggleProfessionFields()" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
+                                    <option value="">Select Profession</option>
+                                    <option value="Individual">Individual</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Lawyer">Lawyer</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- CONDITIONAL FIELDS -->
+                        <!-- Business Fields -->
+                        <div id="businessFields" class="hidden space-y-4 pt-2 border-t border-gray-100 mt-2">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-1">Company Name *</label>
+                                    <input type="text" id="companyNameInput" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-1">Company Address *</label>
+                                    <input type="text" id="companyAddressInput" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lawyer Fields -->
+                        <div id="lawyerFields" class="hidden space-y-4 pt-2 border-t border-gray-100 mt-2">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Specialization *</label>
+                                <select id="specializationInput" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
+                                    <option value="">Select Specialization</option>
+                                    <option value="Family Matters">Family Matters</option>
+                                    <option value="Corporate Law">Corporate Law</option>
+                                    <option value="Criminal Defense">Criminal Defense</option>
+                                    <option value="Property Law">Property Law</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4">
+                            <button type="submit" class="px-6 h-10 rounded-lg bg-primary text-white font-bold text-sm hover:bg-secondary hover:text-primary transition duration-300">
+                                Save User
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- USERS TABLE -->
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-xl font-bold text-primary">Manage Users</h3>
-                        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-accent transition">Add User</button>
                     </div>
                     <p class="text-gray-500 mb-8">This section will list all regular clients. Integration with Google Sheets pending.</p>
                     
@@ -224,8 +316,66 @@
                 </div>
             </div>
             
+            <!-- Know Your Rights Tab -->
+            <div id="tab-know-rights" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-primary mb-4">Know Your Rights</h3>
+                    <p class="text-gray-500">Manage 'Know Your Rights' content here.</p>
+                </div>
+            </div>
+
+            <!-- Know The Laws Tab -->
+            <div id="tab-know-laws" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-primary mb-4">Know The Laws</h3>
+                    <p class="text-gray-500">Manage 'Know The Laws' content here.</p>
+                </div>
+            </div>
+
+            <!-- Our Services Tab -->
+            <div id="tab-services" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-primary mb-4">Our Services</h3>
+                    <p class="text-gray-500">Manage 'Our Services' content here.</p>
+                </div>
+            </div>
+
+            <!-- Case Submission Tab -->
+            <div id="tab-case-submission" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-primary mb-4">Case Submition</h3>
+                    <p class="text-gray-500">View and manage submitted cases here.</p>
+                </div>
+            </div>
+
+            <!-- Lawyers Pannel Tab -->
+            <div id="tab-lawyers-pannel" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-primary mb-4">Lawyers Pannel</h3>
+                    <p class="text-gray-500">Manage the 'Lawyers Pannel' presentation here.</p>
+                </div>
+            </div>
+
+            <!-- Testimonials Tab -->
+            <div id="tab-testimonials" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-primary mb-4">Testimonials</h3>
+                    <p class="text-gray-500">Manage client 'Testimonials' here.</p>
+                </div>
+            </div>
+
+            <!-- Subscription Tab -->
+            <div id="tab-subscription" class="tab-content">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-primary mb-4">Subscription</h3>
+                    <p class="text-gray-500">Manage 'Subscription' plans and users here.</p>
+                </div>
+            </div>
+
         </div>
     </main>
+
+
 
     <script>
         // Tab Switching Logic
@@ -248,7 +398,14 @@
             const titles = {
                 'dashboard': 'Dashboard Overview',
                 'users': 'Manage Users',
-                'lawyers': 'Manage Lawyers Network'
+                'lawyers': 'Manage Lawyers Network',
+                'know-rights': 'Know Your Rights',
+                'know-laws': 'Know The Laws',
+                'services': 'Our Services',
+                'case-submission': 'Case Submition',
+                'lawyers-pannel': 'Lawyers Pannel',
+                'testimonials': 'Testimonials',
+                'subscription': 'Subscription'
             };
             document.getElementById('pageTitle').textContent = titles[tabId];
             
@@ -299,6 +456,38 @@
         window.onload = function() {
             loadLawyers();
         };
+
+        // Add User Form Logic
+        function toggleProfessionFields() {
+            const prof = document.getElementById('userProfession').value;
+            const bizFields = document.getElementById('businessFields');
+            const lawFields = document.getElementById('lawyerFields');
+            
+            // Hide all first
+            bizFields.classList.add('hidden');
+            lawFields.classList.add('hidden');
+            
+            // Reset required attrs
+            document.getElementById('companyNameInput').required = false;
+            document.getElementById('companyAddressInput').required = false;
+            document.getElementById('specializationInput').required = false;
+            
+            if (prof === 'Business') {
+                bizFields.classList.remove('hidden');
+                document.getElementById('companyNameInput').required = true;
+                document.getElementById('companyAddressInput').required = true;
+            } else if (prof === 'Lawyer') {
+                lawFields.classList.remove('hidden');
+                document.getElementById('specializationInput').required = true;
+            }
+        }
+        
+        function handleAddUser(e) {
+            e.preventDefault();
+            alert("User saved successfully! (Frontend Simulation)");
+            document.getElementById('addUserForm').reset();
+            toggleProfessionFields();
+        }
     </script>
 </body>
 </html>
