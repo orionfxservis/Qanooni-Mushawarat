@@ -34,87 +34,159 @@
 </head>
 <body class="flex h-screen overflow-hidden text-gray-800">
 
-    <!-- Sidebar -->
-<aside class="w-48 bg-primary text-white flex flex-col hidden md:flex">
+    <!-- PROFESSIONAL SIDEBAR -->
+<aside class="w-48 bg-gradient-to-b from-primary via-[#233f65] to-[#172a45] text-white flex flex-col shadow-2xl hidden md:flex border-r border-white/10">
 
     <!-- LOGO AREA -->
-    <div class="h-16 flex items-center justify-center border-b border-white/10 px-2">
-        <img src="../images/logo/logo.png"
-             alt="Logo"
-             class="h-8 w-8 rounded-full mr-2 object-cover">
+    <div class="h-16 flex items-center px-5 border-b border-white/10">
 
-        <h1 class="text-base font-bold tracking-wide">
-            Admin Panel
-        </h1>
+        <div class="w-9 h-9 rounded-lg bg-white p-1 shadow-lg">
+            <img src="../images/logo/logo.png"
+                 alt="Logo"
+                 class="w-full h-full object-contain">
+        </div>
+
+        <div class="ml-3">
+            <h1 class="text-[14px] font-bold leading-none">
+                LegalEase
+            </h1>
+
+            <p class="text-[9px] text-white/60 mt-1">
+                Admin Dashboard
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ADMIN INFO -->
+    <div class="px-4 py-4 border-b border-white/10">
+        <div class="flex items-center gap-3">
+            <div <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">
+                A
+            </div>
+
+            <div>
+                <h3 class="text-[12px] font-semibold">
+                    Administrator
+                </h3>
+
+                <p class="text-[9px] text-green-300">
+                    ● Online
+                </p>
+            </div>
+        </div>
     </div>
 
     <!-- MENU -->
-    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+    <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1.5">
 
-        <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="tab-btn active w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-chart-line w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Dashboard</span>
-        </button>
-
-        <button onclick="switchTab('users')" id="tab-btn-users" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-users w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Manage Users</span>
-        </button>
-
-        <button onclick="switchTab('lawyers')" id="tab-btn-lawyers" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-gavel w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Manage Lawyers</span>
-        </button>
-        
-        <div class="pt-2 pb-1 border-t border-white/10 mt-2 mb-1">
-            <span class="text-[10px] uppercase text-white/50 tracking-wider px-3 font-bold">Content Management</span>
+        <!-- MAIN -->
+        <div class="px-3 mb-2">
+            <span class="text-[8px] uppercase tracking-[1px] text-white/40 font-bold">
+                Main
+            </span>
         </div>
 
-        <button onclick="switchTab('know-rights')" id="tab-btn-know-rights" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-user-shield w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Know Your Rights</span>
+        <button onclick="switchTab('dashboard')" id="tab-btn-dashboard"
+            class="tab-btn active w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-chart-line w-4 text-center text-[12px]"></i>
+            <span class="font-medium text-[11px]">Dashboard</span>
+
         </button>
 
-        <button onclick="switchTab('know-laws')" id="tab-btn-know-laws" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-book w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Know The Laws</span>
+        <button onclick="switchTab('users')" id="tab-btn-users"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-users w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Manage Users</span>
+
         </button>
 
-        <button onclick="switchTab('services')" id="tab-btn-services" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-briefcase w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Our Services</span>
+        <button onclick="switchTab('lawyers')" id="tab-btn-lawyers"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-gavel w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Manage Lawyers</span>
+
         </button>
 
-        <button onclick="switchTab('case-submission')" id="tab-btn-case-submission" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-file-signature w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Case Submition</span>
+        <!-- CONTENT -->
+        <div class="pt-4 pb-2 px-3">
+            <span class="text-[8px] uppercase tracking-[1px] text-white/40 font-bold">
+                Content Management
+            </span>
+        </div>
+
+        <button onclick="switchTab('know-rights')" id="tab-btn-know-rights"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-user-shield w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Know Rights</span>
+
         </button>
 
-        <button onclick="switchTab('lawyers-pannel')" id="tab-btn-lawyers-pannel" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-user-tie w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Lawyers Pannel</span>
+        <button onclick="switchTab('know-laws')" id="tab-btn-know-laws"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-book w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Know Laws</span>
+
         </button>
 
-        <button onclick="switchTab('testimonials')" id="tab-btn-testimonials" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-star w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Testimonials</span>
+        <button onclick="switchTab('services')" id="tab-btn-services"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-briefcase w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Services</span>
+
         </button>
 
-        <button onclick="switchTab('subscription')" id="tab-btn-subscription" class="tab-btn w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-white/10 text-left">
-            <i class="fas fa-crown w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Subscription</span>
+        <button onclick="switchTab('case-submission')" id="tab-btn-case-submission"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-file-signature w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Case Submission</span>
+
+        </button>
+
+        <button onclick="switchTab('lawyers-pannel')" id="tab-btn-lawyers-pannel"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-user-tie w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Lawyers Panel</span>
+
+        </button>
+
+        <button onclick="switchTab('testimonials')" id="tab-btn-testimonials"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-star w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Testimonials</span>
+
+        </button>
+
+        <button onclick="switchTab('subscription')" id="tab-btn-subscription"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-crown w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Subscription</span>
+
         </button>
 
     </nav>
 
-    <!-- LOGOUT -->
-    <div class="p-3 border-t border-white/10">
-        <a href="../index.html" class="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition hover:bg-red-500 hover:text-white text-left text-gray-300">
-            <i class="fas fa-sign-out-alt w-4 text-center text-[13px]"></i>
-            <span class="font-medium text-[13px]">Logout</span>
+    <!-- FOOTER -->
+    <div class="p-4 border-t border-white/10">
+        <a href="../index.html"
+           class="w-full flex items-center justify-center gap-2 bg-red-500/10 border border-red-400/20 text-red-300 hover:bg-red-500 hover:text-white rounded-xl py-2.5 transition-all duration-300">
+
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="font-medium text-sm">
+                Logout
+            </span>
         </a>
     </div>
-
 </aside>
 
     <!-- Main Content -->
@@ -132,130 +204,366 @@
         <!-- Content Area -->
         <div class="flex-1 overflow-y-auto p-8">
             
-            <!-- Dashboard Tab -->
             <div id="tab-dashboard" class="tab-content active space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 text-2xl">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Total Users</p>
-                            <h3 class="text-2xl font-bold text-gray-800">1,245</h3>
-                        </div>
+
+				<!-- DASHBOARD STATS -->
+				<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+
+				<!-- USERS -->
+				<div class="bg-[#eaeef3] rounded-xl p-4 border border-blue-200/60 shadow-sm hover:shadow-md transition">
+					<div class="flex items-center justify-between">
+						<div>
+							<p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">
+								Total Users
+							</p>
+							<h3 class="text-xl font-bold text-blue-600 mt-1">
+								1,245
+							</h3>
+						</div>
+
+						<div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+							<i class="fas fa-users text-blue-600 text-lg"></i>
+						</div>
+					</div>
+				</div>
+
+				<!-- LAWYERS -->
+				<div class="bg-[#eaeef3] rounded-xl p-4 border border-amber-200/60 shadow-sm hover:shadow-md transition">
+					<div class="flex items-center justify-between">
+						<div>
+							<p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">
+								Lawyers
+							</p>
+							<h3 id="dash-lawyer-count" class="text-xl font-bold text-secondary mt-1">
+								0
+							</h3>
+						</div>
+
+						<div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+							<i class="fas fa-gavel text-secondary text-lg"></i>
+						</div>
+					</div>
+				</div>
+
+				<!-- ACTIVE CASES -->
+				<div class="bg-[#eaeef3] rounded-xl p-4 border border-green-200/60 shadow-sm hover:shadow-md transition">
+					<div class="flex items-center justify-between">
+						<div>
+							<p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">
+								Active Cases
+							</p>
+							<h3 class="text-xl font-bold text-green-600 mt-1">
+								328
+							</h3>
+						</div>
+
+						<div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+							<i class="fas fa-briefcase text-green-600 text-lg"></i>
+						</div>
+					</div>
+				</div>
+
+    <!-- PENDING APPROVALS -->
+    <div class="bg-[#eaeef3] rounded-xl p-4 border border-red-200/60 shadow-sm hover:shadow-md transition">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">
+                    Pending
+                </p>
+                <h3 class="text-xl font-bold text-red-500 mt-1">
+                    42
+                </h3>
+            </div>
+
+            <div class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
+                <i class="fas fa-clock text-red-500 text-lg"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80">
+
+        <div class="flex items-center justify-between mb-5">
+            <h3 class="text-lg font-bold text-primary">
+                Quick Actions
+            </h3>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+
+            <button class="bg-primary text-white rounded-xl py-3 text-sm font-medium hover:bg-secondary hover:text-primary transition">
+                Add Lawyer
+            </button>
+
+            <button class="bg-primary text-white rounded-xl py-3 text-sm font-medium hover:bg-secondary hover:text-primary transition">
+                Review Cases
+            </button>
+
+            <button class="bg-primary text-white rounded-xl py-3 text-sm font-medium hover:bg-secondary hover:text-primary transition">
+                Add Article
+            </button>
+
+            <button class="bg-primary text-white rounded-xl py-3 text-sm font-medium hover:bg-secondary hover:text-primary transition">
+                Notifications
+            </button>
+
+            <button class="bg-primary text-white rounded-xl py-3 text-sm font-medium hover:bg-secondary hover:text-primary transition">
+                Users
+            </button>
+
+            <button class="bg-primary text-white rounded-xl py-3 text-sm font-medium hover:bg-secondary hover:text-primary transition">
+                Reports
+            </button>
+        </div>
+    </div>
+
+    <!-- TWO COLUMN AREA -->
+    <div class="grid lg:grid-cols-2 gap-6">
+
+        <!-- RECENT CASES -->
+        <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80">
+
+            <h3 class="text-lg font-bold text-primary mb-4">
+                Recent Case Requests
+            </h3>
+
+            <div class="space-y-3">
+                <div class="flex justify-between items-center border-b pb-3 border-gray-300/40">
+                    <div>
+                        <h4 class="font-semibold text-gray-800">CASE-001</h4>
+                        <p class="text-xs text-gray-500">Family Law - Karachi</p>
                     </div>
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary text-2xl">
-                            <i class="fas fa-gavel"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Registered Lawyers</p>
-                            <h3 id="dash-lawyer-count" class="text-2xl font-bold text-gray-800">0</h3>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-green-600 text-2xl">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Active Cases</p>
-                            <h3 class="text-2xl font-bold text-gray-800">328</h3>
-                        </div>
-                    </div>
+
+                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-bold">
+                        Pending
+                    </span>
                 </div>
-                
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mt-8">
-                    <h3 class="text-xl font-bold text-primary mb-4">Welcome to Qanooni Mushawarat Admin Panel</h3>
-                    <p class="text-gray-600 leading-relaxed">From this dashboard, you can manage users, approve newly registered lawyers, and oversee all platform activities. Use the sidebar to navigate between sections.</p>
+
+                <div class="flex justify-between items-center border-b pb-3 border-gray-300/40">
+                    <div>
+                        <h4 class="font-semibold text-gray-800">CASE-002</h4>
+                        <p class="text-xs text-gray-500">Property Law - Lahore</p>
+                    </div>
+
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
+                        Assigned
+                    </span>
                 </div>
             </div>
+        </div>
+
+        <!-- LAWYER APPLICATIONS -->
+        <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80">
+
+            <h3 class="text-lg font-bold text-primary mb-4">
+                New Lawyer Applications
+            </h3>
+
+            <div class="space-y-4">
+                <div class="border rounded-xl p-4">
+                    <h4 class="font-semibold">
+                        Ali Raza
+                    </h4>
+
+                    <p class="text-xs text-gray-500 mb-3">
+                        Corporate Lawyer • Karachi
+                    </p>
+
+                    <div class="flex gap-2">
+                        <button class="bg-green-500 text-white px-3 py-1 rounded-lg text-xs">
+                            Approve
+                        </button>
+
+                        <button class="bg-red-500 text-white px-3 py-1 rounded-lg text-xs">
+                            Reject
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI CARD -->
+    <div class="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 text-white">
+
+        <h3 class="text-2xl font-bold mb-2">
+            AI Legal Assistant
+        </h3>
+
+        <p class="text-white/80 mb-4">
+            Smart case categorization, lawyer matching and legal document analysis.
+        </p>
+
+        <div class="flex flex-wrap gap-6 mb-6">
+
+            <div>
+                <p class="text-white/70 text-sm">Cases Analysed</p>
+                <h4 class="text-2xl font-bold">124</h4>
+            </div>
+
+            <div>
+                <p class="text-white/70 text-sm">Pending Reviews</p>
+                <h4 class="text-2xl font-bold">18</h4>
+            </div>
+        </div>
+
+        <button class="bg-secondary text-primary font-semibold px-6 py-3 rounded-xl">
+            Open AI Assistant
+        </button>
+
+    </div>
+
+</div>
             
             <!-- Users Tab -->
             <div id="tab-users" class="tab-content">
                 <!-- ADD NEW USER FORM (Inline) -->
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mb-8">
-                    <h3 class="text-xl font-bold text-primary mb-6">Add New User</h3>
-                    
-                    <form id="addUserForm" class="space-y-4" onsubmit="handleAddUser(event)">
+                <!-- ADD NEW USER FORM (Inline) -->
+                <div class="relative mb-8">
+                    <div class="inline-block bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-[12px] font-bold px-5 py-2 rounded-t-xl shadow-sm">
+                        Manage Users
+                    </div>
+                    <div class="rounded-2xl p-6 shadow-sm border border-gray-200/80 bg-[#eaeef3] -mt-px rounded-tl-none">
+                        <h3 class="text-sm font-bold text-gray-700 mb-5 pb-2 border-b border-gray-300/60">
+                            Add New User
+                        </h3>
                         
-                        <!-- Image Upload -->
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Profile Image</label>
-                            <input type="file" id="profileImageInput" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
-                        </div>
-                        
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <!-- Full Name -->
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Full Name *</label>
-                                <input type="text" id="fullNameInput" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
-                            </div>
+                        <form id="addUserForm" class="space-y-4" onsubmit="handleAddUser(event)">
                             
-                            <!-- Phone No -->
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Phone No *</label>
-                                <input type="tel" id="phoneInput" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
-                            </div>
-                        </div>
-                        
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <!-- Email -->
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Email *</label>
-                                <input type="email" id="emailInput" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
-                            </div>
-                            
-                            <!-- Profession -->
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Profession *</label>
-                                <select id="userProfession" onchange="toggleProfessionFields()" required class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
-                                    <option value="">Select Profession</option>
-                                    <option value="Individual">Individual</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Lawyer">Lawyer</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- CONDITIONAL FIELDS -->
-                        <!-- Business Fields -->
-                        <div id="businessFields" class="hidden space-y-4 pt-2 border-t border-gray-100 mt-2">
-                            <div class="grid md:grid-cols-2 gap-4">
+                            <!-- First Row: Profile Picture URL, Full Name, Mobile No -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Profile Picture URL -->
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-1">Company Name *</label>
-                                    <input type="text" id="companyNameInput" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">Profile Picture URL</label>
+                                    <div class="flex gap-1">
+                                        <input type="text" id="profileImageUrlInput" class="flex-1 h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="https://...">
+                                        <button type="button" id="uploadImageBtn" onclick="triggerFileInput()" class="w-8 h-8 rounded-lg bg-slate-700 text-white flex items-center justify-center hover:bg-slate-650 transition flex-shrink-0" title="Upload Image File">
+                                            <i class="fas fa-upload text-xs"></i>
+                                        </button>
+                                        <input type="file" id="profileImageInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                                    </div>
                                 </div>
+                                
+                                <!-- Full Name -->
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-1">Company Address *</label>
-                                    <input type="text" id="companyAddressInput" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary">
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">Full Name *</label>
+                                    <input type="text" id="fullNameInput" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="e.g., Ali Khan">
+                                </div>
+
+                                <!-- Mobile No -->
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">Mobile No. *</label>
+                                    <input type="tel" id="phoneInput" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="e.g., 03001234567">
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Lawyer Fields -->
-                        <div id="lawyerFields" class="hidden space-y-4 pt-2 border-t border-gray-100 mt-2">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Specialization *</label>
-                                <select id="specializationInput" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
-                                    <option value="">Select Specialization</option>
-                                    <option value="Family Matters">Family Matters</option>
-                                    <option value="Corporate Law">Corporate Law</option>
-                                    <option value="Criminal Defense">Criminal Defense</option>
-                                    <option value="Property Law">Property Law</option>
-                                </select>
+                            
+                            <!-- Second Row: Email, City, Profession -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Email -->
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">Email *</label>
+                                    <input type="email" id="emailInput" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="e.g., user@example.com">
+                                </div>
+                                
+                                <!-- City -->
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">City *</label>
+                                    <input type="text" id="cityInput" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="e.g., Karachi">
+                                </div>
+
+                                <!-- Profession -->
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">Profession *</label>
+                                    <select id="userProfession" onchange="toggleProfessionFields()" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20">
+                                        <option value="">Select Profession</option>
+                                        <option value="Individual">Individual</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Lawyer">Lawyer</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="pt-4">
-                            <button type="submit" class="px-6 h-10 rounded-lg bg-primary text-white font-bold text-sm hover:bg-secondary hover:text-primary transition duration-300">
-                                Save User
-                            </button>
-                        </div>
-                    </form>
+                            
+                            <!-- CONDITIONAL FIELDS -->
+                            <!-- Business Fields -->
+                            <div id="businessFields" class="hidden p-4 rounded-xl bg-amber-100/40 border border-amber-200/50 space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Company Name *</label>
+                                        <input type="text" id="companyNameInput" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="e.g., ABC Corp">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Company Email *</label>
+                                        <input type="email" id="companyEmailInput" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="e.g., info@abccorp.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Company Address</label>
+                                        <input type="text" id="companyAddressInput" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20" placeholder="e.g., Office 101, Karachi">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Lawyer Fields -->
+                            <div id="lawyerFields" class="hidden p-4 rounded-xl bg-green-100/40 border border-green-200/50 space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Specialize In *</label>
+                                        <select id="specializationInput" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20">
+                                            <option value="">Select Specialization</option>
+                                            <option value="Family Matters">Family Matters</option>
+                                            <option value="Corporate Law">Corporate Law</option>
+                                            <option value="Criminal Defense">Criminal Defense</option>
+                                            <option value="Property Law">Property Law</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Working Court *</label>
+                                        <select id="workingCourtInput" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20">
+                                            <option value="">Select Court</option>
+                                            <option value="City Court">City Court</option>
+                                            <option value="Session Court">Session Court</option>
+                                            <option value="High Court">High Court</option>
+                                            <option value="Supreme Court">Supreme Court</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Third Row: User Role / Type, Account Status -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-gray-300/40">
+                                <!-- User Role / Type -->
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">User Role / Type *</label>
+                                    <select id="userRoleInput" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20">
+                                        <option value="">Select Role</option>
+                                        <option value="Normal User">Normal User</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                </div>
+                                <!-- Account Status -->
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">Account Status *</label>
+                                    <select id="accountStatusInput" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20">
+                                        <option value="">Select Status</option>
+                                        <option value="Active">Active</option>
+                                        <option value="On Hold">On Hold</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Save User Button (Bottom Left) -->
+                            <div class="pt-3">
+                                <button type="submit" class="px-6 h-9 rounded-lg bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-bold text-xs shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+                                    Save User
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- USERS TABLE -->
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-xl font-bold text-primary">Manage Users</h3>
                     </div>
@@ -264,11 +572,13 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead>
-                                <tr class="text-gray-400 border-b border-gray-100">
-                                    <th class="pb-4 font-medium">Name</th>
-                                    <th class="pb-4 font-medium">Email</th>
-                                    <th class="pb-4 font-medium">Status</th>
-                                    <th class="pb-4 font-medium text-right">Actions</th>
+                                <tr class="text-gray-400 border-b border-gray-100 text-[12px] uppercase tracking-wider font-bold">
+                                    <th class="pb-4 font-semibold">User Profile</th>
+                                    <th class="pb-4 font-semibold">Contact</th>
+                                    <th class="pb-4 font-semibold">City</th>
+                                    <th class="pb-4 font-semibold">Details</th>
+                                    <th class="pb-4 font-semibold">Status</th>
+                                    <th class="pb-4 font-semibold text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="usersTableBody">
@@ -278,14 +588,13 @@
                         <div id="noUsersMsg" class="hidden text-center py-8 text-gray-400">
                             No users found in the database.
                         </div>
-                        </table>
                     </div>
                 </div>
             </div>
             
             <!-- Lawyers Tab -->
             <div id="tab-lawyers" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-xl font-bold text-primary">Lawyer Network Applications</h3>
                         <span class="text-sm text-gray-500"><i class="fas fa-info-circle mr-1"></i> Data synced from localStorage</span>
@@ -294,12 +603,12 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead>
-                                <tr class="text-gray-400 border-b border-gray-100">
-                                    <th class="pb-4 font-medium">Lawyer Name</th>
-                                    <th class="pb-4 font-medium">License Number</th>
-                                    <th class="pb-4 font-medium">Specialization</th>
-                                    <th class="pb-4 font-medium">City</th>
-                                    <th class="pb-4 font-medium text-right">Actions</th>
+                                <tr class="text-gray-400 border-b border-gray-150 text-[12px] uppercase tracking-wider font-bold">
+                                    <th class="pb-4 font-semibold">Lawyer Name</th>
+                                    <th class="pb-4 font-semibold">License Number</th>
+                                    <th class="pb-4 font-semibold">Specialization</th>
+                                    <th class="pb-4 font-semibold">City</th>
+                                    <th class="pb-4 font-semibold text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="lawyersTableBody">
@@ -315,7 +624,7 @@
             
             <!-- Know Your Rights Tab -->
             <div id="tab-know-rights" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <h3 class="text-xl font-bold text-primary mb-4">Know Your Rights</h3>
                     <p class="text-gray-500">Manage 'Know Your Rights' content here.</p>
                 </div>
@@ -323,7 +632,7 @@
 
             <!-- Know The Laws Tab -->
             <div id="tab-know-laws" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <h3 class="text-xl font-bold text-primary mb-4">Know The Laws</h3>
                     <p class="text-gray-500">Manage 'Know The Laws' content here.</p>
                 </div>
@@ -331,7 +640,7 @@
 
             <!-- Our Services Tab -->
             <div id="tab-services" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <h3 class="text-xl font-bold text-primary mb-4">Our Services</h3>
                     <p class="text-gray-500">Manage 'Our Services' content here.</p>
                 </div>
@@ -339,7 +648,7 @@
 
             <!-- Case Submission Tab -->
             <div id="tab-case-submission" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <h3 class="text-xl font-bold text-primary mb-4">Case Submition</h3>
                     <p class="text-gray-500">View and manage submitted cases here.</p>
                 </div>
@@ -347,7 +656,7 @@
 
             <!-- Lawyers Pannel Tab -->
             <div id="tab-lawyers-pannel" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <h3 class="text-xl font-bold text-primary mb-4">Lawyers Pannel</h3>
                     <p class="text-gray-500">Manage the 'Lawyers Pannel' presentation here.</p>
                 </div>
@@ -355,7 +664,7 @@
 
             <!-- Testimonials Tab -->
             <div id="tab-testimonials" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <h3 class="text-xl font-bold text-primary mb-4">Testimonials</h3>
                     <p class="text-gray-500">Manage client 'Testimonials' here.</p>
                 </div>
@@ -363,7 +672,7 @@
 
             <!-- Subscription Tab -->
             <div id="tab-subscription" class="tab-content">
-                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
                     <h3 class="text-xl font-bold text-primary mb-4">Subscription</h3>
                     <p class="text-gray-500">Manage 'Subscription' plans and users here.</p>
                 </div>
@@ -442,15 +751,15 @@
                 tableBody.innerHTML = '';
                 lawyers.forEach(l => {
                     const tr = document.createElement('tr');
-                    tr.className = 'border-b border-gray-50 hover:bg-gray-50 transition';
+                    tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
                     tr.innerHTML = `
-                        <td class="py-4 font-medium text-gray-800">${l.name}</td>
-                        <td class="py-4 text-gray-600 font-mono text-sm">${l.license}</td>
-                        <td class="py-4 text-gray-500">${l.specialization || 'N/A'}</td>
-                        <td class="py-4 text-gray-500">${l.city || 'N/A'}</td>
-                        <td class="py-4 text-right">
-                            <button class="px-3 py-1 bg-secondary text-primary rounded text-xs font-bold mr-2 hover:opacity-80">Approve</button>
-                            <button class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        <td class="py-4 font-medium text-gray-800 px-2">${l.name}</td>
+                        <td class="py-4 text-gray-600 font-mono text-sm px-2">${l.license}</td>
+                        <td class="py-4 text-gray-500 px-2">${l.specialization || 'N/A'}</td>
+                        <td class="py-4 text-gray-500 px-2">${l.city || 'N/A'}</td>
+                        <td class="py-4 text-right px-2">
+                            <button class="px-3 py-1 bg-secondary text-primary rounded-lg text-xs font-bold mr-2 hover:opacity-80 transition shadow-sm">Approve</button>
+                            <button class="text-red-400 hover:text-red-600 transition p-2"><i class="fas fa-trash"></i></button>
                         </td>
                     `;
                     tableBody.appendChild(tr);
@@ -464,7 +773,7 @@
             fetchUsers();
         };
 
-        // Fetch Users from Supabase
+        // Fetch Users from Supabase & Merge with local data fallback
         async function fetchUsers() {
             const tableBody = document.getElementById('usersTableBody');
             const noMsg = document.getElementById('noUsersMsg');
@@ -490,24 +799,90 @@
                     tableBody.innerHTML = '';
                     
                     users.forEach(u => {
+                        // Retrieve extra metadata from localStorage if present
+                        let extraData = {};
+                        try {
+                            const cached = localStorage.getItem(`user_extra_${u.email}`);
+                            if (cached) {
+                                extraData = JSON.parse(cached);
+                            }
+                        } catch (e) {
+                            console.error("Error reading user extra details:", e);
+                        }
+
+                        // Combine database columns and localStorage fallback keys
+                        const city = u.city || extraData.city || 'N/A';
+                        const companyEmail = u.company_email || extraData.company_email || 'N/A';
+                        const workingCourt = u.working_court || extraData.working_court || 'N/A';
+                        const userRole = u.user_role || extraData.user_role || 'Normal User';
+                        const accountStatus = u.account_status || extraData.account_status || 'Active';
+
                         const tr = document.createElement('tr');
-                        tr.className = 'border-b border-gray-50 hover:bg-gray-50 transition';
+                        tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
                         
                         // Avatar HTML
-                        let avatarHtml = `<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500 flex-shrink-0">${u.full_name ? u.full_name.charAt(0).toUpperCase() : '?'}</div>`;
+                        let avatarHtml = `<div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">${u.full_name ? u.full_name.charAt(0).toUpperCase() : '?'}</div>`;
                         if (u.profile_image) {
-                            avatarHtml = `<img src="${u.profile_image}" class="w-8 h-8 rounded-full object-cover flex-shrink-0" alt="avatar">`;
+                            avatarHtml = `<img src="${u.profile_image}" class="w-9 h-9 rounded-full object-cover flex-shrink-0" alt="avatar">`;
                         }
+
+                        // Badges for profession and role
+                        const profColors = {
+                            'Individual': 'bg-blue-50 text-blue-700 border border-blue-100',
+                            'Business': 'bg-amber-50 text-amber-700 border border-amber-100',
+                            'Lawyer': 'bg-green-50 text-green-700 border border-green-100'
+                        };
+                        const profBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold ${profColors[u.profession] || 'bg-gray-50 text-gray-600 border border-gray-100'}">${u.profession || 'Individual'}</span>`;
                         
+                        const roleColors = {
+                            'Admin': 'bg-purple-50 text-purple-700 border border-purple-100',
+                            'Normal User': 'bg-slate-50 text-slate-600 border border-slate-100'
+                        };
+                        const roleBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold ${roleColors[userRole] || 'bg-slate-50 text-slate-600 border border-slate-100'}">${userRole}</span>`;
+                        
+                        // Details text based on profession
+                        let detailsHtml = '<span class="text-gray-400 font-normal">No additional details</span>';
+                        if (u.profession === 'Business') {
+                            detailsHtml = `
+                                <div class="font-medium text-gray-800">${u.company_name || 'N/A'}</div>
+                                <div class="text-[11px] text-gray-400">${companyEmail}</div>
+                            `;
+                        } else if (u.profession === 'Lawyer') {
+                            detailsHtml = `
+                                <div class="font-medium text-gray-800">${u.specialization || 'N/A'}</div>
+                                <div class="text-[11px] text-gray-400">${workingCourt}</div>
+                            `;
+                        }
+
+                        // Status Badge
+                        const statusColors = {
+                            'Active': 'bg-green-100 text-green-700 font-semibold',
+                            'On Hold': 'bg-red-100 text-red-700 font-semibold'
+                        };
+                        const statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-bold ${statusColors[accountStatus] || 'bg-green-100 text-green-700 font-semibold'}">${accountStatus}</span>`;
+
                         tr.innerHTML = `
                             <td class="py-4 flex items-center gap-3">
                                 ${avatarHtml}
-                                <span class="font-medium text-gray-800">${u.full_name || 'N/A'} <span class="text-xs text-gray-400 ml-1">(${u.profession || 'User'})</span></span>
+                                <div>
+                                    <div class="font-bold text-gray-800">${u.full_name || 'N/A'}</div>
+                                    <div class="flex items-center gap-1.5 mt-1">
+                                        ${profBadge}
+                                        ${roleBadge}
+                                    </div>
+                                </div>
                             </td>
-                            <td class="py-4 text-gray-500">${u.email || 'N/A'}</td>
-                            <td class="py-4"><span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Active</span></td>
+                            <td class="py-4">
+                                <div class="font-medium text-gray-700">${u.phone || 'N/A'}</div>
+                                <div class="text-[11px] text-gray-400">${u.email || 'N/A'}</div>
+                            </td>
+                            <td class="py-4 font-medium text-gray-600">${city}</td>
+                            <td class="py-4 text-xs">${detailsHtml}</td>
+                            <td class="py-4">${statusBadge}</td>
                             <td class="py-4 text-right">
-                                <button class="text-gray-400 hover:text-primary"><i class="fas fa-edit"></i></button>
+                                <button onclick="deleteUser('${u.email}')" class="text-red-400 hover:text-red-600 transition p-2" title="Delete User">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         `;
                         tableBody.appendChild(tr);
@@ -518,31 +893,88 @@
             }
         }
 
-        // Add User Form Logic
+        // Trigger hidden file picker
+        function triggerFileInput() {
+            document.getElementById('profileImageInput').click();
+        }
+
+        // Handle image selection and upload (with Base64 fallback)
+        async function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const urlInput = document.getElementById('profileImageUrlInput');
+            const uploadBtn = document.getElementById('uploadImageBtn');
+            const originalIcon = uploadBtn.innerHTML;
+            
+            // Show loading spinner
+            uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-xs"></i>';
+            uploadBtn.disabled = true;
+
+            try {
+                // Convert to Base64 first as a guaranteed fallback URL
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    urlInput.value = reader.result;
+                }
+                reader.readAsDataURL(file);
+
+                // If Supabase is configured, try to upload to storage
+                if (supabaseClient && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+                    const filePath = `${fileName}`;
+
+                    const { error: uploadError } = await supabaseClient.storage
+                        .from('avatars')
+                        .upload(filePath, file);
+
+                    if (!uploadError) {
+                        const { data } = supabaseClient.storage.from('avatars').getPublicUrl(filePath);
+                        if (data && data.publicUrl) {
+                            urlInput.value = data.publicUrl;
+                        }
+                    } else {
+                        console.warn("Supabase storage upload failed. Using local base64 preview.", uploadError);
+                    }
+                }
+            } catch (error) {
+                console.error("Error in image upload handler:", error);
+            } finally {
+                uploadBtn.innerHTML = originalIcon;
+                uploadBtn.disabled = false;
+            }
+        }
+
+        // Consolidated Profession Dropdown Toggle Logic
         function toggleProfessionFields() {
             const prof = document.getElementById('userProfession').value;
             const bizFields = document.getElementById('businessFields');
             const lawFields = document.getElementById('lawyerFields');
             
-            // Hide all first
+            // Hide all conditional blocks first
             bizFields.classList.add('hidden');
             lawFields.classList.add('hidden');
             
-            // Reset required attrs
+            // Reset required flags for conditional inputs
             document.getElementById('companyNameInput').required = false;
+            document.getElementById('companyEmailInput').required = false;
             document.getElementById('companyAddressInput').required = false;
             document.getElementById('specializationInput').required = false;
+            document.getElementById('workingCourtInput').required = false;
             
             if (prof === 'Business') {
                 bizFields.classList.remove('hidden');
                 document.getElementById('companyNameInput').required = true;
-                document.getElementById('companyAddressInput').required = true;
+                document.getElementById('companyEmailInput').required = true;
             } else if (prof === 'Lawyer') {
                 lawFields.classList.remove('hidden');
                 document.getElementById('specializationInput').required = true;
+                document.getElementById('workingCourtInput').required = true;
             }
         }
         
+        // Add User Handler (with Supabase + LocalStorage Fallback)
         async function handleAddUser(e) {
             e.preventDefault();
             
@@ -552,7 +984,6 @@
             submitBtn.disabled = true;
 
             try {
-                // Ensure Supabase client is initialized properly (keys are added)
                 if (!supabaseClient || SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') {
                     alert("Supabase is not configured yet. Please add your API keys to js/supabase-config.js");
                     submitBtn.innerText = originalBtnText;
@@ -561,61 +992,83 @@
                 }
 
                 // 1. Get Form Values
-                const fullName = document.getElementById('fullNameInput').value;
-                const phone = document.getElementById('phoneInput').value;
-                const email = document.getElementById('emailInput').value;
+                const fullName = document.getElementById('fullNameInput').value.trim();
+                const phone = document.getElementById('phoneInput').value.trim();
+                const email = document.getElementById('emailInput').value.trim();
+                const city = document.getElementById('cityInput').value.trim();
                 const profession = document.getElementById('userProfession').value;
-                const companyName = document.getElementById('companyNameInput').value;
-                const companyAddress = document.getElementById('companyAddressInput').value;
+                
+                const companyName = document.getElementById('companyNameInput').value.trim();
+                const companyEmail = document.getElementById('companyEmailInput').value.trim();
+                const companyAddress = document.getElementById('companyAddressInput').value.trim();
+                
                 const specialization = document.getElementById('specializationInput').value;
+                const workingCourt = document.getElementById('workingCourtInput').value;
                 
-                // 2. Handle Image Upload (if any)
-                let profileImageUrl = null;
-                const imageFile = document.getElementById('profileImageInput').files[0];
+                const userRole = document.getElementById('userRoleInput').value;
+                const accountStatus = document.getElementById('accountStatusInput').value;
                 
-                if (imageFile) {
-                    const fileExt = imageFile.name.split('.').pop();
-                    const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
-                    const filePath = `${fileName}`;
+                // 2. Read Profile Image URL from text input (either pasted URL or uploaded file URL/base64)
+                const profileImageUrl = document.getElementById('profileImageUrlInput').value.trim() || null;
+                
+                // 3. Prepare Payloads
+                const payload = { 
+                    full_name: fullName, 
+                    phone: phone, 
+                    email: email, 
+                    profession: profession,
+                    company_name: profession === 'Business' ? companyName : null,
+                    company_address: profession === 'Business' ? companyAddress : null,
+                    specialization: profession === 'Lawyer' ? specialization : null,
+                    profile_image: profileImageUrl
+                };
+
+                const fullPayload = {
+                    ...payload,
+                    city: city,
+                    company_email: profession === 'Business' ? companyEmail : null,
+                    working_court: profession === 'Lawyer' ? workingCourt : null,
+                    user_role: userRole,
+                    account_status: accountStatus
+                };
+
+                // 4. Insert Record (Dual Mode Fallback)
+                let { error: insertError } = await supabaseClient
+                    .from('users')
+                    .insert([fullPayload]);
                     
-                    const { error: uploadError } = await supabaseClient.storage
-                        .from('avatars')
-                        .upload(filePath, imageFile);
+                if (insertError) {
+                    // Fallback if schema doesn't have custom columns
+                    if (insertError.code === 'PGRST204' || insertError.message.includes('column') || insertError.status === 400) {
+                        console.warn("Supabase schema does not have the new columns yet. Falling back to base columns and localStorage backup.");
                         
-                    if (uploadError) {
-                        throw uploadError;
+                        const { error: fallbackError } = await supabaseClient
+                            .from('users')
+                            .insert([payload]);
+                            
+                        if (fallbackError) throw fallbackError;
+                        
+                        // Cache the unsupported fields locally
+                        const extraData = {
+                            city,
+                            company_email: profession === 'Business' ? companyEmail : null,
+                            working_court: profession === 'Lawyer' ? workingCourt : null,
+                            user_role: userRole,
+                            account_status: accountStatus
+                        };
+                        localStorage.setItem(`user_extra_${email}`, JSON.stringify(extraData));
+                    } else {
+                        throw insertError;
                     }
-                    
-                    // Get public URL
-                    const { data } = supabaseClient.storage.from('avatars').getPublicUrl(filePath);
-                    profileImageUrl = data.publicUrl;
+                } else {
+                    // Successful insert of all columns, delete old local cache for this email
+                    localStorage.removeItem(`user_extra_${email}`);
                 }
                 
-                // 3. Insert Record into Users Table
-                const { error: insertError } = await supabaseClient
-                    .from('users')
-                    .insert([
-                        { 
-                            full_name: fullName, 
-                            phone: phone, 
-                            email: email, 
-                            profession: profession,
-                            company_name: profession === 'Business' ? companyName : null,
-                            company_address: profession === 'Business' ? companyAddress : null,
-                            specialization: profession === 'Lawyer' ? specialization : null,
-                            profile_image: profileImageUrl
-                        }
-                    ]);
-                    
-                if (insertError) throw insertError;
-                
-                alert("User saved successfully to Supabase!");
+                alert("User saved successfully!");
                 document.getElementById('addUserForm').reset();
                 toggleProfessionFields();
-                
-                // Refresh the table with new data
                 fetchUsers();
-                
                 
             } catch (error) {
                 console.error("Error saving user:", error);
@@ -623,6 +1076,28 @@
             } finally {
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
+            }
+        }
+
+        // Delete User from Supabase and LocalStorage
+        async function deleteUser(email) {
+            if (!confirm(`Are you sure you want to delete the user with email ${email}?`)) return;
+            try {
+                if (!supabaseClient || SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') return;
+                
+                const { error } = await supabaseClient
+                    .from('users')
+                    .delete()
+                    .eq('email', email);
+                    
+                if (error) throw error;
+                
+                localStorage.removeItem(`user_extra_${email}`);
+                alert("User deleted successfully!");
+                fetchUsers();
+            } catch (e) {
+                console.error("Error deleting user:", e);
+                alert("Error deleting user: " + e.message);
             }
         }
     </script>
