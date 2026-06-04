@@ -105,11 +105,28 @@
     }
 
     /* =========================
-       LAW SLIDER
-    ========================= */
+       LAW SLIDERS (Rights & Laws)
+     ========================= */
 
-    .law-slider{
-        animation:lawSlide 60s linear infinite;
+    .rights-slider {
+        animation: lawSlide 60s linear infinite;
+    }
+
+    /* Laws Slider - Default (Mobile/Tablet) */
+    .laws-slider {
+        animation: lawSlide 85s linear infinite;
+    }
+
+    /* Laws Slider - Large Screens (Laptop/Desktop) */
+    @media (min-width: 1024px) {
+        .laws-slider {
+            animation: lawSlide 70s linear infinite;
+        }
+    }
+
+    .rights-slider:hover,
+    .laws-slider:hover {
+        animation-play-state: paused;
     }
 
     @keyframes lawSlide{
@@ -444,7 +461,6 @@
 
         <button
             class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
-
             Legal Services
             <i class="fas fa-chevron-down text-[10px] mt-[2px]"></i>
         </button>
@@ -452,11 +468,9 @@
         <!-- DROPDOWN -->
         <div
             class="absolute top-full left-0 mt-4 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
-
             <a href="#services"
                 class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
                 <i class="fas fa-comments text-secondary text-[13px]"></i>
-
                 Our Services
             </a>
 			
@@ -467,14 +481,11 @@
                 Consultation
             </a>
 
-            <a href="#client-form"
-    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
-
-    <i class="fas fa-file-signature text-secondary text-[13px]"></i>
-
-    Submit Case
-
-</a>
+            <a 	href="#client-form"
+				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
+				<i class="fas fa-file-signature text-secondary text-[13px]"></i>
+				Submit Case
+			</a>
         </div>
     </div>
 
@@ -496,25 +507,23 @@
 				Find Lawyer
 			</a>
 
-            <a href="javascript:void(0)"
-    onclick="openLawyerModal()"
-    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
+            <a 	href="javascript:void(0)"
+				onclick="openLawyerModal()"
+				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
 
-    <i class="fas fa-user-plus text-secondary text-[13px]"></i>
-
-    Register As Lawyer
-
-</a>
+			<i class="fas fa-user-plus text-secondary text-[13px]"></i>
+				Register As Lawyer
+			</a>
         </div>
-    </div>
+	</div>
 
-    <!-- FAQ -->
-    <a href="#faq"
-        class="text-white text-[15px] font-medium hover:text-secondary transition duration-300 relative group">
+			<!-- FAQ -->
+			<a 	href="#faq"
+				class="text-white text-[15px] font-medium hover:text-secondary transition duration-300 relative group">
 
-        FAQ
-        <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
-    </a>
+					FAQ
+				<span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
+			</a>
 
     <!-- COMPANY -->
     <div class="relative group">
@@ -528,23 +537,18 @@
         <!-- DROPDOWN -->
         <div
             class="absolute top-full left-0 mt-4 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
-            <a href="./pages/about.html"
-    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
+            <a 	href="./pages/about.html"
+				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
 
-    <i class="fas fa-circle-info text-secondary text-[13px]"></i>
-
-    About Us
-
-</a>
+			<i class="fas fa-circle-info text-secondary text-[13px]"></i>
+				About Us		
+			</a>
 
             <a href="./pages/policy.html"
-    class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
-
-    <i class="fas fa-shield-halved text-secondary text-[13px]"></i>
-
-    Privacy Policy
-
-</a>
+				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
+				<i class="fas fa-shield-halved text-secondary text-[13px]"></i>
+				Privacy Policy
+			</a>
 
             <a href="#contact"
                 class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
@@ -801,8 +805,6 @@
     </div>
 </section>
 
-<button onclick="testSupabase()">Test</button>
-
 				<!-- Know Your Rights Section -->
 				<section class="py-20 bg-[#f8f9fa] border-b border-gray-200 overflow-hidden">
     
@@ -829,7 +831,7 @@
 	
 					<div class="relative overflow-hidden w-full">
 							<!-- Using existing law-slider animation for seamless scrolling -->
-						<div class="law-slider flex gap-6 items-center w-max">
+						<div class="rights-slider flex gap-6 items-center w-max">
 							<!-- Original set of 6 images -->
 							<img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
 							<img src="./images/laws-slide-show/2011-mld-1662.png" alt="Law Record" class="h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer">
@@ -859,7 +861,7 @@
             </div>
             
             <div class="relative overflow-hidden">
-                <div class="law-slider flex gap-6" id="lawSlider">
+                <div class="laws-slider flex gap-6" id="lawSlider">
                     <!-- Law Cards - Doubled for seamless loop -->
                     <a href="https://www.pakistanlaw.org" target="_blank" class="flex-shrink-0 w-72 bg-gradient-to-br from-primary to-accent rounded-2xl overflow-hidden hover-lift group">
                         <div class="h-48 overflow-hidden">
@@ -1129,50 +1131,50 @@
                     <p class="text-white/70" data-en="Submit your legal matter and our experts will get back to you within 24 hours" data-ur="اپنا قانونی معاملہ جمع کروائیں اور ہمارے ماہرین 24 گھنٹے کے اندر آپ سے رابطہ کریں گے">Submit your legal matter and our experts will get back to you within 24 hours</p>
                 </div>
                 
-                <form id="clientForm" class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
+                <form id="clientForm" class="bg-[#eaeef3] rounded-2xl p-6 md:p-8 shadow-2xl border border-gray-200/80">
                     <!-- Progress Bar -->
-                    <div class="mb-8">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-sm text-gray-500" data-en="Step 1 of 3" data-ur="مرحلہ 1 از 3">Step 1 of 3</span>
-                            <span class="text-sm text-primary font-semibold" id="progressPercent">33%</span>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-1.5">
+                            <span class="text-xs text-gray-500" data-en="Step 1 of 3" data-ur="مرحلہ 1 از 3">Step 1 of 3</span>
+                            <span class="text-xs text-primary font-semibold" id="progressPercent">33%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div id="progressBar" class="progress-bar h-2 rounded-full transition-all duration-500" style="width: 33%"></div>
+                        <div class="w-full bg-gray-300 rounded-full h-1.5">
+                            <div id="progressBar" class="progress-bar h-1.5 rounded-full transition-all duration-500" style="width: 33%"></div>
                         </div>
                     </div>
                     
                     <!-- Step 1: Basic Info -->
                     <div id="step1" class="step">
-                        <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
-                            <span class="w-8 h-8 bg-secondary text-primary rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                        <h3 class="text-md font-bold text-primary mb-5 flex items-center gap-2">
+                            <span class="w-6 h-6 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">1</span>
                             <span data-en="Personal Information" data-ur="ذاتی معلومات">Personal Information</span>
                         </h3>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-gray-700 font-medium mb-2" data-en="Full Name *" data-ur="مکمل نام *">Full Name *</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="Enter your full name">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="Full Name *" data-ur="مکمل نام *">Full Name *</label>
+                                <input type="text" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="Enter your full name">
                             </div>
                             <div>
-                                <label class="block text-gray-700 font-medium mb-2" data-en="CNIC Number *" data-ur="شناختی کارڈ نمبر *">CNIC Number *</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="XXXXX-XXXXXXX-X">
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2" data-en="Phone Number *" data-ur="فون نمبر *">Phone Number *</label>
-                                <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="+92-3XX-XXXXXXX">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2" data-en="Email Address" data-ur="ای میل ایڈریس">Email Address</label>
-                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition" placeholder="your@email.com">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="CNIC Number *" data-ur="شناختی کارڈ نمبر *">CNIC Number *</label>
+                                <input type="text" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="XXXXX-XXXXXXX-X">
                             </div>
                         </div>
                         
-                        <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2" data-en="City *" data-ur="شہر *">City *</label>
-                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="Phone Number *" data-ur="فون نمبر *">Phone Number *</label>
+                                <input type="tel" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="+92-3XX-XXXXXXX">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="Email Address" data-ur="ای میل ایڈریس">Email Address</label>
+                                <input type="email" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="City *" data-ur="شہر *">City *</label>
+                            <select required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
                                 <option value="">Select City</option>
                                 <option value="karachi">Karachi</option>
                                 <option value="lahore">Lahore</option>
@@ -1186,7 +1188,7 @@
                             </select>
                         </div>
                         
-                        <button type="button" onclick="nextStep(1)" class="w-full bg-primary text-white py-4 rounded-xl font-semibold hover:bg-secondary hover:text-primary transition flex items-center justify-center gap-2">
+                        <button type="button" onclick="nextStep(1)" class="w-full bg-primary text-white h-9 rounded-lg font-bold hover:bg-secondary hover:text-primary text-xs transition flex items-center justify-center gap-2">
                             <span data-en="Next Step" data-ur="اگلا مرحلہ">Next Step</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
@@ -1194,14 +1196,14 @@
                     
                     <!-- Step 2: Case Details -->
                     <div id="step2" class="step hidden">
-                        <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
-                            <span class="w-8 h-8 bg-secondary text-primary rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                        <h3 class="text-md font-bold text-primary mb-5 flex items-center gap-2">
+                            <span class="w-6 h-6 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">2</span>
                             <span data-en="Case Details" data-ur="کیس کی تفصیلات">Case Details</span>
                         </h3>
                         
-                        <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2" data-en="Legal Matter Type *" data-ur="قانونی معاملے کی قسم *">Legal Matter Type *</label>
-                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition">
+                        <div class="mb-4">
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="Legal Matter Type *" data-ur="قانونی معاملے کی قسم *">Legal Matter Type *</label>
+                            <select required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
                                 <option value="">Select Matter Type</option>
                                 <option value="family">Family Law (خاندانی قانون)</option>
                                 <option value="criminal">Criminal Defense (کریمنل ڈیفنس)</option>
@@ -1215,56 +1217,56 @@
                             </select>
                         </div>
                         
-                        <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2" data-en="Case Priority *" data-ur="کیس کی ترجیح *">Case Priority *</label>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <label class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
+                        <div class="mb-4">
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="Case Priority *" data-ur="کیس کی ترجیح *">Case Priority *</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <label class="flex items-center justify-center p-2 border border-gray-300 rounded-lg cursor-pointer bg-white hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
                                     <input type="radio" name="priority" value="low" class="hidden peer">
                                     <div class="text-center">
-                                        <i class="fas fa-clock text-gray-400 text-2xl mb-2"></i>
-                                        <p class="font-semibold" data-en="Low" data-ur="کم">Low</p>
-                                        <p class="text-xs text-gray-500" data-en="General inquiry" data-ur="عمومی پوچھ">General inquiry</p>
+                                        <i class="fas fa-clock text-gray-400 text-lg mb-1"></i>
+                                        <p class="font-semibold text-xs" data-en="Low" data-ur="کم">Low</p>
+                                        <p class="text-[10px] text-gray-500" data-en="General inquiry" data-ur="عمومی پوچھ">General inquiry</p>
                                     </div>
                                 </label>
-                                <label class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
+                                <label class="flex items-center justify-center p-2 border border-gray-300 rounded-lg cursor-pointer bg-white hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
                                     <input type="radio" name="priority" value="medium" class="hidden peer" checked>
                                     <div class="text-center">
-                                        <i class="fas fa-exclamation-triangle text-yellow-500 text-2xl mb-2"></i>
-                                        <p class="font-semibold" data-en="Medium" data-ur="درمیانہ">Medium</p>
-                                        <p class="text-xs text-gray-500" data-en="Need attention" data-ur="توجہ درکار">Need attention</p>
+                                        <i class="fas fa-exclamation-triangle text-yellow-500 text-lg mb-1"></i>
+                                        <p class="font-semibold text-xs" data-en="Medium" data-ur="درمیانہ">Medium</p>
+                                        <p class="text-[10px] text-gray-500" data-en="Need attention" data-ur="توجہ درکار">Need attention</p>
                                     </div>
                                 </label>
-                                <label class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
+                                <label class="flex items-center justify-center p-2 border border-gray-300 rounded-lg cursor-pointer bg-white hover:border-secondary transition peer-checked:border-secondary peer-checked:bg-secondary/10">
                                     <input type="radio" name="priority" value="high" class="hidden peer">
                                     <div class="text-center">
-                                        <i class="fas fa-fire text-red-500 text-2xl mb-2"></i>
-                                        <p class="font-semibold" data-en="Urgent" data-ur="جلدی">Urgent</p>
-                                        <p class="text-xs text-gray-500" data-en="Emergency" data-ur="ایمرجنسی">Emergency</p>
+                                        <i class="fas fa-fire text-red-500 text-lg mb-1"></i>
+                                        <p class="font-semibold text-xs" data-en="Urgent" data-ur="جلدی">Urgent</p>
+                                        <p class="text-[10px] text-gray-500" data-en="Emergency" data-ur="ایمرجنسی">Emergency</p>
                                     </div>
                                 </label>
                             </div>
                         </div>
                         
-                        <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2" data-en="Describe Your Legal Matter *" data-ur="اپنا قانونی معاملہ بیان کریں *">Describe Your Legal Matter *</label>
+                        <div class="mb-5">
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="Describe Your Legal Matter *" data-ur="اپنا قانونی معاملہ بیان کریں *">Describe Your Legal Matter *</label>
                             <div class="relative">
-                                <textarea required rows="5" id="caseDescription" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary transition resize-none" placeholder="Describe your legal matter in detail..." data-placeholder-en="Describe your legal matter in detail..." data-placeholder-ur="اپنا قانونی معاملہ تفصیل سے بیان کریں..."></textarea>
-                                <button type="button" id="voiceBtn" onclick="startVoiceInput()" class="voice-btn absolute bottom-4 right-4 w-12 h-12 bg-secondary text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
-                                    <i class="fas fa-microphone"></i>
+                                <textarea required rows="4" id="caseDescription" class="w-full px-2.5 py-2 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition resize-none" placeholder="Describe your legal matter in detail..." data-placeholder-en="Describe your legal matter in detail..." data-placeholder-ur="اپنا قانونی معاملہ تفصیل سے بیان کریں..."></textarea>
+                                <button type="button" id="voiceBtn" onclick="startVoiceInput()" class="voice-btn absolute bottom-3 right-3 w-9 h-9 bg-secondary text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                    <i class="fas fa-microphone text-sm"></i>
                                 </button>
                             </div>
-                            <p class="text-sm text-gray-500 mt-2 flex items-center gap-2">
+                            <p class="text-xs text-gray-500 mt-1.5 flex items-center gap-1.5">
                                 <i class="fas fa-info-circle"></i>
                                 <span data-en="Click microphone to record your voice or type your matter" data-ur="اپنی آواز ریکارڈ کرنے کے لیے مائیکروفون پر کلک کریں یا اپنا معاملہ ٹائپ کریں">Click microphone to record your voice or type your matter</span>
                             </p>
                         </div>
                         
-                        <div class="flex gap-4">
-                            <button type="button" onclick="prevStep(2)" class="flex-1 bg-gray-200 text-primary py-4 rounded-xl font-semibold hover:bg-gray-300 transition flex items-center justify-center gap-2">
+                        <div class="flex gap-3">
+                            <button type="button" onclick="prevStep(2)" class="flex-1 bg-gray-250 text-primary h-9 rounded-lg font-bold hover:bg-gray-300 text-xs transition flex items-center justify-center gap-2">
                                 <i class="fas fa-arrow-left"></i>
                                 <span data-en="Previous" data-ur="پچھلا">Previous</span>
                             </button>
-                            <button type="button" onclick="nextStep(2)" class="flex-1 bg-primary text-white py-4 rounded-xl font-semibold hover:bg-secondary hover:text-primary transition flex items-center justify-center gap-2">
+                            <button type="button" onclick="nextStep(2)" class="flex-1 bg-primary text-white h-9 rounded-lg font-bold hover:bg-secondary hover:text-primary text-xs transition flex items-center justify-center gap-2">
                                 <span data-en="Next Step" data-ur="اگلا مرحلہ">Next Step</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -1273,39 +1275,39 @@
                     
                     <!-- Step 3: Document Upload -->
                     <div id="step3" class="step hidden">
-                        <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
-                            <span class="w-8 h-8 bg-secondary text-primary rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                        <h3 class="text-md font-bold text-primary mb-5 flex items-center gap-2">
+                            <span class="w-6 h-6 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">3</span>
                             <span data-en="Upload Documents" data-ur="دستاویزات اپلوڈ کریں">Upload Documents</span>
                         </h3>
                         
-                        <div class="mb-6">
-                            <label class="block text-gray-700 font-medium mb-2" data-en="Upload Legal Documents (Optional)" data-ur="قانونی دستاویزات اپلوڈ کریں (اختیاری)">Upload Legal Documents (Optional)</label>
-                            <div id="uploadZone" class="upload-zone rounded-2xl p-8 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()">
+                        <div class="mb-4">
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1" data-en="Upload Legal Documents (Optional)" data-ur="قانونی دستاویزات اپلوڈ کریں (اختیاری)">Upload Legal Documents (Optional)</label>
+                            <div id="uploadZone" class="upload-zone rounded-xl p-6 text-center cursor-pointer bg-white" onclick="document.getElementById('fileInput').click()">
                                 <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" class="hidden" onchange="handleFileUpload(event)">
-                                <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-cloud-upload-alt text-primary text-2xl"></i>
+                                <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-cloud-upload-alt text-primary text-lg"></i>
                                 </div>
-                                <p class="text-lg font-semibold text-primary mb-2" data-en="Drop your files here or click to upload" data-ur="اپنی فائلیں یہاں ڈرا کریں یا اپلوڈ کرنے کے لیے کلک کریں">Drop your files here or click to upload</p>
-                                <p class="text-sm text-gray-500" data-en="Supported: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)" data-ur="سپورٹڈ: پی ڈی ایف، ڈی او سی، جے پی جی، پی این جی (زیادہ سے زیادہ 10 ایم بی)">Supported: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)</p>
+                                <p class="text-sm font-semibold text-primary mb-1" data-en="Drop your files here or click to upload" data-ur="اپنی فائلیں یہاں ڈرا کریں یا اپلوڈ کرنے کے لیے کلک کریں">Drop your files here or click to upload</p>
+                                <p class="text-xs text-gray-500" data-en="Supported: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)" data-ur="سپورٹڈ: پی ڈی ایف، ڈی او سی، جے پی جی، پی این جی (زیادہ سے زیادہ 10 ایم بی)">Supported: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)</p>
                             </div>
                             
                             <!-- Uploaded Files Preview -->
-                            <div id="uploadedFiles" class="mt-4 space-y-2"></div>
+                            <div id="uploadedFiles" class="mt-3 space-y-1.5"></div>
                         </div>
                         
-                        <div class="mb-6">
-                            <label class="flex items-center gap-3 cursor-pointer">
-                                <input type="checkbox" required class="w-5 h-5 text-secondary rounded border-gray-300 focus:ring-secondary">
-                                <span class="text-gray-700" data-en="I agree to the terms and conditions and privacy policy *" data-ur="میں شرائط و ضوابط اور رازداری کی پالیسی سے اتفاق کرتا/کرتی ہوں *">I agree to the terms and conditions and privacy policy *</span>
+                        <div class="mb-5">
+                            <label class="flex items-center gap-2.5 cursor-pointer">
+                                <input type="checkbox" required class="w-4 h-4 text-secondary rounded border-gray-300 focus:ring-secondary">
+                                <span class="text-xs text-gray-700" data-en="I agree to the terms and conditions and privacy policy *" data-ur="میں شرائط و ضوابط اور رازداری کی پالیسی سے اتفاق کرتا/کرتی ہوں *">I agree to the terms and conditions and privacy policy *</span>
                             </label>
                         </div>
                         
-                        <div class="flex gap-4">
-                            <button type="button" onclick="prevStep(3)" class="flex-1 bg-gray-200 text-primary py-4 rounded-xl font-semibold hover:bg-gray-300 transition flex items-center justify-center gap-2">
+                        <div class="flex gap-3">
+                            <button type="button" onclick="prevStep(3)" class="flex-1 bg-gray-250 text-primary h-9 rounded-lg font-bold hover:bg-gray-300 text-xs transition flex items-center justify-center gap-2">
                                 <i class="fas fa-arrow-left"></i>
                                 <span data-en="Previous" data-ur="پچھلا">Previous</span>
                             </button>
-                            <button type="submit" class="flex-1 bg-secondary text-primary py-4 rounded-xl font-semibold hover:bg-primary hover:text-white transition flex items-center justify-center gap-2">
+                            <button type="submit" class="flex-1 bg-secondary text-primary h-9 rounded-lg font-bold hover:bg-primary hover:text-white text-xs transition flex items-center justify-center gap-2">
                                 <i class="fas fa-paper-plane"></i>
                                 <span data-en="Submit Case" data-ur="کیس جمع کروائیں">Submit Case</span>
                             </button>
@@ -1637,131 +1639,136 @@
 
 	<!-- MODAL BOX -->
 	<div
-		class="relative w-full max-w-3xl max-h-[95vh] overflow-y-auto bg-white rounded-[28px] shadow-2xl border-2 border-primary">
+		class="relative w-full max-w-3xl max-h-[95vh] overflow-y-auto bg-[#eaeef3] rounded-2xl shadow-2xl border border-gray-200/80">
 
 			<!-- CLOSE BUTTON -->
 			<button
 				onclick="closeLawyerModal()"
-				class="absolute top-5 right-5 w-10 h-10 rounded-full bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition duration-300">
-
-				<i class="fas fa-xmark text-lg"></i>
-
+				class="absolute top-4 right-4 w-8 h-8 rounded-full bg-red-100 text-red-650 hover:bg-red-600 hover:text-white transition duration-300 flex items-center justify-center"
+				title="Close">
+				<i class="fas fa-xmark text-sm"></i>
 			</button>
 
         <!-- FORM CONTENT -->
-        <div class="p-8 md:p-10">
+        <div class="p-5 md:p-6">
 
             <!-- Top Badge -->
             <span
-				class="inline-block bg-green-100 text-green-800 px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide mb-6"
+				class="inline-block bg-green-200 text-green-800 px-3.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide mb-2"
 				data-en="Expand Your Legal Practice"
 				data-ur="اپنی قانونی پریکٹس کو وسعت دیں">
 					Expand Your Legal Practice
 			</span>
 
-            <h3 class="text-4xl font-bold text-primary leading-tight mb-5"
+            <h3 class="text-xl md:text-2xl font-bold text-primary leading-snug mb-1.5"
                 data-en="Join our National Lawyer Network"
                 data-ur="ہمارے قومی وکلاء نیٹ ورک میں شامل ہوں">
                 Join our National Lawyer Network
             </h3>
 
-            <p class="text-gray-600 text-lg leading-relaxed mb-8"
+            <p class="text-gray-600 text-xs leading-relaxed mb-4"
 			   data-en="Register today and receive verified legal leads directly from nearby clients looking for legal consultation."
 			   data-ur="آج ہی رجسٹر کریں اور قانونی مشاورت کے خواہشمند قریبی کلائنٹس سے تصدیق شدہ قانونی مواقع حاصل کریں۔">
 				Register today and receive verified legal leads directly from nearby clients looking for legal consultation.
 			</p>
 
             <!-- FORM -->
-            <form id="lawyerRegistrationForm" class="space-y-4" onsubmit="handleLawyerRegistration(event)">
+            <form id="lawyerRegistrationForm" class="space-y-3" onsubmit="handleLawyerRegistration(event)">
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
-                        Full Professional Name *
-                    </label>
-
-                    <input
-                        id="regLawyerName"
-                        type="text"
-                        required
-                        placeholder="e.g. Adv. Zainab Qureshi"
-                        class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
-                    >
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="Full Professional Name *"
+                               data-ur="مکمل پیشہ ورانہ نام *">
+                            Full Professional Name *
+                        </label>
+                        <input
+                            id="regLawyerName"
+                            type="text"
+                            required
+                            placeholder="e.g. Adv. Zainab Qureshi"
+                            class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="Bar License Number *"
+                               data-ur="بار لائسنس نمبر *">
                             Bar License Number *
                         </label>
-
                         <input
                             id="regLawyerLicense"
                             type="text"
                             required
                             placeholder="e.g. LHC-98012-H"
-                            class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
+                            class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition"
                         >
                     </div>
 
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="Specialization *"
+                               data-ur="شعبہ تخصص *">
                             Specialization *
                         </label>
-
-                        <select id="regLawyerSpec" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
-                            <option>Family Matters</option>
-                            <option>Corporate Law</option>
-                            <option>Criminal Defense</option>
-                            <option>Property Law</option>
+                        <select id="regLawyerSpec" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                            <option value="Family Matters" data-en="Family Matters" data-ur="خاندانی معاملات">Family Matters</option>
+                            <option value="Corporate Law" data-en="Corporate Law" data-ur="کارپوریٹ قانون">Corporate Law</option>
+                            <option value="Criminal Defense" data-en="Criminal Defense" data-ur="فوجداری دفاع">Criminal Defense</option>
+                            <option value="Property Law" data-en="Property Law" data-ur="جائیداد کا قانون">Property Law</option>
                         </select>
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
-                        Official Email Address *
-                    </label>
-
-                    <input
-                        id="regLawyerEmail"
-                        type="email"
-                        required
-                        placeholder="e.g. advocate@example.com"
-                        class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
-                    >
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="Official Email Address *"
+                               data-ur="سرکاری ای میل ایڈریس *">
+                            Official Email Address *
+                        </label>
+                        <input
+                            id="regLawyerEmail"
+                            type="email"
+                            required
+                            placeholder="e.g. advocate@example.com"
+                            class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="Contact / WhatsApp *"
+                               data-ur="رابطہ / واٹس ایپ *">
                             Contact / WhatsApp *
                         </label>
-
                         <input
                             id="regLawyerPhone"
                             type="tel"
                             required
                             placeholder="+92 300 1234567"
-                            class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary"
+                            class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition"
                         >
                     </div>
 
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 uppercase mb-1">
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="City of Practice *"
+                               data-ur="پریکٹس کا شہر *">
                             City of Practice *
                         </label>
-
-                        <select id="regLawyerCity" class="w-full h-10 px-4 text-sm rounded-lg border border-gray-200 focus:outline-none focus:border-secondary bg-white">
-                            <option>Karachi</option>
-                            <option>Lahore</option>
-                            <option>Islamabad</option>
+                        <select id="regLawyerCity" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                            <option value="Karachi" data-en="Karachi" data-ur="کراچی">Karachi</option>
+                            <option value="Lahore" data-en="Lahore" data-ur="لاہور">Lahore</option>
+                            <option value="Islamabad" data-en="Islamabad" data-ur="اسلام آباد">Islamabad</option>
                         </select>
                     </div>
                 </div>
 
                 <button
 					type="submit"
-					class="w-full h-10 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-bold text-sm hover:from-secondary hover:to-secondary hover:text-primary transition duration-300"
+					class="w-full h-9 mt-1 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-bold text-xs hover:from-secondary hover:to-secondary hover:text-primary transition duration-300 flex items-center justify-center gap-2"
 					data-en="Register as Lawyer"
 					data-ur="وکیل کے طور پر رجسٹر کریں">
 						Register as Lawyer		
@@ -2085,15 +2092,27 @@
     </footer>
 
     <!-- Floating Action Buttons -->
-    <div class="floating-btn flex flex-col gap-3">
-        <button onclick="scrollToTop()" id="scrollTopBtn" class="w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-secondary hover:text-primary transition opacity-0 invisible">
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        <a href="https://wa.me/+923330360487" target="_blank" class="w-14 h-14 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition pulse-animation">
-            <i class="fab fa-whatsapp text-2xl"></i>
-        </a>
-    </div>
+<div class="floating-btn flex flex-row items-center gap-3">
+
+    <!-- Scroll Top -->
+    <button onclick="scrollToTop()"
+        id="scrollTopBtn"
+        class="w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center ...">
+
+        <i class="fas fa-arrow-up text-sm"></i>
+
+    </button>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/923330360487"
+       target="_blank"
+       class="w-12 h-12 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center ...">
+
+        <i class="fab fa-whatsapp text-xl"></i>
+
+    </a>
+
+</div>
 
     <!-- Live Chat Modal -->
     <div id="liveChatModal" class="modal">
