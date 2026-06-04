@@ -2256,10 +2256,19 @@
                 el.placeholder = el.getAttribute(`data-placeholder-${currentLanguage}`);
             });
             
-            // Update buttons
-            document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
-            document.getElementById('mobileLangBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
-            document.getElementById('logoTagline').textContent = currentLanguage === 'en' ? 'قانونی مشاورت' : 'Legal Consultancy';
+            // Update buttons safely
+            const langBtn = document.getElementById('langBtn');
+            if (langBtn) {
+                langBtn.textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+            }
+            const mobileLangBtn = document.getElementById('mobileLangBtn');
+            if (mobileLangBtn) {
+                mobileLangBtn.textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+            }
+            const logoTagline = document.getElementById('logoTagline');
+            if (logoTagline) {
+                logoTagline.textContent = currentLanguage === 'en' ? 'قانونی مشاورت' : 'Legal Consultancy';
+            }
             
             updateLanguageDirection();
         }
