@@ -625,7 +625,7 @@
         </div>
 
         <!-- Mobile Install Button -->
-        <button id="mobileInstallBtn" class="hidden lg:hidden items-center gap-1 bg-secondary text-primary px-3 py-1.5 rounded-lg text-[11px] font-bold hover:bg-white transition border-2 border-secondary mr-2">
+        <button id="mobileInstallBtn" class="flex lg:hidden items-center gap-1 bg-secondary text-primary px-3 py-1.5 rounded-lg text-[11px] font-bold hover:bg-white transition border-2 border-secondary mr-2">
             <i class="fas fa-mobile-alt"></i>
             <span data-en="Install App" data-ur="ایپ انسٹال کریں">Install App</span>
         </button>
@@ -2710,17 +2710,33 @@ setInterval(nextSlide, 5000);
 
         if (installBtn) {
             installBtn.addEventListener('click', async () => {
-                if (!deferredPrompt) return;
-                // Show the prompt
-                deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User choice outcome: ${outcome}`);
-                // Discard the prompt
-                deferredPrompt = null;
-                // Hide the button
-                installBtn.style.display = 'none';
-                installBtn.classList.add('hidden');
+                if (deferredPrompt) {
+                    // Show the prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User choice outcome: ${outcome}`);
+                    // Discard the prompt
+                    deferredPrompt = null;
+                    // Hide the button
+                    installBtn.style.display = 'none';
+                    installBtn.classList.add('hidden');
+                } else {
+                    // Fallback instructions if native prompt has not fired yet (e.g. not on localhost/HTTPS, or on iOS)
+                    const userAgent = navigator.userAgent.toLowerCase();
+                    const isIos = /iphone|ipad|ipod/.test(userAgent);
+                    if (isIos) {
+                        alert(currentLanguage === 'en' ? 
+                            "To install: Tap the 'Share' button in Safari and select 'Add to Home Screen'." : 
+                            "انسٹال کرنے کے لیے: سفاری (Safari) میں 'شیئر' (Share) بٹن پر کلک کریں اور 'ہوم اسکرین پر شامل کریں' منتخب کریں۔"
+                        );
+                    } else {
+                        alert(currentLanguage === 'en' ? 
+                            "To install: Open this site in Chrome, click the three dots menu, and select 'Install App' or 'Add to Home screen'." : 
+                            "انسٹال کرنے کے لیے: اس سائٹ کو کروم میں کھولیں، تھری ڈاٹ مینو پر کلک کریں اور 'ایپ انسٹال کریں' یا 'ہوم اسکرین پر شامل کریں' منتخب کریں۔"
+                        );
+                    }
+                }
             });
         }
 
