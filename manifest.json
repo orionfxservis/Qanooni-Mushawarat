@@ -1,0 +1,17 @@
+{
+  "name": "Qanooni Mushawarat Pakistan",
+  "short_name": "Qanooni Mushawarat",
+  "description": "Expert legal consultation and representation in Pakistan.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1e3a5f",
+  "theme_color": "#1e3a5f",
+  "icons": [
+    {
+      "src": "./images/logo/logo-03.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
