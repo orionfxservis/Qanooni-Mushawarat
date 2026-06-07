@@ -776,9 +776,9 @@
 
 <!-- REGISTER MODAL -->
 <div id="registerModal"
-     class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[9999] overflow-hidden">
+     class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
 
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-[420px] mx-4 my-6 overflow-hidden">
+    <div class="relative w-full max-w-2xl bg-[#eaeef3] rounded-2xl shadow-2xl border border-gray-200/80 overflow-hidden">
 
         <!-- Header -->
         <div class="bg-primary text-white px-5 py-3 flex justify-between items-center">
@@ -787,111 +787,131 @@
             </h3>
 
             <button onclick="closeRegisterModal()"
-                    class="text-white hover:text-secondary text-lg">
-                <i class="fas fa-times"></i>
+                class="absolute top-3 right-4 w-8 h-8 rounded-full bg-red-100 text-red-600 hover:bg-red-650 hover:text-white transition duration-300 flex items-center justify-center"
+                title="Close">
+                <i class="fas fa-xmark text-sm"></i>
             </button>
         </div>
 
         <!-- Form -->
-<div class="p-4">
+        <div class="p-5 md:p-6">
+            <form id="userRegistrationForm" class="space-y-3" onsubmit="event.preventDefault(); handleRegister();">
 
-    <!-- Complete Name -->
-    <div class="mb-2">
-        <label class="block text-xs font-semibold mb-1">
-            Complete Name
-        </label>
-        <input type="text"
-               class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
-    </div>
+                <!-- Row 1: Name & User ID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                            Complete Name *
+                        </label>
+                        <input type="text"
+                               id="regName"
+                               required
+                               placeholder="e.g. Zainab Qureshi"
+                               class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
 
-    <!-- NIC & Mobile -->
-    <div class="grid grid-cols-2 gap-3 mb-2">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                            User ID *
+                        </label>
+                        <input type="text"
+                               id="regUserId"
+                               required
+                               placeholder="e.g. zainab_q"
+                               class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+                </div>
 
-        <div>
-            <label class="block text-xs font-semibold mb-1">
-                N.I.C. No.
-            </label>
-            <input type="text"
-                   placeholder="42101-1234567-1"
-                   class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
+                <!-- Row 2: NIC, Mobile & Email -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                            N.I.C. No.
+                        </label>
+                        <input type="text"
+                               id="regNIC"
+                               placeholder="42101-1234567-1"
+                               class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                            Mobile No. *
+                        </label>
+                        <input type="text"
+                               id="regMobile"
+                               required
+                               placeholder="03XXXXXXXXX"
+                               class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                            Email Address *
+                        </label>
+                        <input type="email"
+                               id="regEmail"
+                               required
+                               placeholder="e.g. user@example.com"
+                               class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+                </div>
+
+                <!-- Row 3: Address -->
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                        Complete Address
+                    </label>
+                    <input type="text"
+                           id="regAddress"
+                           placeholder="e.g. Flat 4B, Gulshan, Karachi"
+                           class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                </div>
+
+                <!-- Row 4: Password & Confirm Password -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                            Password *
+                        </label>
+                        <input type="password"
+                               id="regPassword"
+                               required
+                               placeholder="Min 6 characters"
+                               class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">
+                            Re-enter Password *
+                        </label>
+                        <input type="password"
+                               id="regConfirmPassword"
+                               required
+                               placeholder="Confirm Password"
+                               class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+                </div>
+
+                <!-- Show Password -->
+                <div class="flex items-center justify-between pt-1">
+                    <label class="flex items-center gap-2 text-xs text-gray-600 cursor-pointer">
+                        <input type="checkbox"
+                               onchange="toggleRegisterPassword(this)"
+                               class="accent-secondary">
+                        Show Password
+                    </label>
+                </div>
+
+                <!-- Register Button -->
+                <button type="submit"
+                        class="w-full h-9 mt-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-bold text-xs hover:from-secondary hover:to-secondary hover:text-primary transition duration-300 flex items-center justify-center">
+                    Register Now
+                </button>
+            </form>
         </div>
-
-        <div>
-            <label class="block text-xs font-semibold mb-1">
-                Mobile No.
-            </label>
-            <input type="text"
-                   placeholder="03XXXXXXXXX"
-                   class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
-        </div>
-
     </div>
-
-					<!-- Email -->
-					<div class="mb-2">
-						<label class="block text-xs font-semibold mb-1">
-							Email Address
-						</label>
-						<input type="email"
-							class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
-					</div>
-
-					<!-- Address -->
-					<div class="mb-2">
-						<label class="block text-xs font-semibold mb-1">
-							Complete Address
-						</label>
-						<textarea rows="2"
-							class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm resize-none focus:ring-2 focus:ring-secondary focus:outline-none"></textarea>
-					</div>
-
-					<!-- User ID -->
-					<div class="mb-2">
-						<label class="block text-xs font-semibold mb-1">
-							User ID
-						</label>
-						<input type="text"
-							class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
-					</div>
-
-					<!-- Password & Confirm Password -->
-					<div class="grid grid-cols-2 gap-3 mb-2">
-
-						<div>
-							<label class="block text-xs font-semibold mb-1">
-								Password
-							</label>
-							<input type="password"
-								id="regPassword"
-								class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
-						</div>
-
-						<div>
-							<label class="block text-xs font-semibold mb-1">
-								Re-enter Password
-							</label>
-								<input type="password"
-									id="regConfirmPassword"
-									class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-secondary focus:outline-none">
-						</div>
-					</div>
-
-					<!-- Show Password -->
-					<div class="mb-3">
-						<label class="flex items-center gap-2 text-xs text-gray-600 cursor-pointer">
-							<input type="checkbox"
-							onchange="toggleRegisterPassword(this)"
-							class="accent-secondary">
-							Show Password
-						</label>
-					</div>
-
-					<!-- Register Button -->
-					<button
-						class="w-full bg-secondary text-primary font-semibold py-2 rounded-lg hover:bg-primary hover:text-white transition">
-							Register Now
-					</button>
-			</div>
+</div>
 
     </div>
 </div>
@@ -3025,13 +3045,15 @@ window.addEventListener("click", function(e) {
 
 // Registration Model
 function openRegisterModal() {
+    const title = document.getElementById("loginTitle").innerText;
     closeLoginModal();
 
-    document.getElementById("registerModal")
-        .classList.remove("hidden");
-
-    document.getElementById("registerModal")
-        .classList.add("flex");
+    if (title === "Lawyer Login") {
+        openLawyerModal();
+    } else {
+        document.getElementById("registerModal").classList.remove("hidden");
+        document.getElementById("registerModal").classList.add("flex");
+    }
 }
 
 function closeRegisterModal() {
@@ -3119,6 +3141,68 @@ async function handleLogin() {
     } catch (err) {
         console.error("Login error:", err);
         alert("An error occurred during login. Please check Supabase connection.");
+    }
+}
+
+async function handleRegister() {
+    const fullName = document.getElementById("regName").value.trim();
+    const nic = document.getElementById("regNIC").value.trim();
+    const phone = document.getElementById("regMobile").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
+    const address = document.getElementById("regAddress").value.trim();
+    const userId = document.getElementById("regUserId").value.trim();
+    const password = document.getElementById("regPassword").value.trim();
+    const confirmPassword = document.getElementById("regConfirmPassword").value.trim();
+
+    if (!fullName || !phone || !email || !userId || !password) {
+        alert("Please fill all required fields (Name, Phone, Email, User ID, and Password).");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    try {
+        if (typeof supabase === 'undefined') {
+            alert("Supabase client is not loaded.");
+            return;
+        }
+
+        // Prepare register payload
+        const payload = {
+            full_name: fullName,
+            phone: phone,
+            email: email,
+            profession: "Individual",
+            user_role: "Normal User",
+            account_status: "pending"
+        };
+
+        const { error } = await supabase
+            .from('users')
+            .insert([payload]);
+
+        if (error) {
+            throw error;
+        }
+
+        alert("Registration successful! Your account is pending admin approval.");
+        closeRegisterModal();
+        
+        // Reset form
+        document.getElementById("regName").value = "";
+        document.getElementById("regNIC").value = "";
+        document.getElementById("regMobile").value = "";
+        document.getElementById("regEmail").value = "";
+        document.getElementById("regAddress").value = "";
+        document.getElementById("regUserId").value = "";
+        document.getElementById("regPassword").value = "";
+        document.getElementById("regConfirmPassword").value = "";
+    } catch (err) {
+        console.error("Registration error:", err);
+        alert("Registration failed: " + err.message);
     }
 }
     </script>
