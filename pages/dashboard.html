@@ -648,9 +648,84 @@
 
             <!-- Case Submission Tab -->
             <div id="tab-case-submission" class="tab-content">
-                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
-                    <h3 class="text-xl font-bold text-primary mb-4">Case Submition</h3>
-                    <p class="text-gray-500">View and manage submitted cases here.</p>
+                <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-primary">Case Submissions</h3>
+                            <p class="text-xs text-gray-500 mt-1">Review and manage client legal cases</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 bg-white p-4 rounded-xl border border-gray-200/60">
+                        <!-- Search -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Search Client</label>
+                            <input type="text" id="caseSearchInput" oninput="filterCases()" placeholder="Search name, phone, etc..." class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:border-secondary">
+                        </div>
+                        <!-- Case Type -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Case Type</label>
+                            <select id="caseTypeFilter" onchange="filterCases()" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white focus:outline-none focus:border-secondary">
+                                <option value="">All Types</option>
+                                <option value="family">Family Law</option>
+                                <option value="criminal">Criminal Defense</option>
+                                <option value="civil">Civil Litigation</option>
+                                <option value="corporate">Corporate Law</option>
+                                <option value="property">Property/Real Estate</option>
+                                <option value="labor">Labor Law</option>
+                                <option value="tax">Tax Matters</option>
+                                <option value="immigration">Immigration</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <!-- Status -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Status</label>
+                            <select id="caseStatusFilter" onchange="filterCases()" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white focus:outline-none focus:border-secondary">
+                                <option value="">All Statuses</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Assigned">Assigned</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Hearing Scheduled">Hearing Scheduled</option>
+                                <option value="Closed">Closed</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <!-- Priority -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Priority</label>
+                            <select id="casePriorityFilter" onchange="filterCases()" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white focus:outline-none focus:border-secondary">
+                                <option value="">All Priorities</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Cases Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-gray-400 border-b border-gray-150 text-[12px] uppercase tracking-wider font-bold">
+                                    <th class="pb-4 font-semibold px-2">Case ID</th>
+                                    <th class="pb-4 font-semibold px-2">Client Details</th>
+                                    <th class="pb-4 font-semibold px-2">Case Type & Priority</th>
+                                    <th class="pb-4 font-semibold px-2">Assigned Lawyer</th>
+                                    <th class="pb-4 font-semibold px-2">Status</th>
+                                    <th class="pb-4 font-semibold text-right px-2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="casesTableBody">
+                                <!-- Dynamically loaded from Supabase -->
+                            </tbody>
+                        </table>
+                        <div id="noCasesMsg" class="hidden text-center py-10 text-gray-400">
+                            No case submissions found.
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -679,12 +754,126 @@
             </div>
 
         </div>
-    </main>
+    <!-- Case Details Modal -->
+    <div id="caseDetailsModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Header -->
+            <div class="bg-primary text-white px-6 py-4 flex justify-between items-center shrink-0">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fas fa-file-signature text-secondary"></i>
+                    <span>Case Details</span>
+                    <span id="modalCaseId" class="text-xs bg-white/20 px-2 py-0.5 rounded font-mono"></span>
+                </h3>
+                <button onclick="closeCaseModal()" class="text-white hover:text-secondary text-xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <!-- Body -->
+            <div class="p-6 overflow-y-auto space-y-6">
+                <!-- Client Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-gray-100">
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400">Client Name</p>
+                        <p id="modalClientName" class="font-bold text-gray-800"></p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400">CNIC Number</p>
+                        <p id="modalClientCNIC" class="font-mono text-gray-700"></p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400">Phone</p>
+                        <p id="modalClientPhone" class="text-gray-700"></p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400">Email</p>
+                        <p id="modalClientEmail" class="text-gray-700"></p>
+                    </div>
+                </div>
+
+                <!-- Case Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400">Case Type</p>
+                        <p id="modalCaseType" class="capitalize font-semibold text-gray-800"></p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400">Priority</p>
+                        <span id="modalCasePriority" class="text-xs px-2.5 py-0.5 rounded-full font-bold inline-block mt-1 uppercase"></span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400">Submitted Date</p>
+                        <p id="modalSubmittedDate" class="text-gray-600 text-sm"></p>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <p class="text-[10px] uppercase font-bold text-gray-400 mb-1">Description</p>
+                    <div id="modalDescription" class="text-sm text-gray-700 bg-slate-50 p-4 rounded-xl border border-gray-150 leading-relaxed max-h-40 overflow-y-auto whitespace-pre-wrap"></div>
+                </div>
+
+                <!-- Attachments -->
+                <div>
+                    <p class="text-[10px] uppercase font-bold text-gray-400 mb-1.5">Attachments / Documents</p>
+                    <div id="modalAttachments" class="flex flex-wrap gap-2">
+                        <!-- Links generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Admin Action Section -->
+                <div class="border-t border-gray-100 pt-5 space-y-4">
+                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider">Update Status & Assignment</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Assign Lawyer -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Assign Lawyer</label>
+                            <select id="modalAssignLawyer" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                                <option value="">Unassigned</option>
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <!-- Change Status -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Change Status</label>
+                            <select id="modalChangeStatus" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                                <option value="Pending">Pending</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Assigned">Assigned</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Hearing Scheduled">Hearing Scheduled</option>
+                                <option value="Closed">Closed</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Remarks -->
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Remarks / Progress Notes</label>
+                        <textarea id="modalRemarks" rows="3" class="w-full px-2.5 py-2 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition resize-none" placeholder="Enter remarks, updates, or communication details..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="bg-slate-50 px-6 py-4 flex justify-between shrink-0 border-t border-t-gray-150">
+                <button id="modalDeleteBtn" onclick="deleteCaseBtn()" class="px-4 h-9 rounded-lg bg-red-500 text-white font-bold text-xs shadow hover:bg-red-600 transition">
+                    Delete Case
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="closeCaseModal()" class="px-4 h-9 rounded-lg bg-gray-200 text-gray-700 font-bold text-xs hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button id="modalSaveBtn" onclick="saveCaseChanges()" class="px-5 h-9 rounded-lg bg-primary text-white font-bold text-xs shadow hover:bg-accent transition">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 	<script src="../js/supabase.js"></script>
-
 	<script src="../js/dashboard.js"></script>
 
     <!-- Supabase Core Library -->
@@ -767,10 +956,51 @@
             }
         }
         
+        let allCases = [];
+        let selectedCaseId = null;
+        let currentUser = { role: 'admin' }; // default
+
         // Initial load
         window.onload = function() {
-            loadLawyers();
-            fetchUsers();
+            try {
+                const sessionUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (sessionUser) {
+                    currentUser = sessionUser;
+                }
+            } catch (e) {
+                console.error("Error loading current user:", e);
+            }
+
+            // Apply role-based UI adaptations
+            try {
+                adaptDashboardForRole();
+            } catch (e) {
+                console.error("Error adapting role:", e);
+            }
+
+            try {
+                loadLawyers();
+            } catch (e) {
+                console.error("Error loading lawyers:", e);
+            }
+
+            try {
+                fetchUsers();
+            } catch (e) {
+                console.error("Error fetching users:", e);
+            }
+
+            try {
+                fetchCases();
+            } catch (e) {
+                console.error("Error fetching cases:", e);
+            }
+
+            try {
+                populateLawyersDropdown();
+            } catch (e) {
+                console.error("Error populating lawyers dropdown:", e);
+            }
         };
 
         // Fetch Users from Supabase & Merge with local data fallback
@@ -778,7 +1008,7 @@
             const tableBody = document.getElementById('usersTableBody');
             const noMsg = document.getElementById('noUsersMsg');
             
-            if (!supabaseClient || SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') return;
+            if (typeof supabaseClient === 'undefined' || typeof SUPABASE_URL === 'undefined' || SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') return;
 
             try {
                 const { data: users, error } = await supabaseClient
@@ -815,7 +1045,9 @@
                         const companyEmail = u.company_email || extraData.company_email || 'N/A';
                         const workingCourt = u.working_court || extraData.working_court || 'N/A';
                         const userRole = u.user_role || extraData.user_role || 'Normal User';
-                        const accountStatus = u.account_status || extraData.account_status || 'Active';
+                        const accountStatusRaw = u.account_status || extraData.account_status || 'pending';
+
+						const accountStatus = accountStatusRaw.toLowerCase();
 
                         const tr = document.createElement('tr');
                         tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
@@ -856,10 +1088,15 @@
 
                         // Status Badge
                         const statusColors = {
-                            'Active': 'bg-green-100 text-green-700 font-semibold',
-                            'On Hold': 'bg-red-100 text-red-700 font-semibold'
-                        };
-                        const statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-bold ${statusColors[accountStatus] || 'bg-green-100 text-green-700 font-semibold'}">${accountStatus}</span>`;
+    'active': 'bg-green-100 text-green-700 font-semibold',
+    'pending': 'bg-yellow-100 text-yellow-700 font-semibold',
+    'rejected': 'bg-red-100 text-red-700 font-semibold',
+    'on hold': 'bg-gray-100 text-gray-600 font-semibold'
+};
+                        const statusBadge = `
+<span class="px-3 py-1 rounded-full text-xs font-bold ${statusColors[accountStatus] || 'bg-yellow-100 text-yellow-700'}">
+    ${accountStatus.charAt(0).toUpperCase() + accountStatus.slice(1)}
+</span>`;
 
                         tr.innerHTML = `
                             <td class="py-4 flex items-center gap-3">
@@ -880,6 +1117,11 @@
                             <td class="py-4 text-xs">${detailsHtml}</td>
                             <td class="py-4">${statusBadge}</td>
                             <td class="py-4 text-right">
+                                ${accountStatus === 'pending' ? `
+                                <button onclick="approveUser('${u.email}')" class="text-green-500 hover:text-green-700 transition p-2 mr-1" title="Approve User">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                ` : ''}
                                 <button onclick="deleteUser('${u.email}')" class="text-red-400 hover:text-red-600 transition p-2" title="Delete User">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -1098,6 +1340,379 @@
             } catch (e) {
                 console.error("Error deleting user:", e);
                 alert("Error deleting user: " + e.message);
+            }
+        }
+		
+        async function approveUser(email) {
+            if (!confirm(`Are you sure you want to approve user ${email}?`)) return;
+            try {
+                if (!supabaseClient || SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') return;
+                
+                const { error } = await supabaseClient
+                    .from('users')
+                    .update({ account_status: 'active' })
+                    .eq('email', email);
+                    
+                if (error) throw error;
+                
+                // Also update local cache if it exists
+                const cached = localStorage.getItem(`user_extra_${email}`);
+                if (cached) {
+                    const extraData = JSON.parse(cached);
+                    extraData.account_status = 'active';
+                    localStorage.setItem(`user_extra_${email}`, JSON.stringify(extraData));
+                }
+                
+                alert("User approved successfully!");
+                fetchUsers();
+            } catch (error) {
+                console.error("Error approving user:", error);
+                alert("Error approving user: " + error.message);
+            }
+        }
+
+        // Role Adaptation Logic
+        function adaptDashboardForRole() {
+            const isLawyer = (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') && currentUser.role !== 'admin';
+            if (isLawyer) {
+                // Update header title info
+                const adminBadge = document.querySelector('header div span.font-semibold');
+                if (adminBadge) adminBadge.textContent = currentUser.full_name || 'Lawyer';
+                const adminAvatar = document.querySelector('header div div.bg-primary');
+                if (adminAvatar) adminAvatar.textContent = (currentUser.full_name || 'L').charAt(0).toUpperCase();
+
+                // Sidebar changes
+                const adminInfoText = document.querySelector('aside div p.text-[9px]');
+                if (adminInfoText) adminInfoText.textContent = 'Lawyer Dashboard';
+                const adminInfoName = document.querySelector('aside div h3');
+                if (adminInfoName) adminInfoName.textContent = currentUser.full_name || 'Lawyer';
+
+                // Hide admin-only tabs
+                const tabsToHide = ['users', 'lawyers', 'testimonials', 'subscription', 'know-rights', 'know-laws', 'services', 'lawyers-pannel'];
+                tabsToHide.forEach(tabId => {
+                    const btn = document.getElementById('tab-btn-' + tabId);
+                    if (btn) btn.classList.add('hidden');
+                });
+
+                // Rename Case Submission tab
+                const caseTabBtnText = document.querySelector('#tab-btn-case-submission span');
+                if (caseTabBtnText) caseTabBtnText.textContent = 'Assigned Cases';
+                
+                const caseTitleHeader = document.querySelector('#tab-case-submission h3');
+                if (caseTitleHeader) caseTitleHeader.textContent = 'Assigned Legal Cases';
+
+                // Switch to case-submission automatically since they don't have overview/users tab
+                switchTab('case-submission');
+
+                // Disable lawyer assignment selection in Modal since lawyer shouldn't re-assign
+                const assignDropdown = document.getElementById('modalAssignLawyer');
+                if (assignDropdown) assignDropdown.disabled = true;
+
+                // Hide Delete Case button
+                const deleteBtn = document.getElementById('modalDeleteBtn');
+                if (deleteBtn) deleteBtn.classList.add('hidden');
+            }
+        }
+
+        // Populate Lawyers Dropdown in case detail modal
+        function populateLawyersDropdown() {
+            const dropdown = document.getElementById('modalAssignLawyer');
+            if (!dropdown) return;
+            
+            // Clear but keep first option
+            dropdown.innerHTML = '<option value="">Unassigned</option>';
+            
+            let lawyers = [];
+            try {
+                lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+            } catch(e) {}
+            
+            lawyers.forEach(l => {
+                const opt = document.createElement('option');
+                opt.value = l.name;
+                opt.textContent = `${l.name} (${l.city} - ${l.specialization})`;
+                dropdown.appendChild(opt);
+            });
+        }
+
+        // Fetch Cases from Supabase
+        async function fetchCases() {
+            const tableBody = document.getElementById('casesTableBody');
+            const noMsg = document.getElementById('noCasesMsg');
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            if (!activeSupabase) {
+                // Fallback to local storage
+                console.warn("Using LocalStorage fallback for cases list");
+                allCases = JSON.parse(localStorage.getItem('submitted_cases') || '[]');
+                renderCasesTable(allCases);
+                return;
+            }
+
+            try {
+                let query = activeSupabase.from('cases').select('*').order('created_at', { ascending: false });
+                
+                // If current user is a lawyer, filter cases assigned to them
+                if (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') {
+                    query = query.eq('assigned_lawyer', currentUser.full_name);
+                }
+
+                const { data, error } = await query;
+                if (error) throw error;
+                
+                allCases = data || [];
+                renderCasesTable(allCases);
+            } catch (err) {
+                console.error("Error fetching cases from Supabase:", err);
+                // Fallback to local storage
+                allCases = JSON.parse(localStorage.getItem('submitted_cases') || '[]');
+                renderCasesTable(allCases);
+            }
+        }
+
+        // Render Cases Table
+        function renderCasesTable(cases) {
+            const tableBody = document.getElementById('casesTableBody');
+            const noMsg = document.getElementById('noCasesMsg');
+            
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+            
+            if (cases.length === 0) {
+                noMsg.classList.remove('hidden');
+                return;
+            }
+            
+            noMsg.classList.add('hidden');
+            
+            cases.forEach(c => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
+                
+                const caseIdString = 'LE-' + new Date(c.created_at).getFullYear() + '-' + String(c.id).padStart(5, '0');
+                
+                const priorityColors = {
+                    'low': 'bg-blue-50 text-blue-700 border border-blue-100',
+                    'medium': 'bg-yellow-50 text-yellow-700 border border-yellow-100',
+                    'high': 'bg-red-50 text-red-700 border border-red-100'
+                };
+                const priorityBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold uppercase ${priorityColors[c.case_priority] || 'bg-gray-50 text-gray-600'}">${c.case_priority || 'medium'}</span>`;
+                
+                const statusColors = {
+                    'Pending': 'bg-yellow-100 text-yellow-800 font-semibold',
+                    'Under Review': 'bg-blue-100 text-blue-800 font-semibold',
+                    'Assigned': 'bg-indigo-100 text-indigo-800 font-semibold',
+                    'In Progress': 'bg-orange-100 text-orange-800 font-semibold',
+                    'Hearing Scheduled': 'bg-purple-100 text-purple-800 font-semibold',
+                    'Closed': 'bg-green-100 text-green-800 font-semibold',
+                    'Rejected': 'bg-red-100 text-red-800 font-semibold'
+                };
+                const statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-bold ${statusColors[c.status] || 'bg-gray-100 text-gray-700'}">${c.status || 'Pending'}</span>`;
+                
+                tr.innerHTML = `
+                    <td class="py-4 px-2 font-mono font-bold text-gray-800">${caseIdString}</td>
+                    <td class="py-4 px-2">
+                        <div class="font-bold text-gray-800">${c.client_name}</div>
+                        <div class="text-[11px] text-gray-400">${c.client_phone} | ${c.client_email || 'No email'}</div>
+                    </td>
+                    <td class="py-4 px-2">
+                        <div class="capitalize text-gray-800 font-medium">${c.case_type}</div>
+                        <div class="mt-1">${priorityBadge}</div>
+                    </td>
+                    <td class="py-4 px-2 font-medium text-gray-700">${c.assigned_lawyer || '<span class="text-gray-400 italic">Unassigned</span>'}</td>
+                    <td class="py-4 px-2">${statusBadge}</td>
+                    <td class="py-4 px-2 text-right">
+                        <button onclick="openCaseDetails(${c.id})" class="px-3 py-1 bg-secondary text-primary rounded-lg text-xs font-bold hover:opacity-80 transition shadow-sm">
+                            View Details
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Filter & Search Cases
+        function filterCases() {
+            const searchQuery = document.getElementById('caseSearchInput').value.toLowerCase();
+            const caseType = document.getElementById('caseTypeFilter').value;
+            const status = document.getElementById('caseStatusFilter').value;
+            const priority = document.getElementById('casePriorityFilter').value;
+            
+            const filtered = allCases.filter(c => {
+                const matchesSearch = c.client_name.toLowerCase().includes(searchQuery) ||
+                                      (c.client_email && c.client_email.toLowerCase().includes(searchQuery)) ||
+                                      c.client_phone.includes(searchQuery);
+                                      
+                const matchesType = !caseType || c.case_type === caseType;
+                const matchesStatus = !status || c.status === status;
+                const matchesPriority = !priority || c.case_priority === priority;
+                
+                return matchesSearch && matchesType && matchesStatus && matchesPriority;
+            });
+            
+            renderCasesTable(filtered);
+        }
+
+        // Open Case Details Modal
+        function openCaseDetails(id) {
+            const caseObj = allCases.find(c => c.id == id);
+            if (!caseObj) return;
+            
+            selectedCaseId = id;
+            
+            const caseIdString = 'LE-' + new Date(caseObj.created_at).getFullYear() + '-' + String(caseObj.id).padStart(5, '0');
+            document.getElementById('modalCaseId').textContent = caseIdString;
+            document.getElementById('modalClientName').textContent = caseObj.client_name;
+            document.getElementById('modalClientCNIC').textContent = caseObj.client_nic || 'N/A';
+            document.getElementById('modalClientPhone').textContent = caseObj.client_phone;
+            document.getElementById('modalClientEmail').textContent = caseObj.client_email || 'N/A';
+            document.getElementById('modalCaseType').textContent = caseObj.case_type;
+            
+            const priorityBadge = document.getElementById('modalCasePriority');
+            priorityBadge.textContent = caseObj.case_priority || 'medium';
+            priorityBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold inline-block mt-1 uppercase ';
+            if (caseObj.case_priority === 'high') priorityBadge.className += 'bg-red-100 text-red-800';
+            else if (caseObj.case_priority === 'low') priorityBadge.className += 'bg-blue-100 text-blue-800';
+            else priorityBadge.className += 'bg-yellow-100 text-yellow-800';
+            
+            document.getElementById('modalSubmittedDate').textContent = new Date(caseObj.created_at).toLocaleString();
+            document.getElementById('modalDescription').textContent = caseObj.case_description;
+            
+            // Handle Attachments
+            const attachmentContainer = document.getElementById('modalAttachments');
+            attachmentContainer.innerHTML = '';
+            
+            if (caseObj.attachment) {
+                const urls = caseObj.attachment.split(',');
+                urls.forEach((url, index) => {
+                    const cleanUrl = url.trim();
+                    if (!cleanUrl) return;
+                    const link = document.createElement('a');
+                    link.href = cleanUrl;
+                    link.target = '_blank';
+                    link.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-gray-200 rounded-lg text-xs font-semibold text-primary transition';
+                    link.innerHTML = `<i class="fas fa-file-pdf text-red-500"></i> Document ${index + 1}`;
+                    attachmentContainer.appendChild(link);
+                });
+            } else {
+                attachmentContainer.innerHTML = '<span class="text-xs text-gray-400 italic">No attachments submitted</span>';
+            }
+            
+            // Populating edit fields
+            document.getElementById('modalAssignLawyer').value = caseObj.assigned_lawyer || '';
+            document.getElementById('modalChangeStatus').value = caseObj.status || 'Pending';
+            document.getElementById('modalRemarks').value = caseObj.remarks || '';
+            
+            // Toggle Delete button display based on role
+            const deleteBtn = document.getElementById('modalDeleteBtn');
+            if (currentUser.role === 'admin') {
+                deleteBtn.classList.remove('hidden');
+            } else {
+                deleteBtn.classList.add('hidden');
+            }
+
+            document.getElementById('caseDetailsModal').classList.remove('hidden');
+            document.getElementById('caseDetailsModal').classList.add('flex');
+        }
+
+        function closeCaseModal() {
+            document.getElementById('caseDetailsModal').classList.add('hidden');
+            document.getElementById('caseDetailsModal').classList.remove('flex');
+            selectedCaseId = null;
+        }
+
+        // Save Changes
+        async function saveCaseChanges() {
+            if (!selectedCaseId) return;
+            
+            const lawyer = document.getElementById('modalAssignLawyer').value;
+            const status = document.getElementById('modalChangeStatus').value;
+            const remarks = document.getElementById('modalRemarks').value.trim();
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            const caseObj = allCases.find(c => c.id == selectedCaseId);
+            
+            try {
+                // If lawyer is assigned, auto status update to Assigned
+                let targetStatus = status;
+                if (lawyer && caseObj && !caseObj.assigned_lawyer && status === 'Pending') {
+                    targetStatus = 'Assigned';
+                }
+
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('cases')
+                        .update({
+                            assigned_lawyer: lawyer || null,
+                            status: targetStatus,
+                            remarks: remarks
+                        })
+                        .eq('id', selectedCaseId);
+                        
+                    if (error) throw error;
+                } else {
+                    let localCases = JSON.parse(localStorage.getItem('submitted_cases') || '[]');
+                    const idx = localCases.findIndex(c => c.id == selectedCaseId);
+                    if (idx !== -1) {
+                        localCases[idx].assigned_lawyer = lawyer || null;
+                        localCases[idx].status = targetStatus;
+                        localCases[idx].remarks = remarks;
+                        localStorage.setItem('submitted_cases', JSON.stringify(localCases));
+                    }
+                }
+                
+                // Notifications simulated logic
+                triggerNotifications(caseObj, lawyer, targetStatus);
+                
+                alert("Case details updated successfully!");
+                closeCaseModal();
+                fetchCases();
+            } catch (err) {
+                console.error("Error saving case changes:", err);
+                alert("Failed to update case: " + err.message);
+            }
+        }
+
+        // Delete Case button (Admin only)
+        async function deleteCaseBtn() {
+            if (!selectedCaseId || currentUser.role !== 'admin') return;
+            if (!confirm("Are you sure you want to permanently delete this case submission?")) return;
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('cases')
+                        .delete()
+                        .eq('id', selectedCaseId);
+                        
+                    if (error) throw error;
+                } else {
+                    let localCases = JSON.parse(localStorage.getItem('submitted_cases') || '[]');
+                    const filtered = localCases.filter(c => c.id != selectedCaseId);
+                    localStorage.setItem('submitted_cases', JSON.stringify(filtered));
+                }
+                
+                alert("Case submission deleted successfully!");
+                closeCaseModal();
+                fetchCases();
+            } catch (err) {
+                console.error("Error deleting case:", err);
+                alert("Failed to delete case: " + err.message);
+            }
+        }
+
+        // Simulated notifications system
+        function triggerNotifications(originalCase, newLawyer, newStatus) {
+            // Client Status Change Notification
+            if (originalCase.status !== newStatus && originalCase.client_email) {
+                console.log(`%c[NOTIFICATION -> CLIENT (${originalCase.client_email})]:%c Your case status has been changed from "${originalCase.status}" to "${newStatus}".`, 'color: orange; font-weight: bold;', 'color: inherit;');
+            }
+            // Lawyer Assignment Notification
+            if (newLawyer && originalCase.assigned_lawyer !== newLawyer) {
+                console.log(`%c[NOTIFICATION -> LAWYER (${newLawyer})]:%c You have been assigned to Case ID LE-XXXXX for client ${originalCase.client_name}.`, 'color: green; font-weight: bold;', 'color: inherit;');
             }
         }
     </script>
