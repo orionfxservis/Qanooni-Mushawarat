@@ -1692,39 +1692,174 @@
             <div class="lg:col-start-2 lg:col-span-10 w-full">
 
                 <!-- Search Panel -->
-                <div class="bg-[#1e3a5f] rounded-[24px] p-4 shadow-xl border border-gray-100 mb-8">
-
-					<div class="grid md:grid-cols-3 gap-4">
-
-                        <!-- Search -->
-                        <div class="md:col-span-2 relative">
-
-                            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-
+                <div class="bg-[#1e3a5f] rounded-[24px] p-6 shadow-xl border border-white/10 mb-8">
+                    <!-- Primary Filters Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <!-- Search Name -->
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                             <input
+                                id="searchName"
                                 type="text"
-                                placeholder="Search lawyer by name, city, specialization..."
-                                class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-200 focus:outline-none focus:border-secondary text-base"
+                                oninput="filterLawyers()"
+                                placeholder="Search by lawyer name..."
+                                class="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 focus:outline-none focus:border-secondary text-sm bg-white text-gray-800"
                             >
-
                         </div>
 
-                        <!-- Filter -->
+                        <!-- Specialization -->
                         <div>
                             <select
-									id="specializationFilter"
-									onchange="filterLawyers()"
-									class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:outline-none focus:border-secondary text-base bg-white">
+                                id="searchSpecialization"
+                                onchange="filterLawyers()"
+                                class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:outline-none focus:border-secondary text-sm bg-white text-gray-800">
+                                <option value="all">All Specializations</option>
+                                <option value="Family Law">Family Law</option>
+                                <option value="Property & Real Estate">Property & Real Estate</option>
+                                <option value="Privacy & Cyber Crime">Privacy & Cyber Crime</option>
+                                <option value="Criminal Defense">Criminal Defense</option>
+                                <option value="Taxation">Taxation</option>
+                                <option value="Employment & Labour">Employment & Labour</option>
+                                <option value="Immigration">Immigration</option>
+                                <option value="Intellectual Property">Intellectual Property</option>
+                                <option value="Environmental Law">Environmental Law</option>
+                                <option value="ADR">ADR</option>
+                                <option value="Constitutional Law">Constitutional Law</option>
+                                <option value="Banking & Finance">Banking & Finance</option>
+                                <option value="NAB / FIA Cases">NAB / FIA Cases</option>
+                                <option value="Medical Negligence">Medical Negligence</option>
+                                <option value="Human Rights">Human Rights</option>
+                                <option value="Customers Protection">Customers Protection</option>
+                                <option value="Civil Litigation">Civil Litigation</option>
+                                <option value="Corporate Law">Corporate Law</option>
+                            </select>
+                        </div>
 
-									<option value="all">All Specializations</option>
-									<option value="family">Family Law</option>
-									<option value="criminal">Criminal Defense</option>
-									<option value="corporate">Corporate Law</option>
-									<option value="civil">Civil Litigation</option>
-									<option value="property">Property Law</option>
-									<option value="immigration">Immigration</option>
+                        <!-- City -->
+                        <div>
+                            <select
+                                id="searchCity"
+                                onchange="filterLawyers()"
+                                class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:outline-none focus:border-secondary text-sm bg-white text-gray-800">
+                                <option value="all">All Cities</option>
+                                <option value="Karachi">Karachi</option>
+                                <option value="Lahore">Lahore</option>
+                                <option value="Islamabad">Islamabad</option>
+                                <option value="Rawalpindi">Rawalpindi</option>
+                                <option value="Faisalabad">Faisalabad</option>
+                                <option value="Multan">Multan</option>
+                                <option value="Peshawar">Peshawar</option>
+                                <option value="Quetta">Quetta</option>
+                                <option value="Jhang">Jhang</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
 
-							</select>
+                    <!-- Action buttons (Toggle & Reset) -->
+                    <div class="flex items-center justify-between flex-wrap gap-3 pt-3 border-t border-white/10">
+                        <button
+                            type="button"
+                            onclick="toggleAdvancedFilters()"
+                            class="flex items-center gap-2 text-white hover:text-secondary text-sm font-semibold transition bg-transparent border-0 cursor-pointer">
+                            <i class="fas fa-sliders-h"></i>
+                            <span id="advFilterBtnText">Show Advanced Filters</span>
+                        </button>
+                        <button
+                            type="button"
+                            onclick="resetAllFilters()"
+                            class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-xs font-semibold transition border-0 cursor-pointer">
+                            <i class="fas fa-redo"></i>
+                            Reset Filters
+                        </button>
+                    </div>
+
+                    <!-- Collapsible Advanced Filters Section -->
+                    <div id="advancedFiltersSection" class="hidden mt-4 pt-4 border-t border-white/10 space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <!-- Court Level -->
+                            <div>
+                                <label class="block text-[11px] font-semibold text-white/70 mb-1">Court Level</label>
+                                <select
+                                    id="searchCourtLevel"
+                                    onchange="filterLawyers()"
+                                    class="w-full h-10 px-3 rounded-lg border border-gray-200 focus:outline-none focus:border-secondary text-xs bg-white text-gray-800">
+                                    <option value="all">All Court Levels</option>
+                                    <option value="City Court">City Court</option>
+                                    <option value="Session Court">Session Court</option>
+                                    <option value="High Court">High Court</option>
+                                    <option value="Supreme Court">Supreme Court</option>
+                                </select>
+                            </div>
+
+                            <!-- Experience -->
+                            <div>
+                                <label class="block text-[11px] font-semibold text-white/70 mb-1">Experience</label>
+                                <select
+                                    id="searchExperience"
+                                    onchange="filterLawyers()"
+                                    class="w-full h-10 px-3 rounded-lg border border-gray-200 focus:outline-none focus:border-secondary text-xs bg-white text-gray-800">
+                                    <option value="all">All Experience Levels</option>
+                                    <option value="1-3">1-3 Years</option>
+                                    <option value="3-5">3-5 Years</option>
+                                    <option value="5-10">5-10 Years</option>
+                                    <option value="10+">10+ Years</option>
+                                    <option value="15+">15+ Years</option>
+                                </select>
+                            </div>
+
+                            <!-- Language -->
+                            <div>
+                                <label class="block text-[11px] font-semibold text-white/70 mb-1">Language</label>
+                                <select
+                                    id="searchLanguage"
+                                    onchange="filterLawyers()"
+                                    class="w-full h-10 px-3 rounded-lg border border-gray-200 focus:outline-none focus:border-secondary text-xs bg-white text-gray-800">
+                                    <option value="all">All Languages</option>
+                                    <option value="Urdu">Urdu</option>
+                                    <option value="English">English</option>
+                                    <option value="Punjabi">Punjabi</option>
+                                    <option value="Sindhi">Sindhi</option>
+                                    <option value="Pashto">Pashto</option>
+                                    <option value="Balochi">Balochi</option>
+                                </select>
+                            </div>
+
+                            <!-- Gender Preference -->
+                            <div>
+                                <label class="block text-[11px] font-semibold text-white/70 mb-1">Gender Preference</label>
+                                <select
+                                    id="searchGender"
+                                    onchange="filterLawyers()"
+                                    class="w-full h-10 px-3 rounded-lg border border-gray-200 focus:outline-none focus:border-secondary text-xs bg-white text-gray-800">
+                                    <option value="all">Any Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Consultation Type Checklist -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-white/70 mb-2">Consultation Type</label>
+                            <div class="flex flex-wrap gap-4">
+                                <label class="flex items-center gap-2 text-white/90 text-xs cursor-pointer select-none">
+                                    <input type="checkbox" id="consultOnline" checked onchange="filterLawyers()" class="w-4 h-4 rounded border-gray-350 text-secondary focus:ring-secondary">
+                                    Online Consultation
+                                </label>
+                                <label class="flex items-center gap-2 text-white/90 text-xs cursor-pointer select-none">
+                                    <input type="checkbox" id="consultPhysical" checked onchange="filterLawyers()" class="w-4 h-4 rounded border-gray-350 text-secondary focus:ring-secondary">
+                                    Physical Meeting
+                                </label>
+                                <label class="flex items-center gap-2 text-white/90 text-xs cursor-pointer select-none">
+                                    <input type="checkbox" id="consultPhone" checked onchange="filterLawyers()" class="w-4 h-4 rounded border-gray-350 text-secondary focus:ring-secondary">
+                                    Phone Consultation
+                                </label>
+                                <label class="flex items-center gap-2 text-white/90 text-xs cursor-pointer select-none">
+                                    <input type="checkbox" id="consultVideo" checked onchange="filterLawyers()" class="w-4 h-4 rounded border-gray-350 text-secondary focus:ring-secondary">
+                                    Video Consultation
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1733,7 +1868,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
     <!-- Lawyer Card 1 -->
-    <div class="bg-white border border-gray-200 rounded-[24px] overflow-hidden flex flex-col">
+    <div class="lawyer-card bg-white border border-gray-200 rounded-[24px] overflow-hidden flex flex-col" data-name="anna Shafiq" data-category="Family Law" data-city="Rawalpindi" data-court="High Court" data-experience="6" data-languages="Urdu,English" data-consultation="online,physical,phone" data-gender="Female">
         <!-- TOP -->
         <div class="flex items-center gap-4 p-5">
             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" alt="Lawyer" class="w-16 h-16 rounded-2xl object-cover shrink-0">
@@ -1781,7 +1916,7 @@
     </div>
 
     <!-- Lawyer Card 2 -->
-    <div class="bg-white border border-gray-200 rounded-[24px] overflow-hidden flex flex-col">
+    <div class="lawyer-card bg-white border border-gray-200 rounded-[24px] overflow-hidden flex flex-col" data-name="Muhammad Ahmed Rehman" data-category="Privacy & Cyber Crime" data-city="Lahore" data-court="High Court" data-experience="5" data-languages="Urdu,English,Punjabi" data-consultation="online,video" data-gender="Male">
         <!-- TOP -->
         <div class="flex items-center gap-4 p-5">
             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500" alt="Lawyer" class="w-16 h-16 rounded-2xl object-cover shrink-0">
@@ -1789,7 +1924,7 @@
                 <h3 class="text-[16px] font-medium text-[#222] leading-tight truncate">Muhammad Ahmed Rehman</h3>
                 <div class="flex items-center gap-2 mt-2">
                     <i class="fas fa-scale-balanced text-[#2d6b2d] text-[13px]"></i>
-                    <span class="uppercase tracking-[1px] text-[11px] text-[#2d6b2d] font-bold truncate">Cyber Law</span>
+                    <span class="uppercase tracking-[1px] text-[11px] text-[#2d6b2d] font-bold truncate">Privacy & Cyber Crime</span>
                 </div>
             </div>
         </div>
@@ -1829,7 +1964,7 @@
     </div>
 
     <!-- Lawyer Card 3 -->
-    <div class="bg-white border border-gray-200 rounded-[24px] overflow-hidden flex flex-col">
+    <div class="lawyer-card bg-white border border-gray-200 rounded-[24px] overflow-hidden flex flex-col" data-name="aamir Sultan" data-category="Civil Litigation" data-city="Jhang" data-court="High Court" data-experience="10" data-languages="Urdu,Punjabi" data-consultation="physical,phone" data-gender="Male">
         <!-- TOP -->
         <div class="flex items-center gap-4 p-5">
             <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=500" alt="Lawyer" class="w-16 h-16 rounded-2xl object-cover shrink-0">
@@ -1837,7 +1972,7 @@
                 <h3 class="text-[16px] font-medium text-[#222] leading-tight truncate">aamir Sultan</h3>
                 <div class="flex items-center gap-2 mt-2">
                     <i class="fas fa-scale-balanced text-[#2d6b2d] text-[13px]"></i>
-                    <span class="uppercase tracking-[1px] text-[11px] text-[#2d6b2d] font-bold truncate">Civil Law</span>
+                    <span class="uppercase tracking-[1px] text-[11px] text-[#2d6b2d] font-bold truncate">Civil Litigation</span>
                 </div>
             </div>
         </div>
@@ -2847,32 +2982,101 @@ setInterval(nextSlide, 5000);
             document.getElementById('uploadedFiles').innerHTML = '';
         }
 		
-		function filterLawyers(){
-
-    const filterValue =
-        document.getElementById('specializationFilter').value;
-
-    const lawyerCards =
-        document.querySelectorAll('.lawyer-card');
-
-    lawyerCards.forEach(card => {
-
-        const category =
-            card.getAttribute('data-category');
-
-        if(filterValue === 'all' || category === filterValue){
-
-            card.style.display = 'block';
-
-        }else{
-
-            card.style.display = 'none';
-
+        function toggleAdvancedFilters() {
+            const sect = document.getElementById('advancedFiltersSection');
+            const btnText = document.getElementById('advFilterBtnText');
+            if (sect.classList.contains('hidden')) {
+                sect.classList.remove('hidden');
+                btnText.textContent = 'Hide Advanced Filters';
+            } else {
+                sect.classList.add('hidden');
+                btnText.textContent = 'Show Advanced Filters';
+            }
         }
 
-    });
+        function resetAllFilters() {
+            document.getElementById('searchName').value = '';
+            document.getElementById('searchSpecialization').value = 'all';
+            document.getElementById('searchCity').value = 'all';
+            document.getElementById('searchCourtLevel').value = 'all';
+            document.getElementById('searchExperience').value = 'all';
+            document.getElementById('searchLanguage').value = 'all';
+            document.getElementById('searchGender').value = 'all';
+            document.getElementById('consultOnline').checked = true;
+            document.getElementById('consultPhysical').checked = true;
+            document.getElementById('consultPhone').checked = true;
+            document.getElementById('consultVideo').checked = true;
+            filterLawyers();
+        }
 
-}
+        function filterLawyers() {
+            const nameVal = document.getElementById('searchName').value.toLowerCase().trim();
+            const specVal = document.getElementById('searchSpecialization').value;
+            const cityVal = document.getElementById('searchCity').value;
+            const courtVal = document.getElementById('searchCourtLevel').value;
+            const expRange = document.getElementById('searchExperience').value;
+            const langVal = document.getElementById('searchLanguage').value;
+            const genderVal = document.getElementById('searchGender').value;
+            
+            const consultOnline = document.getElementById('consultOnline').checked;
+            const consultPhysical = document.getElementById('consultPhysical').checked;
+            const consultPhone = document.getElementById('consultPhone').checked;
+            const consultVideo = document.getElementById('consultVideo').checked;
+
+            const lawyerCards = document.querySelectorAll('.lawyer-card');
+
+            lawyerCards.forEach(card => {
+                const name = (card.getAttribute('data-name') || '').toLowerCase();
+                const spec = card.getAttribute('data-category') || '';
+                const city = card.getAttribute('data-city') || '';
+                const court = card.getAttribute('data-court') || '';
+                const exp = parseInt(card.getAttribute('data-experience') || '0', 10);
+                const langs = (card.getAttribute('data-languages') || '').split(',');
+                const consultTypes = (card.getAttribute('data-consultation') || '').split(',');
+                const gender = card.getAttribute('data-gender') || '';
+
+                // Name match
+                const matchName = !nameVal || name.includes(nameVal);
+
+                // Specialization match
+                const matchSpec = specVal === 'all' || spec === specVal;
+
+                // City match
+                const matchCity = cityVal === 'all' || city === cityVal;
+
+                // Court Level match
+                const matchCourt = courtVal === 'all' || court === courtVal;
+
+                // Experience range match
+                let matchExp = true;
+                if (expRange !== 'all') {
+                    if (expRange === '1-3') matchExp = exp >= 1 && exp <= 3;
+                    else if (expRange === '3-5') matchExp = exp >= 3 && exp <= 5;
+                    else if (expRange === '5-10') matchExp = exp >= 5 && exp <= 10;
+                    else if (expRange === '10+') matchExp = exp >= 10;
+                    else if (expRange === '15+') matchExp = exp >= 15;
+                }
+
+                // Language match
+                const matchLang = langVal === 'all' || langs.includes(langVal);
+
+                // Gender match
+                const matchGender = genderVal === 'all' || gender === genderVal;
+
+                // Consultation match
+                let matchConsult = false;
+                if (consultOnline && consultTypes.includes('online')) matchConsult = true;
+                if (consultPhysical && consultTypes.includes('physical')) matchConsult = true;
+                if (consultPhone && consultTypes.includes('phone')) matchConsult = true;
+                if (consultVideo && consultTypes.includes('video')) matchConsult = true;
+
+                if (matchName && matchSpec && matchCity && matchCourt && matchExp && matchLang && matchGender && matchConsult) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
 
 		<!-- MODAL SCRIPT -->
 			function openLawyerModal() {
