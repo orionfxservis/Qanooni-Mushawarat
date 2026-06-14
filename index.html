@@ -3429,6 +3429,14 @@ setInterval(nextSlide, 5000);
             }
             else if (aiChatState === 'collecting_email') {
                 sessionData.email = value;
+                appendChatBubble('AI', currentLanguage === 'en'
+                    ? `Lastly, in which matter do you want legal assistance? (What's the subject/matter?)`
+                    : `آخر میں، آپ کو کس معاملے میں قانونی مدد کی ضرورت ہے؟ (مسئلہ یا موضوع کیا ہے؟)`);
+                aiChatState = 'collecting_matter';
+                input.placeholder = currentLanguage === 'en' ? 'e.g. Divorce Case, Property Dispute...' : 'مثال کے طور پر: طلاق کا کیس، جائیداد کا تنازع...';
+            }
+            else if (aiChatState === 'collecting_matter') {
+                sessionData.category = value;
                 
                 // Show saving indicator
                 appendChatBubble('AI', currentLanguage === 'en'
@@ -3472,7 +3480,7 @@ setInterval(nextSlide, 5000);
                         `*Name:* ${sessionData.name}\n` +
                         `*Phone:* ${sessionData.phone}\n` +
                         `*Email:* ${sessionData.email}\n` +
-                        `*Category:* ${sessionData.category}\n` +
+                        `*Requested Matter:* ${sessionData.category}\n` +
                         `*User Query:* ${sessionData.question}\n\n` +
                         `_This ticket was generated automatically by the AI Legal Support Agent._`;
                     
@@ -3510,7 +3518,7 @@ setInterval(nextSlide, 5000);
                     console.error("DB Save Error:", dbErr);
                     
                     const whatsappNumber = '923330360487';
-                    const messageText = `*New Query (Fallback) - Qanooni Mushawarat*\n\n*Name:* ${sessionData.name}\n*Phone:* ${sessionData.phone}\n*Query:* ${sessionData.question}`;
+                    const messageText = `*New Query (Fallback) - Qanooni Mushawarat*\n\n*Name:* ${sessionData.name}\n*Phone:* ${sessionData.phone}\n*Requested Matter:* ${sessionData.category}\n*Query:* ${sessionData.question}`;
                     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
                     
                     // Directly open WhatsApp fallback window
