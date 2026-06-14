@@ -2574,8 +2574,6 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 	
-	<script src="../js/supabase.js"></script>
-	
 	<script src="js/supabase.js"></script>
 
     <script>
@@ -2618,24 +2616,31 @@
             initCounters();
             
             // Form submissions
-            document.getElementById('clientForm').addEventListener('submit', handleClientSubmit);
-            document.getElementById('lawyerForm').addEventListener('submit', handleLawyerSubmit);
-            document.getElementById('chatForm').addEventListener('submit', handleChatSubmit);
+            const clientForm = document.getElementById('clientForm');
+            if (clientForm) clientForm.addEventListener('submit', handleClientSubmit);
+
+            const lawyerForm = document.getElementById('lawyerForm');
+            if (lawyerForm) lawyerForm.addEventListener('submit', handleLawyerSubmit);
+
+            const chatForm = document.getElementById('chatForm');
+            if (chatForm) chatForm.addEventListener('submit', handleChatSubmit);
             
             // File upload drag & drop
             const uploadZone = document.getElementById('uploadZone');
-            uploadZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadZone.classList.add('dragover');
-            });
-            uploadZone.addEventListener('dragleave', () => {
-                uploadZone.classList.remove('dragover');
-            });
-            uploadZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadZone.classList.remove('dragover');
-                handleFiles(e.dataTransfer.files);
-            });
+            if (uploadZone) {
+                uploadZone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadZone.classList.add('dragover');
+                });
+                uploadZone.addEventListener('dragleave', () => {
+                    uploadZone.classList.remove('dragover');
+                });
+                uploadZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadZone.classList.remove('dragover');
+                    handleFiles(e.dataTransfer.files);
+                });
+            }
             
             // Language direction
             updateLanguageDirection();
