@@ -3305,7 +3305,7 @@ setInterval(nextSlide, 5000);
             if (indicator) indicator.remove();
 
             // Append response
-            appendChatBubble('AI', `*[Demo/Simulated Mode]*\n\n${sessionData.aiReply}`);
+            appendChatBubble('AI', sessionData.aiReply);
 
             // Move to details collection
             setTimeout(() => {
@@ -3478,16 +3478,19 @@ setInterval(nextSlide, 5000);
                     
                     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
 
+                    // Directly open WhatsApp window to notify admin
+                    window.open(whatsappUrl, '_blank');
+
                     const successHtml = `
                         <div class="space-y-3">
                             <p class="font-semibold text-green-600 flex items-center gap-1.5 text-sm">
                                 <i class="fas fa-check-circle"></i>
-                                ${currentLanguage === 'en' ? 'Ticket Saved Successfully!' : 'ٹکٹ کامیابی سے محفوظ ہو گیا!'}
+                                ${currentLanguage === 'en' ? 'Ticket Saved & WhatsApp Opened!' : 'ٹکٹ محفوظ اور واٹس ایپ کھول دیا گیا!'}
                             </p>
                             <p class="text-xs text-gray-600 leading-normal">
                                 ${currentLanguage === 'en' 
-                                    ? 'Your legal ticket is recorded. Please click the button below to send this case information directly to the Admin on WhatsApp for instant assistance.' 
-                                    : 'آپ کا قانونی ٹکٹ ریکارڈ کر لیا گیا ہے۔ فوری مدد کے لیے براہ کرم نیچے دیے گئے بٹن پر کلک کریں اور یہ معلومات واٹس ایپ پر ایڈمن کو بھیجیں۔'}
+                                    ? 'Your legal ticket is recorded and the WhatsApp chat with the Admin was opened automatically. If it did not open, click the button below.' 
+                                    : 'آپ کا قانونی ٹکٹ ریکارڈ کر لیا گیا ہے اور ایڈمن کے ساتھ واٹس ایپ چیٹ خود بخود کھول دی گئی ہے۔ اگر یہ نہیں کھلی تو نیچے والے بٹن پر کلک کریں۔'}
                             </p>
                             <a href="${whatsappUrl}" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-2.5 px-4 rounded-xl text-xs w-full shadow-md transition-all">
                                 <i class="fab fa-whatsapp text-lg"></i>
@@ -3505,14 +3508,17 @@ setInterval(nextSlide, 5000);
 
                 } catch (dbErr) {
                     console.error("DB Save Error:", dbErr);
-                    appendChatBubble('AI', currentLanguage === 'en'
-                        ? 'Failed to save case ticket to the database, but we can still proceed. Click below to contact the Admin on WhatsApp:'
-                        : 'ڈیٹا بیس میں کیس ٹکٹ محفوظ کرنے میں ناکامی، لیکن ہم پھر بھی آگے بڑھ سکتے ہیں۔ واٹس ایپ پر ایڈمن سے رابطہ کرنے کے لیے نیچے کلک کریں:');
                     
-                    // Fallback button even on error
                     const whatsappNumber = '923330360487';
                     const messageText = `*New Query (Fallback) - Qanooni Mushawarat*\n\n*Name:* ${sessionData.name}\n*Phone:* ${sessionData.phone}\n*Query:* ${sessionData.question}`;
                     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
+                    
+                    // Directly open WhatsApp fallback window
+                    window.open(whatsappUrl, '_blank');
+
+                    appendChatBubble('AI', currentLanguage === 'en'
+                        ? 'We have redirected you to WhatsApp to connect with the Admin directly:'
+                        : 'ہم نے آپ کو ایڈمن سے براہ راست رابطہ قائم کرنے کے لیے واٹس ایپ پر ری ڈائریکٹ کر دیا ہے:');
                     
                     const errorHtml = `
                         <a href="${whatsappUrl}" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-2 px-4 rounded-xl text-xs w-full shadow-md mt-2">
@@ -3603,8 +3609,8 @@ setInterval(nextSlide, 5000);
             e.preventDefault();
             // Stash the event so it can be triggered later.
             deferredPrompt = e;
-            // Update UI to show the install button
-            if (installBtn) {
+            // Update UI to show the install button only on mobile/tablet (screen width < 1024px)
+            if (installBtn && window.innerWidth < 1024) {
                 installBtn.style.display = 'flex';
                 installBtn.classList.remove('hidden');
             }
