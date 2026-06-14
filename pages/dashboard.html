@@ -150,6 +150,14 @@
 
         </button>
 
+        <button onclick="switchTab('ai-support')" id="tab-btn-ai-support"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-robot w-5 text-center"></i>
+            <span class="font-medium text-[11px]">AI Support Chats</span>
+
+        </button>
+
         <button onclick="switchTab('lawyers-pannel')" id="tab-btn-lawyers-pannel"
             class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
 
@@ -399,17 +407,17 @@
         <div class="flex flex-wrap gap-6 mb-6">
 
             <div>
-                <p class="text-white/70 text-sm">Cases Analysed</p>
-                <h4 class="text-2xl font-bold">124</h4>
+                <p class="text-white/70 text-sm">Total AI Tickets</p>
+                <h4 id="dash-ai-cases-count" class="text-2xl font-bold">0</h4>
             </div>
 
             <div>
-                <p class="text-white/70 text-sm">Pending Reviews</p>
-                <h4 class="text-2xl font-bold">18</h4>
+                <p class="text-white/70 text-sm">Pending Action</p>
+                <h4 id="dash-ai-pending-count" class="text-2xl font-bold">0</h4>
             </div>
         </div>
 
-        <button class="bg-secondary text-primary font-semibold px-6 py-3 rounded-xl">
+        <button onclick="switchTab('ai-support')" class="bg-secondary text-primary font-semibold px-6 py-3 rounded-xl hover:bg-white hover:text-primary transition duration-300">
             Open AI Assistant
         </button>
 
@@ -729,6 +737,39 @@
                 </div>
             </div>
 
+            <!-- AI Support Chats Tab -->
+            <div id="tab-ai-support" class="tab-content">
+                <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-primary">AI Support Chats & Tickets</h3>
+                            <p class="text-xs text-gray-500 mt-1">Review and manage client interactions with the AI Legal Support Agent</p>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-gray-400 border-b border-gray-150 text-[12px] uppercase tracking-wider font-bold">
+                                    <th class="pb-4 font-semibold px-2">Client Details</th>
+                                    <th class="pb-4 font-semibold px-2">Requested Matter</th>
+                                    <th class="pb-4 font-semibold px-2">Initial Query</th>
+                                    <th class="pb-4 font-semibold px-2">AI Reply Summary</th>
+                                    <th class="pb-4 font-semibold px-2">Date Submitted</th>
+                                    <th class="pb-4 font-semibold text-right px-2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="aiChatsTableBody">
+                                <!-- Dynamically loaded from Supabase support_chats -->
+                            </tbody>
+                        </table>
+                        <div id="noAiChatsMsg" class="hidden text-center py-10 text-gray-400">
+                            No AI Support chats found.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Lawyers Pannel Tab -->
             <div id="tab-lawyers-pannel" class="tab-content">
                 <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
@@ -907,6 +948,7 @@
                 'know-laws': 'Know The Laws',
                 'services': 'Our Services',
                 'case-submission': 'Case Submition',
+                'ai-support': 'AI Legal Support Chats',
                 'lawyers-pannel': 'Lawyers Pannel',
                 'testimonials': 'Testimonials',
                 'subscription': 'Subscription'
@@ -914,6 +956,7 @@
             document.getElementById('pageTitle').textContent = titles[tabId];
             
             if(tabId === 'lawyers' || tabId === 'dashboard') loadLawyers();
+            if(tabId === 'ai-support' || tabId === 'dashboard') fetchAiSupportChats();
         }
 
         // Load Lawyers from LocalStorage
@@ -1000,6 +1043,12 @@
                 populateLawyersDropdown();
             } catch (e) {
                 console.error("Error populating lawyers dropdown:", e);
+            }
+
+            try {
+                fetchAiSupportChats();
+            } catch (e) {
+                console.error("Error fetching AI support chats:", e);
             }
         };
 
@@ -1702,6 +1751,187 @@
                 console.error("Error deleting case:", err);
                 alert("Failed to delete case: " + err.message);
             }
+        }
+
+        async function fetchAiSupportChats() {
+            const tableBody = document.getElementById('aiChatsTableBody');
+            const noMsg = document.getElementById('noAiChatsMsg');
+            const dashCasesCount = document.getElementById('dash-ai-cases-count');
+            const dashPendingCount = document.getElementById('dash-ai-pending-count');
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            try {
+                let chats = [];
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('support_chats')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                        
+                    if (error) throw error;
+                    chats = data || [];
+                } else {
+                    chats = JSON.parse(localStorage.getItem('local_support_chats') || '[]');
+                }
+                
+                // Update dashboard counter UI
+                if (dashCasesCount) dashCasesCount.textContent = chats.length;
+                if (dashPendingCount) dashPendingCount.textContent = chats.length;
+                
+                if (!tableBody) return;
+                
+                if (chats.length === 0) {
+                    tableBody.innerHTML = '';
+                    if (noMsg) noMsg.classList.remove('hidden');
+                    return;
+                }
+                
+                if (noMsg) noMsg.classList.add('hidden');
+                tableBody.innerHTML = '';
+                
+                chats.forEach(c => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
+                    
+                    const dateStr = c.created_at ? new Date(c.created_at).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+                    
+                    const querySnippet = c.message && c.message.length > 50 ? c.message.substring(0, 48) + '...' : (c.message || 'N/A');
+                    const replySnippet = c.ai_reply && c.ai_reply.length > 55 ? c.ai_reply.substring(0, 52) + '...' : (c.ai_reply || 'N/A');
+                    
+                    tr.innerHTML = `
+                        <td class="py-4 px-2">
+                            <div class="font-bold text-gray-800">${c.user_name || 'N/A'}</div>
+                            <div class="text-[11px] text-gray-400 font-mono">${c.phone || ''}</div>
+                            <div class="text-[11px] text-gray-400">${c.email || ''}</div>
+                        </td>
+                        <td class="py-4 px-2 font-semibold text-primary capitalize">${c.category || 'General'}</td>
+                        <td class="py-4 px-2 text-gray-600 max-w-[200px] truncate" title="${escapeHtmlAttr(c.message || '')}">${querySnippet}</td>
+                        <td class="py-4 px-2 text-gray-600 max-w-[250px] truncate" title="${escapeHtmlAttr(c.ai_reply || '')}">${replySnippet}</td>
+                        <td class="py-4 px-2 text-gray-500">${dateStr}</td>
+                        <td class="py-4 px-2 text-right">
+                            <button onclick='viewAiChatDetails(${JSON.stringify(c).replace(/'/g, "&#39;")})' class="text-blue-500 hover:text-blue-700 transition p-2 mr-1" title="View Full Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="deleteAiSupportChat(${c.id})" class="text-red-400 hover:text-red-600 transition p-2" title="Delete Ticket">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error("Error fetching support chats:", err);
+            }
+        }
+
+        function escapeHtmlAttr(text) {
+            if (!text) return '';
+            return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        async function deleteAiSupportChat(id) {
+            if (!confirm("Are you sure you want to permanently delete this AI Support Chat ticket?")) return;
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('support_chats')
+                        .delete()
+                        .eq('id', id);
+                        
+                    if (error) throw error;
+                } else {
+                    let localChats = JSON.parse(localStorage.getItem('local_support_chats') || '[]');
+                    const filtered = localChats.filter(c => c.id != id);
+                    localStorage.setItem('local_support_chats', JSON.stringify(filtered));
+                }
+                
+                alert("AI Support ticket deleted successfully!");
+                fetchAiSupportChats();
+            } catch (err) {
+                console.error("Error deleting AI support chat:", err);
+                alert("Failed to delete support chat: " + err.message);
+            }
+        }
+        
+        function viewAiChatDetails(chat) {
+            let modal = document.getElementById('aiChatDetailsModal');
+            if (!modal) {
+                const div = document.createElement('div');
+                div.id = 'aiChatDetailsModal';
+                div.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4';
+                div.innerHTML = `
+                    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+                        <div class="bg-primary text-white px-6 py-4 flex justify-between items-center shrink-0">
+                            <h3 class="text-lg font-bold flex items-center gap-2">
+                                <i class="fas fa-robot text-secondary"></i>
+                                <span>AI Chat Details</span>
+                            </h3>
+                            <button onclick="closeAiChatModal()" class="text-white hover:text-secondary text-xl">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="p-6 overflow-y-auto space-y-4 text-sm flex-1">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-gray-150 animate-fade-in">
+                                <div>
+                                    <p class="text-[10px] uppercase font-bold text-gray-400">Client Name</p>
+                                    <p id="aiModalName" class="font-bold text-gray-800"></p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase font-bold text-gray-400">Requested Matter</p>
+                                    <p id="aiModalMatter" class="capitalize font-semibold text-secondary"></p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase font-bold text-gray-400">Phone</p>
+                                    <p id="aiModalPhone" class="text-gray-700 font-mono"></p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase font-bold text-gray-400">Email</p>
+                                    <p id="aiModalEmail" class="text-gray-700"></p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-gray-400 mb-1">User Query</p>
+                                <div id="aiModalQuery" class="bg-slate-50 p-4 rounded-xl border border-gray-150 leading-relaxed text-gray-700 whitespace-pre-wrap max-h-36 overflow-y-auto"></div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-gray-400 mb-1">AI Assistant Response</p>
+                                <div id="aiModalReply" class="bg-blue-50 p-4 rounded-xl border border-blue-100 leading-relaxed text-gray-800 whitespace-pre-wrap max-h-48 overflow-y-auto"></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 px-6 py-4 flex justify-end shrink-0 border-t border-t-gray-150">
+                            <button onclick="closeAiChatModal()" class="px-5 h-9 rounded-lg bg-gray-200 text-gray-700 font-bold text-xs hover:bg-gray-300 transition">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(div);
+                modal = div;
+            }
+            
+            document.getElementById('aiModalName').textContent = chat.user_name || 'N/A';
+            document.getElementById('aiModalMatter').textContent = chat.category || 'General';
+            document.getElementById('aiModalPhone').textContent = chat.phone || 'N/A';
+            document.getElementById('aiModalEmail').textContent = chat.email || 'N/A';
+            document.getElementById('aiModalQuery').textContent = chat.message || 'N/A';
+            document.getElementById('aiModalReply').textContent = chat.ai_reply || 'N/A';
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeAiChatModal() {
+            const modal = document.getElementById('aiChatDetailsModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+            document.body.style.overflow = 'auto';
         }
 
         // Simulated notifications system
