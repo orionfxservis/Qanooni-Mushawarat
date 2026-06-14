@@ -3252,6 +3252,71 @@ setInterval(nextSlide, 5000);
                 .replace(/'/g, "&#039;");
         }
 
+        function runSimulatedAiResponse(userQuery, input) {
+            sessionData.question = userQuery;
+            
+            // Generate simulated response
+            const q = userQuery.toLowerCase();
+            let category = "General Law";
+            let reply = "";
+
+            if (q.includes("divorce") || q.includes("nikah") || q.includes("marriage") || q.includes("custody") || q.includes("طلاق") || q.includes("شادی") || q.includes("بچے")) {
+                category = "Family Law";
+                reply = currentLanguage === 'en' 
+                    ? "Under Pakistani family laws (such as the Muslim Family Laws Ordinance 1961), matters regarding divorce, child custody, maintenance, and dower require representation in Family Courts. Guardian courts determine custody based primarily on the welfare of the minor child."
+                    : "پاکستانی خاندانی قوانین (جیسے مسلم فیملی لاز آرڈیننس 1961) کے تحت، طلاق، بچوں کی تحویل (کیس)، نان نفقہ اور مہر کے معاملات فیملی کورٹ کے ذریعے طے ہوتے ہیں۔ گارڈین عدالتیں بنیادی طور پر نابالغ بچے کی فلاح و بہبود کو مدنظر رکھ کر تحویل کا فیصلہ کرتی ہیں۔";
+            } else if (q.includes("property") || q.includes("land") || q.includes("rent") || q.includes("inheritance") || q.includes("وراثت") || q.includes("جائیداد") || q.includes("زمین")) {
+                category = "Property Law";
+                reply = currentLanguage === 'en'
+                    ? "Property transactions, registry, tenancy, and inheritance rights in Pakistan are governed by the Land Revenue Act, Transfer of Property Act, and personal inheritance laws. Document validation (registry, fard, and mutation) is essential."
+                    : "پاکستان میں جائیداد کی منتقلی، رجسٹری، کرایہ داری اور وراثت کے حقوق لینڈ ریونیو ایکٹ اور ٹرانسفر آف پراپرٹی ایکٹ کے تحت آتے ہیں۔ دستاویزات (رجسٹری، فرد اور انتقال) کی تصدیق انتہائی ضروری ہے۔";
+            } else if (q.includes("police") || q.includes("bail") || q.includes("arrest") || q.includes("fir") || q.includes("f.i.r") || q.includes("فوجداری") || q.includes("پولیس") || q.includes("ضمانت")) {
+                category = "Criminal Law";
+                reply = currentLanguage === 'en'
+                    ? "Criminal offenses in Pakistan are governed by the Pakistan Penal Code (PPC) and the Code of Criminal Procedure (CrPC). If facing criminal charges or police action, applying for pre-arrest or post-arrest bail is a critical priority."
+                    : "پاکستان میں فوجداری جرائم کا فیصلہ تعزیرات پاکستان (PPC) اور ضابطہ فوجداری (CrPC) کے تحت ہوتا ہے۔ پولیس کارروائی یا مجرمانہ الزامات کی صورت میں، قبل از گرفتاری یا بعد از گرفتاری ضمانت کے لیے درخواست دینا سب سے اہم قدم ہے۔";
+            } else if (q.includes("company") || q.includes("corporate") || q.includes("contract") || q.includes("business") || q.includes("معاہدہ") || q.includes("کاروبار")) {
+                category = "Corporate Law";
+                reply = currentLanguage === 'en'
+                    ? "Company registration, partnership deeds, contract drafting, and corporate disputes are handled in accordance with the Companies Act 2017 and regulated by the Securities and Exchange Commission of Pakistan (SECP)."
+                    : "کمپنی رجسٹریشن، پارٹنرشپ ڈیڈ، کنٹریکٹ ڈرافٹنگ اور کارپوریٹ تنازعات کو کمپنیز ایکٹ 2017 کے مطابق حل کیا جاتا ہے اور یہ سیکیورٹیز اینڈ ایکسچینج کمیشن آف پاکستان (SECP) کے زیر کنٹرول ہوتے ہیں۔";
+            } else if (q.includes("tax") || q.includes("fbr") || q.includes("income") || q.includes("ٹیکس")) {
+                category = "Tax Law";
+                reply = currentLanguage === 'en'
+                    ? "Taxation, income tax filing, sales tax registration, and audits are administered by the Federal Board of Revenue (FBR) in compliance with the Income Tax Ordinance 2001."
+                    : "ٹیکس وصولی، انکم ٹیکس فائلنگ، سیلز ٹیکس رجسٹریشن اور آڈٹ فیڈرل بورڈ آف ریونیو (FBR) کی طرف سے انکم ٹیکس آرڈیننس 2001 کے تحت کیے جاتے ہیں۔";
+            } else if (q.includes("cyber") || q.includes("hack") || q.includes("online") || q.includes("fia") || q.includes("ہیک") || q.includes("انٹرنیٹ")) {
+                category = "Cyber Crime";
+                reply = currentLanguage === 'en'
+                    ? "Digital harassment, online fraud, and cyber threats fall under the Prevention of Electronic Crimes Act (PECA). Complaints can be officially filed with the FIA Cyber Crime Wing."
+                    : "ڈیجیٹل ہراساں کرنا، آن لائن فراڈ اور سائبر خطرات پریوینشن آف الیکٹرانک کرائمز ایکٹ (PECA) کے دائرہ کار میں آتے ہیں۔ اس کی باضابطہ شکایت ایف آئی اے سائبر کرائم ونگ میں درج کرائی جا سکتی ہے۔";
+            } else {
+                category = "General Law";
+                reply = currentLanguage === 'en'
+                    ? "Thank you for your legal inquiry. Under the laws of Pakistan, this matter requires a detailed review of the facts and documentation. A professional legal consultation with a registered advocate is highly recommended."
+                    : "آپ کی قانونی انکوائری کا شکریہ۔ پاکستان کے قوانین کے تحت، اس معاملے میں حقائق اور دستاویزات کے تفصیلی جائزے کی ضرورت ہے۔ کسی رجسٹرڈ ایڈوکیٹ کے ساتھ پیشہ ورانہ قانونی مشاورت کی سختی سے سفارش کی جاتی ہے۔";
+            }
+
+            sessionData.aiReply = reply;
+            sessionData.category = category;
+
+            // Remove thinking indicator if it exists
+            const indicator = document.getElementById('ai-thinking-indicator');
+            if (indicator) indicator.remove();
+
+            // Append response
+            appendChatBubble('AI', `*[Demo/Simulated Mode]*\n\n${sessionData.aiReply}`);
+
+            // Move to details collection
+            setTimeout(() => {
+                appendChatBubble('AI', currentLanguage === 'en'
+                    ? `To help connect you with an expert lawyer and create a case ticket for our team, please share your details. What is your **Full Name**?`
+                    : `آپ کو کسی ماہر وکیل سے منسلک کرنے اور ہماری ٹیم کے لیے کیس کا ٹکٹ بنانے کے لیے، براہ کرم اپنی تفصیلات فراہم کریں۔ آپ کا **پورا نام** کیا ہے؟`);
+                aiChatState = 'collecting_name';
+                input.placeholder = currentLanguage === 'en' ? 'Enter your full name...' : 'اپنا پورا نام درج کریں...';
+            }, 800);
+        }
+
         async function handleChatSubmit(e) {
             e.preventDefault();
             const input = document.getElementById('chatInput');
@@ -3266,13 +3331,6 @@ setInterval(nextSlide, 5000);
 
             if (aiChatState === 'chatting') {
                 const apiKey = localStorage.getItem('openai_api_key');
-                if (!apiKey) {
-                    appendChatBubble('AI', currentLanguage === 'en' 
-                        ? 'Please configure your OpenAI API Key first by clicking the settings cog at the top-right of the chat widget.'
-                        : 'براہ کرم پہلے چیٹ ونڈو کے اوپر دائیں کونے میں سیٹنگز آئیکن پر کلک کر کے اپنی OpenAI API Key درج کریں۔');
-                    return;
-                }
-
                 sessionData.question = value;
                 
                 // Show thinking indicator
@@ -3290,6 +3348,14 @@ setInterval(nextSlide, 5000);
                 `;
                 chatMessages.appendChild(thinkingDiv);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                if (!apiKey) {
+                    // Fallback to simulated response if no API key is configured
+                    setTimeout(() => {
+                        runSimulatedAiResponse(value, input);
+                    }, 1500);
+                    return;
+                }
 
                 try {
                     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -3340,12 +3406,9 @@ setInterval(nextSlide, 5000);
                     }, 800);
 
                 } catch (error) {
-                    console.error("OpenAI call error:", error);
-                    const indicator = document.getElementById('ai-thinking-indicator');
-                    if (indicator) indicator.remove();
-                    appendChatBubble('AI', currentLanguage === 'en'
-                        ? 'Sorry, I encountered an error. Please make sure your API Key is correct and try again.'
-                        : 'معذرت، مجھے ایک خرابی کا سامنا کرنا پڑا۔ براہ کرم یقینی بنائیں کہ آپ کی API Key درست ہے اور دوبارہ کوشش کریں۔');
+                    console.error("OpenAI call error, falling back to simulator:", error);
+                    // Automatically fallback to simulated AI response
+                    runSimulatedAiResponse(value, input);
                 }
             }
             else if (aiChatState === 'collecting_name') {
