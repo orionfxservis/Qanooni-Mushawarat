@@ -527,6 +527,15 @@
 				<span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
 			</a>
 
+			<!-- BLOGS -->
+			<a 	href="#blogs"
+				class="text-white text-[15px] font-medium hover:text-secondary transition duration-300 relative group"
+				data-en="Blogs" data-ur="بلاگز">
+
+					Blogs
+				<span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
+			</a>
+
     <!-- COMPANY -->
     <div class="relative group">
         <button
@@ -580,7 +589,7 @@
 
             <!-- Live Chat -->
             <button onclick="openLiveChat()"
-                class="bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-white transition flex items-center gap-2 border-2 border-secondary">
+                class="bg-secondary text-primary px-3 py-1.5 rounded-lg text-[13px] font-semibold hover:bg-white transition flex items-center gap-2 border-2 border-secondary">
 
                 <i class="fas fa-comments text-sm"></i>
 
@@ -591,7 +600,7 @@
 
             <!-- Consultation -->
             <a href="#client-form"
-               class="bg-transparent border-2 border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2"
+               class="bg-transparent border-2 border-secondary text-secondary px-3 py-1.5 rounded-lg text-[13px] font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2"
                data-en="Consultation"
                data-ur="مشاورت">
 
@@ -602,8 +611,8 @@
 
             <!-- Login Dropdown -->
             <div class="relative group">
-                <button class="bg-transparent border-2 border-secondary text-secondary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2">
-                    <i class="fas fa-user text-sm"></i>
+                <button class="bg-transparent border-2 border-secondary text-secondary px-3 py-1.5 rounded-lg text-[13px] font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2">
+                    <i class="fas fa-user text-[13px]"></i>
                     <span data-en="Login" data-ur="لاگ ان">Login</span>
                     <i class="fas fa-chevron-down text-xs ml-1 transition-transform group-hover:rotate-180"></i>
                 </button>
@@ -660,6 +669,7 @@
                     <a href="#client-form" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Submit Case" data-ur="کیس جمع کریں">Submit Case</a>
                     <a href="#lawyers" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Lawyers Network" data-ur="وکلاء کا نیٹ ورک">Lawyers Network</a>
                     <a href="#faq" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="FAQ" data-ur="عمومی سوالات">FAQ</a>
+                    <a href="#blogs" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Blogs" data-ur="بلاگز">Blogs</a>
                     <a href="./pages/about.html" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="About Us" data-ur="ہمارے بارے میں">About Us</a>
                     <a href="./pages/policy.html" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Privacy Policy" data-ur="رازداری کی پالیسی">Privacy Policy</a>
                     <a href="#contact" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Contact Us" data-ur="ہم سے رابطہ کریں">Contact Us</a>
@@ -710,6 +720,7 @@
 
                     <input type="text"
                         id="loginUserId"
+                        value="admin"
                         placeholder="Enter User ID"
                         class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-secondary">
                 </div>
@@ -2238,6 +2249,71 @@
         </div>
     </section>
 
+    <!-- Blogs Section -->
+    <section id="blogs" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="BLOGS" data-ur="بلاگز">BLOGS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Legal Resources & Articles" data-ur="قانونی رہنمائی اور معلوماتی مضامین">Legal Resources & Articles</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Blog Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                    <div class="h-48 w-full bg-gray-200 relative">
+                        <img src="./images/bg-slide-show/family-law.jpg" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Family Law</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs text-gray-500 mb-2">October 15, 2026</p>
+                        <h3 class="text-xl font-bold text-primary mb-3" data-en="Understanding Child Custody Laws in Pakistan" data-ur="پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا">Understanding Child Custody Laws in Pakistan</h3>
+                        <p class="text-gray-600 text-sm mb-4" data-en="A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision." data-ur="فیملی کورٹس کس طرح بچوں کی تحویل کا تعین کرتی ہیں، دونوں والدین کے حقوق، اور حتمی فیصلے کو کون سے عوامل متاثر کرتے ہیں، اس کے بارے میں ایک جامع گائیڈ۔">A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision.</p>
+                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                            Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                    <div class="h-48 w-full bg-gray-200 relative">
+                        <img src="./images/bg-slide-show/corporate.jpg" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Corporate Law</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs text-gray-500 mb-2">October 10, 2026</p>
+                        <h3 class="text-xl font-bold text-primary mb-3" data-en="Starting a Business: Legal Requirements" data-ur="کاروبار شروع کرنا: قانونی تقاضے">Starting a Business: Legal Requirements</h3>
+                        <p class="text-gray-600 text-sm mb-4" data-en="Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly." data-ur="آسانی سے کاروبار شروع کرنے کے لیے ضروری قانونی دستاویزات، کمپنی کی رجسٹریشن کے عمل، اور ٹیکس کی تعمیل کے بارے میں جانیں۔">Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly.</p>
+                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                            Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                    <div class="h-48 w-full bg-gray-200 relative">
+                        <img src="./images/bg-slide-show/property.jpg" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Property Law</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs text-gray-500 mb-2">October 05, 2026</p>
+                        <h3 class="text-xl font-bold text-primary mb-3" data-en="How to Verify Real Estate Property Titles" data-ur="رئیل اسٹیٹ پراپرٹی کے ٹائٹل کی تصدیق کیسے کریں">How to Verify Real Estate Property Titles</h3>
+                        <p class="text-gray-600 text-sm mb-4" data-en="Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment." data-ur="سرمایہ کاری کرنے سے پہلے ملکیت کے ریکارڈ کو صحیح طریقے سے چیک کرنے اور پراپرٹی کے ٹائٹلز کی تصدیق کرنے کا طریقہ سیکھ کر پراپرٹی کے فراڈ سے بچیں۔">Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment.</p>
+                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                            Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="./pages/blogs.html" class="bg-secondary text-primary px-8 py-3 rounded-lg font-bold hover:bg-white transition inline-flex items-center gap-2 border-2 border-secondary" data-en="View All Articles" data-ur="تمام مضامین دیکھیں">
+                    View All Articles
+                </a>
+            </div>
+        </div>
+    </section>
     <!-- Testimonials -->
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
@@ -3755,7 +3831,7 @@ async function handleLogin() {
     }
 
     // Demo/Admin Fallback
-    if (email === "admin" && password === "admin123") {
+    if (email === "admin" && password === "Incite@Matrox#1200") {
         localStorage.setItem('currentUser', JSON.stringify({
             email: "admin@legalease.pk",
             role: "admin",
