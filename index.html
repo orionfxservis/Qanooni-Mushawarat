@@ -483,6 +483,12 @@
                 Consultation
             </a>
 
+            <a href="./pages/cyber-crime.html"
+                class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
+                <i class="fas fa-user-shield text-secondary text-[13px]"></i>
+                Cyber Crime
+            </a>
+
             <a 	href="#client-form"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
 				<i class="fas fa-file-signature text-secondary text-[13px]"></i>
@@ -665,6 +671,7 @@
                 <div class="flex flex-col gap-4">
                     <a href="#home" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Home" data-ur="ہوم">Home</a>
                     <a href="#services" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Our Services" data-ur="ہماری خدمات">Our Services</a>
+                    <a href="./pages/cyber-crime.html" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Cyber Crime" data-ur="سائبر کرائم">Cyber Crime</a>
                     <a href="#consultation" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Consultation" data-ur="مشاورت">Consultation</a>
                     <a href="#client-form" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Submit Case" data-ur="کیس جمع کریں">Submit Case</a>
                     <a href="#lawyers" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Lawyers Network" data-ur="وکلاء کا نیٹ ورک">Lawyers Network</a>
@@ -720,7 +727,6 @@
 
                     <input type="text"
                         id="loginUserId"
-                        value="admin"
                         placeholder="Enter User ID"
                         class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-secondary">
                 </div>
@@ -1386,6 +1392,15 @@
                     <h3 class="text-xl font-bold text-primary mb-3" data-en="International Law" data-ur="بین الاقوامی قانون">International Law</h3>
                     <p class="text-gray-600 text-sm mb-4" data-en="Immigration, British laws, international disputes" data-ur="امیگریشن، برٹش قوانین، بین الاقوامی تنازعات">Immigration, British laws, international disputes</p>
                     <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-user-shield text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Cyber Crime Complaint" data-ur="سائبر کرائم شکایت">🛡️ Cyber Crime Complaint</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Report online fraud, harassment, hacking, blackmail, identity theft, financial scams, and other cyber offences. Our legal experts will guide you through the next steps." data-ur="آن لائن فراڈ، ہراساں کرنا، ہیکنگ، بلیک میلنگ، شناختی چوری، مالیاتی گھپلے اور دیگر سائبر جرائم کی اطلاع دیں۔ ہمارے قانون دان رہنمائی کریں گے۔">Report online fraud, harassment, hacking, blackmail, identity theft, financial scams, and other cyber offences. Our legal experts will guide you through the next steps.</p>
+                    <a href="./pages/cyber-crime.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Report Cyber Crime" data-ur="سائبر کرائم رپورٹ کریں">Report Cyber Crime</a>
                 </div>
             </div>
         </div>
@@ -3743,6 +3758,8 @@ setInterval(nextSlide, 5000);
 		// Login Model
 		function openLoginModal(title) {
     document.getElementById("loginTitle").innerText = title;
+    document.getElementById("loginUserId").value = "";
+    document.getElementById("passwordField").value = "";
     document.getElementById("loginModal").classList.remove("hidden");
     document.getElementById("loginModal").classList.add("flex");
 }
