@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Cyber Crime Complaint Assistance - Qanooni Mushawarat" data-ur="سائبر کرائم شکایت اور مدد - قانونی مشاورت">Cyber Crime Complaint Assistance - Qanooni Mushawarat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#c9a227',
+                        accent: '#2d5a87',
+                        dark: '#0f1c2e',
+                        light: '#f8f9fa'
+                    },
+                    fontFamily: {
+                        urdu: ['Noto Nastaliq Urdu', 'serif'],
+                        english: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        @font-face {
+            font-family: 'JameelNoori';
+            src: url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        }
+        .urdu-text, .urdu-heading, .urdu-ui {
+            font-family: 'JameelNoori', serif !important;
+            direction: rtl;
+        }
+        .urdu-text {
+            line-height: 2.6;
+            font-size: 1.15rem;
+        }
+        .urdu-heading {
+            line-height: 2.8;
+        }
+        .urdu-ui {
+            line-height: 2.2;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .upload-zone {
+            border: 2px dashed #c9a227;
+            transition: all 0.3s ease;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #1e3a5f;
+            background: rgba(201, 162, 39, 0.05);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #1e3a5f, #c9a227);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2">
+                <img src="../images/logo/logo-02.png" alt="Logo" class="h-8 md:h-10 w-auto object-contain">
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="../index.html" class="text-white/80 hover:text-white transition font-semibold text-sm" data-en="Back to Home" data-ur="ہوم پر واپس جائیں">Back to Home</a>
+                <button onclick="toggleLanguage()" id="langBtn" class="border border-secondary text-secondary px-4 py-1.5 rounded-lg hover:bg-secondary hover:text-primary transition font-medium text-xs">
+                    اردو
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 bg-gradient-to-r from-primary via-[#233f65] to-dark text-white text-center overflow-hidden shrink-0">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute -top-10 -left-10 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 max-w-4xl">
+            <span class="bg-secondary/20 text-secondary border border-secondary/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block" data-en="Cyber Crime Legal Assistance Center" data-ur="سائبر کرائم لیگل اسسٹنس سینٹر">Cyber Crime Legal Assistance Center</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-4" data-en="Cyber Crime Complaint Assistance" data-ur="سائبر کرائمز شکایت اور مدد">Cyber Crime Complaint Assistance</h1>
+            <p class="text-white/80 text-sm md:text-lg max-w-2xl mx-auto" data-en="Protect Your Digital Rights. Report Cyber Crimes & Get Professional Legal Guidance." data-ur="اپنے ڈیجیٹل حقوق کا تحفظ کریں۔ سائبر کرائمز کی رپورٹ کریں اور پیشہ ورانہ قانونی رہنمائی حاصل کریں۔">Protect Your Digital Rights. Report Cyber Crimes & Get Professional Legal Guidance.</p>
+        </div>
+    </section>
+
+    <!-- Content Area -->
+    <main class="container mx-auto px-4 py-12 flex-1 max-w-5xl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left 2 columns: Complaint Categories and Reporting Form -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Category Selector -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100">
+                    <h2 class="text-xl md:text-2xl font-bold text-primary mb-2" data-en="1. Select Complaint Category" data-ur="1. شکایت کے زمرے کا انتخاب کریں">1. Select Complaint Category</h2>
+                    <p class="text-xs text-gray-500 mb-6" data-en="Choose the category that best describes the incident. Your form details will adapt." data-ur="اس زمرے کا انتخاب کریں جو آپ کے واقعے کی بہترین وضاحت کرے۔">Choose the category that best describes the incident. Your form details will adapt.</p>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="categoryGrid">
+                        <!-- Category Cards -->
+                        <button onclick="selectCategory('Online Financial Fraud', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">💰</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Financial Fraud" data-ur="مالیاتی فراڈ">Financial Fraud</span>
+                        </button>
+                        <button onclick="selectCategory('WhatsApp / SMS Scam', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">📱</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="WhatsApp/SMS Scam" data-ur="واٹس ایپ / ایس ایم ایس اسکیم">WhatsApp/SMS Scam</span>
+                        </button>
+                        <button onclick="selectCategory('Fake Social Media Account', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🎭</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Fake Account" data-ur="جعلی اکاؤنٹ">Fake Account</span>
+                        </button>
+                        <button onclick="selectCategory('Email Hacking', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">📧</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Email Hacking" data-ur="ای میل ہیکنگ">Email Hacking</span>
+                        </button>
+                        <button onclick="selectCategory('Facebook / Instagram Account Hacked', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🔐</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Social Account Hack" data-ur="سوشل میڈیا ہیک">Social Account Hack</span>
+                        </button>
+                        <button onclick="selectCategory('Identity Theft', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">👤</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Identity Theft" data-ur="شناختی چوری">Identity Theft</span>
+                        </button>
+                        <button onclick="selectCategory('Banking Fraud', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">💳</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Banking Fraud" data-ur="بینکنگ فراڈ">Banking Fraud</span>
+                        </button>
+                        <button onclick="selectCategory('Online Blackmail / Sextortion', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">❤️</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Blackmail/Sextortion" data-ur="بلیک میلنگ / سیکسٹارشن">Blackmail/Sextortion</span>
+                        </button>
+                        <button onclick="selectCategory('Cyber Harassment', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🚫</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Cyber Harassment" data-ur="سائبر ہراساں کرنا">Cyber Harassment</span>
+                        </button>
+                        <button onclick="selectCategory('Child Online Abuse', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🧒</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Child Online Abuse" data-ur="بچوں کا آن لائن استحصال">Child Online Abuse</span>
+                        </button>
+                        <button onclick="selectCategory('E-Commerce Fraud', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🛒</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="E-Commerce Fraud" data-ur="ای کامرس فراڈ">E-Commerce Fraud</span>
+                        </button>
+                        <button onclick="selectCategory('Website Hacking', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🖥️</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Website Hacking" data-ur="ویب سائٹ ہیکنگ">Website Hacking</span>
+                        </button>
+                        <button onclick="selectCategory('Phishing Scam', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🎣</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Phishing Scam" data-ur="فشنگ اسکیم">Phishing Scam</span>
+                        </button>
+                        <button onclick="selectCategory('Data Theft', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">📂</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Data Theft" data-ur="ڈیٹا چوری">Data Theft</span>
+                        </button>
+                        <button onclick="selectCategory('Other Cyber Crime', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Other Cyber Crime" data-ur="دیگر سائبر کرائم">Other Cyber Crime</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Section -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100">
+                    <!-- Progress Bar -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-xs font-bold text-gray-500" id="stepIndicator" data-en="Step 1 of 3" data-ur="مرحلہ 1 از 3">Step 1 of 3</span>
+                            <span class="text-xs font-extrabold text-primary" id="progressPercent">33%</span>
+                        </div>
+                        <div class="w-full bg-gray-250 rounded-full h-1.5 bg-gray-200">
+                            <div id="progressBar" class="progress-bar h-1.5 rounded-full transition-all duration-500" style="width: 33%"></div>
+                        </div>
+                    </div>
+
+                    <form id="cyberForm" onsubmit="handleSubmit(event)" class="space-y-6">
+                        <!-- Hidden inputs -->
+                        <input type="hidden" id="selectedCategory" required>
+
+                        <!-- STEP 1: Personal Information -->
+                        <div id="step1" class="step">
+                            <h3 class="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                                <span class="w-7 h-7 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                                <span data-en="Personal Information" data-ur="ذاتی معلومات">Personal Information</span>
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Full Name *" data-ur="مکمل نام *">Full Name *</label>
+                                    <input type="text" id="fullName" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="CNIC (Optional)" data-ur="شناختی کارڈ نمبر (اختیاری)">CNIC (Optional)</label>
+                                    <input type="text" id="cnic" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="XXXXX-XXXXXXX-X">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Mobile Number *" data-ur="موبائل نمبر *">Mobile Number *</label>
+                                    <input type="tel" id="mobileNumber" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. 0333-1234567">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Email Address *" data-ur="ای میل ایڈریس *">Email Address *</label>
+                                    <input type="email" id="email" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="you@example.com">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="City *" data-ur="شہر *">City *</label>
+                                <select id="city" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                                    <option value="" data-en="Select City" data-ur="شہر کا انتخاب کریں">Select City</option>
+                                    <option value="Karachi">Karachi</option>
+                                    <option value="Lahore">Lahore</option>
+                                    <option value="Islamabad">Islamabad</option>
+                                    <option value="Rawalpindi">Rawalpindi</option>
+                                    <option value="Faisalabad">Faisalabad</option>
+                                    <option value="Multan">Multan</option>
+                                    <option value="Peshawar">Peshawar</option>
+                                    <option value="Quetta">Quetta</option>
+                                    <option value="Gujranwala">Gujranwala</option>
+                                    <option value="Sialkot">Sialkot</option>
+                                    <option value="Other">Other / Outside Pakistan</option>
+                                </select>
+                            </div>
+                            <button type="button" onclick="nextStep(1)" class="w-full bg-primary text-white h-11 rounded-xl font-bold hover:bg-secondary hover:text-primary text-xs transition flex items-center justify-center gap-2">
+                                <span data-en="Next Step" data-ur="اگلا مرحلہ">Next Step</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- STEP 2: Incident Details -->
+                        <div id="step2" class="step hidden">
+                            <h3 class="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                                <span class="w-7 h-7 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                                <span data-en="Incident Details" data-ur="واقعے کی تفصیلات">Incident Details</span>
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Date of Incident *" data-ur="واقعے کی تاریخ *">Date of Incident *</label>
+                                    <input type="date" id="incidentDate" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Platform *" data-ur="پلیٹ فارم *">Platform *</label>
+                                    <select id="platform" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                                        <option value="">Select Platform</option>
+                                        <option value="Facebook">Facebook</option>
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="WhatsApp">WhatsApp</option>
+                                        <option value="TikTok">TikTok</option>
+                                        <option value="X (Twitter)">X (Twitter)</option>
+                                        <option value="YouTube">YouTube</option>
+                                        <option value="Banking App">Banking App</option>
+                                        <option value="Website">Website</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Suspect Profile Link (if any)" data-ur="مشکوک اکاؤنٹ کا لنک">Suspect Profile Link (if any)</label>
+                                    <input type="url" id="suspectProfile" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="https://facebook.com/username">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Suspect Phone (if any)" data-ur="مشکوک فون نمبر">Suspect Phone (if any)</label>
+                                    <input type="tel" id="suspectPhone" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. 0300-1234567">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Suspect Email (if any)" data-ur="مشکوک ای میل">Suspect Email (if any)</label>
+                                    <input type="email" id="suspectEmail" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="suspect@email.com">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Amount Lost (PKR - if applicable)" data-ur="کھوئی ہوئی رقم (اگر لاگو ہو)">Amount Lost (PKR - if applicable)</label>
+                                    <input type="number" id="amountLost" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. 50000">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Website URL (if applicable)" data-ur="ویب سائٹ کا لنک">Website URL (if applicable)</label>
+                                <input type="url" id="websiteUrl" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="https://example-scam-site.com">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Detailed Description *" data-ur="تفصیلی معلومات *">Detailed Description *</label>
+                                <div class="relative">
+                                    <textarea id="description" required rows="4" class="w-full p-4 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition resize-none" placeholder="Explain the incident, what happened, who contacted you, what threats/demands were made..."></textarea>
+                                    <button type="button" id="voiceBtn" onclick="startVoiceInput()" class="voice-btn absolute bottom-3 right-3 w-9 h-9 bg-secondary text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                        <i class="fas fa-microphone text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <button type="button" onclick="prevStep(2)" class="flex-1 bg-gray-200 text-primary h-11 rounded-xl font-bold hover:bg-gray-300 text-xs transition flex items-center justify-center gap-2">
+                                    <i class="fas fa-arrow-left"></i>
+                                    <span data-en="Previous" data-ur="پچھلا">Previous</span>
+                                </button>
+                                <button type="button" onclick="nextStep(2)" class="flex-1 bg-primary text-white h-11 rounded-xl font-bold hover:bg-secondary hover:text-primary text-xs transition flex items-center justify-center gap-2">
+                                    <span data-en="Next Step" data-ur="اگلا مرحلہ">Next Step</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: Evidence Upload -->
+                        <div id="step3" class="step hidden">
+                            <h3 class="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                                <span class="w-7 h-7 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                                <span data-en="Upload Evidence" data-ur="ثبوت اپلوڈ کریں">Upload Evidence</span>
+                            </h3>
+                            <div class="mb-6">
+                                <label class="block text-xs font-semibold text-gray-500 mb-2" data-en="Select Evidence Material" data-ur="ثبوت کے دستاویزات منتخب کریں">Select Evidence Material</label>
+                                <div id="uploadZone" class="upload-zone rounded-2xl p-8 text-center cursor-pointer bg-white" onclick="document.getElementById('evidenceInput').click()">
+                                    <input type="file" id="evidenceInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.wav,.mp4,.mkv,.txt" class="hidden" onchange="handleEvidenceSelect(event)">
+                                    <div class="w-14 h-14 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-cloud-upload-alt text-primary text-xl"></i>
+                                    </div>
+                                    <p class="text-sm font-bold text-primary mb-1" data-en="Drop files here or click to browse" data-ur="فائلیں یہاں ڈراپ کریں یا تلاش کرنے کے لیے کلک کریں">Drop files here or click to browse</p>
+                                    <p class="text-[11px] text-gray-500 leading-normal" data-en="Acceptable: Screenshots, Chat Exports, Bank Receipts, Videos, Audio, PDFs" data-ur="سپورٹڈ: اسکرین شاٹس، چیٹ ایکسپورٹ، بینک رسید، آڈیو، ویڈیوز، پی ڈی ایف">Acceptable: Screenshots, Chat Exports, Bank Receipts, Videos, Audio, PDFs</p>
+                                </div>
+                                
+                                <!-- File Preview List -->
+                                <div id="fileList" class="mt-4 space-y-2"></div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="flex items-start gap-2.5 cursor-pointer">
+                                    <input type="checkbox" required class="w-4 h-4 text-secondary rounded border-gray-300 focus:ring-secondary mt-0.5">
+                                    <span class="text-xs text-gray-600 leading-normal" data-en="I verify that all statements and evidence submitted are true and correct to the best of my knowledge." data-ur="میں تصدیق کرتا ہوں کہ فراہم کردہ تمام بیانات اور شواہد درست ہیں۔">I verify that all statements and evidence submitted are true and correct to the best of my knowledge.</span>
+                                </label>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <button type="button" onclick="prevStep(3)" class="flex-1 bg-gray-250 text-primary bg-gray-200 h-11 rounded-xl font-bold hover:bg-gray-300 text-xs transition flex items-center justify-center gap-2">
+                                    <i class="fas fa-arrow-left"></i>
+                                    <span data-en="Previous" data-ur="پچھلا">Previous</span>
+                                </button>
+                                <button type="submit" class="flex-1 bg-secondary text-primary h-11 rounded-xl font-bold hover:bg-primary hover:text-white text-xs transition flex items-center justify-center gap-2">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span data-en="Report Cyber Crime" data-ur="سائبر کرائم رپورٹ کریں">Report Cyber Crime</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Success / Report Progress screen -->
+                    <div id="resultPanel" class="hidden bg-white p-2 text-center">
+                        <div id="aiAnalyzingPanel" class="space-y-4 py-8">
+                            <div class="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center mx-auto animate-pulse">
+                                <i class="fas fa-robot text-secondary text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary" data-en="AI Reviewing Case Details..." data-ur="اے آئی کیس کی تفصیلات کا جائزہ لے رہا ہے...">AI Reviewing Case Details...</h3>
+                            <p class="text-xs text-gray-500 max-w-sm mx-auto leading-relaxed" data-en="Our assistant is analyzing the incident description to auto-categorize, generate risk assessment, and prep legal steps." data-ur="ہماری اے آئی آپ کے کیس کا جائزہ لے کر ایکشن پلان تیار کر رہی ہے۔">Our assistant is analyzing the incident description to auto-categorize, generate risk assessment, and prep legal steps.</p>
+                            <div class="flex justify-center gap-1.5 pt-2">
+                                <span class="w-2.5 h-2.5 bg-secondary rounded-full animate-bounce"></span>
+                                <span class="w-2.5 h-2.5 bg-secondary rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                                <span class="w-2.5 h-2.5 bg-secondary rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+                            </div>
+                        </div>
+
+                        <div id="aiSuccessPanel" class="hidden space-y-6 text-left">
+                            <div class="flex items-center gap-4 bg-green-50 p-4 rounded-2xl border border-green-100 mb-6">
+                                <div class="w-12 h-12 bg-green-150 rounded-full flex items-center justify-center shrink-0 bg-green-100 text-green-600">
+                                    <i class="fas fa-check text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-green-800 text-sm" data-en="Incident Successfully Pushed to Legal Panel" data-ur="واقعہ کامیابی کے ساتھ پینل میں منتقل ہو گیا">Incident Successfully Pushed to Legal Panel</h4>
+                                    <p class="text-[11px] text-green-700" data-en="Your legal complaint has been filed. Reference ID:" data-ur="آپ کی شکایت درج ہو چکی ہے۔ رجسٹریشن آئی ڈی:">Your legal complaint has been filed. Reference ID: <span class="font-mono font-bold" id="complaintRefId">CC-2026-00001</span></p>
+                                </div>
+                            </div>
+
+                            <!-- AI Assessment Summary Card -->
+                            <div class="bg-gradient-to-br from-primary to-[#233f65] text-white rounded-3xl p-6 shadow-xl space-y-4">
+                                <div class="flex items-center gap-2.5">
+                                    <i class="fas fa-robot text-secondary text-lg"></i>
+                                    <h3 class="font-bold text-base" data-en="AI Risk Assessment Report" data-ur="اے آئی خطرے کا جائزہ رپورٹ">AI Risk Assessment Report</h3>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 border-t border-b border-white/10 py-3 text-xs">
+                                    <div>
+                                        <p class="text-white/60 uppercase tracking-wider text-[9px] font-bold" data-en="Threat Severity" data-ur="شدت">Threat Severity</p>
+                                        <p id="aiSeverity" class="font-bold text-secondary text-sm">Medium Risk</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/60 uppercase tracking-wider text-[9px] font-bold" data-en="Classification Check" data-ur="درجہ بندی">Classification Check</p>
+                                        <p id="aiClassify" class="font-bold text-white text-sm">Financial Scams</p>
+                                    </div>
+                                </div>
+                                <div class="text-xs space-y-2 leading-relaxed">
+                                    <p class="text-white/80 font-bold" data-en="Immediate Safety Instructions:" data-ur="فوری حفاظتی ہدایات:">Immediate Safety Instructions:</p>
+                                    <ul class="list-disc pl-4 space-y-1 text-white/70" id="aiSteps">
+                                        <li>Secure your access keys and block suspicious accounts.</li>
+                                        <li>Take backups of payment receipt metadata.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-amber-50 rounded-2xl p-4 border border-amber-200/50 flex gap-3 text-xs leading-normal">
+                                <i class="fas fa-circle-info text-amber-600 mt-0.5 text-sm"></i>
+                                <div>
+                                    <p class="font-bold text-amber-800" data-en="What Happens Next?" data-ur="اگلا قدم کیا ہوگا؟">What Happens Next?</p>
+                                    <p class="text-amber-700 mt-1" data-en="An expert cybercrime lawyer is being matched to review your logs. You will receive an SMS and email notification once assigned." data-ur="ایک ماہر سائبر کرائم وکیل آپ کی فائل کا جائزہ لے گا۔ وکیل مقرر ہونے پر آپ کو مطلع کیا جائے گا۔">An expert cybercrime lawyer is being matched to review your logs. You will receive an SMS and email notification once assigned.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center pt-2">
+                                <button onclick="resetCyberForm()" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-secondary hover:text-primary transition text-xs" data-en="Submit Another Report" data-ur="دوسری رپورٹ جمع کروائیں">Submit Another Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Column: Information sidebar -->
+            <div class="space-y-6">
+                
+                <div class="bg-gradient-to-br from-primary to-dark text-white rounded-3xl p-6 shadow-xl border border-primary/20 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
+                            <i class="fas fa-shield-halved text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm" data-en="Assistance Center Workflow" data-ur="مدد کے عمل کا طریقہ کار">Assistance Center Workflow</h3>
+                            <p class="text-[10px] text-white/60">Professional Legal Guidance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative pl-6 border-l border-white/10 space-y-6 text-xs text-white/80 py-2">
+                        <div class="relative">
+                            <span class="absolute -left-[30px] top-0 w-4.5 h-4.5 rounded-full bg-secondary text-primary font-bold flex items-center justify-center text-[9px]">1</span>
+                            <p class="font-bold text-white" data-en="Report Incident" data-ur="رپورٹ درج کریں">Report Incident</p>
+                            <p class="text-[10px] text-white/60 mt-0.5" data-en="Submit incident data & upload screenshots securely." data-ur="تفصیلات جمع کروائیں اور ثبوت اپلوڈ کریں۔">Submit incident data & upload screenshots securely.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute -left-[30px] top-0 w-4.5 h-4.5 rounded-full bg-secondary text-primary font-bold flex items-center justify-center text-[9px]">2</span>
+                            <p class="font-bold text-white" data-en="AI Categorization" data-ur="اے آئی جائزہ">AI Categorization</p>
+                            <p class="text-[10px] text-white/60 mt-0.5" data-en="AI automatically reviews parameters and logs severity." data-ur="اے آئی خود کار طریقے سے خطرے کا جائزہ لیتی ہے۔">AI automatically reviews parameters and logs severity.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute -left-[30px] top-0 w-4.5 h-4.5 rounded-full bg-secondary text-primary font-bold flex items-center justify-center text-[9px]">3</span>
+                            <p class="font-bold text-white" data-en="Lawyer Allocation" data-ur="وکیل کا تقرر">Lawyer Allocation</p>
+                            <p class="text-[10px] text-white/60 mt-0.5" data-en="Admin designates an expert advocate to review evidence." data-ur="انتظامیہ ماہر وکیل مقرر کرتی ہے۔">Admin designates an expert advocate to review evidence.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute -left-[30px] top-0 w-4.5 h-4.5 rounded-full bg-secondary text-primary font-bold flex items-center justify-center text-[9px]">4</span>
+                            <p class="font-bold text-white" data-en="NCCIA Submission" data-ur="سرکاری شکایت">NCCIA Submission</p>
+                            <p class="text-[10px] text-white/60 mt-0.5" data-en="We guide and format draft to file official agency complaints." data-ur="ہم سرکاری ادارے (NCCIA) میں شکایت درج کرواتے ہیں۔">We guide and format draft to file official agency complaints.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 space-y-4">
+                    <h3 class="font-bold text-primary text-sm" data-en="Evidence Guidelines" data-ur="ثبوت جمع کرنے کی ہدایات">Evidence Guidelines</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed" data-en="High-quality evidence assists investigators and advocates in drafting a strong complaint file. Please compile:" data-ur="معیاری ثبوت کیس کو مضبوط بناتا ہے۔ برائے مہربانی درج ذیل شواہد جمع کریں:">High-quality evidence assists investigators and advocates in drafting a strong complaint file. Please compile:</p>
+                    <ul class="text-xs text-gray-700 space-y-2">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-check text-green-500 mt-1"></i>
+                            <span data-en="Screenshots of conversation logs containing timestamps." data-ur="گفتگو کے اسکرین شاٹس بشمول تاریخ اور وقت۔">Screenshots of conversation logs containing timestamps.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-check text-green-500 mt-1"></i>
+                            <span data-en="Transaction alerts, bank transfers, or receipt PDFs." data-ur="بینک ٹرانسفر یا ادائیگی کی رسیدیں اور پی ڈی ایف۔">Transaction alerts, bank transfers, or receipt PDFs.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-check text-green-500 mt-1"></i>
+                            <span data-en="Profile URLs of suspect pages rather than just display names." data-ur="مشکوک اکاؤنٹس کے یو آر ایل (لنک)۔">Profile URLs of suspect pages rather than just display names.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white/70 py-8 text-center text-xs shrink-0 mt-12 border-t border-white/5">
+        <p>&copy; 2026 Qanooni Mushawarat Pakistan. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Supabase Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+
+    <!-- App Scripts -->
+    <script>
+        let currentLanguage = localStorage.getItem('language') || 'en';
+        let currentStep = 1;
+        let uploadedFiles = [];
+
+        // Apply initial language configuration
+        updateLangUI();
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+            localStorage.setItem('language', currentLanguage);
+            updateLangUI();
+        }
+
+        function updateLangUI() {
+            document.documentElement.lang = currentLanguage;
+            document.documentElement.dir = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+
+            // Swap text contents
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const textVal = el.getAttribute(`data-${currentLanguage}`);
+                if (textVal) {
+                    el.textContent = textVal;
+                }
+            });
+
+            // Toggle Noto Nastaliq Font class
+            if (currentLanguage === 'ur') {
+                document.body.classList.add('urdu-ui');
+                document.body.classList.remove('font-english');
+                document.getElementById('langBtn').textContent = 'English';
+            } else {
+                document.body.classList.remove('urdu-ui');
+                document.body.classList.add('font-english');
+                document.getElementById('langBtn').textContent = 'اردو';
+            }
+
+            // Textarea Placeholder Adaptation
+            const descArea = document.getElementById('description');
+            if (descArea) {
+                if (currentLanguage === 'ur') {
+                    descArea.placeholder = "واقعے کی تفصیلات، کیا ہوا، کس نے رابطہ کیا، کیا مطالبات یا دھمکیاں دی گئیں درج کریں...";
+                } else {
+                    descArea.placeholder = "Explain the incident, what happened, who contacted you, what threats/demands were made...";
+                }
+            }
+
+            updateProgress();
+        }
+
+        // Category Cards Selection
+        function selectCategory(categoryName, element) {
+            // Remove active style from all cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('border-secondary', 'bg-secondary/10');
+            });
+            // Add active style to selected card
+            element.classList.add('border-secondary', 'bg-secondary/10');
+            
+            // Set value
+            document.getElementById('selectedCategory').value = categoryName;
+        }
+
+        // Multi-Step wizard
+        function nextStep(step) {
+            if (step === 1) {
+                // Validation for Step 1
+                if (!document.getElementById('fullName').value || !document.getElementById('mobileNumber').value || !document.getElementById('email').value || !document.getElementById('city').value) {
+                    alert(currentLanguage === 'en' ? 'Please fill out all required fields.' : 'براہ کرم تمام لازمی فیلڈز پُر کریں۔');
+                    return;
+                }
+            }
+            if (step === 2) {
+                // Validation for Step 2
+                if (!document.getElementById('selectedCategory').value) {
+                    alert(currentLanguage === 'en' ? 'Please select a complaint category from the top cards.' : 'براہ کرم سب سے اوپر کارڈز سے شکایت کے زمرے کا انتخاب کریں۔');
+                    return;
+                }
+                if (!document.getElementById('incidentDate').value || !document.getElementById('platform').value || !document.getElementById('description').value) {
+                    alert(currentLanguage === 'en' ? 'Please fill out all required incident details.' : 'براہ کرم واقعے کی تمام لازمی فیلڈز پُر کریں۔');
+                    return;
+                }
+            }
+
+            document.getElementById(`step${step}`).classList.add('hidden');
+            document.getElementById(`step${step + 1}`).classList.remove('hidden');
+            currentStep = step + 1;
+            updateProgress();
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${step}`).classList.add('hidden');
+            document.getElementById(`step${step - 1}`).classList.remove('hidden');
+            currentStep = step - 1;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const percent = (currentStep / 3) * 100;
+            document.getElementById('progressBar').style.width = `${percent}%`;
+            document.getElementById('progressPercent').textContent = `${Math.round(percent)}%`;
+            
+            const stepTextEn = `Step ${currentStep} of 3`;
+            const stepTextUr = `مرحلہ ${currentStep} از 3`;
+            document.getElementById('stepIndicator').textContent = currentLanguage === 'ur' ? stepTextUr : stepTextEn;
+        }
+
+        // Voice Recognition Support
+        function startVoiceInput() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert(currentLanguage === 'en' ? 'Voice input is not supported in this browser. Use Chrome.' : 'آواز کی شناخت اس براؤزر میں دستیاب نہیں ہے، کروم استعمال کریں۔');
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = currentLanguage === 'en' ? 'en-US' : 'ur-PK';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            recognition.onstart = () => {
+                const btn = document.getElementById('voiceBtn');
+                btn.classList.add('bg-red-500', 'text-white');
+                btn.innerHTML = '<i class="fas fa-stop"></i>';
+            };
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                const area = document.getElementById('description');
+                area.value += (area.value ? ' ' : '') + transcript;
+            };
+            
+            recognition.onend = () => {
+                const btn = document.getElementById('voiceBtn');
+                btn.classList.remove('bg-red-500', 'text-white');
+                btn.innerHTML = '<i class="fas fa-microphone"></i>';
+            };
+            
+            recognition.start();
+        }
+
+        // Handle File Selections
+        function handleEvidenceSelect(event) {
+            const files = event.target.files;
+            const listContainer = document.getElementById('fileList');
+            
+            Array.from(files).forEach(file => {
+                if (file.size > 20 * 1024 * 1024) {
+                    alert('File size must be under 20MB');
+                    return;
+                }
+                uploadedFiles.push(file);
+                
+                const fileItem = document.createElement('div');
+                fileItem.className = 'flex items-center justify-between bg-white border border-gray-200 p-3.5 rounded-xl shadow-sm';
+                fileItem.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        <i class="fas fa-file text-secondary text-sm"></i>
+                        <span class="text-xs font-semibold text-gray-700 truncate max-w-xs">${file.name}</span>
+                        <span class="text-[10px] text-gray-400">(${(file.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                    </div>
+                    <button type="button" onclick="removeEvidenceFile(this, '${file.name}')" class="text-red-500 hover:text-red-700 text-sm">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                listContainer.appendChild(fileItem);
+            });
+        }
+
+        function removeEvidenceFile(btnElement, filename) {
+            btnElement.parentElement.remove();
+            uploadedFiles = uploadedFiles.filter(f => f.name !== filename);
+        }
+
+        // Form submission & AI review simulation
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Hide wizard, show loading panel
+            document.getElementById('categoryGrid').parentElement.classList.add('hidden');
+            document.getElementById('cyberForm').classList.add('hidden');
+            document.getElementById('resultPanel').classList.remove('hidden');
+            
+            // Collect Form Values
+            const name = document.getElementById('fullName').value.trim();
+            const clientCnic = document.getElementById('cnic').value.trim() || 'N/A';
+            const phone = document.getElementById('mobileNumber').value.trim();
+            const clientEmail = document.getElementById('email').value.trim();
+            const clientCity = document.getElementById('city').value;
+            const category = document.getElementById('selectedCategory').value;
+            const dateOfIncident = document.getElementById('incidentDate').value;
+            const platform = document.getElementById('platform').value;
+            const suspectProfile = document.getElementById('suspectProfile').value.trim() || 'N/A';
+            const suspectPhone = document.getElementById('suspectPhone').value.trim() || 'N/A';
+            const suspectEmail = document.getElementById('suspectEmail').value.trim() || 'N/A';
+            const websiteUrl = document.getElementById('websiteUrl').value.trim() || 'N/A';
+            const amountLost = parseFloat(document.getElementById('amountLost').value) || 0;
+            const descriptionText = document.getElementById('description').value.trim();
+
+            // Run Simulated Local AI Model review (inspects parameters and logs a response)
+            let severity = "Medium Severity";
+            let aiClassification = category;
+            let safetyInstructions = [];
+
+            const lowerDesc = descriptionText.toLowerCase();
+            if (amountLost > 100000 || lowerDesc.includes('blackmail') || lowerDesc.includes('sextortion') || lowerDesc.includes('suicide') || lowerDesc.includes('death')) {
+                severity = "High Severity / Urgent Attention Required";
+            } else if (amountLost === 0 && !lowerDesc.includes('threat') && !lowerDesc.includes('harass')) {
+                severity = "Low Severity / Educational Advisory";
+            }
+
+            if (category === "Online Financial Fraud" || category === "Banking Fraud" || amountLost > 0) {
+                safetyInstructions = [
+                    "Report the transaction details immediately to your bank helpline to lock/dispute the account details.",
+                    "Save all SMS alerts, transaction IDs, and receipt screenshots.",
+                    "Do not transfer any further funds under threats of legal or financial penalty."
+                ];
+            } else if (category === "Online Blackmail / Sextortion" || category === "Cyber Harassment") {
+                safetyInstructions = [
+                    "Deactivate or lock your social media profile privacy settings immediately.",
+                    "Do not delete the chat transcripts - block the suspect but preserve chat backups.",
+                    "Do not send money or photos under blackmail demands."
+                ];
+            } else if (category.includes("Account Hacked") || category.includes("Email Hacking")) {
+                safetyInstructions = [
+                    "Initiate Account Recovery procedures with the platform provider.",
+                    "Enable Two-Factor Authentication (2FA) on all email, SMS, and messaging applications.",
+                    "Change passwords of associated recovery emails."
+                ];
+            } else {
+                safetyInstructions = [
+                    "Collect and back up chronological conversation records.",
+                    "Avoid further engagement with the suspect accounts or links."
+                ];
+            }
+
+            // Set AI panel details
+            document.getElementById('aiSeverity').textContent = severity;
+            document.getElementById('aiClassify').textContent = aiClassification;
+            
+            const stepsList = document.getElementById('aiSteps');
+            stepsList.innerHTML = '';
+            safetyInstructions.forEach(instruction => {
+                const li = document.createElement('li');
+                li.textContent = instruction;
+                stepsList.appendChild(li);
+            });
+
+            // Upload files to Supabase Storage if initialized
+            let fileUrls = [];
+            const activeSupabase = (typeof supabase !== 'undefined') ? supabase : (typeof supabaseClient !== 'undefined' ? supabaseClient : null);
+            
+            if (activeSupabase && uploadedFiles.length > 0) {
+                for (const file of uploadedFiles) {
+                    try {
+                        const fileExt = file.name.split('.').pop();
+                        const uniqueName = `evidence-${Math.random().toString(36).substring(2, 15)}-${Date.now()}.${fileExt}`;
+                        
+                        // Attempt upload to 'cyber-crime-evidence' or fallback to 'case-documents'
+                        let bucketName = 'cyber-crime-evidence';
+                        const { error: uploadError } = await activeSupabase.storage
+                            .from(bucketName)
+                            .upload(uniqueName, file);
+                            
+                        if (uploadError) {
+                            console.warn("Upload to cyber-crime-evidence failed, trying fallback bucket:", uploadError.message);
+                            bucketName = 'case-documents';
+                            const { error: fallbackError } = await activeSupabase.storage
+                                .from(bucketName)
+                                .upload(uniqueName, file);
+                            if (fallbackError) throw fallbackError;
+                        }
+                        
+                        const { data } = activeSupabase.storage.from(bucketName).getPublicUrl(uniqueName);
+                        if (data && data.publicUrl) {
+                            fileUrls.push(data.publicUrl);
+                        }
+                    } catch (fileErr) {
+                        console.error("Evidence upload failed for file:", file.name, fileErr);
+                    }
+                }
+            }
+
+            const attachmentString = fileUrls.join(',');
+
+            // Save record payload
+            const payload = {
+                name: name,
+                cnic: clientCnic,
+                mobile: phone,
+                email: clientEmail,
+                city: clientCity,
+                category: category,
+                date_of_incident: dateOfIncident,
+                platform: platform,
+                suspect_profile: suspectProfile,
+                suspect_phone: suspectPhone,
+                suspect_email: suspectEmail,
+                website_url: websiteUrl,
+                amount_lost: amountLost,
+                description: descriptionText,
+                evidence_attachments: attachmentString || null,
+                priority: severity.includes('High') ? 'High' : (severity.includes('Low') ? 'Low' : 'Medium'),
+                status: 'New',
+                assigned_lawyer: null,
+                ai_severity: severity,
+                ai_notes: `Auto-categorized as: ${aiClassification}. Risk: ${severity}. Platform check: ${platform}.`
+            };
+
+            let referenceId = 'CC-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('cyber_crime_complaints')
+                        .insert([payload])
+                        .select();
+                        
+                    if (error) {
+                        // Fallback if table doesn't exist: save as special service ticket in standard 'cases' table
+                        console.warn("Table 'cyber_crime_complaints' not found. Inserting into standard 'cases' table as a fallback.");
+                        const casesPayload = {
+                            client_name: name,
+                            client_phone: phone,
+                            client_email: clientEmail,
+                            client_nic: clientCnic,
+                            case_type: `Cyber Crime - ${category}`,
+                            case_description: `[AI RISK: ${severity}]\nPlatform: ${platform}\nSuspect Profile: ${suspectProfile}\nSuspect Phone: ${suspectPhone}\nWebsite URL: ${websiteUrl}\nAmount Lost: ${amountLost}\n\nDescription: ${descriptionText}`,
+                            case_priority: severity.includes('High') ? 'high' : (severity.includes('Low') ? 'low' : 'medium'),
+                            attachment: attachmentString || null,
+                            status: 'Pending',
+                            remarks: `City: ${clientCity}. Incident Date: ${dateOfIncident}. Suspect Email: ${suspectEmail}.`
+                        };
+                        
+                        const { data: fallbackData, error: fallbackError } = await activeSupabase
+                            .from('cases')
+                            .insert([casesPayload])
+                            .select();
+                            
+                        if (fallbackError) throw fallbackError;
+                        if (fallbackData && fallbackData[0]) {
+                            referenceId = 'LE-' + new Date().getFullYear() + '-' + String(fallbackData[0].id).padStart(5, '0');
+                        }
+                    } else if (data && data[0]) {
+                        referenceId = 'CC-' + new Date().getFullYear() + '-' + String(data[0].id).padStart(5, '0');
+                    }
+                } else {
+                    // Save in local storage
+                    console.warn("Supabase not active. Storing complaint in local storage.");
+                    let localComplaints = JSON.parse(localStorage.getItem('cyber_crime_complaints') || '[]');
+                    payload.id = Date.now();
+                    payload.created_at = new Date().toISOString();
+                    localComplaints.push(payload);
+                    localStorage.setItem('cyber_crime_complaints', JSON.stringify(localComplaints));
+                }
+            } catch (dbErr) {
+                console.error("DB storage error, using local storage fallback", dbErr);
+                let localComplaints = JSON.parse(localStorage.getItem('cyber_crime_complaints') || '[]');
+                payload.id = Date.now();
+                payload.created_at = new Date().toISOString();
+                localComplaints.push(payload);
+                localStorage.setItem('cyber_crime_complaints', JSON.stringify(localComplaints));
+            }
+
+            document.getElementById('complaintRefId').textContent = referenceId;
+
+            // Wait 1.5 seconds to show simulated AI analysis animation, then switch view
+            setTimeout(() => {
+                document.getElementById('aiAnalyzingPanel').classList.add('hidden');
+                document.getElementById('aiSuccessPanel').classList.remove('hidden');
+            }, 1500);
+        }
+
+        function resetCyberForm() {
+            document.getElementById('categoryGrid').parentElement.classList.remove('hidden');
+            document.getElementById('cyberForm').classList.remove('hidden');
+            document.getElementById('resultPanel').classList.add('hidden');
+            document.getElementById('aiAnalyzingPanel').classList.remove('hidden');
+            document.getElementById('aiSuccessPanel').classList.add('hidden');
+            
+            document.getElementById('cyberForm').reset();
+            // Reset active categories styles
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('border-secondary', 'bg-secondary/10');
+            });
+            document.getElementById('selectedCategory').value = '';
+            
+            currentStep = 1;
+            uploadedFiles = [];
+            document.getElementById('fileList').innerHTML = '';
+            updateProgress();
+        }
+    </script>
+</body>
+</html>

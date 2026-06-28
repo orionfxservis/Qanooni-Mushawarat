@@ -118,6 +118,14 @@
             </span>
         </div>
 
+        <button onclick="switchTab('blogs')" id="tab-btn-blogs"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-newspaper w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Manage Blogs</span>
+
+        </button>
+
         <button onclick="switchTab('know-rights')" id="tab-btn-know-rights"
             class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
 
@@ -147,6 +155,14 @@
 
             <i class="fas fa-file-signature w-5 text-center"></i>
             <span class="font-medium text-[11px]">Case Submission</span>
+
+        </button>
+
+        <button onclick="switchTab('cyber-crime-complaints')" id="tab-btn-cyber-crime-complaints"
+            class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
+
+            <i class="fas fa-user-shield w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Cyber Crime Complaints</span>
 
         </button>
 
@@ -630,6 +646,174 @@
                 </div>
             </div>
             
+            <!-- Manage Blogs Tab -->
+            <div id="tab-blogs" class="tab-content">
+                <!-- Add New Blog -->
+                <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80 mb-6">
+                    <h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+                        <i class="fas fa-plus-circle text-secondary"></i>
+                        Add New Blog
+                    </h3>
+                    <form id="addBlogForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Title (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogTitleEn" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="e.g. How to save money">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Slug (Auto-generated) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogSlug" required readonly class="w-full px-4 py-2 border border-gray-200 rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed" placeholder="how-to-save-money">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div dir="rtl">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Title (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogTitleUr" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="عنوان یہاں لکھیں">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Author Name <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogAuthor" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="e.g. Ali Khan">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Category (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogCategoryEn" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="e.g. Family Law">
+                            </div>
+                            <div dir="rtl">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Category (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogCategoryUr" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="کیٹیگری یہاں لکھیں">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Blog Image URL <span class="text-red-500">*</span></label>
+                                <input type="url" id="blogImage" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="https://example.com/image.jpg">
+                                <p class="text-[11px] text-gray-500 mt-1">Recommended aspect ratio: 16:9</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Status <span class="text-red-500">*</span></label>
+                                <select id="blogStatus" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition bg-white">
+                                    <option value="Publish">Publish</option>
+                                    <option value="Draft">Draft</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">SEO Title</label>
+                                <input type="text" id="blogSeoTitle" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Optimized title for search engines...">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Meta Description</label>
+                                <input type="text" id="blogMetaDesc" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Brief meta description for SEO...">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Short Description (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogDescEn" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Brief summary for the card...">
+                            </div>
+                            <div dir="rtl">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Short Description (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogDescUr" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="مختصر تفصیل...">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Content (English) <span class="text-red-500">*</span></label>
+                                <textarea id="blogContentEn" required rows="6" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Write your blog content here..."></textarea>
+                            </div>
+                            <div dir="rtl">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Content (Urdu) <span class="text-red-500">*</span></label>
+                                <textarea id="blogContentUr" required rows="6" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="مضمون یہاں لکھیں..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-4 mt-6">
+                            <button type="button" onclick="alert('Publish action')" id="btnSaveBlog" class="bg-secondary text-primary px-8 py-2.5 rounded-xl font-bold hover:bg-[#b08d22] transition">
+                                Publish
+                            </button>
+                            <button type="button" onclick="alert('Publish to Facebook action')" id="btnPublishFacebook" class="bg-[#1877f2] text-white px-6 py-2.5 rounded-xl font-bold hover:bg-[#166fe5] transition flex items-center gap-2">
+                                <i class="fab fa-facebook"></i> Publish on Facebook
+                            </button>
+                            <button type="button" onclick="alert('Cancel action')" id="btnCancelBlog" class="bg-gray-500 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-gray-600 transition hidden">
+                                Cancel Edit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Existing Blogs -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+                        <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                            <i class="fas fa-list text-secondary"></i>
+                            Existing Blogs
+                        </h3>
+                        <div class="flex flex-wrap gap-3">
+                            <input type="text" id="blogSearchInput" placeholder="Search blog..." class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition text-sm">
+                            <select id="blogCategoryFilter" class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition text-sm bg-white">
+                                <option value="All">All Categories</option>
+                                <option value="Family Law">Family Law</option>
+                                <option value="Corporate Law">Corporate Law</option>
+                                <option value="Property Law">Property Law</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-gray-100 bg-gray-50/50 text-[13px] text-gray-500">
+                                    <th class="py-3 px-4 font-semibold rounded-tl-xl w-10"><input type="checkbox" id="selectAllBlogs" class="rounded"></th>
+                                    <th class="py-3 px-2 font-semibold w-16">Image</th>
+                                    <th class="py-3 px-4 font-semibold">Title</th>
+                                    <th class="py-3 px-4 font-semibold">Category</th>
+                                    <th class="py-3 px-4 font-semibold">Status</th>
+                                    <th class="py-3 px-4 font-semibold">Views</th>
+                                    <th class="py-3 px-4 font-semibold">Date</th>
+                                    <th class="py-3 px-4 font-semibold rounded-tr-xl text-right w-24">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blogsTableBody">
+                                <!-- Dummy Data -->
+                                <tr class="border-b border-gray-50 hover:bg-gray-50/50 transition">
+                                    <td class="py-3 px-4"><input type="checkbox" class="rounded"></td>
+                                    <td class="py-3 px-2">
+                                        <div class="w-10 h-10 rounded overflow-hidden bg-gray-200">
+                                            <img src="../images/bg-slide-show/family-law.jpg" class="w-full h-full object-cover">
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <p class="font-semibold text-[13px] text-gray-800">Understanding Family Law</p>
+                                        <p class="text-[12px] text-gray-500 font-urdu" dir="rtl">فیملی لا کو سمجھنا</p>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-[11px] font-semibold">Family Law</span>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[11px] font-semibold">Publish</span>
+                                    </td>
+                                    <td class="py-3 px-4 text-[13px] text-gray-600">124</td>
+                                    <td class="py-3 px-4 text-[13px] text-gray-600">Oct 15, 2026</td>
+                                    <td class="py-3 px-4 text-right space-x-2">
+                                        <button class="text-blue-500 hover:text-blue-700 transition" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="text-red-500 hover:text-red-700 transition" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Know Your Rights Tab -->
             <div id="tab-know-rights" class="tab-content">
                 <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
@@ -732,6 +916,82 @@
                         </table>
                         <div id="noCasesMsg" class="hidden text-center py-10 text-gray-400">
                             No case submissions found.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cyber Crime Complaints Tab -->
+            <div id="tab-cyber-crime-complaints" class="tab-content">
+                <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-primary">Cyber Crime Complaints</h3>
+                            <p class="text-xs text-gray-500 mt-1">Review legal complaints, AI risk evaluations, evidence materials, and coordinate lawyer assignment.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Search & Filters -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-6 bg-slate-100/50 p-4 rounded-xl border border-gray-200/50">
+                        <input type="text" id="cyberSearchInput" oninput="filterCyberComplaints()" placeholder="Search by name/phone..." class="h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none">
+                        
+                        <select id="cyberCategoryFilter" onchange="filterCyberComplaints()" class="h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none">
+                            <option value="">All Categories</option>
+                            <option value="Online Financial Fraud">Financial Fraud</option>
+                            <option value="WhatsApp / SMS Scam">WhatsApp/SMS Scam</option>
+                            <option value="Fake Social Media Account">Fake Account</option>
+                            <option value="Email Hacking">Email Hacking</option>
+                            <option value="Facebook / Instagram Account Hacked">Social Account Hack</option>
+                            <option value="Identity Theft">Identity Theft</option>
+                            <option value="Banking Fraud">Banking Fraud</option>
+                            <option value="Online Blackmail / Sextortion">Blackmail/Sextortion</option>
+                            <option value="Cyber Harassment">Cyber Harassment</option>
+                            <option value="Child Online Abuse">Child Online Abuse</option>
+                            <option value="E-Commerce Fraud">E-Commerce Fraud</option>
+                            <option value="Website Hacking">Website Hacking</option>
+                            <option value="Phishing Scam">Phishing Scam</option>
+                            <option value="Data Theft">Data Theft</option>
+                            <option value="Other Cyber Crime">Other</option>
+                        </select>
+
+                        <select id="cyberStatusFilter" onchange="filterCyberComplaints()" class="h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none">
+                            <option value="">All Statuses</option>
+                            <option value="New">New</option>
+                            <option value="Under Review">Under Review</option>
+                            <option value="Evidence Required">Evidence Required</option>
+                            <option value="Lawyer Assigned">Lawyer Assigned</option>
+                            <option value="Referred to NCCIA">Referred to NCCIA</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+
+                        <select id="cyberPriorityFilter" onchange="filterCyberComplaints()" class="h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none">
+                            <option value="">All Priorities</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-gray-400 border-b border-gray-150 text-[12px] uppercase tracking-wider font-bold">
+                                    <th class="pb-4 font-semibold px-2">Complaint ID</th>
+                                    <th class="pb-4 font-semibold px-2">Client Info</th>
+                                    <th class="pb-4 font-semibold px-2">Category & Platform</th>
+                                    <th class="pb-4 font-semibold px-2">City</th>
+                                    <th class="pb-4 font-semibold px-2">Priority</th>
+                                    <th class="pb-4 font-semibold px-2">Status</th>
+                                    <th class="pb-4 font-semibold px-2">Assigned Lawyer</th>
+                                    <th class="pb-4 font-semibold text-right px-2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cyberComplaintsTableBody">
+                                <!-- Dynamically loaded from Supabase or LocalStorage -->
+                            </tbody>
+                        </table>
+                        <div id="noCyberComplaintsMsg" class="hidden text-center py-10 text-gray-400">
+                            No cyber crime complaints found.
                         </div>
                     </div>
                 </div>
@@ -913,6 +1173,195 @@
         </div>
     </div>
 
+    <!-- Cyber Crime Details Modal -->
+    <div id="cyberDetailsModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col max-h-[92vh]">
+            <!-- Header -->
+            <div class="bg-primary text-white px-6 py-4 flex justify-between items-center shrink-0">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fas fa-user-shield text-secondary"></i>
+                    <span>Cyber Crime Incident Report</span>
+                    <span id="cyberModalId" class="text-xs bg-white/20 px-2 py-0.5 rounded font-mono"></span>
+                </h3>
+                <button onclick="closeCyberModal()" class="text-white hover:text-secondary text-xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <!-- Body -->
+            <div class="p-6 overflow-y-auto space-y-6">
+                <!-- Client Info Grid -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-gray-200">
+                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Personal Information</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Full Name</p>
+                            <p id="cyberModalClientName" class="font-bold text-gray-800"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">CNIC Number</p>
+                            <p id="cyberModalCNIC" class="font-mono text-gray-700"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Mobile / Phone</p>
+                            <p id="cyberModalPhone" class="text-gray-700 font-mono"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Email Address</p>
+                            <p id="cyberModalEmail" class="text-gray-700"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">City</p>
+                            <p id="cyberModalCity" class="text-gray-700"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incident Details -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-gray-200">
+                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider mb-3">Incident Parameters</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Category</p>
+                            <p id="cyberModalCategory" class="font-semibold text-secondary"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Date of Incident</p>
+                            <p id="cyberModalIncidentDate" class="text-gray-700"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Platform Involved</p>
+                            <p id="cyberModalPlatform" class="text-gray-700 font-semibold"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Amount Lost</p>
+                            <p id="cyberModalAmountLost" class="text-red-600 font-bold"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Suspect Account / URL</p>
+                            <p id="cyberModalSuspectProfile" class="text-blue-600 truncate"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Suspect Phone / Contact</p>
+                            <p id="cyberModalSuspectPhone" class="text-gray-700 font-mono"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Suspect Email</p>
+                            <p id="cyberModalSuspectEmail" class="text-gray-700"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Scam Website URL</p>
+                            <p id="cyberModalWebsite" class="text-blue-600 truncate"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description & Evidence -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400 mb-1">Detailed Description</p>
+                        <div id="cyberModalDescription" class="text-xs text-gray-700 bg-slate-50 p-4 rounded-xl border border-gray-200 leading-relaxed max-h-40 overflow-y-auto whitespace-pre-wrap"></div>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-gray-400 mb-1.5">Evidence Files & Receipts</p>
+                        <div id="cyberModalEvidence" class="flex flex-wrap gap-2 bg-slate-50 p-4 rounded-xl border border-gray-200 min-h-[80px] max-h-40 overflow-y-auto">
+                            <!-- Links generated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Review Summary -->
+                <div class="bg-gradient-to-r from-primary to-accent text-white p-5 rounded-2xl shadow-md space-y-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-robot text-secondary"></i>
+                        <h4 class="text-xs font-bold uppercase tracking-wider">AI Risk Analysis Summary</h4>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-xs border-t border-b border-white/10 py-2.5">
+                        <div>
+                            <p class="text-white/60 text-[9px] uppercase font-bold">Risk Level Assessment</p>
+                            <p id="cyberModalAiSeverity" class="font-bold text-secondary"></p>
+                        </div>
+                        <div>
+                            <p class="text-white/60 text-[9px] uppercase font-bold">Auto-Classification Notes</p>
+                            <p id="cyberModalAiNotes" class="font-semibold text-white/90"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NCCIA Filing Toolkit -->
+                <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200/60 space-y-3 text-xs leading-normal">
+                    <div class="flex items-center gap-2 text-amber-800">
+                        <i class="fas fa-briefcase"></i>
+                        <h4 class="font-bold uppercase tracking-wider">NCCIA Filing Assistant Toolkit</h4>
+                    </div>
+                    <p class="text-amber-700">Prepare case drafts to report this incident to the official National Cyber Crime Investigation Agency (NCCIA) portal.</p>
+                    
+                    <div class="bg-white border border-amber-200 rounded-xl p-3 text-gray-700 font-mono text-[11px] select-all cursor-pointer whitespace-pre-wrap max-h-36 overflow-y-auto" id="ncciaTemplateText">
+                        <!-- Template text copied dynamically -->
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button onclick="copyNcciaTemplate()" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold px-4 py-2 rounded-lg transition text-xs flex items-center gap-1.5 shadow-sm">
+                            <i class="fas fa-copy"></i>
+                            Copy Complaint Text
+                        </button>
+                        <a href="https://complaint.fia.gov.pk" target="_blank" class="bg-secondary text-primary font-bold px-4 py-2 rounded-lg transition text-xs flex items-center gap-1.5 shadow-sm hover:opacity-90">
+                            <i class="fas fa-external-link-alt"></i>
+                            File Official Complaint
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Action Section -->
+                <div class="border-t border-gray-100 pt-5 space-y-4">
+                    <h4 class="text-xs font-bold text-primary uppercase tracking-wider">Complaint Management</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Assign Lawyer -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Assign Cybercrime Advocate</label>
+                            <select id="cyberModalAssignLawyer" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                                <option value="">Unassigned</option>
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <!-- Change Status -->
+                        <div>
+                            <label class="block text-[11px] font-semibold text-gray-500 mb-1">Update Action Status</label>
+                            <select id="cyberModalChangeStatus" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                                <option value="New">New</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Evidence Required">Evidence Required</option>
+                                <option value="Lawyer Assigned">Lawyer Assigned</option>
+                                <option value="Referred to NCCIA">Referred to NCCIA</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Remarks -->
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Advocate Updates / Remarks</label>
+                        <textarea id="cyberModalRemarks" rows="2" class="w-full px-2.5 py-2 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition resize-none" placeholder="Add progress report or coordination steps..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="bg-slate-50 px-6 py-4 flex justify-between shrink-0 border-t border-t-gray-150">
+                <button id="cyberModalDeleteBtn" onclick="deleteCyberComplaintBtn()" class="px-4 h-9 rounded-lg bg-red-500 text-white font-bold text-xs shadow hover:bg-red-600 transition">
+                    Delete Complaint
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="closeCyberModal()" class="px-4 h-9 rounded-lg bg-gray-200 text-gray-700 font-bold text-xs hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button onclick="saveCyberComplaintChanges()" class="px-5 h-9 rounded-lg bg-primary text-white font-bold text-xs shadow hover:bg-accent transition">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 	<script src="../js/supabase.js"></script>
 	<script src="../js/dashboard.js"></script>
@@ -948,6 +1397,7 @@
                 'know-laws': 'Know The Laws',
                 'services': 'Our Services',
                 'case-submission': 'Case Submition',
+                'cyber-crime-complaints': 'Cyber Crime Complaints',
                 'ai-support': 'AI Legal Support Chats',
                 'lawyers-pannel': 'Lawyers Pannel',
                 'testimonials': 'Testimonials',
@@ -957,6 +1407,7 @@
             
             if(tabId === 'lawyers' || tabId === 'dashboard') loadLawyers();
             if(tabId === 'ai-support' || tabId === 'dashboard') fetchAiSupportChats();
+            if(tabId === 'cyber-crime-complaints' || tabId === 'dashboard') fetchCyberComplaints();
         }
 
         // Load Lawyers from LocalStorage
@@ -1049,6 +1500,12 @@
                 fetchAiSupportChats();
             } catch (e) {
                 console.error("Error fetching AI support chats:", e);
+            }
+
+            try {
+                fetchCyberComplaints();
+            } catch (e) {
+                console.error("Error fetching cyber complaints:", e);
             }
         };
 
@@ -1945,6 +2402,335 @@
                 console.log(`%c[NOTIFICATION -> LAWYER (${newLawyer})]:%c You have been assigned to Case ID LE-XXXXX for client ${originalCase.client_name}.`, 'color: green; font-weight: bold;', 'color: inherit;');
             }
         }
+
+        // ==========================================
+        // CYBER CRIME COMPLAINTS CODE
+        // ==========================================
+        let allCyberComplaints = [];
+        let selectedCyberComplaintId = null;
+
+        async function fetchCyberComplaints() {
+            const tableBody = document.getElementById('cyberComplaintsTableBody');
+            const noMsg = document.getElementById('noCyberComplaintsMsg');
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            if (!activeSupabase) {
+                console.warn("Using LocalStorage fallback for cyber complaints list");
+                allCyberComplaints = JSON.parse(localStorage.getItem('cyber_crime_complaints') || '[]');
+                if (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') {
+                    allCyberComplaints = allCyberComplaints.filter(c => c.assigned_lawyer === currentUser.full_name);
+                }
+                renderCyberComplaintsTable(allCyberComplaints);
+                return;
+            }
+
+            try {
+                let query = activeSupabase.from('cyber_crime_complaints').select('*').order('created_at', { ascending: false });
+                
+                if (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') {
+                    query = query.eq('assigned_lawyer', currentUser.full_name);
+                }
+
+                const { data, error } = await query;
+                if (error) {
+                    // Fallback to localStorage if table doesn't exist
+                    allCyberComplaints = JSON.parse(localStorage.getItem('cyber_crime_complaints') || '[]');
+                    if (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') {
+                        allCyberComplaints = allCyberComplaints.filter(c => c.assigned_lawyer === currentUser.full_name);
+                    }
+                } else {
+                    allCyberComplaints = data || [];
+                }
+                renderCyberComplaintsTable(allCyberComplaints);
+            } catch (err) {
+                console.error("Error fetching cyber complaints:", err);
+                allCyberComplaints = JSON.parse(localStorage.getItem('cyber_crime_complaints') || '[]');
+                if (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') {
+                    allCyberComplaints = allCyberComplaints.filter(c => c.assigned_lawyer === currentUser.full_name);
+                }
+                renderCyberComplaintsTable(allCyberComplaints);
+            }
+        }
+
+        function renderCyberComplaintsTable(complaints) {
+            const tableBody = document.getElementById('cyberComplaintsTableBody');
+            const noMsg = document.getElementById('noCyberComplaintsMsg');
+            
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+            
+            if (complaints.length === 0) {
+                noMsg.classList.remove('hidden');
+                return;
+            }
+            
+            noMsg.classList.add('hidden');
+            
+            complaints.forEach(c => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
+                
+                const complaintIdString = 'CC-' + new Date(c.created_at || Date.now()).getFullYear() + '-' + String(c.id || '').padStart(5, '0');
+                
+                const priorityColors = {
+                    'Low': 'bg-blue-50 text-blue-700 border border-blue-100',
+                    'Medium': 'bg-yellow-50 text-yellow-700 border border-yellow-100',
+                    'High': 'bg-red-50 text-red-700 border border-red-100'
+                };
+                const priorityBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold uppercase ${priorityColors[c.priority] || 'bg-gray-50 text-gray-600'}">${c.priority || 'Medium'}</span>`;
+                
+                const statusColors = {
+                    'New': 'bg-yellow-100 text-yellow-800 font-semibold',
+                    'Under Review': 'bg-blue-100 text-blue-800 font-semibold',
+                    'Evidence Required': 'bg-orange-100 text-orange-850 font-semibold',
+                    'Lawyer Assigned': 'bg-indigo-100 text-indigo-800 font-semibold',
+                    'Referred to NCCIA': 'bg-purple-100 text-purple-800 font-semibold',
+                    'Closed': 'bg-green-100 text-green-800 font-semibold'
+                };
+                const statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-bold ${statusColors[c.status] || 'bg-gray-100 text-gray-700'}">${c.status || 'New'}</span>`;
+                
+                tr.innerHTML = `
+                    <td class="py-4 px-2 font-mono font-bold text-gray-800">${complaintIdString}</td>
+                    <td class="py-4 px-2">
+                        <div class="font-bold text-gray-800">${c.name}</div>
+                        <div class="text-[11px] text-gray-400 font-mono">${c.mobile}</div>
+                    </td>
+                    <td class="py-4 px-2 font-medium text-gray-700">
+                        <div>${c.category}</div>
+                        <div class="text-[10px] text-gray-400">${c.platform || 'N/A'}</div>
+                    </td>
+                    <td class="py-4 px-2 font-semibold text-gray-700">${c.city}</td>
+                    <td class="py-4 px-2">${priorityBadge}</td>
+                    <td class="py-4 px-2">${statusBadge}</td>
+                    <td class="py-4 px-2 font-medium text-gray-700">${c.assigned_lawyer || '<span class="text-gray-400 italic">Unassigned</span>'}</td>
+                    <td class="py-4 px-2 text-right">
+                        <button onclick="openCyberComplaintModal('${c.id || c.created_at}')" class="px-3 py-1 bg-secondary text-primary rounded-lg text-xs font-bold hover:opacity-80 transition shadow-sm">
+                            View Details
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function filterCyberComplaints() {
+            const query = document.getElementById('cyberSearchInput').value.toLowerCase();
+            const category = document.getElementById('cyberCategoryFilter').value;
+            const status = document.getElementById('cyberStatusFilter').value;
+            const priority = document.getElementById('cyberPriorityFilter').value;
+
+            const filtered = allCyberComplaints.filter(c => {
+                const matchesSearch = c.name.toLowerCase().includes(query) || c.mobile.includes(query);
+                const matchesCategory = !category || c.category === category;
+                const matchesStatus = !status || c.status === status;
+                const matchesPriority = !priority || c.priority === priority;
+                return matchesSearch && matchesCategory && matchesStatus && matchesPriority;
+            });
+            renderCyberComplaintsTable(filtered);
+        }
+
+        function openCyberComplaintModal(id) {
+            const complaint = allCyberComplaints.find(c => (c.id == id || c.created_at == id));
+            if (!complaint) return;
+            
+            selectedCyberComplaintId = id;
+            
+            const complaintIdString = 'CC-' + new Date(complaint.created_at || Date.now()).getFullYear() + '-' + String(complaint.id || '').padStart(5, '0');
+            document.getElementById('cyberModalId').textContent = complaintIdString;
+            document.getElementById('cyberModalClientName').textContent = complaint.name;
+            document.getElementById('cyberModalCNIC').textContent = complaint.cnic || 'N/A';
+            document.getElementById('cyberModalPhone').textContent = complaint.mobile;
+            document.getElementById('cyberModalEmail').textContent = complaint.email || 'N/A';
+            document.getElementById('cyberModalCity').textContent = complaint.city;
+            
+            document.getElementById('cyberModalCategory').textContent = complaint.category;
+            document.getElementById('cyberModalIncidentDate').textContent = complaint.date_of_incident;
+            document.getElementById('cyberModalPlatform').textContent = complaint.platform;
+            document.getElementById('cyberModalAmountLost').textContent = complaint.amount_lost ? `PKR ${complaint.amount_lost.toLocaleString()}` : 'N/A';
+            document.getElementById('cyberModalSuspectProfile').innerHTML = complaint.suspect_profile !== 'N/A' ? `<a href="${complaint.suspect_profile}" target="_blank" class="hover:underline">${complaint.suspect_profile}</a>` : 'N/A';
+            document.getElementById('cyberModalSuspectPhone').textContent = complaint.suspect_phone || 'N/A';
+            document.getElementById('cyberModalSuspectEmail').textContent = complaint.suspect_email || 'N/A';
+            document.getElementById('cyberModalWebsite').innerHTML = complaint.website_url !== 'N/A' ? `<a href="${complaint.website_url}" target="_blank" class="hover:underline">${complaint.website_url}</a>` : 'N/A';
+            
+            document.getElementById('cyberModalDescription').textContent = complaint.description;
+            document.getElementById('cyberModalAiSeverity').textContent = complaint.ai_severity || complaint.priority + ' Severity';
+            document.getElementById('cyberModalAiNotes').textContent = complaint.ai_notes || 'Auto-classified';
+            
+            // Populating evidence links
+            const evidenceContainer = document.getElementById('cyberModalEvidence');
+            evidenceContainer.innerHTML = '';
+            if (complaint.evidence_attachments) {
+                const urls = complaint.evidence_attachments.split(',');
+                urls.forEach((url, index) => {
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.target = '_blank';
+                    a.className = 'flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-[10px] font-semibold text-primary hover:bg-slate-100 transition';
+                    a.innerHTML = `<i class="fas fa-file-alt text-secondary"></i> Evidence File ${index + 1}`;
+                    evidenceContainer.appendChild(a);
+                });
+            } else {
+                evidenceContainer.innerHTML = '<span class="text-gray-400 italic text-[11px]">No evidence files uploaded.</span>';
+            }
+
+            // Populating Lawyers dropdown
+            const lawyerDropdown = document.getElementById('cyberModalAssignLawyer');
+            lawyerDropdown.innerHTML = '<option value="">Unassigned</option>';
+            let lawyers = [];
+            try {
+                lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+            } catch(e) {}
+            lawyers.forEach(l => {
+                const opt = document.createElement('option');
+                opt.value = l.name;
+                opt.textContent = `${l.name} (${l.city})`;
+                lawyerDropdown.appendChild(opt);
+            });
+            lawyerDropdown.value = complaint.assigned_lawyer || '';
+
+            // Status select
+            document.getElementById('cyberModalChangeStatus').value = complaint.status || 'New';
+            document.getElementById('cyberModalRemarks').value = complaint.remarks || '';
+
+            // Prep NCCIA Template Text
+            const template = `NATIONAL CYBER CRIME INVESTIGATION AGENCY (NCCIA) COMPLAINT FILE\n` +
+                             `============================================================\n` +
+                             `CLIENT NAME: ${complaint.name}\n` +
+                             `CNIC NUMBER: ${complaint.cnic || 'N/A'}\n` +
+                             `CONTACT PHONE: ${complaint.mobile}\n` +
+                             `CITY: ${complaint.city}\n\n` +
+                             `INCIDENT CATEGORY: ${complaint.category}\n` +
+                             `DATE OF INCIDENT: ${complaint.date_of_incident}\n` +
+                             `PLATFORM INVOLVED: ${complaint.platform}\n` +
+                             `FINANCIAL LOSS: PKR ${complaint.amount_lost ? complaint.amount_lost.toLocaleString() : '0'}\n\n` +
+                             `SUSPECT DETAILS:\n` +
+                             `- Profile/URL: ${complaint.suspect_profile || 'N/A'}\n` +
+                             `- Contact Phone: ${complaint.suspect_phone || 'N/A'}\n` +
+                             `- Email: ${complaint.suspect_email || 'N/A'}\n` +
+                             `- Website: ${complaint.website_url || 'N/A'}\n\n` +
+                             `INCIDENT DETAILS:\n` +
+                             `${complaint.description}\n\n` +
+                             `Submitted via Qanoni Mushawarat Pakistan.`;
+            document.getElementById('ncciaTemplateText').textContent = template;
+
+            // Lawyer permission checks
+            const isLawyer = (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') && currentUser.role !== 'admin';
+            if (isLawyer) {
+                document.getElementById('cyberModalAssignLawyer').disabled = true;
+                document.getElementById('cyberModalDeleteBtn').classList.add('hidden');
+            } else {
+                document.getElementById('cyberModalAssignLawyer').disabled = false;
+                document.getElementById('cyberModalDeleteBtn').classList.remove('hidden');
+            }
+
+            document.getElementById('cyberDetailsModal').classList.remove('hidden');
+            document.getElementById('cyberDetailsModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCyberModal() {
+            document.getElementById('cyberDetailsModal').classList.add('hidden');
+            document.getElementById('cyberDetailsModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        async function saveCyberComplaintChanges() {
+            const complaint = allCyberComplaints.find(c => (c.id == selectedCyberComplaintId || c.created_at == selectedCyberComplaintId));
+            if (!complaint) return;
+
+            const lawyerVal = document.getElementById('cyberModalAssignLawyer').value;
+            let statusVal = document.getElementById('cyberModalChangeStatus').value;
+            const remarksVal = document.getElementById('cyberModalRemarks').value.trim();
+
+            if (lawyerVal && statusVal === 'New') {
+                statusVal = 'Lawyer Assigned';
+            }
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase && complaint.id) {
+                    const { error } = await activeSupabase
+                        .from('cyber_crime_complaints')
+                        .update({
+                            assigned_lawyer: lawyerVal || null,
+                            status: statusVal,
+                            remarks: remarksVal
+                        })
+                        .eq('id', complaint.id);
+                        
+                    if (error) {
+                        const { error: fallbackErr } = await activeSupabase
+                            .from('cases')
+                            .update({
+                                assigned_lawyer: lawyerVal || null,
+                                status: statusVal === 'Referred to NCCIA' ? 'In Progress' : statusVal,
+                                remarks: remarksVal
+                            })
+                            .eq('id', complaint.id);
+                        if (fallbackErr) throw fallbackErr;
+                    }
+                } else {
+                    complaint.assigned_lawyer = lawyerVal || null;
+                    complaint.status = statusVal;
+                    complaint.remarks = remarksVal;
+                    localStorage.setItem('cyber_crime_complaints', JSON.stringify(allCyberComplaints));
+                }
+
+                alert("Complaint updated successfully!");
+                closeCyberModal();
+                fetchCyberComplaints();
+            } catch (err) {
+                console.error("Error saving complaint changes:", err);
+                alert("Failed to save changes: " + err.message);
+            }
+        }
+
+        async function deleteCyberComplaintBtn() {
+            if (!confirm("Are you sure you want to delete this cyber crime complaint record?")) return;
+            const complaint = allCyberComplaints.find(c => (c.id == selectedCyberComplaintId || c.created_at == selectedCyberComplaintId));
+            if (!complaint) return;
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase && complaint.id) {
+                    const { error } = await activeSupabase
+                        .from('cyber_crime_complaints')
+                        .delete()
+                        .eq('id', complaint.id);
+                        
+                    if (error) {
+                        const { error: fallbackErr } = await activeSupabase
+                            .from('cases')
+                            .delete()
+                            .eq('id', complaint.id);
+                        if (fallbackErr) throw fallbackErr;
+                    }
+                } else {
+                    allCyberComplaints = allCyberComplaints.filter(c => (c.id != selectedCyberComplaintId && c.created_at != selectedCyberComplaintId));
+                    localStorage.setItem('cyber_crime_complaints', JSON.stringify(allCyberComplaints));
+                }
+
+                alert("Complaint record deleted.");
+                closeCyberModal();
+                fetchCyberComplaints();
+            } catch (err) {
+                console.error("Error deleting complaint:", err);
+                alert("Failed to delete record: " + err.message);
+            }
+        }
+
+        function copyNcciaTemplate() {
+            const text = document.getElementById('ncciaTemplateText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("NCCIA complaint details copied to clipboard!");
+            }).catch(e => {
+                console.error("Failed to copy text", e);
+            });
+        }
+
     </script>
 </body>
 </html>
