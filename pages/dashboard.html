@@ -292,13 +292,12 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">
-                    Pending
+                    Pending Lawyer Requests
                 </p>
-                <h3 class="text-xl font-bold text-red-500 mt-1">
-                    42
+                <h3 id="dash-pending-lawyer-requests" class="text-xl font-bold text-red-500 mt-1">
+                    0
                 </h3>
             </div>
-
             <div class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
                 <i class="fas fa-clock text-red-500 text-lg"></i>
             </div>
@@ -380,31 +379,11 @@
 
         <!-- LAWYER APPLICATIONS -->
         <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80">
-
             <h3 class="text-lg font-bold text-primary mb-4">
                 New Lawyer Applications
             </h3>
-
-            <div class="space-y-4">
-                <div class="border rounded-xl p-4">
-                    <h4 class="font-semibold">
-                        Ali Raza
-                    </h4>
-
-                    <p class="text-xs text-gray-500 mb-3">
-                        Corporate Lawyer • Karachi
-                    </p>
-
-                    <div class="flex gap-2">
-                        <button class="bg-green-500 text-white px-3 py-1 rounded-lg text-xs">
-                            Approve
-                        </button>
-
-                        <button class="bg-red-500 text-white px-3 py-1 rounded-lg text-xs">
-                            Reject
-                        </button>
-                    </div>
-                </div>
+            <div id="dashLawyerRequestsContainer" class="space-y-4">
+                <!-- Dynamic pending lawyer requests will load here -->
             </div>
         </div>
     </div>
@@ -632,6 +611,7 @@
                                     <th class="pb-4 font-semibold">License Number</th>
                                     <th class="pb-4 font-semibold">Specialization</th>
                                     <th class="pb-4 font-semibold">City</th>
+                                    <th class="pb-4 font-semibold">Status</th>
                                     <th class="pb-4 font-semibold text-right">Actions</th>
                                 </tr>
                             </thead>
@@ -1449,6 +1429,41 @@
             const countEl = document.getElementById('dash-lawyer-count');
             if (countEl) countEl.textContent = lawyers.length;
 
+            // Calculate pending requests (status is 'Pending' or not specified)
+            const pendingLawyers = lawyers.filter(l => !l.status || l.status === 'Pending');
+            const pendingRequestsEl = document.getElementById('dash-pending-lawyer-requests');
+            if (pendingRequestsEl) pendingRequestsEl.textContent = pendingLawyers.length;
+
+            // Render dashboard widget "New Lawyer Applications"
+            const dashWidgetContainer = document.getElementById('dashLawyerRequestsContainer');
+            if (dashWidgetContainer) {
+                if (pendingLawyers.length === 0) {
+                    dashWidgetContainer.innerHTML = '<div class="text-xs text-gray-400 italic py-2">No pending applications</div>';
+                } else {
+                    dashWidgetContainer.innerHTML = '';
+                    // Display top 3 recent pending applications
+                    pendingLawyers.slice(0, 3).forEach(l => {
+                        const widgetItem = document.createElement('div');
+                        widgetItem.className = 'border border-gray-200/80 rounded-xl p-4 bg-white/60 shadow-sm hover:shadow transition';
+                        widgetItem.innerHTML = `
+                            <h4 class="font-bold text-gray-800 text-sm">${l.name}</h4>
+                            <p class="text-xs text-gray-500 mb-3 mt-0.5">
+                                ${l.specialization || 'N/A'} • ${l.city || 'N/A'} (Lic: ${l.license})
+                            </p>
+                            <div class="flex gap-2">
+                                <button onclick="approveLawyerRegistration('${l.license}')" class="bg-green-600 hover:bg-green-700 transition text-white px-2.5 py-1 rounded-lg text-xs font-semibold">
+                                    Approve
+                                </button>
+                                <button onclick="deleteLawyerRegistration('${l.id || l.license}')" class="bg-red-500 hover:bg-red-650 transition text-white px-2.5 py-1 rounded-lg text-xs font-semibold">
+                                    Reject
+                                </button>
+                            </div>
+                        `;
+                        dashWidgetContainer.appendChild(widgetItem);
+                    });
+                }
+            }
+
             if (lawyers.length === 0) {
                 if(tableBody) tableBody.innerHTML = '';
                 if(noMsg) noMsg.classList.remove('hidden');
@@ -1461,19 +1476,132 @@
                 lawyers.forEach(l => {
                     const tr = document.createElement('tr');
                     tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
+                    
+                    // Render Status Badge
+                    const statusVal = l.status || 'Pending';
+                    let statusClass = 'bg-yellow-100 text-yellow-700';
+                    if (statusVal === 'On Hold') statusClass = 'bg-amber-100 text-amber-700';
+                    else if (statusVal === 'Approved') statusClass = 'bg-green-100 text-green-700';
+                    
+                    const statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${statusVal}</span>`;
+
                     tr.innerHTML = `
                         <td class="py-4 font-medium text-gray-800 px-2">${l.name}</td>
                         <td class="py-4 text-gray-600 font-mono text-sm px-2">${l.license}</td>
                         <td class="py-4 text-gray-500 px-2">${l.specialization || 'N/A'}</td>
                         <td class="py-4 text-gray-500 px-2">${l.city || 'N/A'}</td>
+                        <td class="py-4 px-2">${statusBadge}</td>
                         <td class="py-4 text-right px-2">
-                            <button onclick="approveLawyerRegistration('${l.license}')" class="px-3 py-1 bg-secondary text-primary rounded-lg text-xs font-bold mr-2 hover:opacity-80 transition shadow-sm">Approve</button>
-                            <button class="text-red-400 hover:text-red-600 transition p-2" onclick="deleteLawyerRegistration('${l.id || l.license}')"><i class="fas fa-trash"></i></button>
+                            <div class="flex items-center justify-end gap-1.5">
+                                <button onclick="approveLawyerRegistration('${l.license}')" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm">Approve</button>
+                                <button onclick="onHoldLawyerRegistration('${l.license}')" class="px-2 py-1 bg-amber-500 text-white rounded text-[10px] font-bold hover:bg-amber-600 transition shadow-sm">On Hold</button>
+                                <button onclick="editLawyerRegistration('${l.license}')" class="px-2 py-1 bg-blue-500 text-white rounded text-[10px] font-bold hover:bg-blue-600 transition shadow-sm">Edit</button>
+                                <button onclick="deleteLawyerRegistration('${l.id || l.license}')" class="px-2 py-1 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-650 transition shadow-sm">Delete</button>
+                            </div>
                         </td>
                     `;
                     tableBody.appendChild(tr);
                 });
             }
+        }
+
+        // Helper to edit lawyer details
+        async function editLawyerRegistration(license) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            let lawyers = [];
+            if (activeSupabase) {
+                try {
+                    const { data } = await activeSupabase.from('lawyer_registration').select('*');
+                    if (data) lawyers = data;
+                } catch(e) {}
+            }
+            try {
+                const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers.forEach(localL => {
+                    if (!lawyers.some(dbL => dbL.license === localL.license)) {
+                        lawyers.push(localL);
+                    }
+                });
+            } catch(e) {}
+
+            const lawyer = lawyers.find(l => l.license === license);
+            if (!lawyer) {
+                alert("Lawyer registration not found.");
+                return;
+            }
+
+            const newName = prompt("Edit Professional Name:", lawyer.name);
+            if (newName === null) return;
+            const newSpec = prompt("Edit Specialization:", lawyer.specialization || '');
+            if (newSpec === null) return;
+            const newCity = prompt("Edit City:", lawyer.city || '');
+            if (newCity === null) return;
+
+            const updatedData = {
+                name: newName.trim(),
+                specialization: newSpec.trim(),
+                city: newCity.trim()
+            };
+
+            if (activeSupabase) {
+                try {
+                    const { error } = await activeSupabase
+                        .from('lawyer_registration')
+                        .update(updatedData)
+                        .eq('license', license);
+                    if (error) throw error;
+                } catch (e) {
+                    console.error("Failed to edit lawyer in Supabase:", e);
+                }
+            }
+
+            // Update in local storage
+            try {
+                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers = localLawyers.map(l => {
+                    if (l.license === license) {
+                        return { ...l, ...updatedData };
+                    }
+                    return l;
+                });
+                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
+            } catch(e) {}
+
+            alert("Lawyer registration updated successfully.");
+            loadLawyers();
+            populateLawyersDropdown();
+        }
+
+        // Helper to put lawyer on hold
+        async function onHoldLawyerRegistration(license) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            if (activeSupabase) {
+                try {
+                    const { error } = await activeSupabase
+                        .from('lawyer_registration')
+                        .update({ status: 'On Hold' })
+                        .eq('license', license);
+                    if (error) console.warn("Supabase status update error (might lack status column):", error);
+                } catch(e) {
+                    console.error("Supabase On Hold error:", e);
+                }
+            }
+
+            try {
+                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers = localLawyers.map(l => {
+                    if (l.license === license) {
+                        return { ...l, status: 'On Hold' };
+                    }
+                    return l;
+                });
+                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
+            } catch(e) {}
+
+            alert("Status set to On Hold.");
+            loadLawyers();
         }
 
         // Helper to approve lawyer registration (move to users list and delete registration request)
@@ -1507,8 +1635,8 @@
 
             if (activeSupabase) {
                 try {
-                    // 1. Insert into users table
-                    const userPayload = {
+                    // Try full insertion first (all columns)
+                    const fullPayload = {
                         full_name: lawyer.name,
                         email: lawyer.email,
                         phone: lawyer.phone,
@@ -1519,11 +1647,36 @@
                         user_role: 'Normal User'
                     };
                     
-                    const { error: userError } = await activeSupabase
+                    let { error: userError } = await activeSupabase
                         .from('users')
-                        .insert([userPayload]);
+                        .insert([fullPayload]);
                         
-                    if (userError) throw userError;
+                    if (userError) {
+                        // Fallback if custom schema columns (like city, specialization) don't exist
+                        console.warn("Inserting full payload failed, trying base schema fallback...", userError);
+                        
+                        const basePayload = {
+                            full_name: lawyer.name,
+                            email: lawyer.email,
+                            phone: lawyer.phone,
+                            profession: 'Lawyer',
+                            specialization: lawyer.specialization || ''
+                        };
+                        
+                        const { error: fallbackError } = await activeSupabase
+                            .from('users')
+                            .insert([basePayload]);
+                            
+                        if (fallbackError) throw fallbackError;
+                        
+                        // Save extra fields locally
+                        const extraData = {
+                            city: lawyer.city || '',
+                            account_status: 'active',
+                            user_role: 'Normal User'
+                        };
+                        localStorage.setItem(`user_extra_${lawyer.email}`, JSON.stringify(extraData));
+                    }
 
                     // 2. Delete from lawyer_registration table
                     const { error: regError } = await activeSupabase
@@ -1660,6 +1813,7 @@
                 const { data: users, error } = await supabaseClient
                     .from('users')
                     .select('*')
+                    .eq('project', 'Qanooni-Mushawarat')
                     .order('created_at', { ascending: false });
 
                 if (error) throw error;
@@ -1908,7 +2062,8 @@
                     company_name: profession === 'Business' ? companyName : null,
                     company_address: profession === 'Business' ? companyAddress : null,
                     specialization: profession === 'Lawyer' ? specialization : null,
-                    profile_image: profileImageUrl
+                    profile_image: profileImageUrl,
+                    project: 'Qanooni-Mushawarat'
                 };
 
                 const fullPayload = {
@@ -1917,7 +2072,8 @@
                     company_email: profession === 'Business' ? companyEmail : null,
                     working_court: profession === 'Lawyer' ? workingCourt : null,
                     user_role: userRole,
-                    account_status: accountStatus
+                    account_status: accountStatus,
+                    project: 'Qanooni-Mushawarat'
                 };
 
                 // 4. Insert Record (Dual Mode Fallback)
@@ -1976,7 +2132,8 @@
                 const { error } = await supabaseClient
                     .from('users')
                     .delete()
-                    .eq('email', email);
+                    .eq('email', email)
+                    .eq('project', 'Qanooni-Mushawarat');
                     
                 if (error) throw error;
                 
@@ -1997,7 +2154,8 @@
                 const { error } = await supabaseClient
                     .from('users')
                     .update({ account_status: 'active' })
-                    .eq('email', email);
+                    .eq('email', email)
+                    .eq('project', 'Qanooni-Mushawarat');
                     
                 if (error) throw error;
                 
@@ -2116,7 +2274,7 @@
             }
 
             try {
-                let query = activeSupabase.from('cases').select('*').order('created_at', { ascending: false });
+                let query = activeSupabase.from('cases').select('*').eq('project', 'Qanooni-Mushawarat').order('created_at', { ascending: false });
                 
                 // If current user is a lawyer, filter cases assigned to them
                 if (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') {
@@ -2313,7 +2471,8 @@
                             status: targetStatus,
                             remarks: remarks
                         })
-                        .eq('id', selectedCaseId);
+                        .eq('id', selectedCaseId)
+                        .eq('project', 'Qanooni-Mushawarat');
                         
                     if (error) throw error;
                 } else {
@@ -2351,7 +2510,8 @@
                     const { error } = await activeSupabase
                         .from('cases')
                         .delete()
-                        .eq('id', selectedCaseId);
+                        .eq('id', selectedCaseId)
+                        .eq('project', 'Qanooni-Mushawarat');
                         
                     if (error) throw error;
                 } else {
@@ -2383,6 +2543,7 @@
                     const { data, error } = await activeSupabase
                         .from('support_chats')
                         .select('*')
+                        .eq('project', 'Qanooni-Mushawarat')
                         .order('created_at', { ascending: false });
                         
                     if (error) throw error;
@@ -2585,7 +2746,7 @@
             }
 
             try {
-                let query = activeSupabase.from('cyber_crime_complaints').select('*').order('created_at', { ascending: false });
+                let query = activeSupabase.from('cyber_crime_complaints').select('*').eq('project', 'Qanooni-Mushawarat').order('created_at', { ascending: false });
                 
                 if (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer') {
                     query = query.eq('assigned_lawyer', currentUser.full_name);
@@ -2838,7 +2999,8 @@
                             status: statusVal,
                             remarks: remarksVal
                         })
-                        .eq('id', complaint.id);
+                        .eq('id', complaint.id)
+                        .eq('project', 'Qanooni-Mushawarat');
                         
                     if (error) {
                         const { error: fallbackErr } = await activeSupabase
@@ -2848,7 +3010,8 @@
                                 status: statusVal === 'Referred to NCCIA' ? 'In Progress' : statusVal,
                                 remarks: remarksVal
                             })
-                            .eq('id', complaint.id);
+                            .eq('id', complaint.id)
+                            .eq('project', 'Qanooni-Mushawarat');
                         if (fallbackErr) throw fallbackErr;
                     }
                 } else {
@@ -2879,13 +3042,15 @@
                     const { error } = await activeSupabase
                         .from('cyber_crime_complaints')
                         .delete()
-                        .eq('id', complaint.id);
+                        .eq('id', complaint.id)
+                        .eq('project', 'Qanooni-Mushawarat');
                         
                     if (error) {
                         const { error: fallbackErr } = await activeSupabase
                             .from('cases')
                             .delete()
-                            .eq('id', complaint.id);
+                            .eq('id', complaint.id)
+                            .eq('project', 'Qanooni-Mushawarat');
                         if (fallbackErr) throw fallbackErr;
                     }
                 } else {

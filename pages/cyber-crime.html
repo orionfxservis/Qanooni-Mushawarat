@@ -807,7 +807,8 @@
                 status: 'New',
                 assigned_lawyer: null,
                 ai_severity: severity,
-                ai_notes: `Auto-categorized as: ${aiClassification}. Risk: ${severity}. Platform check: ${platform}.`
+                ai_notes: `Auto-categorized as: ${aiClassification}. Risk: ${severity}. Platform check: ${platform}.`,
+                project: 'Qanooni-Mushawarat'
             };
 
             let referenceId = 'CC-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
@@ -832,7 +833,8 @@
                             case_priority: severity.includes('High') ? 'high' : (severity.includes('Low') ? 'low' : 'medium'),
                             attachment: attachmentString || null,
                             status: 'Pending',
-                            remarks: `City: ${clientCity}. Incident Date: ${dateOfIncident}. Suspect Email: ${suspectEmail}.`
+                            remarks: `City: ${clientCity}. Incident Date: ${dateOfIncident}. Suspect Email: ${suspectEmail}.`,
+                            project: 'Qanooni-Mushawarat'
                         };
                         
                         const { data: fallbackData, error: fallbackError } = await activeSupabase
