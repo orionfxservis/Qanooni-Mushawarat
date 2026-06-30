@@ -1432,11 +1432,17 @@
                 }
             }
 
-            // Fallback to local storage if supabase returned empty or error occurred
-            if (lawyers.length === 0) {
-                try {
-                    lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
-                } catch(e) {}
+            // Merge with local storage to avoid losing locally saved entries
+            try {
+                const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers.forEach(localL => {
+                    const exists = lawyers.some(dbL => dbL.license === localL.license);
+                    if (!exists) {
+                        lawyers.push(localL);
+                    }
+                });
+            } catch(e) {
+                console.error("Error merging with localStorage:", e);
             }
             
             // Update dashboard count
@@ -1461,13 +1467,90 @@
                         <td class="py-4 text-gray-500 px-2">${l.specialization || 'N/A'}</td>
                         <td class="py-4 text-gray-500 px-2">${l.city || 'N/A'}</td>
                         <td class="py-4 text-right px-2">
-                            <button class="px-3 py-1 bg-secondary text-primary rounded-lg text-xs font-bold mr-2 hover:opacity-80 transition shadow-sm">Approve</button>
+                            <button onclick="approveLawyerRegistration('${l.license}')" class="px-3 py-1 bg-secondary text-primary rounded-lg text-xs font-bold mr-2 hover:opacity-80 transition shadow-sm">Approve</button>
                             <button class="text-red-400 hover:text-red-600 transition p-2" onclick="deleteLawyerRegistration('${l.id || l.license}')"><i class="fas fa-trash"></i></button>
                         </td>
                     `;
                     tableBody.appendChild(tr);
                 });
             }
+        }
+
+        // Helper to approve lawyer registration (move to users list and delete registration request)
+        async function approveLawyerRegistration(license) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            // Gather all current registration entries
+            let lawyers = [];
+            if (activeSupabase) {
+                try {
+                    const { data } = await activeSupabase.from('lawyer_registration').select('*');
+                    if (data) lawyers = data;
+                } catch (e) {}
+            }
+            try {
+                const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers.forEach(localL => {
+                    if (!lawyers.some(dbL => dbL.license === localL.license)) {
+                        lawyers.push(localL);
+                    }
+                });
+            } catch(e) {}
+
+            const lawyer = lawyers.find(l => l.license === license);
+            if (!lawyer) {
+                alert("Lawyer not found.");
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to approve and activate Advocate ${lawyer.name}?`)) return;
+
+            if (activeSupabase) {
+                try {
+                    // 1. Insert into users table
+                    const userPayload = {
+                        full_name: lawyer.name,
+                        email: lawyer.email,
+                        phone: lawyer.phone,
+                        profession: 'Lawyer',
+                        city: lawyer.city || '',
+                        specialization: lawyer.specialization || '',
+                        account_status: 'active',
+                        user_role: 'Normal User'
+                    };
+                    
+                    const { error: userError } = await activeSupabase
+                        .from('users')
+                        .insert([userPayload]);
+                        
+                    if (userError) throw userError;
+
+                    // 2. Delete from lawyer_registration table
+                    const { error: regError } = await activeSupabase
+                        .from('lawyer_registration')
+                        .delete()
+                        .eq('license', license);
+                        
+                    if (regError) console.warn("Failed to delete registration record, but user was created:", regError);
+
+                } catch (e) {
+                    console.error("Failed to approve lawyer in Supabase:", e);
+                    alert("Error approving lawyer: " + e.message);
+                    return;
+                }
+            }
+
+            // Also clean up from LocalStorage
+            try {
+                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers = localLawyers.filter(l => l.license !== license);
+                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
+            } catch (e) {}
+
+            alert(`Advocate ${lawyer.name} has been approved and added to the Users/Lawyers list.`);
+            loadLawyers();
+            if (typeof fetchUsers === 'function') fetchUsers();
+            if (typeof populateLawyersDropdown === 'function') populateLawyersDropdown();
         }
 
         // Helper to delete lawyer registration from Supabase & LocalStorage
