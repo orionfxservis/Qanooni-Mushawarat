@@ -1410,18 +1410,38 @@
             if(tabId === 'cyber-crime-complaints' || tabId === 'dashboard') fetchCyberComplaints();
         }
 
-        // Load Lawyers from LocalStorage
-        function loadLawyers() {
+        // Load Lawyers from Supabase & LocalStorage Fallback
+        async function loadLawyers() {
             const tableBody = document.getElementById('lawyersTableBody');
             const noMsg = document.getElementById('noLawyersMsg');
             
             let lawyers = [];
-            try {
-                lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
-            } catch(e) {}
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            if (activeSupabase) {
+                try {
+                    const { data, error } = await activeSupabase
+                        .from('lawyer_registration')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    
+                    if (error) throw error;
+                    if (data) lawyers = data;
+                } catch (e) {
+                    console.error("Failed to fetch lawyers from Supabase:", e);
+                }
+            }
+
+            // Fallback to local storage if supabase returned empty or error occurred
+            if (lawyers.length === 0) {
+                try {
+                    lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                } catch(e) {}
+            }
             
             // Update dashboard count
-            document.getElementById('dash-lawyer-count').textContent = lawyers.length;
+            const countEl = document.getElementById('dash-lawyer-count');
+            if (countEl) countEl.textContent = lawyers.length;
 
             if (lawyers.length === 0) {
                 if(tableBody) tableBody.innerHTML = '';
@@ -1442,12 +1462,49 @@
                         <td class="py-4 text-gray-500 px-2">${l.city || 'N/A'}</td>
                         <td class="py-4 text-right px-2">
                             <button class="px-3 py-1 bg-secondary text-primary rounded-lg text-xs font-bold mr-2 hover:opacity-80 transition shadow-sm">Approve</button>
-                            <button class="text-red-400 hover:text-red-600 transition p-2"><i class="fas fa-trash"></i></button>
+                            <button class="text-red-400 hover:text-red-600 transition p-2" onclick="deleteLawyerRegistration('${l.id || l.license}')"><i class="fas fa-trash"></i></button>
                         </td>
                     `;
                     tableBody.appendChild(tr);
                 });
             }
+        }
+
+        // Helper to delete lawyer registration from Supabase & LocalStorage
+        async function deleteLawyerRegistration(identifier) {
+            if (!confirm("Are you sure you want to delete this lawyer registration?")) return;
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            let deletedFromSupabase = false;
+
+            if (activeSupabase) {
+                try {
+                    // Try to delete by ID first if it looks like an ID/number, otherwise delete by license
+                    const queryField = isNaN(identifier) ? 'license' : 'id';
+                    const { error } = await activeSupabase
+                        .from('lawyer_registration')
+                        .delete()
+                        .eq(queryField, identifier);
+                    
+                    if (error) throw error;
+                    deletedFromSupabase = true;
+                } catch (e) {
+                    console.error("Failed to delete lawyer from Supabase:", e);
+                }
+            }
+
+            // Also remove from localStorage as fallback
+            try {
+                let lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                lawyers = lawyers.filter(l => l.id != identifier && l.license !== identifier);
+                localStorage.setItem('registeredLawyers', JSON.stringify(lawyers));
+            } catch(e) {
+                console.error("Failed to delete lawyer from LocalStorage:", e);
+            }
+
+            alert("Lawyer registration deleted successfully.");
+            loadLawyers();
+            populateLawyersDropdown();
         }
         
         let allCases = [];
@@ -1921,7 +1978,7 @@
         }
 
         // Populate Lawyers Dropdown in case detail modal
-        function populateLawyersDropdown() {
+        async function populateLawyersDropdown() {
             const dropdown = document.getElementById('modalAssignLawyer');
             if (!dropdown) return;
             
@@ -1929,14 +1986,33 @@
             dropdown.innerHTML = '<option value="">Unassigned</option>';
             
             let lawyers = [];
-            try {
-                lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
-            } catch(e) {}
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            if (activeSupabase) {
+                try {
+                    const { data, error } = await activeSupabase
+                        .from('lawyer_registration')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    
+                    if (!error && data) {
+                        lawyers = data;
+                    }
+                } catch (e) {
+                    console.error("Failed to fetch lawyers for dropdown from Supabase:", e);
+                }
+            }
+            
+            if (lawyers.length === 0) {
+                try {
+                    lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                } catch(e) {}
+            }
             
             lawyers.forEach(l => {
                 const opt = document.createElement('option');
                 opt.value = l.name;
-                opt.textContent = `${l.name} (${l.city} - ${l.specialization})`;
+                opt.textContent = `${l.name} (${l.city || 'N/A'} - ${l.specialization || 'N/A'})`;
                 dropdown.appendChild(opt);
             });
         }
@@ -2530,7 +2606,7 @@
             renderCyberComplaintsTable(filtered);
         }
 
-        function openCyberComplaintModal(id) {
+        async function openCyberComplaintModal(id) {
             const complaint = allCyberComplaints.find(c => (c.id == id || c.created_at == id));
             if (!complaint) return;
             
@@ -2574,17 +2650,38 @@
                 evidenceContainer.innerHTML = '<span class="text-gray-400 italic text-[11px]">No evidence files uploaded.</span>';
             }
 
-            // Populating Lawyers dropdown
+            // Populating Lawyers dropdown from Supabase & LocalStorage fallback
             const lawyerDropdown = document.getElementById('cyberModalAssignLawyer');
             lawyerDropdown.innerHTML = '<option value="">Unassigned</option>';
             let lawyers = [];
-            try {
-                lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
-            } catch(e) {}
+            
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            if (activeSupabase) {
+                try {
+                    const { data, error } = await activeSupabase
+                        .from('lawyer_registration')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    
+                    if (!error && data) {
+                        lawyers = data;
+                    }
+                } catch (e) {
+                    console.error("Failed to fetch lawyers for cyber complaints assignment from Supabase:", e);
+                }
+            }
+            
+            if (lawyers.length === 0) {
+                try {
+                    lawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                } catch(e) {}
+            }
+            
             lawyers.forEach(l => {
                 const opt = document.createElement('option');
                 opt.value = l.name;
-                opt.textContent = `${l.name} (${l.city})`;
+                opt.textContent = `${l.name} (${l.city || 'N/A'})`;
                 lawyerDropdown.appendChild(opt);
             });
             lawyerDropdown.value = complaint.assigned_lawyer || '';
