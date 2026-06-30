@@ -3041,7 +3041,8 @@ setInterval(nextSlide, 5000);
                     case_priority: casePriority,
                     attachment: attachmentString || null,
                     status: 'Pending',
-                    remarks: ''
+                    remarks: '',
+                    project: 'Qanooni-Mushawarat'
                 };
                 
                 let refNum = 'LE-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
@@ -3673,7 +3674,8 @@ setInterval(nextSlide, 5000);
                 email: document.getElementById('regLawyerEmail').value.trim(),
                 phone: document.getElementById('regLawyerPhone').value.trim(),
                 city: document.getElementById('regLawyerCity').value,
-                created_at: new Date().toISOString()
+                created_at: new Date().toISOString(),
+                project: 'Qanooni-Mushawarat'
             };
             
             const activeSupabase = (typeof supabase !== 'undefined') ? supabase : (typeof supabaseClient !== 'undefined' ? supabaseClient : null);
@@ -3901,6 +3903,7 @@ async function handleLogin() {
             .from('users')
             .select('account_status, role, full_name, profession')
             .eq('email', email)
+            .eq('project', 'Qanooni-Mushawarat')
             .single();
 
         if (error) {
@@ -3971,7 +3974,8 @@ async function handleRegister() {
             email: email,
             profession: "Individual",
             user_role: "Normal User",
-            account_status: "pending"
+            account_status: "pending",
+            project: 'Qanooni-Mushawarat'
         };
 
         const { error } = await supabase
