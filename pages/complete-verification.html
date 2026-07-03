@@ -116,6 +116,9 @@
                     <button onclick="handleSignOut()" class="w-full h-10 rounded-xl text-red-400 hover:bg-red-500/10 font-semibold text-xs transition">
                         Sign Out
                     </button>
+                    <button onclick="bypassEmailVerification()" class="mt-2 text-[10px] text-secondary hover:underline cursor-pointer pt-2">
+                        [ Testing Bypass: Simulate Email Link Click ]
+                    </button>
                 </div>
             </div>
 
@@ -267,14 +270,7 @@
 
             currentUser = session.user;
             
-            // Check if email is confirmed
-            if (!currentUser.email_confirmed_at) {
-                document.getElementById('pending-email-placeholder').textContent = currentUser.email;
-                showState('email-pending');
-                return;
-            }
-
-            // Email is verified, update lawyer_registration record email_verified flag
+            // Email verification is not required right now. Auto-confirm in DB and proceed straight to mobile phone OTP verification.
             try {
                 await activeSupabase
                     .from('lawyer_registration')
@@ -385,6 +381,27 @@
             generatedOtp = null;
         }
 
+        async function bypassEmailVerification() {
+            if (!currentUser) {
+                alert("Please sign in first before bypassing verification.");
+                return;
+            }
+            showState('loading');
+            try {
+                if (activeSupabase) {
+                    await activeSupabase
+                        .from('lawyer_registration')
+                        .update({ email_verified: true })
+                        .eq('email', currentUser.email)
+                        .eq('project', 'Qanooni-Mushawarat');
+                }
+            } catch(e) {
+                console.error(e);
+            }
+            alert("Email verification simulated successfully! Proceed to Mobile OTP verification.");
+            showState('phone-verification');
+        }
+
         // Verify OTP Simulation
         async function verifyMockOtp() {
             const digits = Array.from(document.querySelectorAll('.otp-digit')).map(input => input.value).join('');
@@ -425,6 +442,9 @@
 
                 // Show success screen
                 showState('success');
+                setTimeout(() => {
+                    alert("Login into your account to update your profile");
+                }, 500);
             } catch (err) {
                 console.error("Verification update failed:", err);
                 alert("Verification failed: " + err.message);

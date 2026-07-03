@@ -1443,8 +1443,8 @@
             const countEl = document.getElementById('dash-lawyer-count');
             if (countEl) countEl.textContent = lawyers.length;
 
-            // Calculate pending requests (status is 'Pending' or not specified)
-            const pendingLawyers = lawyers.filter(l => !l.status || l.status === 'Pending');
+            // Calculate pending requests (status is 'Pending' or 'Pending Review')
+            const pendingLawyers = lawyers.filter(l => !l.status || l.status === 'Pending' || l.status === 'Pending Review');
             const pendingRequestsEl = document.getElementById('dash-pending-lawyer-requests');
             if (pendingRequestsEl) pendingRequestsEl.textContent = pendingLawyers.length;
 
@@ -1458,18 +1458,33 @@
                     // Display top 3 recent pending applications
                     pendingLawyers.slice(0, 3).forEach(l => {
                         const widgetItem = document.createElement('div');
-                        widgetItem.className = 'border border-gray-200/80 rounded-xl p-4 bg-white/60 shadow-sm hover:shadow transition';
+                        widgetItem.className = 'border border-gray-200/80 rounded-xl p-4 bg-white/60 shadow-sm hover:shadow transition space-y-2';
                         widgetItem.innerHTML = `
-                            <h4 class="font-bold text-gray-800 text-sm">${l.name}</h4>
-                            <p class="text-xs text-gray-500 mb-3 mt-0.5">
-                                ${l.specialization || 'N/A'} • ${l.city || 'N/A'} (Lic: ${l.license})
-                            </p>
-                            <div class="flex gap-2">
-                                <button onclick="approveLawyerRegistration('${l.license}')" class="bg-green-600 hover:bg-green-700 transition text-white px-2.5 py-1 rounded-lg text-xs font-semibold">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-bold text-gray-800 text-sm">${l.name}</h4>
+                                <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-yellow-100 text-yellow-800">${l.status || 'Pending'}</span>
+                            </div>
+                            <div class="text-xs text-gray-500 space-y-1">
+                                <div>Lic: <span class="font-mono text-gray-700">${l.license}</span></div>
+                                <div class="flex items-center gap-1.5">
+                                    <span>Email:</span>
+                                    <span>${l.email_verified ? '✅ Verified' : '❌ Unverified'}</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <span>Phone:</span>
+                                    <span>${l.phone_verified ? '✅ Verified' : '❌ Unverified'}</span>
+                                </div>
+                                <div>Documents: <span class="font-semibold text-primary">${l.documents_uploaded ? 'Uploaded' : 'Pending'}</span></div>
+                            </div>
+                            <div class="flex gap-1.5 pt-1.5 border-t border-gray-150">
+                                <button onclick="approveLawyerApplication('${l.license}')" class="bg-green-600 hover:bg-green-700 transition text-white px-2 py-1 rounded text-[10px] font-semibold">
                                     Approve
                                 </button>
-                                <button onclick="deleteLawyerRegistration('${l.id || l.license}')" class="bg-red-500 hover:bg-red-650 transition text-white px-2.5 py-1 rounded-lg text-xs font-semibold">
+                                <button onclick="rejectLawyerApplication('${l.license}')" class="bg-red-500 hover:bg-red-650 transition text-white px-2 py-1 rounded text-[10px] font-semibold">
                                     Reject
+                                </button>
+                                <button onclick="requestMoreInfo('${l.license}')" class="bg-amber-500 hover:bg-amber-600 transition text-white px-2 py-1 rounded text-[10px] font-semibold">
+                                    Request Info
                                 </button>
                             </div>
                         `;
@@ -1495,21 +1510,30 @@
                     const statusVal = l.status || 'Pending';
                     let statusClass = 'bg-yellow-100 text-yellow-700';
                     if (statusVal === 'On Hold') statusClass = 'bg-amber-100 text-amber-700';
-                    else if (statusVal === 'Approved') statusClass = 'bg-green-100 text-green-700';
+                    else if (statusVal === 'Approved' || statusVal === 'Verified Lawyer') statusClass = 'bg-green-100 text-green-700';
                     
                     const statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${statusVal}</span>`;
 
                     tr.innerHTML = `
-                        <td class="py-4 font-medium text-gray-800 px-2">${l.name}</td>
-                        <td class="py-4 text-gray-600 font-mono text-sm px-2">${l.license}</td>
+                        <td class="py-4 font-medium text-gray-800 px-2">
+                            <div>${l.name}</div>
+                            <div class="text-[10px] text-gray-400 mt-0.5">${l.email_verified ? '✅ Email Verified' : '❌ Email Unverified'}</div>
+                        </td>
+                        <td class="py-4 text-gray-600 font-mono text-sm px-2">
+                            <div>${l.license}</div>
+                            <div class="text-[10px] text-gray-400 mt-0.5">${l.phone_verified ? '✅ Phone Verified' : '❌ Phone Unverified'}</div>
+                        </td>
                         <td class="py-4 text-gray-500 px-2">${l.specialization || 'N/A'}</td>
-                        <td class="py-4 text-gray-500 px-2">${l.city || 'N/A'}</td>
+                        <td class="py-4 text-gray-500 px-2">
+                            <div>${l.city || 'N/A'}</div>
+                            <div class="text-[10px] text-primary mt-0.5 font-semibold">${l.documents_uploaded ? 'Docs Uploaded' : 'No Docs'}</div>
+                        </td>
                         <td class="py-4 px-2">${statusBadge}</td>
                         <td class="py-4 text-right px-2">
                             <div class="flex items-center justify-end gap-1.5">
-                                <button onclick="approveLawyerRegistration('${l.license}')" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm">Approve</button>
-                                <button onclick="onHoldLawyerRegistration('${l.license}')" class="px-2 py-1 bg-amber-500 text-white rounded text-[10px] font-bold hover:bg-amber-600 transition shadow-sm">On Hold</button>
-                                <button onclick="editLawyerRegistration('${l.license}')" class="px-2 py-1 bg-blue-500 text-white rounded text-[10px] font-bold hover:bg-blue-600 transition shadow-sm">Edit</button>
+                                <button onclick="approveLawyerApplication('${l.license}')" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm">Approve</button>
+                                <button onclick="rejectLawyerApplication('${l.license}')" class="px-2 py-1 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-650 transition shadow-sm">Reject</button>
+                                <button onclick="requestMoreInfo('${l.license}')" class="px-2 py-1 bg-amber-500 text-white rounded text-[10px] font-bold hover:bg-amber-600 transition shadow-sm">Request Info</button>
                                 <button onclick="deleteLawyerRegistration('${l.id || l.license}')" class="px-2 py-1 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-650 transition shadow-sm">Delete</button>
                             </div>
                         </td>
@@ -1612,14 +1636,8 @@
                     return l;
                 });
                 localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
-            } catch(e) {}
-
-            alert("Status set to On Hold.");
-            loadLawyers();
-        }
-
-        // Helper to approve lawyer registration (move to users list and delete registration request)
-        async function approveLawyerRegistration(license) {
+            } catch(e)         // Helper to approve lawyer registration application (Status = Verified Lawyer, notifies lawyer)
+        async function approveLawyerApplication(license) {
             const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
             
             // Gather all current registration entries
@@ -1645,11 +1663,19 @@
                 return;
             }
 
-            if (!confirm(`Are you sure you want to approve and activate Advocate ${lawyer.name}?`)) return;
+            if (!confirm(`Are you sure you want to approve Advocate ${lawyer.name}?`)) return;
+
+            const updatedData = { status: 'Verified Lawyer' };
 
             if (activeSupabase) {
                 try {
-                    // Try full insertion first (all columns)
+                    // Update lawyer_registration status
+                    await activeSupabase
+                        .from('lawyer_registration')
+                        .update(updatedData)
+                        .eq('license', license);
+
+                    // Add user to users table as a Lawyer with Active status
                     const fullPayload = {
                         full_name: lawyer.name,
                         email: lawyer.email,
@@ -1658,51 +1684,172 @@
                         city: lawyer.city || '',
                         specialization: lawyer.specialization || '',
                         account_status: 'active',
-                        user_role: 'Normal User'
+                        user_role: 'lawyer',
+                        working_court: lawyer.working_courts || '',
+                        project: 'Qanooni-Mushawarat'
                     };
-                    
-                    let { error: userError } = await activeSupabase
-                        .from('users')
-                        .insert([fullPayload]);
-                        
-                    if (userError) {
-                        // Fallback if custom schema columns (like city, specialization) don't exist
-                        console.warn("Inserting full payload failed, trying base schema fallback...", userError);
-                        
-                        const basePayload = {
-                            full_name: lawyer.name,
-                            email: lawyer.email,
-                            phone: lawyer.phone,
-                            profession: 'Lawyer',
-                            specialization: lawyer.specialization || ''
-                        };
-                        
-                        const { error: fallbackError } = await activeSupabase
-                            .from('users')
-                            .insert([basePayload]);
-                            
-                        if (fallbackError) throw fallbackError;
-                        
-                        // Save extra fields locally
-                        const extraData = {
-                            city: lawyer.city || '',
-                            account_status: 'active',
-                            user_role: 'Normal User'
-                        };
-                        localStorage.setItem(`user_extra_${lawyer.email}`, JSON.stringify(extraData));
-                    }
 
-                    // 2. Delete from lawyer_registration table
-                    const { error: regError } = await activeSupabase
-                        .from('lawyer_registration')
-                        .delete()
-                        .eq('license', license);
-                        
-                    if (regError) console.warn("Failed to delete registration record, but user was created:", regError);
-
+                    await activeSupabase.from('users').upsert([fullPayload], { onConflict: 'email' });
                 } catch (e) {
-                    console.error("Failed to approve lawyer in Supabase:", e);
-                    alert("Error approving lawyer: " + e.message);
+                    console.error("Failed to update status in Supabase:", e);
+                }
+            }
+
+            // LocalStorage sync
+            try {
+                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers = localLawyers.map(l => {
+                    if (l.license === license) {
+                        return { ...l, ...updatedData };
+                    }
+                    return l;
+                });
+                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
+            } catch(e) {}
+
+            // Send notification template
+            const message = `EMAIL / WHATSAPP NOTIFICATION SENDER (MOCK)\n` +
+                            `-------------------------------------------\n` +
+                            `To: ${lawyer.name} (${lawyer.email} / ${lawyer.phone})\n\n` +
+                            `Congratulations!\n\n` +
+                            `Your lawyer account has been approved.\n` +
+                            `You can now receive client inquiries.\n\n` +
+                            `Status: Verified Lawyer`;
+            alert(message);
+
+            loadLawyers();
+            if (typeof fetchUsers === 'function') fetchUsers();
+        }
+
+        // Helper to reject lawyer registration application
+        async function rejectLawyerApplication(license) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            let lawyers = [];
+            if (activeSupabase) {
+                try {
+                    const { data } = await activeSupabase.from('lawyer_registration').select('*');
+                    if (data) lawyers = data;
+                } catch(e) {}
+            }
+            try {
+                const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers.forEach(localL => {
+                    if (!lawyers.some(dbL => dbL.license === localL.license)) {
+                        lawyers.push(localL);
+                    }
+                });
+            } catch(e) {}
+
+            const lawyer = lawyers.find(l => l.license === license);
+            if (!lawyer) {
+                alert("Lawyer not found.");
+                return;
+            }
+
+            const missingField = prompt("Which field is missing? Please mention the field name:", "Bar License Document");
+            if (missingField === null) return;
+
+            const updatedData = { status: 'Rejected' };
+
+            if (activeSupabase) {
+                try {
+                    await activeSupabase
+                        .from('lawyer_registration')
+                        .update(updatedData)
+                        .eq('license', license);
+                } catch (e) {
+                    console.error("Failed to reject lawyer in Supabase:", e);
+                }
+            }
+
+            // LocalStorage sync
+            try {
+                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers = localLawyers.map(l => {
+                    if (l.license === license) {
+                        return { ...l, ...updatedData };
+                    }
+                    return l;
+                });
+                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
+            } catch(e) {}
+
+            // Send notification template
+            const message = `EMAIL / WHATSAPP NOTIFICATION SENDER (MOCK)\n` +
+                            `-------------------------------------------\n` +
+                            `To: ${lawyer.name} (${lawyer.email} / ${lawyer.phone})\n\n` +
+                            `Additional information is required.\n\n` +
+                            `Reason:\n` +
+                            `The field "${missingField}" is missing or invalid. Please update your profile.`;
+            alert(message);
+
+            loadLawyers();
+        }
+
+        // Request Info
+        async function requestMoreInfo(license) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            
+            let lawyers = [];
+            if (activeSupabase) {
+                try {
+                    const { data } = await activeSupabase.from('lawyer_registration').select('*');
+                    if (data) lawyers = data;
+                } catch(e) {}
+            }
+            try {
+                const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers.forEach(localL => {
+                    if (!lawyers.some(dbL => dbL.license === localL.license)) {
+                        lawyers.push(localL);
+                    }
+                });
+            } catch(e) {}
+
+            const lawyer = lawyers.find(l => l.license === license);
+            if (!lawyer) {
+                alert("Lawyer not found.");
+                return;
+            }
+
+            const infoNeeded = prompt("What additional information is required?", "Clear image of Bar Council Card");
+            if (infoNeeded === null) return;
+
+            const updatedData = { status: 'Pending Info Request' };
+
+            if (activeSupabase) {
+                try {
+                    await activeSupabase
+                        .from('lawyer_registration')
+                        .update(updatedData)
+                        .eq('license', license);
+                } catch (e) {
+                    console.error("Failed to request info in Supabase:", e);
+                }
+            }
+
+            // LocalStorage sync
+            try {
+                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers = localLawyers.map(l => {
+                    if (l.license === license) {
+                        return { ...l, ...updatedData };
+                    }
+                    return l;
+                });
+                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
+            } catch(e) {}
+
+            const message = `EMAIL / WHATSAPP NOTIFICATION SENDER (MOCK)\n` +
+                            `-------------------------------------------\n` +
+                            `To: ${lawyer.name} (${lawyer.email} / ${lawyer.phone})\n\n` +
+                            `Please provide more information:\n` +
+                            `Detail required: ${infoNeeded}`;
+            alert(message);
+
+            loadLawyers();
+        }ing lawyer: " + e.message);
                     return;
                 }
             }
@@ -2205,22 +2352,77 @@
                 const adminInfoName = document.querySelector('aside div h3');
                 if (adminInfoName) adminInfoName.textContent = currentUser.full_name || 'Lawyer';
 
-                // Hide admin-only tabs
-                const tabsToHide = ['users', 'lawyers', 'testimonials', 'subscription', 'know-rights', 'know-laws', 'services', 'lawyers-pannel'];
-                tabsToHide.forEach(tabId => {
-                    const btn = document.getElementById('tab-btn-' + tabId);
-                    if (btn) btn.classList.add('hidden');
-                });
+                // Change Sidebar Menu dynamically to match Lawyer Dashboard items:
+                // Dashboard, My Profile, Incoming Cases, Appointments, Messages, Payments, Documents, Notifications, Settings
+                const sidebarNav = document.querySelector('aside nav');
+                if (sidebarNav) {
+                    sidebarNav.innerHTML = `
+                        <div class="px-3 mb-2">
+                            <span class="text-[8px] uppercase tracking-[1px] text-white/40 font-bold">Lawyer Menu</span>
+                        </div>
+                        <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="tab-btn active w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-chart-line w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Dashboard</span>
+                        </button>
+                        <button onclick="switchTab('lawyer-profile')" id="tab-btn-lawyer-profile" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-user-circle w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">My Profile</span>
+                        </button>
+                        <button onclick="switchTab('case-submission')" id="tab-btn-case-submission" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-inbox w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Incoming Cases</span>
+                        </button>
+                        <button onclick="switchTab('appointments')" id="tab-btn-appointments" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-calendar-alt w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Appointments</span>
+                        </button>
+                        <button onclick="switchTab('messages')" id="tab-btn-messages" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-comments w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Messages</span>
+                        </button>
+                        <button onclick="switchTab('payments')" id="tab-btn-payments" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-credit-card w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Payments</span>
+                        </button>
+                        <button onclick="switchTab('documents')" id="tab-btn-documents" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-file-alt w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Documents</span>
+                        </button>
+                        <button onclick="switchTab('notifications')" id="tab-btn-notifications" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-bell w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Notifications</span>
+                        </button>
+                        <button onclick="switchTab('settings')" id="tab-btn-settings" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-cog w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Settings</span>
+                        </button>
+                    `;
+                }
 
-                // Rename Case Submission tab
-                const caseTabBtnText = document.querySelector('#tab-btn-case-submission span');
-                if (caseTabBtnText) caseTabBtnText.textContent = 'Assigned Cases';
-                
+                // Add Tab Containers dynamically to the Page if they don't exist
+                const contentArea = document.querySelector('main div.flex-1.overflow-y-auto');
+                if (contentArea) {
+                    const extraTabs = ['lawyer-profile', 'appointments', 'messages', 'payments', 'documents', 'notifications', 'settings'];
+                    extraTabs.forEach(t => {
+                        if (!document.getElementById('tab-' + t)) {
+                            const newTab = document.createElement('div');
+                            newTab.id = 'tab-' + t;
+                            newTab.className = 'tab-content space-y-6';
+                            let title = t.replace('-', ' ').toUpperCase();
+                            newTab.innerHTML = `
+                                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200/80">
+                                    <h3 class="text-xl font-bold text-primary mb-4">${title}</h3>
+                                    <p class="text-gray-500 text-sm">Welcome to your ${title.toLowerCase()} section. This area is dedicated to managing your professional services.</p>
+                                </div>
+                            `;
+                            contentArea.appendChild(newTab);
+                        }
+                    });
+                }
+
+                // Rename Case Submission tab title
                 const caseTitleHeader = document.querySelector('#tab-case-submission h3');
-                if (caseTitleHeader) caseTitleHeader.textContent = 'Assigned Legal Cases';
-
-                // Switch to case-submission automatically since they don't have overview/users tab
-                switchTab('case-submission');
+                if (caseTitleHeader) caseTitleHeader.textContent = 'Incoming Cases (Forwarded by Admin)';
 
                 // Disable lawyer assignment selection in Modal since lawyer shouldn't re-assign
                 const assignDropdown = document.getElementById('modalAssignLawyer');
