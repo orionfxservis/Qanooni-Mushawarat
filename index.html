@@ -3750,10 +3750,12 @@ setInterval(nextSlide, 5000);
                 created_at: new Date().toISOString(),
                 project: 'Qanooni-Mushawarat'
             };
+            let activeSupabase = null;
+            if (typeof window !== 'undefined') {
+                activeSupabase = window.supabaseClient || window.supabase || (typeof supabaseClient !== 'undefined' ? supabaseClient : (typeof supabase !== 'undefined' ? supabase : null));
+            }
             
-            const activeSupabase = (typeof supabase !== 'undefined') ? supabase : (typeof supabaseClient !== 'undefined' ? supabaseClient : null);
-            
-            if (activeSupabase) {
+            if (activeSupabase && activeSupabase.auth) {
                 try {
                     // Create Supabase Auth User
                     const redirectToUrl = window.location.origin + window.location.pathname.replace('index.html', '') + 'pages/complete-verification.html';
@@ -3806,8 +3808,8 @@ setInterval(nextSlide, 5000);
             }
             
             alert(currentLanguage === 'en' 
-                ? 'Registration Successful! A verification email has been sent. Please verify your email first.' 
-                : 'رجسٹریشن کامیاب! ایک تصدیقی ای میل بھیج دی گئی ہے۔ براہ کرم پہلے اپنی ای میل کی تصدیق کریں۔');
+                ? 'Registration Successful! Redirecting to Mobile OTP Verification.' 
+                : 'رجسٹریشن کامیاب! موبائل OTP تصدیق پر منتقل کیا جا رہا ہے۔');
             
             e.target.reset();
             if (typeof closeLawyerModal === 'function') closeLawyerModal();
@@ -3816,6 +3818,9 @@ setInterval(nextSlide, 5000);
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
+
+            // Redirect automatically to verification page
+            window.location.href = './pages/complete-verification.html';
         }
         
         // Smooth scroll for anchor links
