@@ -316,6 +316,52 @@
             
             showState('loading');
 
+            const password = document.getElementById('loginPassword').value;
+            
+            showState('loading');
+
+            // 1. Check local storage registration first to bypass any Supabase provider settings errors
+            try {
+                const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                const matchedLawyer = localLawyers.find(l => l.email.toLowerCase() === email.toLowerCase());
+                
+                if (matchedLawyer) {
+                    currentUser = {
+                        email: matchedLawyer.email,
+                        email_confirmed_at: new Date().toISOString(),
+                        user_metadata: {
+                            full_name: matchedLawyer.name,
+                            license_number: matchedLawyer.license,
+                            specialization: matchedLawyer.specialization,
+                            phone: matchedLawyer.phone,
+                            city: matchedLawyer.city,
+                            user_role: 'lawyer',
+                            project: 'Qanooni-Mushawarat'
+                        }
+                    };
+                    
+                    // Save fake session for dashboard.html redirection
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        email: matchedLawyer.email,
+                        full_name: matchedLawyer.name,
+                        role: 'lawyer',
+                        profession: 'Lawyer'
+                    }));
+
+                    // Directly proceed to OTP entry or success
+                    if (matchedLawyer.phone_verified) {
+                        showState('success');
+                    } else {
+                        document.getElementById('verifyPhone').value = matchedLawyer.phone;
+                        showState('phone-verification');
+                    }
+                    return;
+                }
+            } catch (localErr) {
+                console.error("Local login check failed:", localErr);
+            }
+
+            // 2. Fall back to Supabase auth only if no local details exist
             try {
                 const { data, error } = await activeSupabase.auth.signInWithPassword({
                     email,
@@ -325,50 +371,7 @@
                 if (error) throw error;
                 checkUserStatus();
             } catch (err) {
-                console.warn("Supabase auth failed. Checking local registration fallback:", err.message);
-                
-                // Fallback: Check if they registered locally. If yes, auto-login them for demo/testing.
-                try {
-                    const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
-                    const matchedLawyer = localLawyers.find(l => l.email.toLowerCase() === email.toLowerCase());
-                    
-                    if (matchedLawyer) {
-                        currentUser = {
-                            email: matchedLawyer.email,
-                            email_confirmed_at: new Date().toISOString(),
-                            user_metadata: {
-                                full_name: matchedLawyer.name,
-                                license_number: matchedLawyer.license,
-                                specialization: matchedLawyer.specialization,
-                                phone: matchedLawyer.phone,
-                                city: matchedLawyer.city,
-                                user_role: 'lawyer',
-                                project: 'Qanooni-Mushawarat'
-                            }
-                        };
-                        
-                        // Save fake session for dashboard.html redirection
-                        localStorage.setItem('currentUser', JSON.stringify({
-                            email: matchedLawyer.email,
-                            full_name: matchedLawyer.name,
-                            role: 'lawyer',
-                            profession: 'Lawyer'
-                        }));
-
-                        // Directly proceed to OTP entry or success
-                        if (matchedLawyer.phone_verified) {
-                            showState('success');
-                        } else {
-                            document.getElementById('verifyPhone').value = matchedLawyer.phone;
-                            showState('phone-verification');
-                        }
-                        return;
-                    }
-                } catch (localErr) {
-                    console.error("Local login fallback failed:", localErr);
-                }
-
-                alert("Sign in failed: " + err.message + "\n\n(Note: We tried to log you in locally, but no registration details were found for this email either. Please sign up first!)");
+                alert("Sign in failed: " + err.message);
                 showState('signin');
             }
         }
