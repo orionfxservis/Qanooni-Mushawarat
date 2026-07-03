@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Verification - LegalEase Pakistan</title>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f1c2e 0%, #1e3a5f 100%);
+            min-height: 100vh;
+        }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #d4b06a;
+        }
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
+        .text-secondary { color: var(--secondary); }
+        .border-secondary { border-color: var(--secondary); }
+        .focus-secondary:focus { border-color: var(--secondary); outline: none; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .otp-input:focus {
+            box-shadow: 0 0 10px rgba(212, 176, 106, 0.5);
+            border-color: #d4b06a;
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-between">
+
+    <!-- Header / Branding -->
+    <header class="py-6 px-4 shrink-0">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2">
+                <span class="text-lg font-bold text-white tracking-wider"><i class="fas fa-scale-balanced text-secondary mr-2"></i>LegalEase</span>
+            </a>
+            <a href="../index.html" class="text-white/60 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Card -->
+    <main class="flex-1 flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-lg rounded-3xl p-8 md:p-10 shadow-2xl text-white relative overflow-hidden">
+            
+            <!-- Background glow effect -->
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+            <!-- Loading State -->
+            <div id="state-loading" class="flex flex-col items-center justify-center py-10">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary mb-4"></div>
+                <p class="text-white/80 text-sm font-medium">Verifying authorization status...</p>
+            </div>
+
+            <!-- Authentication State: If user is not logged in / needs sign-in to complete -->
+            <div id="state-signin" class="hidden text-center space-y-6">
+                <div class="w-16 h-16 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                    <i class="fas fa-user-lock"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Access Verification Portal</h2>
+                    <p class="text-white/60 text-xs mt-2">To complete your email & mobile verification, please log in with your registered lawyer credentials.</p>
+                </div>
+                <form id="signInForm" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Email Address</label>
+                        <input id="loginEmail" type="email" required placeholder="e.g. advocate@example.com" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 placeholder-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Password</label>
+                        <input id="loginPassword" type="password" required placeholder="••••••••" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 placeholder-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                    </div>
+                    <button type="submit" class="w-full h-10 rounded-xl bg-secondary text-primary font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg flex items-center justify-center gap-2">
+                        Sign In & Proceed
+                    </button>
+                </form>
+            </div>
+
+            <!-- Phase 2: Email Verification Required -->
+            <div id="state-email-pending" class="hidden text-center space-y-6">
+                <div class="w-16 h-16 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 rounded-2xl flex items-center justify-center mx-auto text-2xl animate-pulse">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Verify Your Email Address</h2>
+                    <p class="text-white/70 text-sm mt-3 leading-relaxed">
+                        We've sent a verification link to <span id="pending-email-placeholder" class="text-secondary font-semibold">your email</span>.
+                    </p>
+                    <p class="text-white/50 text-xs mt-2">
+                        Please check your inbox (and spam folder) and click the link to confirm your email. Once confirmed, refresh this page to continue.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-white/10 flex flex-col gap-2">
+                    <button onclick="window.location.reload()" class="w-full h-10 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition flex items-center justify-center gap-2">
+                        <i class="fas fa-rotate"></i> I Have Clicked the Link (Refresh)
+                    </button>
+                    <button onclick="handleSignOut()" class="w-full h-10 rounded-xl text-red-400 hover:bg-red-500/10 font-semibold text-xs transition">
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+
+            <!-- Phase 3: Mobile OTP Verification -->
+            <div id="state-phone-verification" class="hidden text-center space-y-6">
+                <div class="w-16 h-16 bg-secondary/10 border border-secondary/20 text-secondary rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Mobile Verification</h2>
+                    <p class="text-white/60 text-xs mt-2">Please verify your WhatsApp/Mobile number to complete the registration process.</p>
+                </div>
+
+                <!-- Step 3.1: Enter Phone Number and Send OTP -->
+                <div id="phone-entry-step" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Mobile / WhatsApp Number</label>
+                        <div class="flex gap-2">
+                            <input id="verifyPhone" type="tel" placeholder="+92 300 1234567" class="flex-1 h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 placeholder-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                            <button id="btnSendOtp" onclick="sendMockOtp()" class="h-10 px-4 rounded-xl bg-secondary text-primary font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg">
+                                Send OTP
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3.2: Enter OTP Code -->
+                <div id="otp-entry-step" class="hidden space-y-4 text-left">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider">6-Digit Verification Code</label>
+                            <button onclick="resetOtpStep()" class="text-secondary hover:underline text-[10px] font-medium">Change Phone</button>
+                        </div>
+                        <div class="flex justify-between gap-2" id="otp-inputs">
+                            <input type="text" maxlength="1" class="otp-digit w-12 h-12 text-center text-lg font-bold bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-secondary transition text-white">
+                            <input type="text" maxlength="1" class="otp-digit w-12 h-12 text-center text-lg font-bold bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-secondary transition text-white">
+                            <input type="text" maxlength="1" class="otp-digit w-12 h-12 text-center text-lg font-bold bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-secondary transition text-white">
+                            <input type="text" maxlength="1" class="otp-digit w-12 h-12 text-center text-lg font-bold bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-secondary transition text-white">
+                            <input type="text" maxlength="1" class="otp-digit w-12 h-12 text-center text-lg font-bold bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-secondary transition text-white">
+                            <input type="text" maxlength="1" class="otp-digit w-12 h-12 text-center text-lg font-bold bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-secondary transition text-white">
+                        </div>
+                    </div>
+
+                    <button id="btnVerifyOtp" onclick="verifyMockOtp()" class="w-full h-10 rounded-xl bg-secondary text-primary font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg flex items-center justify-center gap-2">
+                        Verify Code
+                    </button>
+
+                    <p class="text-center text-white/40 text-[10px]">
+                        Didn't receive code? <button onclick="sendMockOtp()" class="text-secondary hover:underline font-semibold ml-1">Resend OTP</button>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Verification Success State -->
+            <div id="state-success" class="hidden text-center space-y-6">
+                <div class="w-20 h-20 bg-green-500/10 border border-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-4xl shadow-lg shadow-green-500/5">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Verification Completed!</h2>
+                    <p class="text-white/70 text-sm mt-3 leading-relaxed">
+                        Your email and phone number have been verified successfully.
+                    </p>
+                    <p class="text-white/50 text-xs mt-2 leading-relaxed">
+                        Your application is now under review by the LegalEase admin team. You will be notified once your profile is approved to appear on the platform.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-white/10">
+                    <a href="../index.html" class="inline-flex w-full h-10 rounded-xl bg-secondary text-primary font-bold text-xs items-center justify-center hover:bg-[#c4a05a] transition duration-300 shadow-lg">
+                        Return to Home Page
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mock OTP Toast (For testing/demo purposes) -->
+            <div id="mock-otp-toast" class="hidden mt-6 bg-[#d4b06a]/15 border border-[#d4b06a]/30 p-4 rounded-xl text-left space-y-2">
+                <div class="flex items-center gap-2 text-secondary font-bold text-xs">
+                    <i class="fas fa-circle-info"></i>
+                    <span>DEMO SIMULATION SENDER</span>
+                </div>
+                <p class="text-white/80 text-[11px]">
+                    To: <span id="toast-phone" class="font-semibold"></span><br>
+                    SMS Gateway sent a 6-digit OTP code: <span id="toast-otp" class="text-secondary font-bold text-sm tracking-wider"></span>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-white/40 text-xs shrink-0">
+        <p>© 2026 LegalEase Pakistan. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+
+    <script>
+        // Supabase client fallback check
+        const activeSupabase = (typeof supabaseClient !== 'undefined') ? supabaseClient : null;
+        let generatedOtp = null;
+        let currentUser = null;
+
+        // Document ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Bind sign in form
+            const signInForm = document.getElementById('signInForm');
+            if (signInForm) {
+                signInForm.addEventListener('submit', handleSignIn);
+            }
+
+            // Autotab for OTP inputs
+            const inputs = document.querySelectorAll('.otp-digit');
+            inputs.forEach((input, index) => {
+                input.addEventListener('keyup', (e) => {
+                    if (e.target.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                    if (e.key === 'Backspace' && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+                input.addEventListener('input', (e) => {
+                    // Force numeric only
+                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                });
+            });
+
+            checkUserStatus();
+        });
+
+        // Check authentication and verification status
+        async function checkUserStatus() {
+            showState('loading');
+            
+            if (!activeSupabase) {
+                console.error("Supabase client is not loaded.");
+                alert("Supabase config is missing or invalid. Check js/supabase-config.js");
+                showState('signin');
+                return;
+            }
+
+            const { data: { session }, error } = await activeSupabase.auth.getSession();
+            if (error || !session) {
+                showState('signin');
+                return;
+            }
+
+            currentUser = session.user;
+            
+            // Check if email is confirmed
+            if (!currentUser.email_confirmed_at) {
+                document.getElementById('pending-email-placeholder').textContent = currentUser.email;
+                showState('email-pending');
+                return;
+            }
+
+            // Email is verified, update lawyer_registration record email_verified flag
+            try {
+                await activeSupabase
+                    .from('lawyer_registration')
+                    .update({ email_verified: true })
+                    .eq('email', currentUser.email)
+                    .eq('project', 'Qanooni-Mushawarat');
+            } catch (err) {
+                console.error("Failed to update email_verified flag in DB:", err);
+            }
+
+            // Check if phone is already verified
+            let phoneVerified = false;
+            try {
+                const { data, error } = await activeSupabase
+                    .from('lawyer_registration')
+                    .select('phone_verified, phone')
+                    .eq('email', currentUser.email)
+                    .eq('project', 'Qanooni-Mushawarat')
+                    .single();
+                
+                if (data) {
+                    phoneVerified = data.phone_verified;
+                    if (data.phone) {
+                        document.getElementById('verifyPhone').value = data.phone;
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to check phone verification status:", err);
+            }
+
+            if (phoneVerified) {
+                showState('success');
+            } else {
+                showState('phone-verification');
+            }
+        }
+
+        // Handle login manually if session is missing
+        async function handleSignIn(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            showState('loading');
+
+            try {
+                const { data, error } = await activeSupabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) throw error;
+                checkUserStatus();
+            } catch (err) {
+                alert("Sign in failed: " + err.message);
+                showState('signin');
+            }
+        }
+
+        // Handle sign out
+        async function handleSignOut() {
+            await activeSupabase.auth.signOut();
+            window.location.reload();
+        }
+
+        // Show states
+        function showState(state) {
+            document.getElementById('state-loading').classList.add('hidden');
+            document.getElementById('state-signin').classList.add('hidden');
+            document.getElementById('state-email-pending').classList.add('hidden');
+            document.getElementById('state-phone-verification').classList.add('hidden');
+            document.getElementById('state-success').classList.add('hidden');
+            
+            const element = document.getElementById('state-' + state);
+            if (element) element.classList.remove('hidden');
+        }
+
+        // Send OTP Simulation
+        function sendMockOtp() {
+            const phone = document.getElementById('verifyPhone').value.trim();
+            if (!phone) {
+                alert("Please enter a valid mobile number.");
+                return;
+            }
+
+            // Generate random 6-digit OTP
+            generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            // Show Simulation Toast
+            document.getElementById('toast-phone').textContent = phone;
+            document.getElementById('toast-otp').textContent = generatedOtp;
+            document.getElementById('mock-otp-toast').classList.remove('hidden');
+
+            // Switch to OTP entry step
+            document.getElementById('phone-entry-step').classList.add('hidden');
+            document.getElementById('otp-entry-step').classList.remove('hidden');
+            
+            // Focus on first input
+            setTimeout(() => {
+                document.querySelector('.otp-digit').focus();
+            }, 100);
+        }
+
+        function resetOtpStep() {
+            document.getElementById('otp-entry-step').classList.add('hidden');
+            document.getElementById('phone-entry-step').classList.remove('hidden');
+            document.getElementById('mock-otp-toast').classList.add('hidden');
+            generatedOtp = null;
+        }
+
+        // Verify OTP Simulation
+        async function verifyMockOtp() {
+            const digits = Array.from(document.querySelectorAll('.otp-digit')).map(input => input.value).join('');
+            
+            if (digits.length !== 6) {
+                alert("Please enter the full 6-digit code.");
+                return;
+            }
+
+            if (digits !== generatedOtp) {
+                alert("Invalid OTP verification code. Please try again.");
+                return;
+            }
+
+            // Code matches, update status in DB
+            showState('loading');
+
+            try {
+                if (activeSupabase && currentUser) {
+                    // Update DB profile
+                    const { error: dbErr } = await activeSupabase
+                        .from('lawyer_registration')
+                        .update({
+                            phone_verified: true,
+                            phone: document.getElementById('verifyPhone').value.trim()
+                        })
+                        .eq('email', currentUser.email)
+                        .eq('project', 'Qanooni-Mushawarat');
+
+                    if (dbErr) throw dbErr;
+
+                    // Update user metadata in Auth to match
+                    const { error: metadataErr } = await activeSupabase.auth.updateUser({
+                        data: { phone_verified: true }
+                    });
+                    if (metadataErr) throw metadataErr;
+                }
+
+                // Show success screen
+                showState('success');
+            } catch (err) {
+                console.error("Verification update failed:", err);
+                alert("Verification failed: " + err.message);
+                showState('phone-verification');
+            }
+        }
+    </script>
+</body>
+</html>
