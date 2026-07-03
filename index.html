@@ -2133,10 +2133,24 @@
                             Specialization *
                         </label>
                         <select id="regLawyerSpec" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
-                            <option value="Family Matters" data-en="Family Matters" data-ur="خاندانی معاملات">Family Matters</option>
+                            <option value="Family Law" data-en="Family Law" data-ur="خاندانی قوانین">Family Law</option>
+                            <option value="Property & Real Estate" data-en="Property & Real Estate" data-ur="جائیداد کا قانون">Property & Real Estate</option>
+                            <option value="Privacy & Cyber Crime" data-en="Privacy & Cyber Crime" data-ur="رازداری اور سائبر کرائم">Privacy & Cyber Crime</option>
+                            <option value="Criminal Defense" data-en="Criminal Defense" data-ur="فوجداری مقدمات">Criminal Defense</option>
+                            <option value="Taxation" data-en="Taxation" data-ur="ٹیکس کے قوانین">Taxation</option>
+                            <option value="Employment & Labour" data-en="Employment & Labour" data-ur="ملازمت اور لیبر قوانین">Employment & Labour</option>
+                            <option value="Immigration" data-en="Immigration" data-ur="امیگریشن">Immigration</option>
+                            <option value="Intellectual Property" data-en="Intellectual Property" data-ur="دانشورانہ ملکیت">Intellectual Property</option>
+                            <option value="Environmental Law" data-en="Environmental Law" data-ur="ماحولیاتی قانون">Environmental Law</option>
+                            <option value="ADR" data-en="ADR (Alternative Dispute Resolution)" data-ur="اے ڈی آر (متبادل حل تنازعات)">ADR</option>
+                            <option value="Constitutional Law" data-en="Constitutional Law" data-ur="آئینی قانون">Constitutional Law</option>
+                            <option value="Banking & Finance" data-en="Banking & Finance" data-ur="بینکاری اور مالیات">Banking & Finance</option>
+                            <option value="NAB / FIA Cases" data-en="NAB / FIA Cases" data-ur="نیب / ایف آئی اے مقدمات">NAB / FIA Cases</option>
+                            <option value="Medical Negligence" data-en="Medical Negligence" data-ur="طبی غفلت">Medical Negligence</option>
+                            <option value="Human Rights" data-en="Human Rights" data-ur="انسانی حقوق">Human Rights</option>
+                            <option value="Customers Protection" data-en="Customers Protection" data-ur="صارفین کا تحفظ">Customers Protection</option>
+                            <option value="Civil Litigation" data-en="Civil Litigation" data-ur="دیوانی مقدمات">Civil Litigation</option>
                             <option value="Corporate Law" data-en="Corporate Law" data-ur="کارپوریٹ قانون">Corporate Law</option>
-                            <option value="Criminal Defense" data-en="Criminal Defense" data-ur="فوجداری دفاع">Criminal Defense</option>
-                            <option value="Property Law" data-en="Property Law" data-ur="جائیداد کا قانون">Property Law</option>
                         </select>
                     </div>
                 </div>
@@ -2185,6 +2199,50 @@
                         </select>
                     </div>
                 </div>
+
+                <!-- Password and Confirm Password Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="Password *"
+                               data-ur="پاس ورڈ *">
+                            Password *
+                        </label>
+                        <input
+                            id="regLawyerPassword"
+                            type="password"
+                            required
+                            placeholder="Min 6 characters"
+                            class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1"
+                               data-en="Confirm Password *"
+                               data-ur="پاس ورڈ کی تصدیق کریں *">
+                            Confirm Password *
+                        </label>
+                        <input
+                            id="regLawyerConfirmPassword"
+                            type="password"
+                            required
+                            placeholder="Confirm Password"
+                            class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition"
+                        >
+                    </div>
+                </div>
+
+                <!-- Show Password -->
+                <div class="flex items-center justify-between pt-1">
+                    <label class="flex items-center gap-2 text-xs text-gray-600 cursor-pointer">
+                        <input type="checkbox"
+                               onchange="toggleLawyerRegisterPassword(this)"
+                               class="accent-secondary">
+                        Show Password
+                    </label>
+                </div>
+
 
                 <button
 					type="submit"
@@ -3667,6 +3725,18 @@ setInterval(nextSlide, 5000);
                 submitBtn.innerHTML = currentLanguage === 'en' ? 'Registering...' : 'رجسٹریشن ہو رہی ہے...';
             }
 
+            const password = document.getElementById('regLawyerPassword').value;
+            const confirmPassword = document.getElementById('regLawyerConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert(currentLanguage === 'en' ? 'Passwords do not match.' : 'پاس ورڈز مطابقت نہیں رکھتے۔');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+                return;
+            }
+
             const newLawyer = {
                 name: document.getElementById('regLawyerName').value.trim(),
                 license: document.getElementById('regLawyerLicense').value.trim(),
@@ -3674,6 +3744,9 @@ setInterval(nextSlide, 5000);
                 email: document.getElementById('regLawyerEmail').value.trim(),
                 phone: document.getElementById('regLawyerPhone').value.trim(),
                 city: document.getElementById('regLawyerCity').value,
+                status: 'Pending Verification',
+                email_verified: false,
+                phone_verified: false,
                 created_at: new Date().toISOString(),
                 project: 'Qanooni-Mushawarat'
             };
@@ -3682,6 +3755,30 @@ setInterval(nextSlide, 5000);
             
             if (activeSupabase) {
                 try {
+                    // Create Supabase Auth User
+                    const redirectToUrl = window.location.origin + window.location.pathname.replace('index.html', '') + 'pages/complete-verification.html';
+                    console.log("Email verification redirect URL:", redirectToUrl);
+                    
+                    const { data: authData, error: authError } = await activeSupabase.auth.signUp({
+                        email: newLawyer.email,
+                        password: password,
+                        options: {
+                            data: {
+                                full_name: newLawyer.name,
+                                license_number: newLawyer.license,
+                                specialization: newLawyer.specialization,
+                                phone: newLawyer.phone,
+                                city: newLawyer.city,
+                                user_role: 'lawyer',
+                                project: 'Qanooni-Mushawarat'
+                            },
+                            emailRedirectTo: redirectToUrl
+                        }
+                    });
+
+                    if (authError) throw authError;
+
+                    // Insert profile record into lawyer_registration
                     const { error } = await activeSupabase
                         .from('lawyer_registration')
                         .insert([newLawyer]);
@@ -3689,6 +3786,12 @@ setInterval(nextSlide, 5000);
                     console.log("Successfully saved lawyer to Supabase");
                 } catch (dbErr) {
                     console.error("Failed to save lawyer registration to Supabase:", dbErr);
+                    alert("Registration failed: " + dbErr.message);
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }
+                    return;
                 }
             } else {
                 console.warn("Supabase not available. Saving locally.");
@@ -3702,7 +3805,10 @@ setInterval(nextSlide, 5000);
                 console.error("Failed to save to localStorage:", e);
             }
             
-            alert(currentLanguage === 'en' ? 'Registration Successful! Your application is under review.' : 'رجسٹریشن کامیاب! آپ کی درخواست زیر غور ہے۔');
+            alert(currentLanguage === 'en' 
+                ? 'Registration Successful! A verification email has been sent. Please verify your email first.' 
+                : 'رجسٹریشن کامیاب! ایک تصدیقی ای میل بھیج دی گئی ہے۔ براہ کرم پہلے اپنی ای میل کی تصدیق کریں۔');
+            
             e.target.reset();
             if (typeof closeLawyerModal === 'function') closeLawyerModal();
 
@@ -3861,6 +3967,19 @@ function toggleRegisterPassword(checkbox) {
         pass2.type = "password";
     }
 }
+
+function toggleLawyerRegisterPassword(checkbox) {
+    const pass1 = document.getElementById("regLawyerPassword");
+    const pass2 = document.getElementById("regLawyerConfirmPassword");
+    if (checkbox.checked) {
+        pass1.type = "text";
+        pass2.type = "text";
+    } else {
+        pass1.type = "password";
+        pass2.type = "password";
+    }
+}
+
 
 window.addEventListener("click", function(e) {
 
