@@ -1432,6 +1432,7 @@
                 localLawyers.forEach(localL => {
                     const dbIndex = lawyers.findIndex(dbL => dbL.license === localL.license);
                     if (dbIndex === -1) {
+                        localL.is_local_only = true; // Mark as local-only
                         lawyers.push(localL);
                     } else {
                         // Merge local verification status and ID if they are verified locally but not in DB
@@ -1524,10 +1525,11 @@
                     else if (statusVal === 'Approved' || statusVal === 'Verified Lawyer') statusClass = 'bg-green-100 text-green-700';
                     
                     const statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${statusVal}</span>`;
+                    const localBadge = l.is_local_only ? '<span class="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-100 text-purple-700">Local Only (Not in DB)</span>' : '';
 
                     tr.innerHTML = `
                         <td class="py-4 font-medium text-gray-800 px-2">
-                            <div>${l.name}</div>
+                            <div class="flex items-center flex-wrap gap-1">${l.name}${localBadge}</div>
                             <div class="text-[10px] text-gray-400 mt-0.5">${l.email_verified ? '✅ Email Verified' : '❌ Email Unverified'}</div>
                         </td>
                         <td class="py-4 text-gray-600 font-mono text-sm px-2">
