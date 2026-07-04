@@ -401,10 +401,16 @@
             // Generate random 6-digit OTP
             generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
             
-            // Show Simulation Toast
-            document.getElementById('toast-phone').textContent = phone;
-            document.getElementById('toast-otp').textContent = generatedOtp;
-            document.getElementById('mock-otp-toast').classList.remove('hidden');
+            // Alert user directly
+            alert("Verification SMS sent to " + phone + "\nOTP Code: " + generatedOtp);
+
+            // Populate and show the simulated OTP toast
+            const toastPhone = document.getElementById('toast-phone');
+            const toastOtp = document.getElementById('toast-otp');
+            const mockToast = document.getElementById('mock-otp-toast');
+            if (toastPhone) toastPhone.innerText = phone;
+            if (toastOtp) toastOtp.innerText = generatedOtp;
+            if (mockToast) mockToast.classList.remove('hidden');
 
             // Switch to OTP entry step
             document.getElementById('phone-entry-step').classList.add('hidden');
