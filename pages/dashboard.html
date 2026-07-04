@@ -1430,9 +1430,20 @@
             try {
                 const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
                 localLawyers.forEach(localL => {
-                    const exists = lawyers.some(dbL => dbL.license === localL.license);
-                    if (!exists) {
+                    const dbIndex = lawyers.findIndex(dbL => dbL.license === localL.license);
+                    if (dbIndex === -1) {
                         lawyers.push(localL);
+                    } else {
+                        // Merge local verification status and ID if they are verified locally but not in DB
+                        if (localL.phone_verified && !lawyers[dbIndex].phone_verified) {
+                            lawyers[dbIndex].phone_verified = true;
+                        }
+                        if (localL.email_verified && !lawyers[dbIndex].email_verified) {
+                            lawyers[dbIndex].email_verified = true;
+                        }
+                        if (localL.user_id && !lawyers[dbIndex].user_id) {
+                            lawyers[dbIndex].user_id = localL.user_id;
+                        }
                     }
                 });
             } catch(e) {
@@ -1571,6 +1582,8 @@
 
             const newName = prompt("Edit Professional Name:", lawyer.name);
             if (newName === null) return;
+            const newUserId = prompt("Edit User ID (for Login):", lawyer.user_id || '');
+            if (newUserId === null) return;
             const newSpec = prompt("Edit Specialization:", lawyer.specialization || '');
             if (newSpec === null) return;
             const newCity = prompt("Edit City:", lawyer.city || '');
@@ -1578,6 +1591,7 @@
 
             const updatedData = {
                 name: newName.trim(),
+                user_id: newUserId.trim(),
                 specialization: newSpec.trim(),
                 city: newCity.trim()
             };
