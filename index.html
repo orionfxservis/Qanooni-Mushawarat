@@ -440,7 +440,7 @@
         <div class="container mx-auto px-4">
 
     <!-- Main Nav -->
-    <nav class="flex justify-between items-center py-2">
+    <nav class="flex justify-between items-center py-2" style="min-height: 72px;">
 
         <!-- Logo -->
         <a href="#home" class="flex items-center">
@@ -580,11 +580,20 @@
         <!-- Right Side -->
         <div class="hidden lg:flex items-center gap-3">
 
-            <!-- Urdu Toggle -->
-            <button onclick="toggleLanguage()"
-                class="w-10 h-10 rounded-full border border-white/20 text-white hover:bg-secondary hover:text-primary transition flex items-center justify-center">
-                <i class="fas fa-language text-sm"></i>
-            </button>
+            <!-- English / Urdu Toggle (Desktop) -->
+            <div dir="ltr" class="relative w-[105px] h-8 rounded-full border border-white/20 bg-primary/20 backdrop-blur flex items-center p-0.5 cursor-pointer select-none" onclick="toggleLanguage()">
+                <!-- Highlighted background slider pill -->
+                <div id="langSlider" class="absolute w-[48px] h-[26px] bg-secondary rounded-full transition-all duration-300 ease-out" style="left: 2px;"></div>
+                
+                <!-- EN Text -->
+                <span id="langTextEN" class="w-[48px] text-center text-xs font-bold transition-colors duration-300 z-10" style="color: #1e3a5f;">EN</span>
+                
+                <!-- Vertical Divider -->
+                <div class="h-3 w-[1px] bg-white/20 z-10"></div>
+                
+                <!-- Urdu Text -->
+                <span id="langTextUR" class="w-[48px] text-center text-xs font-bold transition-colors duration-300 z-10" style="color: #ffffff;">اردو</span>
+            </div>
 
             <!-- Theme Toggle -->
             <button onclick="toggleTheme()"
@@ -680,11 +689,16 @@
                     <a href="./pages/about.html" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="About Us" data-ur="ہمارے بارے میں">About Us</a>
                     <a href="./pages/policy.html" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Privacy Policy" data-ur="رازداری کی پالیسی">Privacy Policy</a>
                     <a href="#contact" class="text-white hover:text-secondary transition py-2 border-b border-white/10" data-en="Contact Us" data-ur="ہم سے رابطہ کریں">Contact Us</a>
-                    <div class="flex gap-4 pt-4">
-                        <button onclick="toggleLanguage()" class="flex-1 bg-secondary text-primary py-2 rounded-full font-semibold">
-                            <span id="mobileLangBtn">اردو</span>
-                        </button>
-                        <button onclick="toggleTheme()" class="flex-1 bg-white/10 text-white py-2 rounded-full">
+                    <div class="flex gap-4 pt-4 items-center justify-between">
+                        <!-- English / Urdu Toggle (Mobile) -->
+                        <div dir="ltr" class="relative w-[105px] h-8 rounded-full border border-white/20 bg-white/10 flex items-center p-0.5 cursor-pointer select-none" onclick="toggleLanguage()">
+                            <div id="mobileLangSlider" class="absolute w-[48px] h-[26px] bg-secondary rounded-full transition-all duration-300 ease-out" style="left: 2px;"></div>
+                            <span id="mobileLangTextEN" class="w-[48px] text-center text-xs font-bold transition-colors duration-300 z-10" style="color: #1e3a5f;">EN</span>
+                            <div class="h-3 w-[1px] bg-white/20 z-10"></div>
+                            <span id="mobileLangTextUR" class="w-[48px] text-center text-xs font-bold transition-colors duration-300 z-10" style="color: #ffffff;">اردو</span>
+                        </div>
+                        
+                        <button onclick="toggleTheme()" class="w-10 h-10 bg-white/10 text-white rounded-full flex items-center justify-center">
                             <i class="fas fa-moon" id="mobileThemeIcon"></i>
                         </button>
                     </div>
@@ -1322,6 +1336,7 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 1. Family Law -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-users text-primary text-3xl group-hover:text-white transition"></i>
@@ -1331,24 +1346,17 @@
                     <a href="./pages/family-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
                 
+                <!-- 2. Criminal Law -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-gavel text-primary text-3xl group-hover:text-white transition"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Criminal Defense" data-ur="کریمنل ڈیفنس">Criminal Defense</h3>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Criminal Law" data-ur="فوجداری قانون">Criminal Law</h3>
                     <p class="text-gray-600 text-sm mb-4" data-en="Bail, FIR, Criminal Defence, Police Investigations & Court Representation." data-ur="ضمانت، ایف آئی آر، فوجداری دفاع، پولیس تحقیقات اور عدالتی نمائندگی۔">Bail, FIR, Criminal Defence, Police Investigations & Court Representation.</p>
                     <a href="./pages/criminal-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
                 
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
-                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
-                        <i class="fas fa-building text-primary text-3xl group-hover:text-white transition"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Corporate Law" data-ur="کارپوریٹ قانون">Corporate Law</h3>
-                    <p class="text-gray-600 text-sm mb-4" data-en="Business Registration, Company Compliance, Contracts & Legal Advisory." data-ur="کاروبار کی رجسٹریشن، کمپنی کی تعمیل، معاہدے اور قانونی مشاورت۔">Business Registration, Company Compliance, Contracts & Legal Advisory.</p>
-                    <a href="./pages/corporate-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
-                </div>
-                
+                <!-- 3. Civil Litigation -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-file-contract text-primary text-3xl group-hover:text-white transition"></i>
@@ -1357,50 +1365,113 @@
                     <p class="text-gray-600 text-sm mb-4" data-en="Property Disputes, Land Ownership, Civil Litigation & Legal Recovery." data-ur="جائیداد کے تنازعات، زمین کی ملکیت، سول قانونی چارہ جوئی اور قانونی وصولی۔">Property Disputes, Land Ownership, Civil Litigation & Legal Recovery.</p>
                     <a href="./pages/civil-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
-                
+
+                <!-- 4. Property Law -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-home text-primary text-3xl group-hover:text-white transition"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Real Estate" data-ur="رئیل اسٹیٹ">Real Estate</h3>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Property Law" data-ur="جائیداد کا قانون">Property Law</h3>
                     <p class="text-gray-600 text-sm mb-4" data-en="Property Transfer, Land Disputes, Rental Agreements & Ownership Verification." data-ur="جائیداد کی منتقلی، زمین کے تنازعات، کرایہ داری کے معاہدے اور ملکیت کی تصدیق۔">Property Transfer, Land Disputes, Rental Agreements & Ownership Verification.</p>
                     <a href="./pages/property-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
-                
+
+                <!-- 5. Corporate & Business Law -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-building text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Corporate & Business Law" data-ur="کارپوریٹ اور تجارتی قوانین">Corporate & Business Law</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Business Registration, Company Compliance, Contracts & Legal Advisory." data-ur="کاروبار کی رجسٹریشن، کمپنی کی تعمیل، معاہدے اور قانونی مشاورت۔">Business Registration, Company Compliance, Contracts & Legal Advisory.</p>
+                    <a href="./pages/corporate-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+
+                <!-- 6. Employment & Labour Law -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-briefcase text-primary text-3xl group-hover:text-white transition"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Labor Law" data-ur="لیبر قانون">Labor Law</h3>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Employment & Labour Law" data-ur="ملازمت اور لیبر قوانین">Employment & Labour Law</h3>
                     <p class="text-gray-600 text-sm mb-4" data-en="Employment Disputes, Wrongful Termination, Labour Rights & Workplace Claims." data-ur="ملازمت کے تنازعات، غیر قانونی برطرفی، مزدوروں کے حقوق اور کام کی جگہ کے دعوے۔">Employment Disputes, Wrongful Termination, Labour Rights & Workplace Claims.</p>
                     <a href="./pages/labour-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
                 
+                <!-- 7. Tax & FBR Matters -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-chart-line text-primary text-3xl group-hover:text-white transition"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Tax Law" data-ur="ٹیکس قانون">Tax Law</h3>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Tax & FBR Matters" data-ur="ٹیکس اور ایف بی آر معاملات">Tax & FBR Matters</h3>
                     <p class="text-gray-600 text-sm mb-4" data-en="Income Tax, Sales Tax, FBR Compliance & Tax Dispute Resolution." data-ur="انکم ٹیکس، سیلز ٹیکس، ایف بی آر تعمیل اور ٹیکس تنازعات کا حل۔">Income Tax, Sales Tax, FBR Compliance & Tax Dispute Resolution.</p>
                     <a href="./pages/tax-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
                 
+                <!-- 8. Immigration & International Law -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-globe text-primary text-3xl group-hover:text-white transition"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="International Law" data-ur="بین الاقوامی قانون">International Law</h3>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Immigration & International Law" data-ur="امیگریشن اور بین الاقوامی قانون">Immigration & International Law</h3>
                     <p class="text-gray-600 text-sm mb-4" data-en="Immigration, Visa Assistance, Overseas Legal Matters & International Law." data-ur="امیگریشن، ویزا میں معاونت، سمندر پار قانونی معاملات اور بین الاقوامی قانون۔">Immigration, Visa Assistance, Overseas Legal Matters & International Law.</p>
                     <a href="./pages/immigration-law.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
                 
+                <!-- 9. Anti Narcotics Law -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-scale-balanced text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Anti Narcotics Law" data-ur="اینٹی نارکوٹکس قوانین">Anti Narcotics Law</h3>
+                    <p class="text-gray-600 text-sm mb-4" 
+                       data-en="Legal assistance for ANF investigations, narcotics offenses, drug possession cases, bail, appeals, trial defense, and court representation across Pakistan." 
+                       data-ur="منشیات سے متعلق مقدمات، اے این ایف تحقیقات، ایف آئی آر، ضمانت، عدالتی دفاع اور پاکستان کے اینٹی نارکوٹکس قوانین کے تحت قانونی معاونت۔">Legal assistance for ANF investigations, narcotics offenses, drug possession cases, bail, appeals, trial defense, and court representation across Pakistan.</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+
+                <!-- 10. Cyber Crime -->
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
                     <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
                         <i class="fas fa-user-shield text-primary text-3xl group-hover:text-white transition"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Cyber Crime Complaint" data-ur="سائبر کرائم شکایت">🛡️ Cyber Crime Complaint</h3>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Cyber Crime" data-ur="سائبر کرائم">🛡️ Cyber Crime</h3>
                     <p class="text-gray-600 text-sm mb-4" data-en="Report online fraud, harassment, hacking, blackmail, identity theft, financial scams, and other cyber offences. Our legal experts will guide you through the next steps." data-ur="آن لائن فراڈ، ہراساں کرنا، ہیکنگ، بلیک میلنگ، شناختی چوری، مالیاتی گھپلے اور دیگر سائبر جرائم کی اطلاع دیں۔ ہمارے قانون دان رہنمائی کریں گے۔">Report online fraud, harassment, hacking, blackmail, identity theft, financial scams, and other cyber offences. Our legal experts will guide you through the next steps.</p>
                     <a href="./pages/cyber-crime.html" class="text-secondary font-semibold hover:text-primary transition" data-en="Report Cyber Crime" data-ur="سائبر کرائم رپورٹ کریں">Report Cyber Crime</a>
+                </div>
+
+                <!-- 11. Consumer Protection -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-shield-halved text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Consumer Protection" data-ur="صارفین کا تحفظ">Consumer Protection</h3>
+                    <p class="text-gray-600 text-sm mb-4" 
+                       data-en="Consumer rights protection, defective product claims, service complaints, and representation in Consumer Courts." 
+                       data-ur="صارفین کے حقوق کا تحفظ، ناقص مصنوعات کے خلاف دعوے، خدمات سے متعلق شکایات اور کنزیومر عدالتوں میں نمائندگی۔">Consumer rights protection, defective product claims, service complaints, and representation in Consumer Courts.</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+
+                <!-- 12. Banking & Finance -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-landmark text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Banking & Finance" data-ur="بینکاری اور مالیاتی قوانین">Banking & Finance</h3>
+                    <p class="text-gray-600 text-sm mb-4" 
+                       data-en="Loan recovery, banking disputes, financial fraud, cheque bounce (Section 489-F) defense, and Banking Court representation." 
+                       data-ur="قرضوں کی وصولی، بینکنگ تنازعات، مالیاتی فراڈ، چیک باؤنس (سیکشن 489-F) کا دفاع اور بینکنگ عدالتوں میں نمائندگی۔">Loan recovery, banking disputes, financial fraud, cheque bounce (Section 489-F) defense, and Banking Court representation.</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
+                </div>
+
+                <!-- 13. Constitutional Matters -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift text-center group">
+                    <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary transition">
+                        <i class="fas fa-building-columns text-primary text-3xl group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Constitutional Matters" data-ur="آئینی معاملات">Constitutional Matters</h3>
+                    <p class="text-gray-600 text-sm mb-4" 
+                       data-en="High Court Writ petitions, fundamental rights enforcement, public interest litigation, constitutional challenges, and appeals." 
+                       data-ur="ہائی کورٹ میں رٹ پٹیشنز، بنیادی حقوق کا نفاذ، عوامی مفاد کی قانونی چارہ جوئی اور آئینی اپیلیں۔">High Court Writ petitions, fundamental rights enforcement, public interest litigation, constitutional challenges, and appeals.</p>
+                    <a href="#client-form" class="text-secondary font-semibold hover:text-primary transition" data-en="Consult Now →" data-ur="ابھی مشاورت کریں ←">Consult Now →</a>
                 </div>
             </div>
         </div>
@@ -2146,6 +2217,7 @@
                             <option value="Constitutional Law" data-en="Constitutional Law" data-ur="آئینی قانون">Constitutional Law</option>
                             <option value="Banking & Finance" data-en="Banking & Finance" data-ur="بینکاری اور مالیات">Banking & Finance</option>
                             <option value="NAB / FIA Cases" data-en="NAB / FIA Cases" data-ur="نیب / ایف آئی اے مقدمات">NAB / FIA Cases</option>
+                            <option value="Anti Narcotics Law" data-en="Anti Narcotics Law" data-ur="اینٹی نارکوٹکس قوانین">Anti Narcotics Law</option>
                             <option value="Medical Negligence" data-en="Medical Negligence" data-ur="طبی غفلت">Medical Negligence</option>
                             <option value="Human Rights" data-en="Human Rights" data-ur="انسانی حقوق">Human Rights</option>
                             <option value="Customers Protection" data-en="Customers Protection" data-ur="صارفین کا تحفظ">Customers Protection</option>
@@ -2811,6 +2883,42 @@
         });
         
         // Language Toggle
+        function updateLanguageToggleUI() {
+            // Update desktop slider
+            const langSlider = document.getElementById('langSlider');
+            const langTextEN = document.getElementById('langTextEN');
+            const langTextUR = document.getElementById('langTextUR');
+
+            if (langSlider && langTextEN && langTextUR) {
+                if (currentLanguage === 'en') {
+                    langSlider.style.left = '2px';
+                    langTextEN.style.color = '#1e3a5f'; // active color (dark blue)
+                    langTextUR.style.color = '#ffffff'; // inactive color (white)
+                } else {
+                    langSlider.style.left = '55px'; // narrower width offset (105px - 48px - 2px)
+                    langTextEN.style.color = '#ffffff'; // inactive color (white)
+                    langTextUR.style.color = '#1e3a5f'; // active color (dark blue)
+                }
+            }
+
+            // Update mobile slider
+            const mobileLangSlider = document.getElementById('mobileLangSlider');
+            const mobileLangTextEN = document.getElementById('mobileLangTextEN');
+            const mobileLangTextUR = document.getElementById('mobileLangTextUR');
+
+            if (mobileLangSlider && mobileLangTextEN && mobileLangTextUR) {
+                if (currentLanguage === 'en') {
+                    mobileLangSlider.style.left = '2px';
+                    mobileLangTextEN.style.color = '#1e3a5f';
+                    mobileLangTextUR.style.color = '#ffffff';
+                } else {
+                    mobileLangSlider.style.left = '55px';
+                    mobileLangTextEN.style.color = '#ffffff';
+                    mobileLangTextUR.style.color = '#1e3a5f';
+                }
+            }
+        }
+
         function toggleLanguage() {
             currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
             const html = document.documentElement;
@@ -2833,20 +2941,12 @@
                 el.placeholder = el.getAttribute(`data-placeholder-${currentLanguage}`);
             });
             
-            // Update buttons safely
-            const langBtn = document.getElementById('langBtn');
-            if (langBtn) {
-                langBtn.textContent = currentLanguage === 'en' ? 'اردو' : 'English';
-            }
-            const mobileLangBtn = document.getElementById('mobileLangBtn');
-            if (mobileLangBtn) {
-                mobileLangBtn.textContent = currentLanguage === 'en' ? 'اردو' : 'English';
-            }
             const logoTagline = document.getElementById('logoTagline');
             if (logoTagline) {
                 logoTagline.textContent = currentLanguage === 'en' ? 'قانونی مشاورت' : 'Legal Consultancy';
             }
             
+            updateLanguageToggleUI();
             updateLanguageDirection();
         }
         
