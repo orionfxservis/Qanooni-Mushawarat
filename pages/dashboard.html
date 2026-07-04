@@ -1866,22 +1866,6 @@
             alert(message);
 
             loadLawyers();
-        }ing lawyer: " + e.message);
-                    return;
-                }
-            }
-
-            // Also clean up from LocalStorage
-            try {
-                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
-                localLawyers = localLawyers.filter(l => l.license !== license);
-                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
-            } catch (e) {}
-
-            alert(`Advocate ${lawyer.name} has been approved and added to the Users/Lawyers list.`);
-            loadLawyers();
-            if (typeof fetchUsers === 'function') fetchUsers();
-            if (typeof populateLawyersDropdown === 'function') populateLawyersDropdown();
         }
 
         // Helper to delete lawyer registration from Supabase & LocalStorage
