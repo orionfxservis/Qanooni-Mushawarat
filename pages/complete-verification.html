@@ -82,8 +82,8 @@
                 </div>
                 <form id="signInForm" class="space-y-4 text-left">
                     <div>
-                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Email Address</label>
-                        <input id="loginEmail" type="email" required placeholder="e.g. advocate@example.com" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 placeholder-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">User ID / Email Address</label>
+                        <input id="loginEmail" type="text" required placeholder="e.g. advocate@example.com or adv_zainab" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 placeholder-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
                     </div>
                     <div>
                         <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Password</label>
@@ -346,7 +346,7 @@
         // Handle login manually if session is missing
         async function handleSignIn(e) {
             e.preventDefault();
-            const email = document.getElementById('loginEmail').value.trim();
+            const inputVal = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
             
             showState('loading');
@@ -354,7 +354,10 @@
             // 1. Check local storage registration first to bypass any Supabase provider settings errors
             try {
                 const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
-                const matchedLawyer = localLawyers.find(l => l.email.toLowerCase() === email.toLowerCase());
+                const matchedLawyer = localLawyers.find(l => 
+                    l.email.toLowerCase() === inputVal.toLowerCase() ||
+                    (l.user_id && l.user_id.toLowerCase() === inputVal.toLowerCase())
+                );
                 
                 if (matchedLawyer) {
                     currentUser = {
@@ -362,6 +365,7 @@
                         email_confirmed_at: new Date().toISOString(),
                         user_metadata: {
                             full_name: matchedLawyer.name,
+                            user_id: matchedLawyer.user_id,
                             license_number: matchedLawyer.license,
                             specialization: matchedLawyer.specialization,
                             phone: matchedLawyer.phone,
@@ -394,6 +398,20 @@
 
             // 2. Fall back to Supabase auth only if no local details exist
             try {
+                let email = inputVal;
+                
+                // If it is a User ID, query lawyer_registration to find their email first
+                if (!inputVal.includes('@')) {
+                    const { data: lawyers } = await activeSupabase
+                        .from('lawyer_registration')
+                        .select('email')
+                        .eq('user_id', inputVal)
+                        .eq('project', 'Qanooni-Mushawarat');
+                    if (lawyers && lawyers.length > 0) {
+                        email = lawyers[0].email;
+                    }
+                }
+
                 const { data, error } = await activeSupabase.auth.signInWithPassword({
                     email,
                     password
