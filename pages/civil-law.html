@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Civil Litigation & Legal Recovery - Qanooni Mushawarat" data-ur="سول قانونی چارہ جوئی اور وصولی - قانونی مشاورت">Civil Litigation & Legal Recovery - Qanooni Mushawarat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#c9a227',
+                        accent: '#2d5a87',
+                        dark: '#0f1c2e',
+                        light: '#f8f9fa'
+                    },
+                    fontFamily: {
+                        urdu: ['Noto Nastaliq Urdu', 'serif'],
+                        english: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        @font-face {
+            font-family: 'JameelNoori';
+            src: url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        }
+        .urdu-text, .urdu-heading, .urdu-ui {
+            font-family: 'JameelNoori', serif !important;
+            direction: rtl;
+        }
+        .urdu-text {
+            line-height: 2.6;
+            font-size: 1.15rem;
+        }
+        .urdu-heading {
+            line-height: 2.8;
+        }
+        .urdu-ui {
+            line-height: 2.2;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .upload-zone {
+            border: 2px dashed #c9a227;
+            transition: all 0.3s ease;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #1e3a5f;
+            background: rgba(201, 162, 39, 0.05);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #1e3a5f, #c9a227);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2">
+                <img src="../images/logo/logo-02.png" alt="Logo" class="h-8 md:h-10 w-auto object-contain">
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="../index.html" class="text-white/80 hover:text-white transition font-semibold text-sm" data-en="Back to Home" data-ur="ہوم پر واپس جائیں">Back to Home</a>
+                <button onclick="toggleLanguage()" id="langBtn" class="border border-secondary text-secondary px-4 py-1.5 rounded-lg hover:bg-secondary hover:text-primary transition font-medium text-xs">
+                    اردو
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 bg-gradient-to-r from-primary via-[#233f65] to-dark text-white text-center overflow-hidden shrink-0">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute -top-10 -left-10 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 max-w-4xl">
+            <span class="bg-secondary/20 text-secondary border border-secondary/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block" data-en="Civil Litigation Legal Consultation" data-ur="سول قانونی چارہ جوئی مشاورت">Civil Litigation Legal Consultation</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-4" data-en="Contract Breach, Debt Recovery & Stays" data-ur="معاہدے کی خلاف ورزی، قرض کی وصولی اور اسٹے آرڈرز">Contract Breach, Debt Recovery & Stays</h1>
+            <p class="text-white/80 text-sm md:text-lg max-w-2xl mx-auto" data-en="Professional Legal Services for Recovery of Funds, Specific Performance, Defamation Suits, and Civil Appeals." data-ur="رقم کی وصولی، مخصوص کارکردگی، ہتک عزت کے مقدمات اور سول اپیلوں کے لیے پیشہ ورانہ قانونی خدمات۔">Professional Legal Services for Recovery of Funds, Specific Performance, Defamation Suits, and Civil Appeals.</p>
+        </div>
+    </section>
+
+    <!-- Content Area -->
+    <main class="container mx-auto px-4 py-12 flex-1 max-w-5xl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left 2 columns -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Category Selector -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100">
+                    <h2 class="text-xl md:text-2xl font-bold text-primary mb-2" data-en="1. Select Dispute Focus" data-ur="1. تنازعہ کی توجہ منتخب کریں">1. Select Dispute Focus</h2>
+                    <p class="text-xs text-gray-500 mb-6" data-en="Choose the sub-area that matches your civil litigation requirements." data-ur="اس ذیلی شعبے کا انتخاب کریں جو آپ کے قانونی معاملہ سے میل کھاتا ہو۔">Choose the sub-area that matches your civil litigation requirements.</p>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="categoryGrid">
+                        <button onclick="selectCategory('Breach of Contract', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">📝</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Contract Breach" data-ur="معاہدے کی خلاف ورزی">Contract Breach</span>
+                        </button>
+                        <button onclick="selectCategory('Debt Recovery', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">💰</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Legal Debt Recovery" data-ur="قرض کی وصولی">Debt Recovery</span>
+                        </button>
+                        <button onclick="selectCategory('Stay Orders', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">⚖️</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Injunctions / Stays" data-ur="اسٹے آرڈرز">Injunctions / Stays</span>
+                        </button>
+                        <button onclick="selectCategory('Consumer Rights', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🛒</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Consumer Court" data-ur="کنزیومر کورٹ کیسز">Consumer Court</span>
+                        </button>
+                        <button onclick="selectCategory('Defamation suit', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">🗣️</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Defamation Claims" data-ur="ہتک عزت کے دعوے">Defamation Suits</span>
+                        </button>
+                        <button onclick="selectCategory('Civil Appeal', this)" class="category-card p-4 rounded-2xl border border-gray-200 bg-white hover:border-secondary transition text-center flex flex-col items-center justify-center gap-2 hover:bg-slate-50 duration-300">
+                            <span class="text-2xl">📂</span>
+                            <span class="text-xs font-bold text-gray-700" data-en="Civil Appeals" data-ur="سول اپیلیں">Civil Appeals</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Section -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100">
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-xs font-bold text-gray-500" id="stepIndicator" data-en="Step 1 of 3" data-ur="مرحلہ 1 از 3">Step 1 of 3</span>
+                            <span class="text-xs font-extrabold text-primary" id="progressPercent">33%</span>
+                        </div>
+                        <div class="w-full bg-gray-250 rounded-full h-1.5 bg-gray-200">
+                            <div id="progressBar" class="progress-bar h-1.5 rounded-full transition-all duration-500" style="width: 33%"></div>
+                        </div>
+                    </div>
+
+                    <form id="consultationForm" onsubmit="handleSubmit(event)" class="space-y-6">
+                        <input type="hidden" id="selectedCategory" required value="Civil Law">
+
+                        <!-- STEP 1 -->
+                        <div id="step1" class="step">
+                            <h3 class="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                                <span class="w-7 h-7 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                                <span data-en="Personal Information" data-ur="ذاتی معلومات">Personal Information</span>
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Full Name *" data-ur="مکمل نام *">Full Name *</label>
+                                    <input type="text" id="fullName" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition" placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="CNIC (Optional)" data-ur="شناختی کارڈ نمبر (اختیاری)">CNIC (Optional)</label>
+                                    <input type="text" id="cnic" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition" placeholder="XXXXX-XXXXXXX-X">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Mobile Number *" data-ur="موبائل نمبر *">Mobile Number *</label>
+                                    <input type="tel" id="mobileNumber" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition" placeholder="e.g. 0333-1234567">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Email Address" data-ur="ای میل ایڈریس">Email Address</label>
+                                    <input type="email" id="email" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition" placeholder="you@example.com">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="City *" data-ur="شہر *">City *</label>
+                                <select id="city" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition">
+                                    <option value="" data-en="Select City" data-ur="شہر کا انتخاب کریں">Select City</option>
+                                    <option value="Karachi">Karachi</option>
+                                    <option value="Lahore">Lahore</option>
+                                    <option value="Islamabad">Islamabad</option>
+                                    <option value="Rawalpindi">Rawalpindi</option>
+                                    <option value="Faisalabad">Faisalabad</option>
+                                    <option value="Multan">Multan</option>
+                                    <option value="Peshawar">Peshawar</option>
+                                    <option value="Quetta">Quetta</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <button type="button" onclick="nextStep(1)" class="w-full bg-primary text-white h-11 rounded-xl font-bold hover:bg-secondary hover:text-primary text-xs transition flex items-center justify-center gap-2">
+                                <span data-en="Next Step" data-ur="اگلا مرحلہ">Next Step</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- STEP 2 -->
+                        <div id="step2" class="step hidden">
+                            <h3 class="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                                <span class="w-7 h-7 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                                <span data-en="Dispute Details" data-ur="معاملے کی تفصیلات">Dispute Details</span>
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Amount in Dispute (PKR if recovery)" data-ur="رقم کا تنازعہ (اگر وصولی ہو)">Claim Amount (PKR)</label>
+                                    <input type="number" id="claimAmount" class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition" placeholder="e.g. 500,000">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Case Priority *" data-ur="ترجیح *">Priority *</label>
+                                    <select id="priority" required class="w-full h-10 px-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition">
+                                        <option value="Low" data-en="Low (Consultation)" data-ur="کم (مشاورت)">Low (Consultation)</option>
+                                        <option value="Medium" selected data-en="Medium (Contract breach)" data-ur="درمیانہ (خلاف ورزی معاہدہ)">Medium (Contract breach)</option>
+                                        <option value="High" data-en="High (Urgent Injunction/Stay order)" data-ur="اعلی (حکم امتناعی)">High (Stay order required)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-xs font-semibold text-gray-500 mb-1" data-en="Describe Civil Matter *" data-ur="تفصیل بیان کریں *">Describe Matter *</label>
+                                <textarea id="description" required rows="4" class="w-full p-3.5 text-xs rounded-xl border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary transition resize-none" placeholder="Provide background history, registry document numbers, plot dimensions..."></textarea>
+                            </div>
+                            <div class="flex gap-4">
+                                <button type="button" onclick="prevStep(2)" class="w-1/2 bg-gray-200 text-gray-700 h-11 rounded-xl font-bold hover:bg-gray-300 text-xs transition">
+                                    <span data-en="Back" data-ur="پیچھے">Back</span>
+                                </button>
+                                <button type="button" onclick="nextStep(2)" class="w-1/2 bg-primary text-white h-11 rounded-xl font-bold hover:bg-secondary hover:text-primary text-xs transition">
+                                    <span data-en="Next" data-ur="آگے">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div id="step3" class="step hidden">
+                            <h3 class="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                                <span class="w-7 h-7 bg-secondary text-primary rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                                <span data-en="Upload Agreement / Notices" data-ur="معاہدے یا نوٹس اپلوڈ کریں">Upload Files</span>
+                            </h3>
+                            <div class="mb-6">
+                                <label class="block text-xs font-semibold text-gray-500 mb-2.5" data-en="Upload Agreement Copy or relevant deeds (Optional)" data-ur="معاہدے کی کاپی یا دستاویزات اپلوڈ کریں (اختیاری)">Upload Relevant Documents (Optional)</label>
+                                <div id="dropZone" class="upload-zone rounded-2xl p-6 text-center cursor-pointer bg-white" onclick="document.getElementById('fileInput').click()">
+                                    <input type="file" id="fileInput" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" class="hidden" onchange="handleFileSelect(event)">
+                                    <i class="fas fa-file-contract text-3xl text-secondary mb-3 block"></i>
+                                    <p class="text-xs font-bold text-gray-700 mb-1" data-en="Drag & drop files here or click to browse" data-ur="فائلیں یہاں کھینچیں یا تلاش کرنے کے لیے کلک کریں">Drag & drop files here or click to browse</p>
+                                    <p class="text-[10px] text-gray-400">PDF, JPG, PNG (Max 10MB each)</p>
+                                </div>
+                                <div id="previewList" class="mt-3 space-y-2"></div>
+                            </div>
+                            <div class="flex gap-4">
+                                <button type="button" onclick="prevStep(3)" class="w-1/2 bg-gray-200 text-gray-700 h-11 rounded-xl font-bold hover:bg-gray-300 text-xs transition">
+                                    <span data-en="Back" data-ur="پیچھے">Back</span>
+                                </button>
+                                <button type="submit" id="submitBtn" class="w-1/2 bg-secondary text-primary h-11 rounded-xl font-bold hover:bg-primary hover:text-white text-xs transition flex items-center justify-center gap-2">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span data-en="Submit Case" data-ur="کیس جمع کریں">Submit Case</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Success Screen -->
+                    <div id="successScreen" class="hidden text-center py-10 space-y-6">
+                        <div class="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-sm border border-green-250">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-primary" data-en="Case Registered Successfully" data-ur="کیس کامیابی سے درج ہوگیا">Case Registered Successfully</h3>
+                            <p class="text-xs text-gray-500 mt-1" data-en="Our civil litigation specialists are reviewing your request." data-ur="ہمارے سول قانونی چارہ جوئی کے ماہرین آپ کے معاملے کا جائزہ لے رہے ہیں۔">Our civil litigation specialists are reviewing your request.</p>
+                        </div>
+                        <div class="bg-slate-100 inline-block px-5 py-2.5 rounded-xl font-mono text-sm font-bold text-primary border border-gray-200">
+                            Ref: <span id="refNumText">LE-XXXXX</span>
+                        </div>
+                        <br>
+                        <a href="../index.html" class="inline-block bg-primary text-white font-bold px-6 py-2.5 rounded-xl text-xs hover:bg-secondary hover:text-primary transition shadow-md">
+                            Return to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="space-y-8">
+                <!-- AI Assistant Box -->
+                <div class="bg-gradient-to-br from-primary to-accent text-white p-6 rounded-3xl shadow-xl space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center text-primary text-xl">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm tracking-wide" data-en="AI Civil Assistant" data-ur="اے آئی سول اسسٹنٹ">AI Civil Assistant</h3>
+                            <span class="text-[10px] text-white/60">Specific performance rules</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-white/80 leading-relaxed" data-en="Facing contract breach or need recovery? Our simulated AI engine will evaluate your legal options under the Civil Procedure Code instantly." data-ur="معاہدے کی خلاف ورزی کا سامنا ہے یا رقم کی وصولی؟ ہمارا اے آئی انجن فوری اختیارات کا جائزہ لے گا۔">Evaluate recovery timelines and specific performance options.</p>
+                    
+                    <button onclick="triggerAiAssessment()" class="w-full py-2 bg-secondary hover:bg-white text-primary hover:text-primary font-bold text-xs rounded-xl transition shadow">
+                        Analyze Litigation Steps
+                    </button>
+                    
+                    <div id="aiEvaluationBox" class="hidden bg-white/10 rounded-2xl p-4 border border-white/10 space-y-2.5 text-xs text-white/90">
+                        <h4 class="font-bold text-secondary flex items-center gap-1.5">
+                            <i class="fas fa-shield-alt"></i>
+                            AI Evaluation
+                        </h4>
+                        <div id="aiAnalysisText" class="space-y-1.5 leading-normal"></div>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="bg-white rounded-3xl p-6 shadow-md border border-gray-150/60 space-y-4">
+                    <h3 class="font-bold text-sm text-primary uppercase tracking-wide" data-en="Civil Code Highlights" data-ur="سول لا کی اہم باتیں">Civil Code Highlights</h3>
+                    <ul class="space-y-2.5 text-xs text-gray-600 list-disc list-inside">
+                        <li data-en="Suit for Specific Performance forces contract fulfillment." data-ur="مخصوص کارکردگی کا دعویٰ فریق کو معاہدہ پورا کرنے پر مجبور کرتا ہے۔">Forces contract fulfillment.</li>
+                        <li data-en="Stay orders block illegal activities immediately." data-ur="اسٹے آرڈرز کسی بھی غیر قانونی سرگرمی کو فوری روک دیتے ہیں۔">Stay orders block actions.</li>
+                        <li data-en="Consumer Courts decide claims within 6 months." data-ur="کنزیومر عدالتیں 6 ماہ کے اندر دعووں کا فیصلہ کرتی ہیں۔">Consumer Court decides within 6 months.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white/60 text-center py-6 text-xs border-t border-white/5">
+        <p>&copy; 2026 Qanooni Mushawarat Pakistan. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script>
+        let currentLanguage = 'en';
+        let currentStep = 1;
+        let selectedFiles = [];
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+            document.documentElement.lang = currentLanguage;
+            document.documentElement.dir = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLanguage}`);
+            });
+
+            document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+            
+            if (currentLanguage === 'ur') {
+                document.querySelectorAll('h1, h2, h3, h4, p, span, button, select, input, textarea, a').forEach(el => {
+                    el.classList.add('urdu-ui');
+                });
+            } else {
+                document.querySelectorAll('h1, h2, h3, h4, p, span, button, select, input, textarea, a').forEach(el => {
+                    el.classList.remove('urdu-ui');
+                });
+            }
+            updateStepIndicator();
+        }
+
+        function selectCategory(category, button) {
+            document.getElementById('selectedCategory').value = 'Civil Law - ' + category;
+            
+            document.querySelectorAll('.category-card').forEach(c => {
+                c.classList.remove('border-secondary', 'bg-secondary/10');
+            });
+            button.classList.add('border-secondary', 'bg-secondary/10');
+        }
+
+        function updateStepIndicator() {
+            const stepText = currentLanguage === 'en' ? `Step ${currentStep} of 3` : `مرحلہ ${currentStep} از 3`;
+            document.getElementById('stepIndicator').textContent = stepText;
+            document.getElementById('progressPercent').textContent = `${currentStep * 33}%`;
+            document.getElementById('progressBar').style.width = `${currentStep * 33}%`;
+        }
+
+        function nextStep(step) {
+            if (step === 1) {
+                const name = document.getElementById('fullName').value.trim();
+                const mobile = document.getElementById('mobileNumber').value.trim();
+                const city = document.getElementById('city').value;
+                if (!name || !mobile || !city) {
+                    alert(currentLanguage === 'en' ? "Please fill all required fields." : "براہ کرم تمام لازمی فیلڈز پُر کریں۔");
+                    return;
+                }
+            }
+            if (step === 2) {
+                const desc = document.getElementById('description').value.trim();
+                if (!desc) {
+                    alert(currentLanguage === 'en' ? "Please describe your civil matter." : "براہ کرم اپنے معاملے کی تفصیل درج کریں۔");
+                    return;
+                }
+            }
+
+            document.getElementById(`step${step}`).classList.add('hidden');
+            currentStep = step + 1;
+            document.getElementById(`step${currentStep}`).classList.remove('hidden');
+            updateStepIndicator();
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${step}`).classList.add('hidden');
+            currentStep = step - 1;
+            document.getElementById(`step${currentStep}`).classList.remove('hidden');
+            updateStepIndicator();
+        }
+
+        function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`File ${file.name} is too large (max 10MB).`);
+                    return;
+                }
+                selectedFiles.push(file);
+                renderFiles();
+            });
+        }
+
+        function renderFiles() {
+            const previewList = document.getElementById('previewList');
+            previewList.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex justify-between items-center bg-slate-100 px-3 py-1.5 rounded-lg text-xs border border-gray-200';
+                div.innerHTML = `
+                    <span class="truncate max-w-[200px] font-mono">${file.name}</span>
+                    <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 transition">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                previewList.appendChild(div);
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFiles();
+        }
+
+        function triggerAiAssessment() {
+            const desc = document.getElementById('description').value.trim();
+            if (!desc) {
+                alert(currentLanguage === 'en' ? "Please describe your matter first." : "براہ کرم پہلے اپنا معاملہ بیان کریں۔");
+                return;
+            }
+
+            const analysisBox = document.getElementById('aiEvaluationBox');
+            const analysisText = document.getElementById('aiAnalysisText');
+            analysisBox.classList.remove('hidden');
+
+            let optionsHtml = '';
+            const textLower = desc.toLowerCase();
+
+            if (textLower.includes('recovery') || textLower.includes('money') || textLower.includes('وصولی')) {
+                optionsHtml = `
+                    <p class="font-bold text-secondary">Recovery Claim: Evaluated</p>
+                    <p>Under Order 37 CPC, summary recovery suits can be filed for promissory notes, cheques, or written contracts. This speeds up court processes considerably.</p>
+                `;
+            } else {
+                optionsHtml = `
+                    <p class="font-bold text-secondary">Civil Remedy Evaluation</p>
+                    <p>Your matter requires a civil suit for declaration or damages. Our legal panel will evaluate contract breach conditions and advise on court filings.</p>
+                `;
+            }
+
+            analysisText.innerHTML = optionsHtml;
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fas fa-spinner animate-spin"></i> Submitting...`;
+
+            const name = document.getElementById('fullName').value.trim();
+            const cnic = document.getElementById('cnic').value.trim();
+            const mobile = document.getElementById('mobileNumber').value.trim();
+            const emailVal = document.getElementById('email').value.trim();
+            const cityVal = document.getElementById('city').value;
+            const category = document.getElementById('selectedCategory').value;
+            const desc = document.getElementById('description').value.trim();
+            const priorityVal = document.getElementById('priority').value;
+
+            let attachmentUrls = [];
+            
+            const payload = {
+                client_name: name,
+                client_phone: mobile,
+                client_email: emailVal || null,
+                client_nic: cnic || null,
+                case_type: category,
+                case_description: desc,
+                case_priority: priorityVal,
+                attachment: attachmentUrls.join(',') || null,
+                status: 'Pending',
+                remarks: 'Registered via dedicated Civil Law subpage.'
+            };
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            let refNum = 'LE-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('cases')
+                        .insert([payload])
+                        .select();
+                    if (error) throw error;
+                    if (data && data[0]) {
+                        refNum = 'LE-' + new Date().getFullYear() + '-' + String(data[0].id).padStart(5, '0');
+                    }
+                } else {
+                    let localCases = JSON.parse(localStorage.getItem('submitted_cases') || '[]');
+                    payload.id = Date.now();
+                    payload.created_at = new Date().toISOString();
+                    localCases.push(payload);
+                    localStorage.setItem('submitted_cases', JSON.stringify(localCases));
+                }
+
+                document.getElementById('refNumText').textContent = refNum;
+                document.getElementById('consultationForm').classList.add('hidden');
+                document.getElementById('successScreen').classList.remove('hidden');
+            } catch (err) {
+                console.error("Submission Error:", err);
+                alert("Failed to submit ticket: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i> Submit Case`;
+            }
+        }
+    </script>
+</body>
+</html>

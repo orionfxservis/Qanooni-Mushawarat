@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blogs - Qanooni Mushawarat</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#f8fafc;
+        }
+
+        /* URDU FONT */
+        @font-face{
+            font-family:'JameelNoori';
+            src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        }
+
+        .urdu-text,
+        .urdu-heading,
+        .urdu-ui{
+            font-family:'JameelNoori', serif !important;
+            direction:rtl;
+        }
+
+        .urdu-text{
+            line-height:2.4;
+            font-size:1.15rem;
+        }
+
+        .urdu-heading{
+            line-height:2.6;
+        }
+
+        :root{
+            --primary:#1e3a5f;
+            --secondary:#c9a227;
+        }
+
+        .bg-primary{
+            background:var(--primary);
+        }
+
+        .text-primary{
+            color:var(--primary);
+        }
+
+        .bg-secondary{
+            background:var(--secondary);
+        }
+
+        .text-secondary{
+            color:var(--secondary);
+        }
+
+        .hover-lift{
+            transition:all .3s ease;
+        }
+
+        .hover-lift:hover{
+            transform:translateY(-10px);
+            box-shadow:0 20px 40px rgba(0,0,0,.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header class="bg-primary shadow-lg sticky top-0 z-50">
+
+    <div class="container mx-auto px-4">
+
+        <nav class="flex items-center justify-between py-2">
+
+            <!-- LEFT -->
+            <div class="flex items-center gap-5">
+
+                <!-- LOGO -->
+                <a href="../index.html" class="flex items-center">
+                    <img src="../images/logo/logo-02.png"
+                         alt="Qanooni Mushawarat Logo"
+                         class="h-8 md:h-10 w-auto object-contain">
+                </a>
+
+                <!-- HOME -->
+                <a href="../index.html"
+                   class="text-white hover:text-secondary transition font-medium text-sm md:text-base"
+                   data-en="Home"
+                   data-ur="ہوم">
+                    Home
+                </a>
+
+            </div>
+
+            <!-- CENTER -->
+            <div class="absolute left-1/2 -translate-x-1/2">
+
+                <h1 class="text-white font-semibold text-base md:text-lg"
+                    data-en="Blogs & Articles"
+                    data-ur="بلاگز اور مضامین">
+                    Blogs & Articles
+                </h1>
+
+            </div>
+
+            <!-- RIGHT -->
+            <button onclick="toggleLanguage()"
+                    id="langBtn"
+                    class="border border-secondary text-secondary px-4 py-1.5 rounded-lg hover:bg-secondary hover:text-primary transition font-medium text-sm">
+                اردو
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="relative py-20 bg-primary overflow-hidden">
+
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute -top-10 -left-10 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+
+        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider mb-6"
+              data-en="Legal Resources"
+              data-ur="قانونی وسائل">
+            Legal Resources
+        </span>
+
+        <h2 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6"
+            data-en="Explore Our Legal Articles"
+            data-ur="ہمارے قانونی مضامین دریافت کریں۔">
+            Explore Our Legal Articles
+        </h2>
+
+        <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-200 leading-relaxed"
+           data-en="Read the latest news, guides, and advice from experienced legal professionals in Pakistan."
+           data-ur="پاکستان میں تجربہ کار قانونی ماہرین سے تازہ ترین خبریں، گائیڈز اور مشورے پڑھیں۔">
+            Read the latest news, guides, and advice from experienced legal professionals in Pakistan.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =========================
+BLOGS GRID
+========================= -->
+
+<section class="py-20 bg-white min-h-screen">
+
+    <div class="container mx-auto px-4">
+        
+        <!-- Category Filter -->
+        <div class="flex flex-wrap gap-3 justify-center mb-12">
+            <button class="bg-primary text-white px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">All</button>
+            <button class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Family Law</button>
+            <button class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Corporate Law</button>
+            <button class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Property Law</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogsGrid">
+            
+            <!-- Blog Card 1 -->
+            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                <div class="h-48 w-full bg-gray-200 relative">
+                    <img src="../images/bg-slide-show/family-law.jpg" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Family Law</div>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <p class="text-xs text-gray-500 mb-2">October 15, 2026</p>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Understanding Child Custody Laws in Pakistan" data-ur="پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا">Understanding Child Custody Laws in Pakistan</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision." data-ur="فیملی کورٹس کس طرح بچوں کی تحویل کا تعین کرتی ہیں، دونوں والدین کے حقوق، اور حتمی فیصلے کو کون سے عوامل متاثر کرتے ہیں، اس کے بارے میں ایک جامع گائیڈ۔">A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision.</p>
+                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                        Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Blog Card 2 -->
+            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                <div class="h-48 w-full bg-gray-200 relative">
+                    <img src="../images/bg-slide-show/corporate.jpg" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Corporate Law</div>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <p class="text-xs text-gray-500 mb-2">October 10, 2026</p>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Starting a Business: Legal Requirements" data-ur="کاروبار شروع کرنا: قانونی تقاضے">Starting a Business: Legal Requirements</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly." data-ur="آسانی سے کاروبار شروع کرنے کے لیے ضروری قانونی دستاویزات، کمپنی کی رجسٹریشن کے عمل، اور ٹیکس کی تعمیل کے بارے میں جانیں۔">Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly.</p>
+                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                        Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Blog Card 3 -->
+            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                <div class="h-48 w-full bg-gray-200 relative">
+                    <img src="../images/bg-slide-show/property.jpg" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Property Law</div>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <p class="text-xs text-gray-500 mb-2">October 05, 2026</p>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="How to Verify Real Estate Property Titles" data-ur="رئیل اسٹیٹ پراپرٹی کے ٹائٹل کی تصدیق کیسے کریں">How to Verify Real Estate Property Titles</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment." data-ur="سرمایہ کاری کرنے سے پہلے ملکیت کے ریکارڈ کو صحیح طریقے سے چیک کرنے اور پراپرٹی کے ٹائٹلز کی تصدیق کرنے کا طریقہ سیکھ کر پراپرٹی کے فراڈ سے بچیں۔">Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment.</p>
+                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                        Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Blog Card 4 -->
+            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                <div class="h-48 w-full bg-gray-200 relative">
+                    <img src="../images/bg-slide-show/criminal-law.jpg" onerror="this.src='https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600'" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Criminal Defense</div>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <p class="text-xs text-gray-500 mb-2">September 28, 2026</p>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Your Rights During a Police Investigation" data-ur="پولیس تفتیش کے دوران آپ کے حقوق">Your Rights During a Police Investigation</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Understand your fundamental rights when dealing with law enforcement, including the right to legal counsel and remain silent." data-ur="قانون نافذ کرنے والے اداروں سے نمٹنے کے دوران اپنے بنیادی حقوق کو سمجھیں، بشمول قانونی مشورے اور خاموش رہنے کا حق۔">Understand your fundamental rights when dealing with law enforcement, including the right to legal counsel and remain silent.</p>
+                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                        Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Blog Card 5 -->
+            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                <div class="h-48 w-full bg-gray-200 relative">
+                    <img src="https://images.unsplash.com/photo-1505664159623-1d0abfc9f3cb?q=80&w=600" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">General Advice</div>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <p class="text-xs text-gray-500 mb-2">September 20, 2026</p>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Why Everyone Needs a Basic Will" data-ur="ہر کسی کو بنیادی وصیت کی ضرورت کیوں ہے">Why Everyone Needs a Basic Will</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="A basic overview of why estate planning isn't just for the wealthy and how creating a simple will protects your family's future." data-ur="ایک بنیادی جائزہ کہ جائیداد کی منصوبہ بندی صرف امیروں کے لیے کیوں نہیں ہے اور کس طرح ایک سادہ وصیت بنانا آپ کے خاندان کے مستقبل کی حفاظت کرتا ہے۔">A basic overview of why estate planning isn't just for the wealthy and how creating a simple will protects your family's future.</p>
+                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                        Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Blog Card 6 -->
+            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
+                <div class="h-48 w-full bg-gray-200 relative">
+                    <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?q=80&w=600" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Corporate Law</div>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <p class="text-xs text-gray-500 mb-2">September 12, 2026</p>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Drafting Employment Contracts" data-ur="ملازمت کے معاہدوں کا مسودہ تیار کرنا">Drafting Employment Contracts</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Key clauses every employer must include in an employment contract to protect their business and follow local labor laws." data-ur="ہر آجر کو اپنے کاروبار کی حفاظت اور مقامی لیبر قوانین کی پیروی کرنے کے لیے ملازمت کے معاہدے میں کلیدی شقیں شامل کرنی چاہئیں۔">Key clauses every employer must include in an employment contract to protect their business and follow local labor laws.</p>
+                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
+                        Read More <i class="fas fa-arrow-right text-[12px]"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer class="bg-primary py-4 mt-10">
+
+    <div class="container mx-auto px-4 text-center">
+
+        <p class="text-white text-sm"
+           data-en="© 2026 Qanooni Mushawarat. All Rights Reserved."
+           data-ur="© 2026 قانونی مشاورت۔ جملہ حقوق محفوظ ہیں۔">
+
+            © 2026 Qanooni Mushawarat. All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+<!-- =========================
+LANGUAGE SCRIPT
+========================= -->
+
+<script>
+
+let currentLanguage = 'en';
+
+function toggleLanguage(){
+
+    currentLanguage =
+        currentLanguage === 'en' ? 'ur' : 'en';
+
+    document.documentElement.lang =
+        currentLanguage;
+
+    document.documentElement.dir =
+        currentLanguage === 'ur' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-en]')
+        .forEach(el => {
+
+            el.textContent =
+                el.getAttribute(`data-${currentLanguage}`);
+
+        });
+
+    document.getElementById('langBtn').textContent =
+        currentLanguage === 'en'
+        ? 'اردو'
+        : 'English';
+
+    if(currentLanguage === 'ur'){
+
+        document.querySelectorAll('h1,h2,h3,h4,p,a,button,span')
+            .forEach(el => {
+
+                el.classList.add('urdu-text');
+
+            });
+
+    }else{
+
+        document.querySelectorAll('h1,h2,h3,h4,p,a,button,span')
+            .forEach(el => {
+
+                el.classList.remove('urdu-text');
+
+            });
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
