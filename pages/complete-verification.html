@@ -138,7 +138,7 @@
                         <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Mobile / WhatsApp Number</label>
                         <div class="flex gap-2">
                             <input id="verifyPhone" type="tel" placeholder="+92 300 1234567" class="flex-1 h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 placeholder-white/20 text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
-                            <button id="btnSendOtp" onclick="sendMockOtp()" class="h-10 px-4 rounded-xl bg-secondary text-primary font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg">
+                            <button type="button" id="btnSendOtp" onclick="sendMockOtp()" class="h-10 px-4 rounded-xl bg-secondary text-primary font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg">
                                 Send OTP
                             </button>
                         </div>
@@ -150,7 +150,7 @@
                     <div>
                         <div class="flex justify-between items-center mb-1">
                             <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider">6-Digit Verification Code</label>
-                            <button onclick="resetOtpStep()" class="text-secondary hover:underline text-[10px] font-medium">Change Phone</button>
+                            <button type="button" onclick="resetOtpStep()" class="text-secondary hover:underline text-[10px] font-medium">Change Phone</button>
                         </div>
                         <div class="flex justify-between gap-2" id="otp-inputs">
                             <input type="text" maxlength="1" class="otp-digit w-12 h-12 text-center text-lg font-bold bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-secondary transition text-white">
@@ -162,12 +162,12 @@
                         </div>
                     </div>
 
-                    <button id="btnVerifyOtp" onclick="verifyMockOtp()" class="w-full h-10 rounded-xl bg-secondary text-primary font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg flex items-center justify-center gap-2">
+                    <button type="button" id="btnVerifyOtp" onclick="verifyMockOtp()" class="w-full h-10 rounded-xl bg-secondary text-primary font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg flex items-center justify-center gap-2">
                         Verify Code
                     </button>
 
                     <p class="text-center text-white/40 text-[10px]">
-                        Didn't receive code? <button onclick="sendMockOtp()" class="text-secondary hover:underline font-semibold ml-1">Resend OTP</button>
+                        Didn't receive code? <button type="button" onclick="sendMockOtp()" class="text-secondary hover:underline font-semibold ml-1">Resend OTP</button>
                     </p>
                 </div>
             </div>
@@ -262,8 +262,43 @@
                 return;
             }
 
-            const { data: { session }, error } = await activeSupabase.auth.getSession();
-            if (error || !session) {
+            let session = null;
+            try {
+                const sessionRes = await activeSupabase.auth.getSession();
+                session = sessionRes.data?.session;
+            } catch (err) {
+                console.warn("Failed to get Supabase session, trying local fallback:", err);
+            }
+
+            if (!session) {
+                // Fallback: Check if we have registered lawyers in local storage to proceed directly
+                try {
+                    const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                    if (localLawyers.length > 0) {
+                        const matchedLawyer = localLawyers[localLawyers.length - 1];
+                        currentUser = {
+                            email: matchedLawyer.email,
+                            email_confirmed_at: new Date().toISOString(),
+                            user_metadata: {
+                                full_name: matchedLawyer.name,
+                                phone: matchedLawyer.phone,
+                                project: 'Qanooni-Mushawarat'
+                            }
+                        };
+                        const phoneInput = document.getElementById('verifyPhone');
+                        if (phoneInput && matchedLawyer.phone) {
+                            phoneInput.value = matchedLawyer.phone;
+                        }
+                        if (matchedLawyer.phone_verified) {
+                            showState('success');
+                        } else {
+                            showState('phone-verification');
+                        }
+                        return;
+                    }
+                } catch (e) {
+                    console.error("Local storage lookup failed:", e);
+                }
                 showState('signin');
                 return;
             }
