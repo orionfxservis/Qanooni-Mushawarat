@@ -361,7 +361,7 @@ let activeCategory = 'All';
 
 // Fetch from Supabase / localStorage
 async function loadBlogs() {
-    const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+    const activeSupabase = (typeof supabaseClient !== 'undefined') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
 
     try {
         if (activeSupabase) {
