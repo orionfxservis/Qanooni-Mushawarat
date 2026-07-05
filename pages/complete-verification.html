@@ -178,12 +178,12 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <div>
-                    <h2 class="text-2xl font-bold tracking-tight">Verification Completed!</h2>
-                    <p class="text-white/70 text-sm mt-3 leading-relaxed">
-                        Your email and phone number have been verified successfully.
+                    <h2 class="text-2xl font-bold tracking-tight" data-en="Registration Submitted!" data-ur="رجسٹریشن موصول ہو گئی!">Registration Submitted!</h2>
+                    <p class="text-white/70 text-sm mt-3 leading-relaxed" data-en="Your registration details have been received. Email & Phone verifications are bypassed." data-ur="آپ کی رجسٹریشن کی تفصیلات موصول ہو گئی ہیں۔ ای میل اور فون کی تصدیق بائی پاس کر دی گئی ہے۔">
+                        Your registration details have been received. Email & Phone verifications are bypassed.
                     </p>
-                    <p class="text-white/50 text-xs mt-2 leading-relaxed">
-                        Your application is now under review by the Qanooni Mushawarat admin team. You will be notified once your profile is approved to appear on the platform.
+                    <p class="text-white/50 text-xs mt-2 leading-relaxed" data-en="Your profile is pending admin approval. Once approved, you will receive a WhatsApp message to log in and fill in the required details." data-ur="آپ کا پروفائل ایڈمن کی منظوری کا منتظر ہے۔ منظوری کے بعد، آپ کو واٹس ایپ پر ایک پیغام موصول ہوگا تاکہ لاگ ان کر کے مطلوبہ تفصیلات پر کر سکیں۔">
+                        Your profile is pending admin approval. Once approved, you will receive a WhatsApp message to log in and fill in the required details.
                     </p>
                 </div>
                 <div class="pt-4 border-t border-white/10">
@@ -285,15 +285,7 @@
                                 project: 'Qanooni-Mushawarat'
                             }
                         };
-                        const phoneInput = document.getElementById('verifyPhone');
-                        if (phoneInput && matchedLawyer.phone) {
-                            phoneInput.value = matchedLawyer.phone;
-                        }
-                        if (matchedLawyer.phone_verified) {
-                            showState('success');
-                        } else {
-                            showState('phone-verification');
-                        }
+                        showState('success');
                         return;
                     }
                 } catch (e) {
@@ -305,42 +297,18 @@
 
             currentUser = session.user;
             
-            // Email verification is not required right now. Auto-confirm in DB and proceed straight to mobile phone OTP verification.
+            // Email and Phone verification are bypassed. Auto-confirm both flags in DB.
             try {
                 await activeSupabase
                     .from('lawyer_registration')
-                    .update({ email_verified: true })
+                    .update({ email_verified: true, phone_verified: true })
                     .eq('email', currentUser.email)
                     .eq('project', 'Qanooni-Mushawarat');
             } catch (err) {
-                console.error("Failed to update email_verified flag in DB:", err);
+                console.error("Failed to update verification flags in DB:", err);
             }
 
-            // Check if phone is already verified
-            let phoneVerified = false;
-            try {
-                const { data, error } = await activeSupabase
-                    .from('lawyer_registration')
-                    .select('phone_verified, phone')
-                    .eq('email', currentUser.email)
-                    .eq('project', 'Qanooni-Mushawarat')
-                    .single();
-                
-                if (data) {
-                    phoneVerified = data.phone_verified;
-                    if (data.phone) {
-                        document.getElementById('verifyPhone').value = data.phone;
-                    }
-                }
-            } catch (err) {
-                console.error("Failed to check phone verification status:", err);
-            }
-
-            if (phoneVerified) {
-                showState('success');
-            } else {
-                showState('phone-verification');
-            }
+            showState('success');
         }
 
         // Handle login manually if session is missing
