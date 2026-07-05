@@ -643,101 +643,101 @@
             <!-- Manage Blogs Tab -->
             <div id="tab-blogs" class="tab-content">
                 <!-- Add New Blog -->
-                <div class="bg-[#eaeef3] rounded-2xl p-6 shadow-sm border border-gray-200/80 mb-6">
-                    <h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+                <div class="bg-[#eaeef3] rounded-2xl p-5 shadow-sm border border-gray-200/80 mb-6">
+                    <h3 class="text-xs font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
                         <i class="fas fa-plus-circle text-secondary"></i>
                         Add New Blog
                     </h3>
-                    <form id="addBlogForm" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <form id="addBlogForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Title (English) <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogTitleEn" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="e.g. How to save money">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Title (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogTitleEn" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. How to save money">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Slug (Auto-generated) <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogSlug" required readonly class="w-full px-4 py-2 border border-gray-200 rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed" placeholder="how-to-save-money">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Slug (Auto-generated) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogSlug" required readonly class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-gray-100 text-gray-455 cursor-not-allowed" placeholder="how-to-save-money">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div dir="rtl">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Title (Urdu) <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogTitleUr" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="عنوان یہاں لکھیں">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" dir="ltr">Title (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogTitleUr" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition font-urdu text-right" placeholder="عنوان یہاں لکھیں">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Author Name <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogAuthor" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="e.g. Ali Khan">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Author Name <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogAuthor" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. Ali Khan">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Category (English) <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogCategoryEn" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="e.g. Family Law">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Category (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogCategoryEn" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. Family Law">
                             </div>
                             <div dir="rtl">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Category (Urdu) <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogCategoryUr" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="کیٹیگری یہاں لکھیں">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" dir="ltr">Category (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogCategoryUr" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition font-urdu text-right" placeholder="کیٹیگری یہاں لکھیں">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Blog Image URL <span class="text-red-500">*</span></label>
-                                <input type="url" id="blogImage" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="https://example.com/image.jpg">
-                                <p class="text-[11px] text-gray-500 mt-1">Recommended aspect ratio: 16:9</p>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Blog Image URL <span class="text-red-500">*</span></label>
+                                <input type="url" id="blogImage" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="https://example.com/image.jpg">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Status <span class="text-red-500">*</span></label>
-                                <select id="blogStatus" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition bg-white">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Status <span class="text-red-500">*</span></label>
+                                <select id="blogStatus" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-750 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition">
                                     <option value="Publish">Publish</option>
                                     <option value="Draft">Draft</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">SEO Title</label>
-                                <input type="text" id="blogSeoTitle" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Optimized title for search engines...">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">SEO Title</label>
+                                <input type="text" id="blogSeoTitle" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="Optimized title for search engines...">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Meta Description</label>
-                                <input type="text" id="blogMetaDesc" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Brief meta description for SEO...">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Meta Description</label>
+                                <input type="text" id="blogMetaDesc" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="Brief meta description for SEO...">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Short Description (English) <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogDescEn" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Brief summary for the card...">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Short Description (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogDescEn" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="Brief summary for the card...">
                             </div>
                             <div dir="rtl">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Short Description (Urdu) <span class="text-red-500">*</span></label>
-                                <input type="text" id="blogDescUr" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="مختصر تفصیل...">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" dir="ltr">Short Description (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="blogDescUr" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition font-urdu text-right" placeholder="مختصر تفصیل...">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Content (English) <span class="text-red-500">*</span></label>
-                                <textarea id="blogContentEn" required rows="6" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition" placeholder="Write your blog content here..."></textarea>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Content (English) <span class="text-red-500">*</span></label>
+                                <textarea id="blogContentEn" required rows="4" class="w-full p-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="Write your blog content here..."></textarea>
                             </div>
                             <div dir="rtl">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1" dir="ltr">Content (Urdu) <span class="text-red-500">*</span></label>
-                                <textarea id="blogContentUr" required rows="6" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu" placeholder="مضمون یہاں لکھیں..."></textarea>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" dir="ltr">Content (Urdu) <span class="text-red-500">*</span></label>
+                                <textarea id="blogContentUr" required rows="4" class="w-full p-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition font-urdu text-right" placeholder="مضمون یہاں لکھیں..."></textarea>
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap items-center gap-4 mt-6">
-                            <button type="button" onclick="alert('Publish action')" id="btnSaveBlog" class="bg-secondary text-primary px-8 py-2.5 rounded-xl font-bold hover:bg-[#b08d22] transition">
+                        <div class="flex flex-wrap items-center gap-3 mt-4">
+                            <button type="button" onclick="alert('Publish action')" id="btnSaveBlog" class="bg-secondary text-primary px-5 h-8 text-xs font-bold rounded-lg hover:bg-[#b08d22] transition">
                                 Publish
                             </button>
-                            <button type="button" onclick="alert('Publish to Facebook action')" id="btnPublishFacebook" class="bg-[#1877f2] text-white px-6 py-2.5 rounded-xl font-bold hover:bg-[#166fe5] transition flex items-center gap-2">
+                            <button type="button" onclick="alert('Publish to Facebook action')" id="btnPublishFacebook" class="bg-[#1877f2] text-white px-4 h-8 text-xs font-bold rounded-lg hover:bg-[#166fe5] transition flex items-center gap-1.5">
                                 <i class="fab fa-facebook"></i> Publish on Facebook
                             </button>
-                            <button type="button" onclick="alert('Cancel action')" id="btnCancelBlog" class="bg-gray-500 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-gray-600 transition hidden">
+                            <button type="button" onclick="alert('Cancel action')" id="btnCancelBlog" class="bg-gray-500 text-white px-4 h-8 text-xs font-bold rounded-lg hover:bg-gray-600 transition hidden">
                                 Cancel Edit
                             </button>
                         </div>
@@ -1395,9 +1395,10 @@
                 'ai-support': 'AI Legal Support Chats',
                 'lawyers-pannel': 'Lawyers Pannel',
                 'testimonials': 'Testimonials',
-                'subscription': 'Subscription'
+                'subscription': 'Subscription',
+                'blogs': 'Manage Blogs'
             };
-            document.getElementById('pageTitle').textContent = titles[tabId];
+            document.getElementById('pageTitle').textContent = titles[tabId] || 'Manage Blogs';
             
             if(tabId === 'lawyers' || tabId === 'dashboard') loadLawyers();
             if(tabId === 'ai-support' || tabId === 'dashboard') fetchAiSupportChats();
