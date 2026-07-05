@@ -2417,54 +2417,8 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Legal Resources & Articles" data-ur="قانونی رہنمائی اور معلوماتی مضامین">Legal Resources & Articles</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Blog Card 1 -->
-                <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                    <div class="h-48 w-full bg-gray-200 relative">
-                        <img src="./images/bg-slide-show/family-law.jpg" class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Family Law</div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-xs text-gray-500 mb-2">October 15, 2026</p>
-                        <h3 class="text-xl font-bold text-primary mb-3" data-en="Understanding Child Custody Laws in Pakistan" data-ur="پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا">Understanding Child Custody Laws in Pakistan</h3>
-                        <p class="text-gray-600 text-sm mb-4" data-en="A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision." data-ur="فیملی کورٹس کس طرح بچوں کی تحویل کا تعین کرتی ہیں، دونوں والدین کے حقوق، اور حتمی فیصلے کو کون سے عوامل متاثر کرتے ہیں، اس کے بارے میں ایک جامع گائیڈ۔">A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision.</p>
-                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
-                            Read More <i class="fas fa-arrow-right text-[12px]"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Blog Card 2 -->
-                <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                    <div class="h-48 w-full bg-gray-200 relative">
-                        <img src="./images/bg-slide-show/corporate.jpg" class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Corporate Law</div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-xs text-gray-500 mb-2">October 10, 2026</p>
-                        <h3 class="text-xl font-bold text-primary mb-3" data-en="Starting a Business: Legal Requirements" data-ur="کاروبار شروع کرنا: قانونی تقاضے">Starting a Business: Legal Requirements</h3>
-                        <p class="text-gray-600 text-sm mb-4" data-en="Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly." data-ur="آسانی سے کاروبار شروع کرنے کے لیے ضروری قانونی دستاویزات، کمپنی کی رجسٹریشن کے عمل، اور ٹیکس کی تعمیل کے بارے میں جانیں۔">Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly.</p>
-                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
-                            Read More <i class="fas fa-arrow-right text-[12px]"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Blog Card 3 -->
-                <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                    <div class="h-48 w-full bg-gray-200 relative">
-                        <img src="./images/bg-slide-show/property.jpg" class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Property Law</div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-xs text-gray-500 mb-2">October 05, 2026</p>
-                        <h3 class="text-xl font-bold text-primary mb-3" data-en="How to Verify Real Estate Property Titles" data-ur="رئیل اسٹیٹ پراپرٹی کے ٹائٹل کی تصدیق کیسے کریں">How to Verify Real Estate Property Titles</h3>
-                        <p class="text-gray-600 text-sm mb-4" data-en="Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment." data-ur="سرمایہ کاری کرنے سے پہلے ملکیت کے ریکارڈ کو صحیح طریقے سے چیک کرنے اور پراپرٹی کے ٹائٹلز کی تصدیق کرنے کا طریقہ سیکھ کر پراپرٹی کے فراڈ سے بچیں۔">Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment.</p>
-                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition" data-en="Read More" data-ur="مزید پڑھیں">
-                            Read More <i class="fas fa-arrow-right text-[12px]"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="homeBlogsGrid">
+                <!-- Dynamic blogs will be injected here from Supabase -->
             </div>
             
             <div class="text-center mt-10">
@@ -2880,6 +2834,9 @@
             
             // Language direction
             updateLanguageDirection();
+            
+            // Load dynamic blogs on homepage
+            loadHomeBlogs();
         });
         
         // Language Toggle
@@ -2919,6 +2876,137 @@
             }
         }
 
+        // ==========================================
+        // DYNAMIC HOMEPAGE BLOGS
+        // ==========================================
+        let homeBlogs = [];
+
+        async function loadHomeBlogs() {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('blogs')
+                        .select('*')
+                        .eq('focus_keyword', 'Qanooni-Mushawarat')
+                        .order('created_at', { ascending: false })
+                        .limit(3);
+
+                    if (error) throw error;
+                    homeBlogs = data || [];
+                } else {
+                    homeBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                }
+            } catch (err) {
+                console.error("Error loading homepage blogs:", err);
+                homeBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+            }
+
+            // Fallback default blogs if empty
+            if (homeBlogs.length === 0) {
+                homeBlogs = [
+                    {
+                        id: 1,
+                        title: "Understanding Child Custody Laws in Pakistan ||| پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا",
+                        slug: "understanding-child-custody-laws",
+                        category: "Family Law ||| فیملی لاء",
+                        short_description: "A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision. ||| فیملی کورٹس کس طرح بچوں کی تحویل کا تعین کرتی ہیں، دونوں والدین کے حقوق، اور حتمی فیصلے کو کون سے عوامل متاثر کرتے ہیں، اس کے بارے میں ایک جامع گائیڈ۔",
+                        image: "./images/bg-slide-show/family-law.jpg",
+                        date: "15-Oct-26",
+                        author: "Legal Expert"
+                    },
+                    {
+                        id: 2,
+                        title: "Starting a Business: Legal Requirements ||| کاروبار شروع کرنا: قانونی تقاضے",
+                        slug: "starting-a-business-legal-requirements",
+                        category: "Corporate Law ||| کارپوریٹ لاء",
+                        short_description: "Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly. ||| آسانی سے کاروبار شروع کرنے کے لیے ضروری قانونی دستاویزات، کمپنی کی رجسٹریشن کے عمل، اور ٹیکس کی تعمیل کے بارے میں جانیں۔",
+                        image: "./images/bg-slide-show/corporate.jpg",
+                        date: "10-Oct-26",
+                        author: "Corporate Team"
+                    },
+                    {
+                        id: 3,
+                        title: "How to Verify Real Estate Property Titles ||| رئیل اسٹیٹ پراپرٹی کے ٹائٹل کی تصدیق کیسے کریں",
+                        slug: "how-to-verify-real-estate-property-titles",
+                        category: "Property Law ||| پراپرٹی لاء",
+                        short_description: "Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment. ||| سرمایہ کاری کرنے سے پہلے ملکیت کے ریکارڈ کو صحیح طریقے سے چیک کرنے اور پراپرٹی کے ٹائٹل کی تصدیق کرنے کا طریقہ سیکھ کر پراپرٹی کے فراڈ سے بچیں۔",
+                        image: "./images/bg-slide-show/property.jpg",
+                        date: "05-Oct-26",
+                        author: "Property Expert"
+                    }
+                ];
+            }
+
+            renderHomeBlogs();
+        }
+
+        function renderHomeBlogs() {
+            const grid = document.getElementById('homeBlogsGrid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+
+            const displayBlogs = homeBlogs.slice(0, 3);
+
+            displayBlogs.forEach(b => {
+                let titleEn = b.title || '';
+                let titleUr = '';
+                if (titleEn.includes(' ||| ')) {
+                    const parts = titleEn.split(' ||| ');
+                    titleEn = parts[0];
+                    titleUr = parts[1];
+                }
+
+                let categoryEn = b.category || '';
+                let categoryUr = '';
+                if (categoryEn.includes(' ||| ')) {
+                    const parts = categoryEn.split(' ||| ');
+                    categoryEn = parts[0];
+                    categoryUr = parts[1];
+                }
+
+                let descEn = b.short_description || b.article || '';
+                let descUr = '';
+                if (descEn.includes(' ||| ')) {
+                    const parts = descEn.split(' ||| ');
+                    descEn = parts[0];
+                    descUr = parts[1];
+                }
+
+                if (descEn.length > 150) descEn = descEn.substring(0, 147) + '...';
+                if (descUr.length > 150) descUr = descUr.substring(0, 147) + '...';
+
+                const currentTitle = currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
+                const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
+                const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="h-48 w-full bg-gray-200 relative">
+                            <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">${currentCategory}</div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-xs text-gray-500 mb-2">${b.date || 'Today'}</p>
+                            <h3 class="text-xl font-bold text-primary mb-3">${currentTitle}</h3>
+                            <p class="text-gray-600 text-sm mb-4">${currentDesc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition">
+                            <span>${currentLanguage === 'ur' ? 'مزید پڑھیں' : 'Read More'}</span>
+                            <i class="fas fa-arrow-right text-[12px] ${currentLanguage === 'ur' ? 'rotate-180' : ''}"></i>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
         function toggleLanguage() {
             currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
             const html = document.documentElement;
@@ -2948,6 +3036,9 @@
             
             updateLanguageToggleUI();
             updateLanguageDirection();
+            
+            // Re-render dynamic blogs in current language
+            renderHomeBlogs();
         }
         
         function updateLanguageDirection() {
