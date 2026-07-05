@@ -1728,15 +1728,19 @@
                 localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
             } catch(e) {}
 
-            // Send notification template
-            const message = `EMAIL / WHATSAPP NOTIFICATION SENDER (MOCK)\n` +
-                            `-------------------------------------------\n` +
-                            `To: ${lawyer.name} (${lawyer.email} / ${lawyer.phone})\n\n` +
-                            `Congratulations!\n\n` +
-                            `Your lawyer account has been approved.\n` +
-                            `You can now receive client inquiries.\n\n` +
-                            `Status: Verified Lawyer`;
-            alert(message);
+            // Send dynamic notification and redirect to WhatsApp
+            const approvalMessage = `Your Profile is Approved, Kindly Log In and Update your profile Details.\n\nآپ کا پروفائل منظور کر لیا گیا ہے، براہ کرم لاگ ان کریں اور تفصیلات اپ ڈیٹ کریں۔`;
+            
+            // Format phone number (remove non-digits, replace leading 0 with 92 for Pakistan if needed)
+            let rawPhone = lawyer.phone || '';
+            let cleanPhone = rawPhone.replace(/[^0-9]/g, '');
+            if (cleanPhone.startsWith('0')) {
+                cleanPhone = '92' + cleanPhone.substring(1);
+            }
+            
+            const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(approvalMessage)}`;
+            alert(`Lawyer approved successfully!\n\nRedirecting to WhatsApp to send approval notification to Advocate ${lawyer.name}...`);
+            window.open(waUrl, '_blank');
 
             loadLawyers();
             if (typeof fetchUsers === 'function') fetchUsers();
