@@ -731,13 +731,13 @@
                         </div>
 
                         <div class="flex flex-wrap items-center gap-3 mt-4">
-                            <button type="button" onclick="alert('Publish action')" id="btnSaveBlog" class="bg-secondary text-primary px-5 h-8 text-xs font-bold rounded-lg hover:bg-[#b08d22] transition">
+                            <button type="submit" id="btnSaveBlog" class="bg-secondary text-primary px-5 h-8 text-xs font-bold rounded-lg hover:bg-[#b08d22] transition">
                                 Publish
                             </button>
                             <button type="button" onclick="alert('Publish to Facebook action')" id="btnPublishFacebook" class="bg-[#1877f2] text-white px-4 h-8 text-xs font-bold rounded-lg hover:bg-[#166fe5] transition flex items-center gap-1.5">
                                 <i class="fab fa-facebook"></i> Publish on Facebook
                             </button>
-                            <button type="button" onclick="alert('Cancel action')" id="btnCancelBlog" class="bg-gray-500 text-white px-4 h-8 text-xs font-bold rounded-lg hover:bg-gray-600 transition hidden">
+                            <button type="button" onclick="cancelBlogEdit()" id="btnCancelBlog" class="bg-gray-500 text-white px-4 h-8 text-xs font-bold rounded-lg hover:bg-gray-600 transition hidden">
                                 Cancel Edit
                             </button>
                         </div>
@@ -1403,6 +1403,7 @@
             if(tabId === 'lawyers' || tabId === 'dashboard') loadLawyers();
             if(tabId === 'ai-support' || tabId === 'dashboard') fetchAiSupportChats();
             if(tabId === 'cyber-crime-complaints' || tabId === 'dashboard') fetchCyberComplaints();
+            if(tabId === 'blogs' || tabId === 'dashboard') fetchBlogs();
         }
 
         // Load Lawyers from Supabase & LocalStorage Fallback
@@ -1964,6 +1965,11 @@
                 fetchCyberComplaints();
             } catch (e) {
                 console.error("Error fetching cyber complaints:", e);
+            }
+            try {
+                fetchBlogs();
+            } catch (e) {
+                console.error("Error fetching blogs on load:", e);
             }
         };
 
@@ -3294,6 +3300,267 @@
             }).catch(e => {
                 console.error("Failed to copy text", e);
             });
+        }
+
+        // ==========================================
+        // MANAGE BLOGS SYSTEM (Qanooni Mushawarat)
+        // ==========================================
+        let allBlogs = [];
+        let editingBlogId = null;
+
+        // Auto Slug Generation
+        const blogTitleEnInput = document.getElementById('blogTitleEn');
+        if (blogTitleEnInput) {
+            blogTitleEnInput.addEventListener('input', (e) => {
+                const slug = e.target.value
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-');
+                document.getElementById('blogSlug').value = slug;
+            });
+        }
+
+        // Fetch Blogs from Supabase
+        async function fetchBlogs() {
+            const tableBody = document.getElementById('blogsTableBody');
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('blogs')
+                        .select('*')
+                        .eq('project', 'Qanooni-Mushawarat')
+                        .order('created_at', { ascending: false });
+
+                    if (error) throw error;
+                    allBlogs = data || [];
+                } else {
+                    allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                }
+                renderBlogs();
+            } catch (err) {
+                console.error("Error fetching blogs:", err);
+                allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                renderBlogs();
+            }
+        }
+
+        // Render Blogs in Table
+        function renderBlogs() {
+            const tableBody = document.getElementById('blogsTableBody');
+            if (!tableBody) return;
+
+            tableBody.innerHTML = '';
+
+            const searchTerm = document.getElementById('blogSearchInput')?.value.toLowerCase() || '';
+            const categoryFilter = document.getElementById('blogCategoryFilter')?.value || 'All';
+
+            const filtered = allBlogs.filter(b => {
+                const matchesSearch = (b.title_en || '').toLowerCase().includes(searchTerm) || 
+                                      (b.title_ur || '').includes(searchTerm) || 
+                                      (b.author || '').toLowerCase().includes(searchTerm);
+                const matchesCategory = categoryFilter === 'All' || b.category_en === categoryFilter;
+                return matchesSearch && matchesCategory;
+            });
+
+            if (filtered.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-gray-400 text-xs">No blogs found.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(b => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
+                
+                const statusClass = b.status === 'Publish' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600';
+
+                tr.innerHTML = `
+                    <td class="py-3 px-2 font-medium text-gray-800">
+                        <div>${b.title_en}</div>
+                        <div class="text-[10px] text-gray-400 font-urdu" dir="rtl">${b.title_ur}</div>
+                    </td>
+                    <td class="py-3 px-2 text-gray-600 font-mono text-[11px]">${b.slug}</td>
+                    <td class="py-3 px-2 text-gray-500">${b.author}</td>
+                    <td class="py-3 px-2 text-gray-500">
+                        <div>${b.category_en}</div>
+                        <div class="text-[10px] text-gray-400 font-urdu" dir="rtl">${b.category_ur}</div>
+                    </td>
+                    <td class="py-3 px-2">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${b.status}</span>
+                    </td>
+                    <td class="py-3 px-2 text-right">
+                        <div class="flex items-center justify-end gap-1.5">
+                            <button onclick="editBlog(${b.id || '\'' + b.slug + '\''})" class="px-2 py-1 bg-primary text-white rounded text-[10px] font-bold hover:bg-accent transition shadow-sm">Edit</button>
+                            <button onclick="deleteBlog(${b.id || '\'' + b.slug + '\''})" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Save (Insert / Update) Blog
+        async function saveBlog(event) {
+            if (event) event.preventDefault();
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            const titleEn = document.getElementById('blogTitleEn').value.trim();
+            const slug = document.getElementById('blogSlug').value.trim();
+            const titleUr = document.getElementById('blogTitleUr').value.trim();
+            const author = document.getElementById('blogAuthor').value.trim();
+            const categoryEn = document.getElementById('blogCategoryEn').value.trim();
+            const categoryUr = document.getElementById('blogCategoryUr').value.trim();
+            const imageUrl = document.getElementById('blogImage').value.trim();
+            const status = document.getElementById('blogStatus').value;
+            const seoTitle = document.getElementById('blogSeoTitle').value.trim() || null;
+            const metaDesc = document.getElementById('blogMetaDesc').value.trim() || null;
+            const descEn = document.getElementById('blogDescEn').value.trim();
+            const descUr = document.getElementById('blogDescUr').value.trim();
+            const contentEn = document.getElementById('blogContentEn').value.trim();
+            const contentUr = document.getElementById('blogContentUr').value.trim();
+
+            const payload = {
+                title_en: titleEn,
+                slug: slug,
+                title_ur: titleUr,
+                author: author,
+                category_en: categoryEn,
+                category_ur: categoryUr,
+                image_url: imageUrl,
+                status: status,
+                seo_title: seoTitle,
+                meta_description: metaDesc,
+                desc_en: descEn,
+                desc_ur: descUr,
+                content_en: contentEn,
+                content_ur: contentUr,
+                project: 'Qanooni-Mushawarat'
+            };
+
+            const submitBtn = document.getElementById('btnSaveBlog');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "Saving...";
+
+            try {
+                if (activeSupabase) {
+                    if (editingBlogId) {
+                        const { error } = await activeSupabase
+                            .from('blogs')
+                            .update(payload)
+                            .eq('id', editingBlogId)
+                            .eq('project', 'Qanooni-Mushawarat');
+                        if (error) throw error;
+                    } else {
+                        const { error } = await activeSupabase
+                            .from('blogs')
+                            .insert([payload]);
+                        if (error) throw error;
+                    }
+                } else {
+                    let localBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                    if (editingBlogId) {
+                        localBlogs = localBlogs.map(b => (b.id == editingBlogId || b.slug == editingBlogId) ? { ...b, ...payload } : b);
+                    } else {
+                        payload.id = Date.now();
+                        payload.created_at = new Date().toISOString();
+                        localBlogs.push(payload);
+                    }
+                    localStorage.setItem('registered_blogs', JSON.stringify(localBlogs));
+                }
+
+                alert(editingBlogId ? "Blog updated successfully!" : "Blog published successfully!");
+                cancelBlogEdit();
+                fetchBlogs();
+            } catch (err) {
+                console.error("Error saving blog:", err);
+                alert("Failed to save blog: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }
+
+        // Edit Blog Trigger
+        function editBlog(id) {
+            const blog = allBlogs.find(b => b.id == id || b.slug == id);
+            if (!blog) return;
+
+            editingBlogId = blog.id || blog.slug;
+
+            document.getElementById('blogTitleEn').value = blog.title_en || '';
+            document.getElementById('blogSlug').value = blog.slug || '';
+            document.getElementById('blogTitleUr').value = blog.title_ur || '';
+            document.getElementById('blogAuthor').value = blog.author || '';
+            document.getElementById('blogCategoryEn').value = blog.category_en || '';
+            document.getElementById('blogCategoryUr').value = blog.category_ur || '';
+            document.getElementById('blogImage').value = blog.image_url || '';
+            document.getElementById('blogStatus').value = blog.status || 'Publish';
+            document.getElementById('blogSeoTitle').value = blog.seo_title || '';
+            document.getElementById('blogMetaDesc').value = blog.meta_description || '';
+            document.getElementById('blogDescEn').value = blog.desc_en || '';
+            document.getElementById('blogDescUr').value = blog.desc_ur || '';
+            document.getElementById('blogContentEn').value = blog.content_en || '';
+            document.getElementById('blogContentUr').value = blog.content_ur || '';
+
+            document.getElementById('btnSaveBlog').innerHTML = "Update Blog";
+            document.getElementById('btnCancelBlog').classList.remove('hidden');
+
+            // Scroll up to the form
+            document.getElementById('addBlogForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Cancel Edit State
+        function cancelBlogEdit() {
+            editingBlogId = null;
+            document.getElementById('addBlogForm').reset();
+            document.getElementById('btnSaveBlog').innerHTML = "Publish";
+            document.getElementById('btnCancelBlog').classList.add('hidden');
+        }
+
+        // Delete Blog Record
+        async function deleteBlog(id) {
+            if (!confirm("Are you sure you want to delete this blog post?")) return;
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('blogs')
+                        .delete()
+                        .eq('id', id)
+                        .eq('project', 'Qanooni-Mushawarat');
+                    if (error) throw error;
+                } else {
+                    let localBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                    localBlogs = localBlogs.filter(b => b.id != id && b.slug != id);
+                    localStorage.setItem('registered_blogs', JSON.stringify(localBlogs));
+                }
+
+                alert("Blog post deleted successfully!");
+                fetchBlogs();
+            } catch (err) {
+                console.error("Error deleting blog:", err);
+                alert("Failed to delete blog: " + err.message);
+            }
+        }
+
+        // Add filter & search listeners
+        const searchInput = document.getElementById('blogSearchInput');
+        if (searchInput) searchInput.addEventListener('input', renderBlogs);
+
+        const filterSelect = document.getElementById('blogCategoryFilter');
+        if (filterSelect) filterSelect.addEventListener('change', renderBlogs);
+
+        // Bind form submit
+        const blogForm = document.getElementById('addBlogForm');
+        if (blogForm) {
+            blogForm.removeAttribute('onsubmit'); // ensure clean bind
+            blogForm.addEventListener('submit', saveBlog);
         }
 
     </script>
