@@ -327,8 +327,8 @@ BLOG DETAIL MODAL
         
         <!-- Content Area -->
         <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
-            <div class="w-full h-64 md:h-80 bg-slate-50 rounded-xl overflow-hidden border border-gray-100 flex items-center justify-center">
-                <img id="modalBlogImage" src="" class="max-w-full max-h-full object-contain">
+            <div class="flex items-center justify-center w-full">
+                <img id="modalBlogImage" src="" class="max-w-full max-h-[250px] md:max-h-[350px] object-contain rounded-xl shadow-sm">
             </div>
             
             <div class="flex items-center gap-2">
@@ -477,7 +477,7 @@ function renderBlogsGrid() {
         card.innerHTML = `
             <div>
                 <div class="h-48 w-full bg-slate-50 relative overflow-hidden flex items-center justify-center border-b border-gray-100">
-                    <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
+                    <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
                     <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">${currentCategory}</div>
                 </div>
                 <div class="p-6">
