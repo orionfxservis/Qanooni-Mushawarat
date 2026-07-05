@@ -3450,8 +3450,8 @@
             const payload = {
                 title: titleEn + ' ||| ' + titleUr,
                 slug: slug,
-                seo_title: seoTitle,
-                meta_description: metaDesc,
+                seo_title: seoTitle || titleEn,
+                meta_description: metaDesc || descEn,
                 short_description: descEn + ' ||| ' + descUr,
                 article: contentEn + ' ||| ' + contentUr,
                 category: categoryEn + ' ||| ' + categoryUr,
@@ -3459,7 +3459,10 @@
                 author: author,
                 focus_keyword: 'Qanooni-Mushawarat',
                 tags: status,
-                date: formattedDate
+                date: formattedDate,
+                section_heading: 'Details',
+                section_content: 'Additional content details for the blog.',
+                conclusion: 'Summary'
             };
 
             const submitBtn = document.getElementById('btnSaveBlog');
