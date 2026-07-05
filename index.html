@@ -2882,10 +2882,12 @@
         let homeBlogs = [];
 
         async function loadHomeBlogs() {
-            const activeSupabase = (typeof supabaseClient !== 'undefined') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            const activeSupabase = window.supabaseClient || (typeof supabase !== 'undefined' && typeof supabase.from === 'function' ? supabase : null);
+            console.log("[DEBUG] activeSupabase resolved to:", activeSupabase);
 
             try {
                 if (activeSupabase) {
+                    console.log("[DEBUG] Querying Supabase for focus_keyword = Qanooni-Mushawarat...");
                     const { data, error } = await activeSupabase
                         .from('blogs')
                         .select('*')
@@ -2894,8 +2896,10 @@
                         .limit(3);
 
                     if (error) throw error;
+                    console.log("[DEBUG] Successfully fetched blogs:", data);
                     homeBlogs = data || [];
                 } else {
+                    console.log("[DEBUG] No activeSupabase client found. Falling back to local storage...");
                     homeBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
                 }
             } catch (err) {
@@ -2903,11 +2907,11 @@
                 homeBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
             }
 
-            // Fallback default blogs if empty
-            if (homeBlogs.length === 0) {
-                homeBlogs = [
+            // Fill up to 3 blogs with static fallbacks if we have fewer than 3
+            if (homeBlogs.length < 3) {
+                const fallbacks = [
                     {
-                        id: 1,
+                        id: 'fb1',
                         title: "Understanding Child Custody Laws in Pakistan ||| پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا",
                         slug: "understanding-child-custody-laws",
                         category: "Family Law ||| فیملی لاء",
@@ -2917,7 +2921,7 @@
                         author: "Legal Expert"
                     },
                     {
-                        id: 2,
+                        id: 'fb2',
                         title: "Starting a Business: Legal Requirements ||| کاروبار شروع کرنا: قانونی تقاضے",
                         slug: "starting-a-business-legal-requirements",
                         category: "Corporate Law ||| کارپوریٹ لاء",
@@ -2927,7 +2931,7 @@
                         author: "Corporate Team"
                     },
                     {
-                        id: 3,
+                        id: 'fb3',
                         title: "How to Verify Real Estate Property Titles ||| رئیل اسٹیٹ پراپرٹی کے ٹائٹل کی تصدیق کیسے کریں",
                         slug: "how-to-verify-real-estate-property-titles",
                         category: "Property Law ||| پراپرٹی لاء",
@@ -2937,6 +2941,18 @@
                         author: "Property Expert"
                     }
                 ];
+                
+                for (const fb of fallbacks) {
+                    if (homeBlogs.length >= 3) break;
+                    const exists = homeBlogs.some(b => {
+                        const bTitle = (b.title || '').split(' ||| ')[0];
+                        const fbTitle = fb.title.split(' ||| ')[0];
+                        return bTitle === fbTitle || b.slug === fb.slug;
+                    });
+                    if (!exists) {
+                        homeBlogs.push(fb);
+                    }
+                }
             }
 
             renderHomeBlogs();
@@ -2982,18 +2998,24 @@
                 const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
                 const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
 
+                const currentDateStr = new Date(b.created_at || Date.now()).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: '2-digit'
+                }).replace(/ /g, '-');
+
                 const card = document.createElement('div');
                 card.className = 'bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col justify-between';
                 card.innerHTML = `
                     <div>
-                        <div class="h-48 w-full bg-gray-200 relative">
-                            <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
+                        <div class="h-48 w-full bg-slate-50 relative overflow-hidden flex items-center justify-center border-b border-gray-100">
+                            <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
                             <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">${currentCategory}</div>
                         </div>
                         <div class="p-6">
-                            <p class="text-xs text-gray-500 mb-2">${b.date || 'Today'}</p>
+                            <p class="text-xs text-gray-500 mb-2">${b.date || currentDateStr}</p>
                             <h3 class="text-xl font-bold text-primary mb-3">${currentTitle}</h3>
-                            <p class="text-gray-600 text-sm mb-4">${currentDesc}</p>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">${currentDesc}</p>
                         </div>
                     </div>
                     <div class="p-6 pt-0">
