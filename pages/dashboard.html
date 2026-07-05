@@ -749,7 +749,7 @@
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
                         <h3 class="text-lg font-bold text-primary flex items-center gap-2">
                             <i class="fas fa-list text-secondary"></i>
-                            Existing Blogs
+                            Qanooni Mushawarat Blogs
                         </h3>
                         <div class="flex flex-wrap gap-3">
                             <input type="text" id="blogSearchInput" placeholder="Search blog..." class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition text-sm">
@@ -3331,7 +3331,7 @@
                     const { data, error } = await activeSupabase
                         .from('blogs')
                         .select('*')
-                        .eq('project', 'Qanooni-Mushawarat')
+                        .eq('focus_keyword', 'Qanooni-Mushawarat')
                         .order('created_at', { ascending: false });
 
                     if (error) throw error;
@@ -3358,10 +3358,12 @@
             const categoryFilter = document.getElementById('blogCategoryFilter')?.value || 'All';
 
             const filtered = allBlogs.filter(b => {
-                const matchesSearch = (b.title_en || '').toLowerCase().includes(searchTerm) || 
-                                      (b.title_ur || '').includes(searchTerm) || 
+                const titleStr = b.title || '';
+                const categoryStr = b.category || '';
+                const matchesSearch = titleStr.toLowerCase().includes(searchTerm) || 
+                                      categoryStr.toLowerCase().includes(searchTerm) || 
                                       (b.author || '').toLowerCase().includes(searchTerm);
-                const matchesCategory = categoryFilter === 'All' || b.category_en === categoryFilter;
+                const matchesCategory = categoryFilter === 'All' || categoryStr.includes(categoryFilter);
                 return matchesSearch && matchesCategory;
             });
 
@@ -3374,21 +3376,37 @@
                 const tr = document.createElement('tr');
                 tr.className = 'border-b border-gray-150 bg-slate-50 hover:bg-slate-100 transition text-[13px]';
                 
-                const statusClass = b.status === 'Publish' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600';
+                const statusClass = b.tags === 'Publish' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600';
+
+                let titleEn = b.title || '';
+                let titleUr = '';
+                if (titleEn.includes(' ||| ')) {
+                    const parts = titleEn.split(' ||| ');
+                    titleEn = parts[0];
+                    titleUr = parts[1];
+                }
+
+                let categoryEn = b.category || '';
+                let categoryUr = '';
+                if (categoryEn.includes(' ||| ')) {
+                    const parts = categoryEn.split(' ||| ');
+                    categoryEn = parts[0];
+                    categoryUr = parts[1];
+                }
 
                 tr.innerHTML = `
                     <td class="py-3 px-2 font-medium text-gray-800">
-                        <div>${b.title_en}</div>
-                        <div class="text-[10px] text-gray-400 font-urdu" dir="rtl">${b.title_ur}</div>
+                        <div>${titleEn}</div>
+                        <div class="text-[10px] text-gray-400 font-urdu" dir="rtl">${titleUr}</div>
                     </td>
                     <td class="py-3 px-2 text-gray-600 font-mono text-[11px]">${b.slug}</td>
                     <td class="py-3 px-2 text-gray-500">${b.author}</td>
                     <td class="py-3 px-2 text-gray-500">
-                        <div>${b.category_en}</div>
-                        <div class="text-[10px] text-gray-400 font-urdu" dir="rtl">${b.category_ur}</div>
+                        <div>${categoryEn}</div>
+                        <div class="text-[10px] text-gray-400 font-urdu" dir="rtl">${categoryUr}</div>
                     </td>
                     <td class="py-3 px-2">
-                        <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${b.status}</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${b.tags || 'Publish'}</span>
                     </td>
                     <td class="py-3 px-2 text-right">
                         <div class="flex items-center justify-end gap-1.5">
@@ -3422,22 +3440,26 @@
             const contentEn = document.getElementById('blogContentEn').value.trim();
             const contentUr = document.getElementById('blogContentUr').value.trim();
 
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: '2-digit'
+            }).replace(/ /g, '-');
+
             const payload = {
-                title_en: titleEn,
+                title: titleEn + ' ||| ' + titleUr,
                 slug: slug,
-                title_ur: titleUr,
-                author: author,
-                category_en: categoryEn,
-                category_ur: categoryUr,
-                image_url: imageUrl,
-                status: status,
                 seo_title: seoTitle,
                 meta_description: metaDesc,
-                desc_en: descEn,
-                desc_ur: descUr,
-                content_en: contentEn,
-                content_ur: contentUr,
-                project: 'Qanooni-Mushawarat'
+                short_description: descEn + ' ||| ' + descUr,
+                article: contentEn + ' ||| ' + contentUr,
+                category: categoryEn + ' ||| ' + categoryUr,
+                image: imageUrl,
+                author: author,
+                focus_keyword: 'Qanooni-Mushawarat',
+                tags: status,
+                date: formattedDate
             };
 
             const submitBtn = document.getElementById('btnSaveBlog');
@@ -3452,7 +3474,7 @@
                             .from('blogs')
                             .update(payload)
                             .eq('id', editingBlogId)
-                            .eq('project', 'Qanooni-Mushawarat');
+                            .eq('focus_keyword', 'Qanooni-Mushawarat');
                         if (error) throw error;
                     } else {
                         const { error } = await activeSupabase
@@ -3491,25 +3513,56 @@
 
             editingBlogId = blog.id || blog.slug;
 
-            document.getElementById('blogTitleEn').value = blog.title_en || '';
+            let titleEn = blog.title || '';
+            let titleUr = '';
+            if (titleEn.includes(' ||| ')) {
+                const parts = titleEn.split(' ||| ');
+                titleEn = parts[0];
+                titleUr = parts[1];
+            }
+
+            let categoryEn = blog.category || '';
+            let categoryUr = '';
+            if (categoryEn.includes(' ||| ')) {
+                const parts = categoryEn.split(' ||| ');
+                categoryEn = parts[0];
+                categoryUr = parts[1];
+            }
+
+            let descEn = blog.short_description || '';
+            let descUr = '';
+            if (descEn.includes(' ||| ')) {
+                const parts = descEn.split(' ||| ');
+                descEn = parts[0];
+                descUr = parts[1];
+            }
+
+            let contentEn = blog.article || '';
+            let contentUr = '';
+            if (contentEn.includes(' ||| ')) {
+                const parts = contentEn.split(' ||| ');
+                contentEn = parts[0];
+                contentUr = parts[1];
+            }
+
+            document.getElementById('blogTitleEn').value = titleEn;
             document.getElementById('blogSlug').value = blog.slug || '';
-            document.getElementById('blogTitleUr').value = blog.title_ur || '';
+            document.getElementById('blogTitleUr').value = titleUr;
             document.getElementById('blogAuthor').value = blog.author || '';
-            document.getElementById('blogCategoryEn').value = blog.category_en || '';
-            document.getElementById('blogCategoryUr').value = blog.category_ur || '';
-            document.getElementById('blogImage').value = blog.image_url || '';
-            document.getElementById('blogStatus').value = blog.status || 'Publish';
+            document.getElementById('blogCategoryEn').value = categoryEn;
+            document.getElementById('blogCategoryUr').value = categoryUr;
+            document.getElementById('blogImage').value = blog.image || '';
+            document.getElementById('blogStatus').value = blog.tags || 'Publish';
             document.getElementById('blogSeoTitle').value = blog.seo_title || '';
             document.getElementById('blogMetaDesc').value = blog.meta_description || '';
-            document.getElementById('blogDescEn').value = blog.desc_en || '';
-            document.getElementById('blogDescUr').value = blog.desc_ur || '';
-            document.getElementById('blogContentEn').value = blog.content_en || '';
-            document.getElementById('blogContentUr').value = blog.content_ur || '';
+            document.getElementById('blogDescEn').value = descEn;
+            document.getElementById('blogDescUr').value = descUr;
+            document.getElementById('blogContentEn').value = contentEn;
+            document.getElementById('blogContentUr').value = contentUr;
 
             document.getElementById('btnSaveBlog').innerHTML = "Update Blog";
             document.getElementById('btnCancelBlog').classList.remove('hidden');
 
-            // Scroll up to the form
             document.getElementById('addBlogForm').scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -3533,7 +3586,7 @@
                         .from('blogs')
                         .delete()
                         .eq('id', id)
-                        .eq('project', 'Qanooni-Mushawarat');
+                        .eq('focus_keyword', 'Qanooni-Mushawarat');
                     if (error) throw error;
                 } else {
                     let localBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');

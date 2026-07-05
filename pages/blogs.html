@@ -10,6 +10,10 @@
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Supabase SDK & Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+
     <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
@@ -311,60 +315,297 @@ FOOTER
 </footer>
 
 <!-- =========================
-LANGUAGE SCRIPT
+BLOG DETAIL MODAL
 ========================= -->
+<div id="blogDetailModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col max-h-[90vh]">
+        <!-- Header -->
+        <div class="bg-primary text-white px-6 py-4 flex justify-between items-center shrink-0">
+            <h3 id="modalBlogCategory" class="text-sm font-bold text-secondary uppercase tracking-wider">Legal Guide</h3>
+            <button onclick="closeBlogModal()" class="text-white/80 hover:text-white text-xl font-bold transition">&times;</button>
+        </div>
+        
+        <!-- Content Area -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+            <img id="modalBlogImage" src="" class="w-full h-64 object-cover rounded-xl shadow-sm">
+            
+            <div class="flex items-center gap-2">
+                <span id="modalBlogDate" class="text-xs text-gray-500"></span>
+                <span class="text-gray-300">|</span>
+                <span class="text-xs text-gray-500 font-medium">By <span id="modalBlogAuthor"></span></span>
+            </div>
 
+            <h2 id="modalBlogTitle" class="text-2xl md:text-3xl font-black text-primary leading-tight"></h2>
+            
+            <p id="modalBlogShortDesc" class="text-gray-600 font-semibold italic border-l-4 border-secondary pl-4 py-1"></p>
+
+            <div id="modalBlogContent" class="text-gray-750 text-sm md:text-base space-y-4 leading-relaxed whitespace-pre-line"></div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="border-t border-gray-150 px-6 py-4 flex justify-end shrink-0 bg-gray-50">
+            <button onclick="closeBlogModal()" class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-xl text-sm transition">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- =========================
+LANGUAGE & DYNAMIC BLOGS SCRIPT
+========================= -->
 <script>
-
 let currentLanguage = 'en';
+let allBlogs = [];
+let activeCategory = 'All';
 
-function toggleLanguage(){
+// Fetch from Supabase / localStorage
+async function loadBlogs() {
+    const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
 
-    currentLanguage =
-        currentLanguage === 'en' ? 'ur' : 'en';
+    try {
+        if (activeSupabase) {
+            const { data, error } = await activeSupabase
+                .from('blogs')
+                .select('*')
+                .eq('focus_keyword', 'Qanooni-Mushawarat')
+                .order('created_at', { ascending: false });
 
-    document.documentElement.lang =
-        currentLanguage;
-
-    document.documentElement.dir =
-        currentLanguage === 'ur' ? 'rtl' : 'ltr';
-
-    document.querySelectorAll('[data-en]')
-        .forEach(el => {
-
-            el.textContent =
-                el.getAttribute(`data-${currentLanguage}`);
-
-        });
-
-    document.getElementById('langBtn').textContent =
-        currentLanguage === 'en'
-        ? 'اردو'
-        : 'English';
-
-    if(currentLanguage === 'ur'){
-
-        document.querySelectorAll('h1,h2,h3,h4,p,a,button,span')
-            .forEach(el => {
-
-                el.classList.add('urdu-text');
-
-            });
-
-    }else{
-
-        document.querySelectorAll('h1,h2,h3,h4,p,a,button,span')
-            .forEach(el => {
-
-                el.classList.remove('urdu-text');
-
-            });
-
+            if (error) throw error;
+            allBlogs = data || [];
+        } else {
+            allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+        }
+    } catch (err) {
+        console.error("Error loading blogs from database:", err);
+        allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
     }
 
+    // Fallback static list so page has default quality content
+    if (allBlogs.length === 0) {
+        allBlogs = [
+            {
+                id: 1,
+                title: "Understanding Child Custody Laws in Pakistan ||| پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا",
+                slug: "understanding-child-custody-laws",
+                category: "Family Law ||| فیملی لاء",
+                short_description: "A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision. ||| فیملی کورٹس کس طرح بچوں کی تحویل کا تعین کرتی ہیں، دونوں والدین کے حقوق، اور حتمی فیصلے کو کون سے عوامل متاثر کرتے ہیں، اس کے بارے میں ایک جامع گائیڈ۔",
+                article: "Under Pakistani family law, child custody is determined strictly based on the welfare of the minor. Mothers usually hold the right of Hizanat (custody) for boys under 7 and girls until puberty. However, the father remains the natural guardian. ||| فیملی لا کے تحت، نابالغ کی فلاح و بہبود کو اولین ترجیح دی جاتی ہے۔ عام طور پر ماں کو 7 سال سے کم عمر لڑکے اور بلوغت تک لڑکی کی تحویل کا حق حاصل ہوتا ہے۔",
+                image: "../images/bg-slide-show/family-law.jpg",
+                date: "15-Oct-26",
+                author: "Legal Expert",
+                tags: "Publish"
+            },
+            {
+                id: 2,
+                title: "Property Dispute Resolution: A Step-by-Step Guide ||| جائیداد کے تنازعات کا حل: ایک مرحلہ وار گائیڈ",
+                slug: "property-dispute-resolution",
+                category: "Property Law ||| پراپرٹی لاء",
+                short_description: "Learn how to handle illegal possession, title disputes, and mutation fraud under Pakistani civil laws. ||| پاکستانی سول قوانین کے تحت غیر قانونی قبضے، ٹائٹل کے تنازعات، اور انتقال کے فراڈ سے نمٹنے کا طریقہ سیکھیں۔",
+                article: "Property disputes can be lengthy in civil courts. Actions include filing a suit for declaration, partition, or partition of joint property. Under the Specific Relief Act, a suit for possession is also vital. ||| جائیداد کے تنازعات طویل ہو سکتے ہیں۔ ان سے نمٹنے کے لیے قانونی چارہ جوئی اور ٹائٹل دستاویزات کا معائنہ لازمی ہے۔",
+                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600",
+                date: "05-Oct-26",
+                author: "Admin Team",
+                tags: "Publish"
+            }
+        ];
+    }
+
+    renderBlogsGrid();
 }
 
-</script>
+function renderBlogsGrid() {
+    const grid = document.getElementById('blogsGrid');
+    if (!grid) return;
 
+    grid.innerHTML = '';
+
+    const filtered = allBlogs.filter(b => {
+        if (activeCategory === 'All') return true;
+        
+        let categoryEn = b.category || '';
+        if (categoryEn.includes(' ||| ')) {
+            categoryEn = categoryEn.split(' ||| ')[0];
+        }
+        return categoryEn.toLowerCase() === activeCategory.toLowerCase();
+    });
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500 font-semibold" data-en="No blogs found in this category." data-ur="اس زمرے میں کوئی بلاگ نہیں ملا۔">No blogs found in this category.</div>`;
+        return;
+    }
+
+    filtered.forEach(b => {
+        let titleEn = b.title || '';
+        let titleUr = '';
+        if (titleEn.includes(' ||| ')) {
+            const parts = titleEn.split(' ||| ');
+            titleEn = parts[0];
+            titleUr = parts[1];
+        }
+
+        let categoryEn = b.category || '';
+        let categoryUr = '';
+        if (categoryEn.includes(' ||| ')) {
+            const parts = categoryEn.split(' ||| ');
+            categoryEn = parts[0];
+            categoryUr = parts[1];
+        }
+
+        let descEn = b.short_description || '';
+        let descUr = '';
+        if (descEn.includes(' ||| ')) {
+            const parts = descEn.split(' ||| ');
+            descEn = parts[0];
+            descUr = parts[1];
+        }
+
+        const currentTitle = currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
+        const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
+        const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
+
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col justify-between';
+        card.innerHTML = `
+            <div>
+                <div class="h-48 w-full bg-gray-200 relative">
+                    <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">${currentCategory}</div>
+                </div>
+                <div class="p-6">
+                    <p class="text-xs text-gray-500 mb-2">${b.date || 'Today'}</p>
+                    <h3 class="text-xl font-bold text-primary mb-3">${currentTitle}</h3>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">${currentDesc}</p>
+                </div>
+            </div>
+            <div class="p-6 pt-0">
+                <button onclick="viewBlogDetails(${b.id || '\'' + b.slug + '\''})" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition">
+                    <span data-en="Read More" data-ur="مزید پڑھیں">${currentLanguage === 'ur' ? 'مزید پڑھیں' : 'Read More'}</span>
+                    <i class="fas fa-arrow-right text-[12px] ${currentLanguage === 'ur' ? 'rotate-180' : ''}"></i>
+                </button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    applyLanguageStyles();
+}
+
+function viewBlogDetails(id) {
+    const blog = allBlogs.find(b => b.id == id || b.slug == id);
+    if (!blog) return;
+
+    let titleEn = blog.title || '';
+    let titleUr = '';
+    if (titleEn.includes(' ||| ')) {
+        const parts = titleEn.split(' ||| ');
+        titleEn = parts[0];
+        titleUr = parts[1];
+    }
+
+    let categoryEn = blog.category || '';
+    let categoryUr = '';
+    if (categoryEn.includes(' ||| ')) {
+        const parts = categoryEn.split(' ||| ');
+        categoryEn = parts[0];
+        categoryUr = parts[1];
+    }
+
+    let descEn = blog.short_description || '';
+    let descUr = '';
+    if (descEn.includes(' ||| ')) {
+        const parts = descEn.split(' ||| ');
+        descEn = parts[0];
+        descUr = parts[1];
+    }
+
+    let contentEn = blog.article || '';
+    let contentUr = '';
+    if (contentEn.includes(' ||| ')) {
+        const parts = contentEn.split(' ||| ');
+        contentEn = parts[0];
+        contentUr = parts[1];
+    }
+
+    const currentTitle = currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
+    const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
+    const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
+    const currentContent = currentLanguage === 'ur' && contentUr ? contentUr : contentEn;
+
+    document.getElementById('modalBlogCategory').textContent = currentCategory;
+    document.getElementById('modalBlogImage').src = blog.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600';
+    document.getElementById('modalBlogDate').textContent = blog.date || 'Today';
+    document.getElementById('modalBlogAuthor').textContent = blog.author || 'Author';
+    document.getElementById('modalBlogTitle').textContent = currentTitle;
+    document.getElementById('modalBlogShortDesc').textContent = currentDesc;
+    document.getElementById('modalBlogContent').innerHTML = currentContent;
+
+    const modal = document.getElementById('blogDetailModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    if (currentLanguage === 'ur') {
+        modal.querySelector('.bg-white').setAttribute('dir', 'rtl');
+        modal.querySelector('.bg-white').classList.add('urdu-text');
+    } else {
+        modal.querySelector('.bg-white').setAttribute('dir', 'ltr');
+        modal.querySelector('.bg-white').classList.remove('urdu-text');
+    }
+}
+
+function closeBlogModal() {
+    const modal = document.getElementById('blogDetailModal');
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+}
+
+function setupCategoryFilters() {
+    const buttons = document.querySelectorAll('.flex.flex-wrap.gap-3.justify-center button');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => {
+                b.classList.remove('bg-primary', 'text-white');
+                b.classList.add('bg-gray-100', 'text-gray-600');
+            });
+            btn.classList.remove('bg-gray-100', 'text-gray-600');
+            btn.classList.add('bg-primary', 'text-white');
+            activeCategory = btn.textContent;
+            renderBlogsGrid();
+        });
+    });
+}
+
+function applyLanguageStyles() {
+    if (currentLanguage === 'ur') {
+        document.querySelectorAll('h1, h2, h3, h4, p, a, button, span').forEach(el => {
+            el.classList.add('urdu-text');
+        });
+    } else {
+        document.querySelectorAll('h1, h2, h3, h4, p, a, button, span').forEach(el => {
+            el.classList.remove('urdu-text');
+        });
+    }
+}
+
+function toggleLanguage() {
+    currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+
+    document.documentElement.lang = currentLanguage;
+    document.documentElement.dir = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLanguage}`);
+    });
+
+    document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+
+    renderBlogsGrid();
+}
+
+window.onload = async () => {
+    setupCategoryFilters();
+    await loadBlogs();
+};
+</script>
 </body>
 </html>
