@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Professional Profile - Qanooni Mushawarat</title>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f1c2e 0%, #1e3a5f 100%);
+            min-height: 100vh;
+        }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #d4b06a;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-between">
+
+    <!-- Header / Branding -->
+    <header class="py-6 px-4 shrink-0">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2">
+                <span class="text-lg font-bold text-white tracking-wider"><i class="fas fa-scale-balanced text-[#d4b06a] mr-2"></i>LegalEase</span>
+            </a>
+            <a href="../index.html" class="text-white/60 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-2xl rounded-3xl p-8 md:p-10 shadow-2xl text-white relative overflow-hidden">
+            <!-- Background glow effect -->
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-[#d4b06a]/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="flex flex-col items-center justify-center py-10">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#d4b06a] mb-4"></div>
+                <p class="text-white/80 text-sm font-medium">Checking authentication status...</p>
+            </div>
+
+            <!-- Profile Form (Hidden by default) -->
+            <div id="profileFormContainer" class="hidden space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight text-[#d4b06a]"><i class="fas fa-user-tie mr-2"></i>Complete Professional Profile</h2>
+                    <p class="text-white/60 text-xs mt-1">Please provide the remaining professional details and verification documents to submit for admin review.</p>
+                </div>
+
+                <form id="profileForm" class="space-y-4 text-left">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Years of Experience *</label>
+                            <input id="yearsOfExperience" type="number" required min="0" placeholder="e.g. 5" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#d4b06a] transition">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Law Firm / Chamber</label>
+                            <input id="lawFirm" type="text" placeholder="e.g. Ali & Partners" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#d4b06a] transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Office Address *</label>
+                        <input id="officeAddress" type="text" required placeholder="e.g. Office 4, Court Road, Karachi" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#d4b06a] transition">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Working Courts *</label>
+                            <input id="workingCourts" type="text" required placeholder="e.g. High Court, Session Court" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#d4b06a] transition">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Consultation Fee (PKR) *</label>
+                            <input id="consultationFee" type="number" required min="0" placeholder="e.g. 5000" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#d4b06a] transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Languages Spoken *</label>
+                        <input id="languages" type="text" required placeholder="e.g. Urdu, English, Punjabi" class="w-full h-10 px-3.5 text-xs rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#d4b06a] transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-1">Biography / Professional Summary *</label>
+                        <textarea id="biography" required rows="3" placeholder="Tell clients about your expertise, notable cases..." class="w-full p-3.5 text-xs rounded-xl border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#d4b06a] transition"></textarea>
+                    </div>
+
+                    <!-- Document Upload Section -->
+                    <div class="border-t border-white/10 pt-4">
+                        <label class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-2">Upload Verification Documents (Bar License Copy / Degree) *</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="file" id="documentUpload" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="handleDocUpload(event)">
+                            <button type="button" onclick="document.getElementById('documentUpload').click()" class="h-10 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition duration-300 flex items-center gap-2">
+                                <i class="fas fa-cloud-upload-alt text-[#d4b06a]"></i> Select Document File
+                            </button>
+                            <span id="uploadedFileName" class="text-xs text-white/60 italic">No file uploaded</span>
+                        </div>
+                        <input type="hidden" id="documentUrl">
+                    </div>
+
+                    <button type="submit" class="w-full h-10 rounded-xl bg-[#d4b06a] text-[#1e3a5f] font-bold text-xs hover:bg-[#c4a05a] transition duration-300 shadow-lg flex items-center justify-center gap-2">
+                        Submit Professional Profile
+                    </button>
+                </form>
+            </div>
+
+            <!-- Profile Completed / Under Review State -->
+            <div id="reviewState" class="hidden text-center space-y-6">
+                <div class="w-20 h-20 bg-yellow-500/10 border border-yellow-500/20 text-[#d4b06a] rounded-full flex items-center justify-center mx-auto text-4xl shadow-lg shadow-yellow-500/5">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight">Application Under Review</h2>
+                    <p class="text-white/70 text-sm mt-3 leading-relaxed">
+                        Your professional profile and documents have been submitted successfully.
+                    </p>
+                    <p class="text-white/50 text-xs mt-2 leading-relaxed">
+                        Our administrative team is reviewing your bar credentials. You will receive access to your verified lawyer dashboard once approved.
+                    </p>
+                </div>
+                <div class="pt-4 border-t border-white/10">
+                    <a href="../index.html" class="inline-flex w-full h-10 rounded-xl bg-[#d4b06a] text-[#1e3a5f] font-bold text-xs items-center justify-center hover:bg-[#c4a05a] transition duration-300 shadow-lg">
+                        Return to Home Page
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-white/40 text-xs shrink-0">
+        <p>© 2026 LegalEase Pakistan. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/custom-alert.js"></script>
+    
+    <script>
+        const activeSupabase = (typeof supabaseClient !== 'undefined') ? supabaseClient : null;
+        let currentUser = null;
+        let lawyerRecord = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            document.getElementById('profileForm').addEventListener('submit', handleProfileSubmit);
+        });
+
+        async function checkAuth() {
+            if (!activeSupabase) {
+                alert("Supabase not loaded properly.");
+                return;
+            }
+
+            const { data: { session } } = await activeSupabase.auth.getSession();
+            if (!session) {
+                alert("Please log in to complete your profile.");
+                window.location.href = "../index.html";
+                return;
+            }
+
+            currentUser = session.user;
+
+            // Fetch registration info
+            try {
+                const { data, error } = await activeSupabase
+                    .from('lawyer_registration')
+                    .select('*')
+                    .eq('email', currentUser.email)
+                    .eq('project', 'Qanooni-Mushawarat')
+                    .single();
+
+                if (error || !data) {
+                    alert("No lawyer registration record found. Redirecting to home.");
+                    window.location.href = "../index.html";
+                    return;
+                }
+
+                lawyerRecord = data;
+
+                if (lawyerRecord.status === 'Approved' || lawyerRecord.status === 'Verified Lawyer') {
+                    alert("Your profile is already approved! Redirecting to Dashboard.");
+                    window.location.href = "dashboard.html";
+                    return;
+                }
+
+                // If documents are uploaded and status is pending review, show review state
+                if (lawyerRecord.documents_uploaded && (lawyerRecord.status === 'Pending Review' || lawyerRecord.status === 'Pending')) {
+                    showState('review');
+                } else {
+                    showState('form');
+                }
+            } catch(e) {
+                console.error("Error fetching lawyer registration status:", e);
+                showState('form');
+            }
+        }
+
+        function showState(state) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('profileFormContainer').classList.add('hidden');
+            document.getElementById('reviewState').classList.add('hidden');
+
+            if (state === 'form') {
+                document.getElementById('profileFormContainer').classList.remove('hidden');
+            } else if (state === 'review') {
+                document.getElementById('reviewState').classList.remove('hidden');
+            }
+        }
+
+        async function handleDocUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            document.getElementById('uploadedFileName').textContent = file.name;
+            
+            // Mock upload path
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                document.getElementById('documentUrl').value = reader.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function handleProfileSubmit(e) {
+            e.preventDefault();
+            
+            const docUrl = document.getElementById('documentUrl').value;
+            if (!docUrl) {
+                alert("Please upload your verification documents (Bar License/Degree).");
+                return;
+            }
+
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('profileFormContainer').classList.add('hidden');
+
+            const payload = {
+                experience: document.getElementById('yearsOfExperience').value,
+                law_firm: document.getElementById('lawFirm').value,
+                office_address: document.getElementById('officeAddress').value,
+                working_courts: document.getElementById('workingCourts').value,
+                consultation_fee: document.getElementById('consultationFee').value,
+                languages: document.getElementById('languages').value,
+                biography: document.getElementById('biography').value,
+                document_url: docUrl,
+                documents_uploaded: true,
+                status: 'Pending Review'
+            };
+
+            try {
+                // Update lawyer registration table
+                const { error } = await activeSupabase
+                    .from('lawyer_registration')
+                    .update(payload)
+                    .eq('email', currentUser.email)
+                    .eq('project', 'Qanooni-Mushawarat');
+
+                if (error) throw error;
+
+                // Also update local storage profile fallback
+                let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                localLawyers = localLawyers.map(l => {
+                    if (l.email === currentUser.email) {
+                        return { ...l, ...payload };
+                    }
+                    return l;
+                });
+                localStorage.setItem('registeredLawyers', JSON.stringify(localLawyers));
+
+                showState('review');
+            } catch(err) {
+                alert("Failed to submit profile: " + err.message);
+                showState('form');
+            }
+        }
+    </script>
+</body>
+</html>
