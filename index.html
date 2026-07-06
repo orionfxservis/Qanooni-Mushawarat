@@ -3865,32 +3865,44 @@ async function handleRegister() {
 
         // Load rights slides dynamically
         async function loadRightsSlides() {
+            console.log("[DEBUG] loadRightsSlides starting...");
             const container = document.getElementById('rightsSliderContainer');
-            if (!container) return;
+            if (!container) {
+                console.error("[DEBUG] rightsSliderContainer not found!");
+                return;
+            }
 
-            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            const activeSupabase = window.supabaseClient || (typeof supabase !== 'undefined' && typeof supabase.from === 'function' ? supabase : null);
+            console.log("[DEBUG] loadRightsSlides activeSupabase:", activeSupabase);
             let slides = [];
 
             try {
                 if (activeSupabase) {
+                    console.log("[DEBUG] Querying know_your_rights from Supabase...");
                     const { data, error } = await activeSupabase
                         .from('know_your_rights')
                         .select('*')
                         .eq('project_name', 'Qanooni-Mushawarat')
                         .order('created_at', { ascending: false });
 
-                    if (error) throw error;
+                    if (error) {
+                        console.error("[DEBUG] Supabase query error:", error);
+                        throw error;
+                    }
                     slides = data || [];
+                    console.log("[DEBUG] Query success. Slides count:", slides.length);
                 } else {
+                    console.log("[DEBUG] Supabase not active. Loading from localStorage...");
                     slides = JSON.parse(localStorage.getItem('rights_slides') || '[]');
                 }
             } catch (err) {
-                console.error("Error loading rights slides:", err);
+                console.error("[DEBUG] Failed to fetch slides, falling back:", err);
                 slides = JSON.parse(localStorage.getItem('rights_slides') || '[]');
             }
 
             // Fallback default slides if empty
             if (slides.length === 0) {
+                console.log("[DEBUG] No slides found in DB/localStorage. Loading fallback defaults...");
                 slides = [
                     { image_url: './images/laws-slide-show/2011-mld-1662.png', title: 'Law Record 1' },
                     { image_url: './images/laws-slide-show/2011-mld-1662.png', title: 'Law Record 2' },
@@ -3900,21 +3912,25 @@ async function handleRegister() {
 
             container.innerHTML = '';
 
-            // We duplicate the array to ensure a seamless infinite scrolling loop
-            const renderSet = [...slides, ...slides, ...slides];
+            // For the infinite scroll animation to look seamless, we need at least 12 items
+            let renderSet = [];
+            if (slides.length > 0) {
+                while (renderSet.length < 12) {
+                    renderSet = renderSet.concat(slides);
+                }
+                // Ensure it is even for translateX(-50%) seamless loop
+                if (renderSet.length % 2 !== 0) {
+                    renderSet = renderSet.concat(slides);
+                }
+            }
+
+            console.log("[DEBUG] Rendering total slides inside marquee container:", renderSet.length);
 
             renderSet.forEach(slide => {
-                let titleEn = slide.title || '';
-                let titleUr = '';
-                if (titleEn.includes(' ||| ')) {
-                    const parts = titleEn.split(' ||| ');
-                    titleEn = parts[0];
-                    titleUr = parts[1];
-                }
-
+                const title = slide.title || '';
                 const img = document.createElement('img');
                 img.src = slide.image_url;
-                img.alt = typeof currentLanguage !== 'undefined' && currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
+                img.alt = title;
                 img.className = "h-48 lg:h-60 object-contain rounded-2xl shadow-lg border border-gray-200 bg-white hover:scale-105 transition-transform duration-300 cursor-pointer";
                 container.appendChild(img);
             });
