@@ -21,7 +21,7 @@
                         light: '#f8f9fa'
                     },
                     fontFamily: {
-                        urdu: ['Noto Nastaliq Urdu', 'serif'],
+                        urdu: ['JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'serif'],
                         english: ['Inter', 'sans-serif']
                     }
                 }
@@ -42,19 +42,23 @@
        URDU FONT
     ========================= */
 
-    @font-face{
-        font-family:'JameelNoori';
-        src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
-    font-weight:normal;
-    font-style:normal;
-}
+    @font-face {
+        font-family: 'JameelNoori';
+        src: local('Jameel Noori Nastaleeq'), local('JameelNoori'), url('./fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body[dir="rtl"], body[dir="rtl"] * {
+        font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
+    }
 
     /* Urdu Text */
 
     .urdu-text,
     .urdu-heading,
     .urdu-ui{
-        font-family:'JameelNoori', serif !important;
+        font-family:'JameelNoori', 'Inter', sans-serif !important;
         direction:rtl;
         font-weight:normal;
         letter-spacing:0;
@@ -444,7 +448,7 @@
 
         <!-- Logo -->
         <a href="#home" class="flex items-center">
-            <img src="./images/logo/logo-02.png" alt="Qanooni Mushawarat Logo" class="h-7 md:h-9 w-auto object-contain">
+            <img src="./images/logo/logo-02.png" alt="Qanooni Mushawarat Logo" class="h-[42px] md:h-[54px] w-auto object-contain relative top-[5px]">
         </a>
 
         <!-- DESKTOP MENU -->
@@ -453,17 +457,14 @@
     <!-- HOME -->
     <a href="#home"
         class="text-white text-[15px] font-medium hover:text-secondary transition duration-300 relative group">
-
-        Home
+        <span data-en="Home" data-ur="ہوم">Home</span>
         <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
     </a>
 
     <!-- LEGAL SERVICES -->
     <div class="relative group">
-
-        <button
-            class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
-            Legal Services
+        <button class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
+            <span data-en="Legal Services" data-ur="قانونی خدمات">Legal Services</span>
             <i class="fas fa-chevron-down text-[10px] mt-[2px]"></i>
         </button>
 
@@ -499,10 +500,8 @@
 
     <!-- LAWYERS NETWORK -->
     <div class="relative group">
-
-        <button
-            class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
-            Lawyers Network
+        <button class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
+            <span data-en="Lawyers Network" data-ur="وکلاء نیٹ ورک">Lawyers Network</span>
             <i class="fas fa-chevron-down text-[10px] mt-[2px]"></i>
         </button>
 
@@ -511,16 +510,15 @@
             class="absolute top-full left-0 mt-4 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
             <a 	href="#lawyers"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
-			<i 	class="fas fa-user-tie text-secondary text-[13px]"></i>
-				Find Lawyer
+				<i 	class="fas fa-user-tie text-secondary text-[13px]"></i>
+				<span data-en="Find Lawyer" data-ur="وکیل تلاش کریں">Find Lawyer</span>
 			</a>
 
             <a 	href="javascript:void(0)"
 				onclick="openLawyerModal()"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
-
-			<i class="fas fa-user-plus text-secondary text-[13px]"></i>
-				Register As Lawyer
+				<i class="fas fa-user-plus text-secondary text-[13px]"></i>
+				<span data-en="Register As Lawyer" data-ur="بطور وکیل رجسٹر کریں">Register As Lawyer</span>
 			</a>
         </div>
 	</div>
@@ -528,8 +526,7 @@
 			<!-- FAQ -->
 			<a 	href="#faq"
 				class="text-white text-[15px] font-medium hover:text-secondary transition duration-300 relative group">
-
-					FAQ
+					<span data-en="FAQ" data-ur="عمومی سوالات">FAQ</span>
 				<span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full"></span>
 			</a>
 
@@ -544,10 +541,8 @@
 
     <!-- COMPANY -->
     <div class="relative group">
-        <button
-            class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
-
-            Company
+        <button class="flex items-center gap-2 text-white text-[15px] font-medium hover:text-secondary transition duration-300">
+            <span data-en="Company" data-ur="کمپنی">Company</span>
             <i class="fas fa-chevron-down text-[10px] mt-[2px]"></i>
         </button>
 
@@ -556,22 +551,20 @@
             class="absolute top-full left-0 mt-4 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
             <a 	href="./pages/about.html"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
-
-			<i class="fas fa-circle-info text-secondary text-[13px]"></i>
-				About Us		
+				<i class="fas fa-circle-info text-secondary text-[13px]"></i>
+				<span data-en="About Us" data-ur="ہمارے بارے میں">About Us</span>
 			</a>
 
             <a href="./pages/policy.html"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
 				<i class="fas fa-shield-halved text-secondary text-[13px]"></i>
-				Privacy Policy
+				<span data-en="Privacy Policy" data-ur="رازداری کی پالیسی">Privacy Policy</span>
 			</a>
 
             <a href="#contact"
                 class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
-
                 <i class="fas fa-envelope text-secondary text-[13px]"></i>
-                Contact Us
+                <span data-en="Contact Us" data-ur="رابطہ کریں">Contact Us</span>
             </a>
         </div>
     </div>
@@ -614,10 +607,7 @@
             </button>
 
             <!-- Consultation -->
-            <a href="#client-form"
-               class="bg-transparent border-2 border-secondary text-secondary px-3 py-1.5 rounded-lg text-[13px] font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2"
-               data-en="Consultation"
-               data-ur="مشاورت">
+            <a href="#client-form" class="bg-transparent border-2 border-secondary text-secondary px-3 py-1.5 rounded-lg text-[13px] font-semibold hover:bg-secondary hover:text-primary transition flex items-center gap-2">
 
                 <i class="fas fa-user-tie text-sm"></i>
                 <span data-en="Consultation" data-ur="مشاورت">Consultation</span>
@@ -634,26 +624,11 @@
                 <!-- Dropdown Menu -->
                 <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right scale-95 group-hover:scale-100 z-50">
                     <div class="p-2 space-y-1">
-                        <a href="javascript:void(0)"
-   onclick="openLoginModal('User Login')"
-   class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition"
-   data-en="Users" data-ur="صارفین">
-    <i class="fas fa-users w-5"></i> Users
-</a>
+                        <a href="javascript:void(0)" onclick="openLoginModal('User Login')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition"><i class="fas fa-users w-5"></i> <span data-en="Users" data-ur="صارفین">Users</span></a>
 
-<a href="javascript:void(0)"
-   onclick="openLoginModal('Lawyer Login')"
-   class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition"
-   data-en="Lawyers" data-ur="وکلاء">
-    <i class="fas fa-gavel w-5"></i> Lawyers
-</a>
+<a href="javascript:void(0)" onclick="openLoginModal('Lawyer Login')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition"><i class="fas fa-gavel w-5"></i> <span data-en="Lawyers" data-ur="وکلاء">Lawyers</span></a>
 
-<a href="javascript:void(0)"
-   onclick="openLoginModal('Admin Login')"
-   class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition"
-   data-en="Admin" data-ur="ایڈمن">
-    <i class="fas fa-user-shield w-5"></i> Admin
-</a>
+<a href="javascript:void(0)" onclick="openLoginModal('Admin Login')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary/20 hover:text-primary rounded-lg transition"><i class="fas fa-user-shield w-5"></i> <span data-en="Admin" data-ur="ایڈمن">Admin</span></a>
                     </div>
                 </div>
             </div>
@@ -3043,119 +3018,13 @@
             }
             
             // Update all translatable elements
+                        // Update all translatable elements
             document.querySelectorAll('[data-en]').forEach(el => {
-                el.textContent = el.getAttribute(`data-${currentLanguage}`);
+                const translation = el.getAttribute('data-' + currentLanguage);
+                if (translation) {
+                    el.textContent = translation;
+                }
             });
-            
-            // Update placeholders
-            document.querySelectorAll('[data-placeholder-en]').forEach(el => {
-                el.placeholder = el.getAttribute(`data-placeholder-${currentLanguage}`);
-            });
-            
-            const logoTagline = document.getElementById('logoTagline');
-            if (logoTagline) {
-                logoTagline.textContent = currentLanguage === 'en' ? 'قانونی مشاورت' : 'Legal Consultancy';
-            }
-            
-            updateLanguageToggleUI();
-            updateLanguageDirection();
-            
-            // Re-render dynamic blogs in current language
-            renderHomeBlogs();
-        }
-        
-        function updateLanguageDirection() {
-            const direction = currentLanguage === 'ur' ? 'rtl' : 'ltr';
-            document.body.setAttribute('dir', direction);
-        }
-        
-        // Theme Toggle
-        function toggleTheme() {
-            isDarkTheme = !isDarkTheme;
-            const icon = document.getElementById('themeIcon');
-            const mobileIcon = document.getElementById('mobileThemeIcon');
-            
-            if (isDarkTheme) {
-                document.body.classList.add('dark');
-                icon.classList.replace('fa-moon', 'fa-sun');
-                mobileIcon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                document.body.classList.remove('dark');
-                icon.classList.replace('fa-sun', 'fa-moon');
-                mobileIcon.classList.replace('fa-sun', 'fa-moon');
-            }
-        }
-        
-        // Mobile Menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const icon = document.getElementById('menuIcon');
-            
-            menu.classList.toggle('hidden');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        }
-        
-        
-
-// Slider Functions
-let currentSlide = 0;
-
-const slider = document.getElementById('heroSlider');
-const slides = document.querySelectorAll('#heroSlider > div');
-const sliderElements = document.querySelectorAll('.slider-dot');
-
-const totalSlides = slides.length;
-
-// Go To Specific Slide
-function goToSlide(index){
-
-    currentSlide = index;
-
-    updateSlider();
-
-}
-
-// Previous Slide
-function prevSlide(){
-
-    currentSlide--;
-
-    if(currentSlide < 0){
-        currentSlide = totalSlides - 1;
-    }
-
-    updateSlider();
-
-}
-
-// Next Slide
-function nextSlide(){
-
-    currentSlide++;
-
-    if(currentSlide >= totalSlides){
-        currentSlide = 0;
-    }
-
-    updateSlider();
-
-}
-
-// Update Slider Position
-function updateSlider(){
-
-    slides.forEach((slide, i) => {
-        if(i === currentSlide) {
-            slide.style.opacity = 1;
-            slide.style.zIndex = 2;
-            slide.style.pointerEvents = 'auto';
-        } else {
-            slide.style.opacity = 0;
-            slide.style.zIndex = 1;
-            slide.style.pointerEvents = 'none';
-        }
-    });
 
     sliderElements.forEach((dot, i) => {
 
@@ -4382,3 +4251,5 @@ async function handleRegister() {
 </script>
 </body>
 </html>
+
+
