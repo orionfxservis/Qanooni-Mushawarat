@@ -50,7 +50,7 @@
     }
 
     body[dir="rtl"], body[dir="rtl"] * {
-        font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
+        font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif !important;
     }
 
     /* Urdu Text */
@@ -58,7 +58,7 @@
     .urdu-text,
     .urdu-heading,
     .urdu-ui{
-        font-family:'JameelNoori', 'Inter', sans-serif !important;
+        font-family:'JameelNoori', serif !important;
         direction:rtl;
         font-weight:normal;
         letter-spacing:0;
@@ -510,15 +510,16 @@
             class="absolute top-full left-0 mt-4 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 overflow-hidden z-50">
             <a 	href="#lawyers"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition">
-				<i 	class="fas fa-user-tie text-secondary text-[13px]"></i>
-				<span data-en="Find Lawyer" data-ur="وکیل تلاش کریں">Find Lawyer</span>
+			<i 	class="fas fa-user-tie text-secondary text-[13px]"></i>
+				Find Lawyer
 			</a>
 
             <a 	href="javascript:void(0)"
 				onclick="openLawyerModal()"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
-				<i class="fas fa-user-plus text-secondary text-[13px]"></i>
-				<span data-en="Register As Lawyer" data-ur="بطور وکیل رجسٹر کریں">Register As Lawyer</span>
+
+			<i class="fas fa-user-plus text-secondary text-[13px]"></i>
+				Register As Lawyer
 			</a>
         </div>
 	</div>
@@ -1084,13 +1085,13 @@
     <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-2"
         data-en="Know the law before you need it"
         data-ur="ضرورت سے پہلے قانون کو جانیں">
-        Know The Law Before You Need It
+        Know the law before you need it
     </h2>
 
     <p class="text-gray-300"
         data-en="Explore important legal rights and laws of Pakistan"
         data-ur="پاکستان کے اہم قانونی حقوق اور قوانین کے بارے میں جانیں">
-        Explore Important Legal Rights & Laws Of Pakistan
+        Explore important legal rights and laws of Pakistan
     </p>
 </div>
 	
@@ -2799,7 +2800,6 @@
             
             // Load dynamic blogs on homepage
             loadHomeBlogs();
-            initCounters();
         });
         
         // Language Toggle
@@ -3005,18 +3005,479 @@
             }
             
             // Update all translatable elements
+                        // Update all translatable elements
             document.querySelectorAll('[data-en]').forEach(el => {
                 const translation = el.getAttribute('data-' + currentLanguage);
                 if (translation) {
                     el.textContent = translation;
                 }
             });
+            
+            const logoTagline = document.getElementById('logoTagline');
+            if (logoTagline) {
+                logoTagline.textContent = currentLanguage === 'en' ? 'قانونی مشاورت' : 'Legal Consultancy';
+            }
+            
+            updateLanguageToggleUI();
+            updateLanguageDirection();
+            
+            // Re-render dynamic blogs in current language
+            renderHomeBlogs();
+        }
+        
+        function updateLanguageDirection() {
+            const direction = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+            document.body.setAttribute('dir', direction);
+        }
+        
+        // Theme Toggle
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const icon = document.getElementById('themeIcon');
+            const mobileIcon = document.getElementById('mobileThemeIcon');
+            
+            if (isDarkTheme) {
+                document.body.classList.add('dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                mobileIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                document.body.classList.remove('dark');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                mobileIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+        
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
+        
+        
+
+// Slider Functions
+let currentSlide = 0;
+
+const slider = document.getElementById('heroSlider');
+const slides = document.querySelectorAll('#heroSlider > div');
+const sliderElements = document.querySelectorAll('.slider-dot');
+
+const totalSlides = slides.length;
+
+// Go To Specific Slide
+function goToSlide(index){
+
+    currentSlide = index;
+
+    updateSlider();
+
+}
+
+// Previous Slide
+function prevSlide(){
+
+    currentSlide--;
+
+    if(currentSlide < 0){
+        currentSlide = totalSlides - 1;
+    }
+
+    updateSlider();
+
+}
+
+// Next Slide
+function nextSlide(){
+
+    currentSlide++;
+
+    if(currentSlide >= totalSlides){
+        currentSlide = 0;
+    }
+
+    updateSlider();
+
+}
+
+// Update Slider Position
+function updateSlider(){
+
+    slides.forEach((slide, i) => {
+        if(i === currentSlide) {
+            slide.style.opacity = 1;
+            slide.style.zIndex = 2;
+            slide.style.pointerEvents = 'auto';
+        } else {
+            slide.style.opacity = 0;
+            slide.style.zIndex = 1;
+            slide.style.pointerEvents = 'none';
+        }
+    });
+
+    sliderElements.forEach((dot, i) => {
+
+        dot.classList.toggle('bg-secondary', i === currentSlide);
+        dot.classList.toggle('bg-white/50', i !== currentSlide);
+
+    });
+
+}
+
+// Initialize first slide
+updateSlider();
+
+// Auto Slide
+setInterval(nextSlide, 5000);
+        
+        // Form Steps
+        function nextStep(step) {
+            document.getElementById(`step${step}`).classList.add('hidden');
+            document.getElementById(`step${step + 1}`).classList.remove('hidden');
+            currentStep = step + 1;
+            updateProgress();
+        }
+        
+        function prevStep(step) {
+            document.getElementById(`step${step}`).classList.add('hidden');
+            document.getElementById(`step${step - 1}`).classList.remove('hidden');
+            currentStep = step - 1;
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const percent = (currentStep / 3) * 100;
+            document.getElementById('progressBar').style.width = `${percent}%`;
+            document.getElementById('progressPercent').textContent = `${Math.round(percent)}%`;
+        }
+        
+        // File Upload
+        function handleFileUpload(event) {
+            handleFiles(event.target.files);
+        }
+        
+        function handleFiles(files) {
+            const container = document.getElementById('uploadedFiles');
+            
+            Array.from(files).forEach(file => {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('File size must be less than 10MB');
+                    return;
+                }
+                
+                uploadedFiles.push(file);
+                
+                const fileElement = document.createElement('div');
+                fileElement.className = 'flex items-center justify-between bg-gray-100 p-3 rounded-xl';
+                fileElement.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-file text-primary"></i>
+                        <span class="text-sm text-gray-700">${file.name}</span>
+                    </div>
+                    <button type="button" onclick="removeFile(this, '${file.name}')" class="text-red-500 hover:text-red-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                container.appendChild(fileElement);
+            });
+        }
+        
+        function removeFile(element, filename) {
+            element.parentElement.remove();
+            uploadedFiles = uploadedFiles.filter(f => f.name !== filename);
+        }
+        
+        // Voice Input
+        function startVoiceInput() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('Voice input not supported in your browser. Please use Chrome.');
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = currentLanguage === 'en' ? 'en-US' : 'ur-PK';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            recognition.onstart = () => {
+                isRecording = true;
+                document.getElementById('voiceBtn').classList.add('bg-red-500', 'text-white');
+                document.getElementById('voiceBtn').innerHTML = '<i class="fas fa-stop"></i>';
+            };
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                const textarea = document.getElementById('caseDescription');
+                textarea.value += (textarea.value ? ' ' : '') + transcript;
+            };
+            
+            recognition.onend = () => {
+                isRecording = false;
+                document.getElementById('voiceBtn').classList.remove('bg-red-500', 'text-white');
+                document.getElementById('voiceBtn').innerHTML = '<i class="fas fa-microphone"></i>';
+            };
+            
+            recognition.onerror = (event) => {
+                console.log('Speech recognition error:', event.error);
+                isRecording = false;
+            };
+            
+            recognition.start();
+        }
+        
+        // Form Submissions
+        async function handleClientSubmit(e) {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting...';
+            
+            try {
+                const clientName = document.getElementById('clientName').value.trim();
+                const clientCNIC = document.getElementById('clientCNIC').value.trim();
+                const clientPhone = document.getElementById('clientPhone').value.trim();
+                const clientEmail = document.getElementById('clientEmail').value.trim() || null;
+                const clientCity = document.getElementById('clientCity').value;
+                const clientCaseType = document.getElementById('clientCaseType').value;
+                const caseDescription = document.getElementById('caseDescription').value.trim();
+                
+                const priorityRadio = document.querySelector('input[name="priority"]:checked');
+                const casePriority = priorityRadio ? priorityRadio.value : 'medium';
+                
+                // Upload files to case-documents
+                let attachmentUrls = [];
+                const activeSupabase = (typeof supabase !== 'undefined') ? supabase : (typeof supabaseClient !== 'undefined' ? supabaseClient : null);
+                
+                if (activeSupabase && uploadedFiles.length > 0) {
+                    for (const file of uploadedFiles) {
+                        const fileExt = file.name.split('.').pop();
+                        const fileName = `${Math.random().toString(36).substring(2, 15)}-${Date.now()}.${fileExt}`;
+                        const filePath = `${fileName}`;
+                        
+                        const { error: uploadError } = await activeSupabase.storage
+                            .from('case-documents')
+                            .upload(filePath, file);
+                            
+                        if (uploadError) {
+                            console.error("Error uploading file:", file.name, uploadError);
+                            continue;
+                        }
+                        
+                        const { data } = activeSupabase.storage.from('case-documents').getPublicUrl(filePath);
+                        if (data && data.publicUrl) {
+                            attachmentUrls.push(data.publicUrl);
+                        }
+                    }
+                }
+                
+                const attachmentString = attachmentUrls.join(',');
+                
+                // Insert case in cases table
+                const payload = {
+                    client_name: clientName,
+                    client_phone: clientPhone,
+                    client_email: clientEmail,
+                    client_nic: clientCNIC,
+                    case_type: clientCaseType,
+                    case_description: caseDescription,
+                    case_priority: casePriority,
+                    attachment: attachmentString || null,
+                    status: 'Pending',
+                    remarks: '',
+                    project: 'Qanooni-Mushawarat'
+                };
+                
+                let refNum = 'LE-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+                
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('cases')
+                        .insert([payload])
+                        .select();
+                        
+                    if (error) throw error;
+                    
+                    if (data && data[0]) {
+                        refNum = 'LE-' + new Date().getFullYear() + '-' + String(data[0].id).padStart(5, '0');
+                    }
+                } else {
+                    console.warn("Supabase client not initialized. Storing in local storage fallback.");
+                    let localCases = JSON.parse(localStorage.getItem('submitted_cases') || '[]');
+                    payload.id = Date.now();
+                    payload.created_at = new Date().toISOString();
+                    localCases.push(payload);
+                    localStorage.setItem('submitted_cases', JSON.stringify(localCases));
+                }
+                
+                document.getElementById('refNumber').textContent = refNum;
+                
+                // Show success message
+                document.getElementById('clientForm').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+                
+            } catch (err) {
+                console.error("Error submitting case:", err);
+                alert("Failed to submit your case: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }
+        
+        function handleLawyerSubmit(e) {
+            e.preventDefault();
+            alert('Registration submitted successfully! Your profile will be reviewed and published after admin approval.');
+            e.target.reset();
+        }
+        
+        function resetForm() {
+            document.getElementById('clientForm').classList.remove('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('clientForm').reset();
+            currentStep = 1;
+            updateProgress();
+            document.querySelectorAll('.step').forEach((step, i) => {
+                step.classList.toggle('hidden', i !== 0);
+            });
+            uploadedFiles = [];
+            document.getElementById('uploadedFiles').innerHTML = '';
+        }
+		
+        function toggleAdvancedFilters() {
+            const sect = document.getElementById('advancedFiltersSection');
+            const btnText = document.getElementById('advFilterBtnText');
+            if (sect.classList.contains('hidden')) {
+                sect.classList.remove('hidden');
+                btnText.textContent = 'Hide Advanced Filters';
+            } else {
+                sect.classList.add('hidden');
+                btnText.textContent = 'Show Advanced Filters';
+            }
         }
 
+        function resetAllFilters() {
+            document.getElementById('searchName').value = '';
+            document.getElementById('searchSpecialization').value = 'all';
+            document.getElementById('searchCity').value = 'all';
+            document.getElementById('searchCourtLevel').value = 'all';
+            document.getElementById('searchExperience').value = 'all';
+            document.getElementById('searchLanguage').value = 'all';
+            document.getElementById('searchGender').value = 'all';
+            document.getElementById('consultOnline').checked = true;
+            document.getElementById('consultPhysical').checked = true;
+            document.getElementById('consultPhone').checked = true;
+            document.getElementById('consultVideo').checked = true;
+            filterLawyers();
+        }
+
+        function filterLawyers() {
+            const nameVal = document.getElementById('searchName').value.toLowerCase().trim();
+            const specVal = document.getElementById('searchSpecialization').value;
+            const cityVal = document.getElementById('searchCity').value;
+            const courtVal = document.getElementById('searchCourtLevel').value;
+            const expRange = document.getElementById('searchExperience').value;
+            const langVal = document.getElementById('searchLanguage').value;
+            const genderVal = document.getElementById('searchGender').value;
+            
+            const consultOnline = document.getElementById('consultOnline').checked;
+            const consultPhysical = document.getElementById('consultPhysical').checked;
+            const consultPhone = document.getElementById('consultPhone').checked;
+            const consultVideo = document.getElementById('consultVideo').checked;
+
+            const lawyerCards = document.querySelectorAll('.lawyer-card');
+
+            lawyerCards.forEach(card => {
+                const name = (card.getAttribute('data-name') || '').toLowerCase();
+                const spec = card.getAttribute('data-category') || '';
+                const city = card.getAttribute('data-city') || '';
+                const court = card.getAttribute('data-court') || '';
+                const exp = parseInt(card.getAttribute('data-experience') || '0', 10);
+                const langs = (card.getAttribute('data-languages') || '').split(',');
+                const consultTypes = (card.getAttribute('data-consultation') || '').split(',');
+                const gender = card.getAttribute('data-gender') || '';
+
+                // Name match
+                const matchName = !nameVal || name.includes(nameVal);
+
+                // Specialization match
+                const matchSpec = specVal === 'all' || spec === specVal;
+
+                // City match
+                const matchCity = cityVal === 'all' || city === cityVal;
+
+                // Court Level match
+                const matchCourt = courtVal === 'all' || court === courtVal;
+
+                // Experience range match
+                let matchExp = true;
+                if (expRange !== 'all') {
+                    if (expRange === '1-3') matchExp = exp >= 1 && exp <= 3;
+                    else if (expRange === '3-5') matchExp = exp >= 3 && exp <= 5;
+                    else if (expRange === '5-10') matchExp = exp >= 5 && exp <= 10;
+                    else if (expRange === '10+') matchExp = exp >= 10;
+                    else if (expRange === '15+') matchExp = exp >= 15;
+                }
+
+                // Language match
+                const matchLang = langVal === 'all' || langs.includes(langVal);
+
+                // Gender match
+                const matchGender = genderVal === 'all' || gender === genderVal;
+
+                // Consultation match
+                let matchConsult = false;
+                if (consultOnline && consultTypes.includes('online')) matchConsult = true;
+                if (consultPhysical && consultTypes.includes('physical')) matchConsult = true;
+                if (consultPhone && consultTypes.includes('phone')) matchConsult = true;
+                if (consultVideo && consultTypes.includes('video')) matchConsult = true;
+
+                if (matchName && matchSpec && matchCity && matchCourt && matchExp && matchLang && matchGender && matchConsult) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+		<!-- MODAL SCRIPT -->
+			function openLawyerModal() {
+				document.getElementById('lawyerModal').classList.remove('hidden');
+				document.getElementById('lawyerModal').classList.add('flex');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeLawyerModal() {
+				document.getElementById('lawyerModal').classList.add('hidden');
+				document.getElementById('lawyerModal').classList.remove('flex');
+				document.body.style.overflow = 'auto';
+			}
+
+		// Close on outside click
+			document.getElementById('lawyerModal').addEventListener('click', function(e) {
+				if (e.target === this) {
+					closeLawyerModal();
+				}
+		});
+        
+        // FAQ
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            answer.classList.toggle('hidden');
+            icon.classList.toggle('fa-plus');
+            icon.classList.toggle('fa-minus');
+        }
+        
         // Counters
         function initCounters() {
             const counters = document.querySelectorAll('.counter');
-            if (counters.length === 0) return;
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -3941,19 +4402,6 @@ async function handleRegister() {
             }
 
             console.log("[DEBUG] Rendering total slides inside marquee container:", renderSet.length);
-            
-            // Temporary debug alert
-            alert(`[Rights Slider Debug] Loaded ${slides.length} slides from DB/localStorage. Rendered ${renderSet.length} cards. activeSupabase: ${activeSupabase !== null}`);
-
-            // Add a temporary visible debug text to help the user diagnose the load state directly on screen
-            let debugEl = document.getElementById('rightsSliderDebug');
-            if (!debugEl) {
-                debugEl = document.createElement('p');
-                debugEl.id = 'rightsSliderDebug';
-                debugEl.className = 'text-center text-[10px] text-white/50 mt-4';
-                container.parentElement.appendChild(debugEl);
-            }
-            debugEl.textContent = `Rights Slider: Loaded ${slides.length} slides from DB/localStorage. Rendered ${renderSet.length} cards.`;
 
             renderSet.forEach(slide => {
                 const title = slide.title || '';
