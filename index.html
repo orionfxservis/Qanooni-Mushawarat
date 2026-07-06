@@ -2899,7 +2899,7 @@
                         slug: "how-to-verify-real-estate-property-titles",
                         category: "Property Law ||| پراپرٹی لاء",
                         short_description: "Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment. ||| سرمایہ کاری کرنے سے پہلے ملکیت کے ریکارڈ کو صحیح طریقے سے چیک کرنے اور پراپرٹی کے ٹائٹل کی تصدیق کرنے کا طریقہ سیکھ کر پراپرٹی کے فراڈ سے بچیں۔",
-                        image: "./images/bg-slide-show/property.jpg",
+                        image: "./images/bg-slide-show/property-law.jpg",
                         date: "05-Oct-26",
                         author: "Property Expert"
                     }
@@ -3012,111 +3012,6 @@
                     el.textContent = translation;
                 }
             });
-            
-            const logoTagline = document.getElementById('logoTagline');
-            if (logoTagline) {
-                logoTagline.textContent = currentLanguage === 'en' ? 'قانونی مشاورت' : 'Legal Consultancy';
-            }
-            
-            updateLanguageToggleUI();
-            updateLanguageDirection();
-            
-            // Re-render dynamic blogs in current language
-            renderHomeBlogs();
-        }
-        
-        function updateLanguageDirection() {
-            const direction = currentLanguage === 'ur' ? 'rtl' : 'ltr';
-            document.body.setAttribute('dir', direction);
-        }
-        
-        // Theme Toggle
-        function toggleTheme() {
-            isDarkTheme = !isDarkTheme;
-            const icon = document.getElementById('themeIcon');
-            const mobileIcon = document.getElementById('mobileThemeIcon');
-            
-            if (isDarkTheme) {
-                document.body.classList.add('dark');
-                icon.classList.replace('fa-moon', 'fa-sun');
-                mobileIcon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                document.body.classList.remove('dark');
-                icon.classList.replace('fa-sun', 'fa-moon');
-                mobileIcon.classList.replace('fa-sun', 'fa-moon');
-            }
-        }
-        
-        // Mobile Menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const icon = document.getElementById('menuIcon');
-            
-            menu.classList.toggle('hidden');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        }
-        
-        
-
-// Slider Functions
-let currentSlide = 0;
-
-const slider = document.getElementById('heroSlider');
-const slides = document.querySelectorAll('#heroSlider > div');
-const sliderElements = document.querySelectorAll('.slider-dot');
-
-const totalSlides = slides.length;
-
-// Go To Specific Slide
-function goToSlide(index){
-
-    currentSlide = index;
-
-    updateSlider();
-
-}
-
-// Previous Slide
-function prevSlide(){
-
-    currentSlide--;
-
-    if(currentSlide < 0){
-        currentSlide = totalSlides - 1;
-    }
-
-    updateSlider();
-
-}
-
-// Next Slide
-function nextSlide(){
-
-    currentSlide++;
-
-    if(currentSlide >= totalSlides){
-        currentSlide = 0;
-    }
-
-    updateSlider();
-
-}
-
-// Update Slider Position
-function updateSlider(){
-
-    slides.forEach((slide, i) => {
-        if(i === currentSlide) {
-            slide.style.opacity = 1;
-            slide.style.zIndex = 2;
-            slide.style.pointerEvents = 'auto';
-        } else {
-            slide.style.opacity = 0;
-            slide.style.zIndex = 1;
-            slide.style.pointerEvents = 'none';
-        }
-    });
 
     sliderElements.forEach((dot, i) => {
 
