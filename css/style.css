@@ -16,7 +16,7 @@
 
 @font-face{
     font-family:'JameelNoori';
-    src:url('./fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    src: local('Jameel Noori Nastaleeq'), local('JameelNoori'), url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
 }
@@ -89,7 +89,7 @@ body{
 
 @font-face{
     font-family:'JameelNoori';
-    src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    src: local('Jameel Noori Nastaleeq'), local('JameelNoori'), url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
 }
@@ -99,7 +99,7 @@ body{
 .urdu-text,
 .urdu-heading,
 .urdu-ui{
-    font-family:'JameelNoori', serif !important;
+    font-family:'JameelNoori', 'Inter', sans-serif !important;
     direction:rtl;
     font-weight:normal;
     letter-spacing:0;
@@ -622,4 +622,30 @@ body{
         font-size:1rem;
     }
 
+}
+
+.tab-btn.active{
+    background: linear-gradient(135deg,#c9a227,#e0c15c);
+    color:#1e3a5f;
+    font-weight:700;
+    box-shadow:0 8px 20px rgba(201,162,39,.25);
+}
+
+/* =========================
+   GOTO TOP BUTTON
+========================= */
+
+.floating-btn{
+    position:fixed;
+    bottom:30px;
+    right:20px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:12px;
+    z-index:999;
+}
+
+body[dir="rtl"], body[dir="rtl"] * {
+    font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
 }
