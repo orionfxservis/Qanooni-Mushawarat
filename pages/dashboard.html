@@ -824,20 +824,16 @@
                     <form id="addRightsForm" class="space-y-4" onsubmit="saveRightsSlide(event)">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Slide Title (English) <span class="text-red-500">*</span></label>
-                                <input type="text" id="rightsTitleEn" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. Right to Fair Trial">
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Slide Title <span class="text-red-500">*</span></label>
+                                <input type="text" id="rightsTitle" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. Right to Fair Trial">
                             </div>
-                            <div dir="rtl">
-                                <label class="block text-[11px] font-semibold text-gray-500 mb-1" dir="ltr">Slide Title (Urdu) <span class="text-red-500">*</span></label>
-                                <input type="text" id="rightsTitleUr" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition font-urdu text-right" placeholder="سلائیڈ کا عنوان یہاں لکھیں">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[11px] font-semibold text-gray-500 mb-1">Image URL</label>
                                 <input type="url" id="rightsImageUrl" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="https://example.com/image.jpg">
                             </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4">
                             <div>
                                 <label class="block text-[11px] font-semibold text-gray-500 mb-1">Or Upload Image File</label>
                                 <input type="file" id="rightsImageFile" accept="image/*" class="w-full text-xs text-gray-500 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-primary file:text-white hover:file:bg-accent file:cursor-pointer transition">
@@ -3715,24 +3711,17 @@
             }
 
             allRightsSlides.forEach(slide => {
-                let titleEn = slide.title || '';
-                let titleUr = '';
-                if (titleEn.includes(' ||| ')) {
-                    const parts = titleEn.split(' ||| ');
-                    titleEn = parts[0];
-                    titleUr = parts[1];
-                }
+                const title = slide.title || '';
 
                 const div = document.createElement('div');
                 div.className = 'bg-white p-3 rounded-xl border border-gray-250 shadow-sm flex flex-col justify-between';
                 div.innerHTML = `
                     <div class="space-y-2">
                         <div class="h-28 overflow-hidden rounded-lg bg-gray-100 flex items-center justify-center">
-                            <img src="${slide.image_url}" class="max-h-full max-w-full object-contain" alt="${titleEn}">
+                            <img src="${slide.image_url}" class="max-h-full max-w-full object-contain" alt="${title}">
                         </div>
                         <div>
-                            <div class="font-bold text-xs text-primary truncate">${titleEn}</div>
-                            <div class="text-[10px] text-gray-400 font-urdu truncate" dir="rtl">${titleUr}</div>
+                            <div class="font-bold text-xs text-primary truncate">${title}</div>
                         </div>
                     </div>
                     <div class="mt-3 pt-2 border-t border-gray-100 flex justify-end">
@@ -3747,8 +3736,7 @@
         async function saveRightsSlide(event) {
             if (event) event.preventDefault();
 
-            const titleEn = document.getElementById('rightsTitleEn').value.trim();
-            const titleUr = document.getElementById('rightsTitleUr').value.trim();
+            const title = document.getElementById('rightsTitle').value.trim();
             const imageUrlInput = document.getElementById('rightsImageUrl');
             const fileInput = document.getElementById('rightsImageFile');
             const submitBtn = document.getElementById('btnSaveRights');
@@ -3765,7 +3753,7 @@
             submitBtn.innerHTML = "Saving...";
 
             const payload = {
-                title: titleEn + ' ||| ' + titleUr,
+                title: title,
                 project_name: 'Qanooni-Mushawarat'
             };
 
