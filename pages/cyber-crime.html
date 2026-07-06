@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -34,10 +34,12 @@
         }
         @font-face {
             font-family: 'JameelNoori';
-            src: url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+            src: local('Jameel Noori Nastaleeq'), local('JameelNoori'), url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
         .urdu-text, .urdu-heading, .urdu-ui {
-            font-family: 'JameelNoori', serif !important;
+            font-family: 'JameelNoori', 'Inter', sans-serif !important;
             direction: rtl;
         }
         .urdu-text {
@@ -73,6 +75,10 @@
         .progress-bar {
             background: linear-gradient(90deg, #1e3a5f, #c9a227);
         }
+    
+        body[dir="rtl"], body[dir="rtl"] * {
+            font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
+        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col">
@@ -81,7 +87,7 @@
     <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2">
-                <img src="../images/logo/logo-02.png" alt="Logo" class="h-8 md:h-10 w-auto object-contain">
+                <img src="../images/logo/logo-02.png" alt="Logo" class="h-[48px] md:h-[60px] w-auto object-contain relative top-[5px]">
             </a>
             <div class="flex items-center gap-4">
                 <a href="../index.html" class="text-white/80 hover:text-white transition font-semibold text-sm" data-en="Back to Home" data-ur="ہوم پر واپس جائیں">Back to Home</a>
@@ -898,3 +904,6 @@
     </script>
 </body>
 </html>
+
+
+
