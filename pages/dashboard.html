@@ -65,7 +65,7 @@
     <!-- ADMIN INFO -->
     <div class="px-4 py-4 border-b border-white/10">
         <div class="flex items-center gap-3">
-            <div <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">
+            <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">
                 A
             </div>
 
@@ -1794,6 +1794,13 @@
 
             if (activeSupabase) {
                 try {
+                    // Get the lawyer's details from local storage if they are local-only
+                    let localLawyer = null;
+                    try {
+                        const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+                        localLawyer = localLawyers.find(l => l.license === license);
+                    } catch (e) {}
+
                     // Get the lawyer's email to sync to users table using correct column license_no
                     let lawyerEmail = "";
                     const { data: emailData } = await activeSupabase
@@ -1802,39 +1809,57 @@
                         .eq('license_no', license);
                     if (emailData && emailData.length > 0) {
                         lawyerEmail = emailData[0].email;
+                    } else if (localLawyer) {
+                        lawyerEmail = localLawyer.email;
                     }
 
                     const dbUpdatedData = {
                         full_name: newName,
                         specialization: newSpec,
                         city: newCity,
-                        status: newStatus
+                        status: newStatus,
+                        project: 'Qanooni-Mushawarat'
                     };
 
-                    const { error } = await activeSupabase
-                        .from('lawyer_registration')
-                        .update(dbUpdatedData)
-                        .eq('license_no', license);
-                    if (error) throw error;
+                    if (!emailData || emailData.length === 0) {
+                        // Insert new record into lawyer_registration
+                        dbUpdatedData.license_no = license;
+                        dbUpdatedData.email = lawyerEmail;
+                        dbUpdatedData.phone = localLawyer ? localLawyer.phone : '';
+                        dbUpdatedData.created_at = new Date().toISOString();
+                        const { error } = await activeSupabase
+                            .from('lawyer_registration')
+                            .insert([dbUpdatedData]);
+                        if (error) throw error;
+                    } else {
+                        // Update existing record in lawyer_registration
+                        const { error } = await activeSupabase
+                            .from('lawyer_registration')
+                            .update(dbUpdatedData)
+                            .eq('license_no', license);
+                        if (error) throw error;
+                    }
 
                     // Sync to users table if email is found (schema-safe)
                     if (lawyerEmail) {
                         const userPayload = {
                             full_name: newName,
-                            specialization: newSpec,
+                            email: lawyerEmail,
+                            phone: localLawyer ? localLawyer.phone : '',
+                            profession: 'Lawyer',
                             city: newCity,
+                            specialization: newSpec,
                             account_status: (newStatus === 'Approved' || newStatus === 'Verified Lawyer') ? 'active' : 'pending',
                             user_role: 'lawyer',
-                            role: 'lawyer'
+                            role: 'lawyer',
+                            project: 'Qanooni-Mushawarat'
                         };
                         await activeSupabase
                             .from('users')
-                            .update(userPayload)
-                            .eq('email', lawyerEmail)
-                            .eq('project', 'Qanooni-Mushawarat');
+                            .upsert([userPayload], { onConflict: 'email' });
                     }
                 } catch (e) {
-                    console.error("Failed to edit lawyer in Supabase:", e);
+                    console.error("Failed to edit/sync lawyer in Supabase:", e);
                 }
             }
 
@@ -2717,6 +2742,27 @@
                 // Hide Delete Case button
                 const deleteBtn = document.getElementById('modalDeleteBtn');
                 if (deleteBtn) deleteBtn.classList.add('hidden');
+
+                // Hide admin-only dashboard elements (stats & quick actions)
+                const statsCards = document.querySelector('#tab-dashboard > div.grid');
+                if (statsCards) statsCards.classList.add('hidden');
+
+                const quickActions = document.querySelector('#tab-dashboard > div.bg-[#eaeef3]');
+                if (quickActions) quickActions.classList.add('hidden');
+
+                const dashboardTab = document.getElementById('tab-dashboard');
+                if (dashboardTab) {
+                    if (!document.getElementById('lawyer-welcome-msg')) {
+                        const welcomeDiv = document.createElement('div');
+                        welcomeDiv.id = 'lawyer-welcome-msg';
+                        welcomeDiv.className = 'bg-white rounded-2xl p-8 shadow-sm border border-gray-200/80 space-y-4';
+                        welcomeDiv.innerHTML = `
+                            <h3 class="text-xl font-bold text-primary">Welcome, Advocate ${currentUser.full_name || 'Lawyer'}</h3>
+                            <p class="text-gray-500 text-sm">Welcome to your Qanooni Mushawarat Lawyer Dashboard. Use the sidebar to manage your profile, view incoming cases forwarded by the Administrator, manage your appointments, messages, and more.</p>
+                        `;
+                        dashboardTab.insertBefore(welcomeDiv, dashboardTab.firstChild);
+                    }
+                }
             }
         }
 
