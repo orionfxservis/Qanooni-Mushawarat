@@ -52,11 +52,11 @@
 
         <div class="ml-3">
             <h1 class="text-[14px] font-bold leading-none">
-                LegalEase
+                Qanooni
             </h1>
 
             <p class="text-[9px] text-white/60 mt-1">
-                Admin Dashboard
+                Mushawarat
             </p>
         </div>
 
@@ -223,7 +223,7 @@
         <!-- Top Header -->
         <header class="h-20 bg-white shadow-sm flex items-center justify-between px-8 shrink-0">
             <h2 id="pageTitle" class="text-2xl font-bold text-primary">Dashboard Overview</h2>
-            <div class="flex items-center gap-4">
+            <div id="headerProfileWidget" class="flex items-center gap-4">
                 <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">A</div>
                 <span class="font-semibold text-gray-700">Admin</span>
             </div>
@@ -1541,9 +1541,16 @@
                 'lawyers-pannel': 'Lawyers Pannel',
                 'testimonials': 'Testimonials',
                 'subscription': 'Subscription',
-                'blogs': 'Manage Blogs'
+                'blogs': 'Manage Blogs',
+                'lawyer-profile': (currentUser && currentUser.full_name) ? (currentUser.full_name + "'s Profile") : "Lawyer's Profile",
+                'appointments': 'My Appointments',
+                'messages': 'Messages Inbox',
+                'payments': 'Payment History',
+                'documents': 'Legal Documents',
+                'notifications': 'Notifications Hub',
+                'settings': 'Account Settings'
             };
-            document.getElementById('pageTitle').textContent = titles[tabId] || 'Manage Blogs';
+            document.getElementById('pageTitle').textContent = titles[tabId] || tabId.replace('-', ' ').toUpperCase();
             
             if(tabId === 'lawyers' || tabId === 'dashboard') loadLawyers();
             if(tabId === 'ai-support' || tabId === 'dashboard') fetchAiSupportChats();
@@ -2796,6 +2803,10 @@
                         dashboardTab.insertBefore(welcomeDiv, dashboardTab.firstChild);
                     }
                 }
+
+                // Hide header profile widget for lawyers
+                const headerWidget = document.getElementById('headerProfileWidget');
+                if (headerWidget) headerWidget.classList.add('hidden');
             }
         }
 
