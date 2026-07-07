@@ -65,16 +65,16 @@
     <!-- ADMIN INFO -->
     <div class="px-4 py-4 border-b border-white/10">
         <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">
+            <div id="sidebarUserAvatar" class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">
                 A
             </div>
 
             <div>
-                <h3 class="text-[12px] font-semibold">
+                <h3 id="sidebarUserName" class="text-[12px] font-semibold">
                     Administrator
                 </h3>
 
-                <p class="text-[9px] text-green-300">
+                <p id="sidebarUserRole" class="text-[9px] text-green-300">
                     ● Online
                 </p>
             </div>
@@ -1949,7 +1949,7 @@
                         .update(updatedData)
                         .eq('license_no', license);
 
-                    // Add user to users table as a Lawyer with Active status (schema-safe)
+                    // Add/Update user in users table as a Lawyer with Active status (schema-safe check)
                     const fullPayload = {
                         full_name: lawyerName,
                         email: lawyer.email,
@@ -1964,7 +1964,25 @@
                         project: 'Qanooni-Mushawarat'
                     };
 
-                    await activeSupabase.from('users').upsert([fullPayload], { onConflict: 'email' });
+                    const { data: userCheck } = await activeSupabase
+                        .from('users')
+                        .select('email')
+                        .eq('email', lawyer.email)
+                        .eq('project', 'Qanooni-Mushawarat');
+
+                    if (userCheck && userCheck.length > 0) {
+                        const { error } = await activeSupabase
+                            .from('users')
+                            .update(fullPayload)
+                            .eq('email', lawyer.email)
+                            .eq('project', 'Qanooni-Mushawarat');
+                        if (error) throw error;
+                    } else {
+                        const { error } = await activeSupabase
+                            .from('users')
+                            .insert([fullPayload]);
+                        if (error) throw error;
+                    }
                 } catch (e) {
                     console.error("Failed to update status in Supabase:", e);
                 }
@@ -2619,11 +2637,13 @@
                 const adminAvatar = document.querySelector('header div div.bg-primary');
                 if (adminAvatar) adminAvatar.textContent = (currentUser.full_name || 'L').charAt(0).toUpperCase();
 
-                // Sidebar changes
-                const adminInfoText = document.querySelector('aside div p.text-[9px]');
+                 // Sidebar changes (using safe unique IDs to avoid logo title collision)
+                const adminInfoText = document.getElementById('sidebarUserRole');
                 if (adminInfoText) adminInfoText.textContent = 'Lawyer Dashboard';
-                const adminInfoName = document.querySelector('aside div h3');
+                const adminInfoName = document.getElementById('sidebarUserName');
                 if (adminInfoName) adminInfoName.textContent = currentUser.full_name || 'Lawyer';
+                const sidebarAvatar = document.getElementById('sidebarUserAvatar');
+                if (sidebarAvatar) sidebarAvatar.textContent = (currentUser.full_name || 'L').charAt(0).toUpperCase();
 
                 // Change Sidebar Menu dynamically to match Lawyer Dashboard items:
                 // Dashboard, My Profile, Incoming Cases, Appointments, Messages, Payments, Documents, Notifications, Settings + Assigned Tasks
