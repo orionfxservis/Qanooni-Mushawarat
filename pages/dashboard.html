@@ -2787,7 +2787,7 @@
                 const statsCards = document.querySelector('#tab-dashboard > div.grid');
                 if (statsCards) statsCards.classList.add('hidden');
 
-                const quickActions = document.querySelector('#tab-dashboard > div.bg-[#eaeef3]');
+                const quickActions = Array.from(document.querySelectorAll('#tab-dashboard > div')).find(el => el.classList.contains('bg-[#eaeef3]'));
                 if (quickActions) quickActions.classList.add('hidden');
 
                 const dashboardTab = document.getElementById('tab-dashboard');
