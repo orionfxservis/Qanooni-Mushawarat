@@ -4258,7 +4258,7 @@ async function handleLogin() {
             // 2. Query the 'lawyer_registration' table (matching email OR user_id)
             const { data: lawyers, error: lawyerError } = await supabase
                 .from('lawyer_registration')
-                .select('status, name, specialization, email, user_id')
+                .select('status, name, specialization, email, user_id, assigned_tasks')
                 .or(`email.eq."${inputVal}",user_id.eq."${inputVal}"`)
                 .eq('project', 'Qanooni-Mushawarat');
 
@@ -4269,7 +4269,8 @@ async function handleLogin() {
                     role: 'lawyer',
                     full_name: lawyer.name,
                     profession: 'Lawyer',
-                    email: lawyer.email
+                    email: lawyer.email,
+                    assigned_tasks: lawyer.assigned_tasks || ''
                 };
             }
         }
@@ -4288,7 +4289,8 @@ async function handleLogin() {
             email: userData.email,
             role: userData.role || 'user',
             full_name: userData.full_name || 'User',
-            profession: userData.profession || 'Individual'
+            profession: userData.profession || 'Individual',
+            assigned_tasks: userData.assigned_tasks || ''
         }));
 
         if (userData.role === 'admin' || userData.role === 'lawyer' || userData.profession === 'Lawyer') {
@@ -4393,15 +4395,17 @@ async function handleRegister() {
                         console.error("[DEBUG] Supabase query error:", error);
                         throw error;
                     }
-                    slides = data || [];
+                    slides = (data || []).filter(slide => !slide.status || slide.status === 'Live');
                     console.log("[DEBUG] Query success. Slides count:", slides.length);
                 } else {
                     console.log("[DEBUG] Supabase not active. Loading from localStorage...");
                     slides = JSON.parse(localStorage.getItem('rights_slides') || '[]');
+                    slides = slides.filter(slide => !slide.status || slide.status === 'Live');
                 }
             } catch (err) {
                 console.error("[DEBUG] Failed to fetch slides, falling back:", err);
                 slides = JSON.parse(localStorage.getItem('rights_slides') || '[]');
+                slides = slides.filter(slide => !slide.status || slide.status === 'Live');
             }
 
             // Fallback default slides if empty
