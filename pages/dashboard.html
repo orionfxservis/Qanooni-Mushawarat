@@ -1676,11 +1676,11 @@
 
                     tr.innerHTML = `
                         <td class="py-4 font-medium text-gray-800 px-2">
-                            <div class="flex items-center flex-wrap gap-1">${l.name}${localBadge}</div>
+                            <div class="flex items-center flex-wrap gap-1">${l.name || l.full_name || ''}${localBadge}</div>
                             <div class="text-[10px] text-gray-400 mt-0.5">${l.email_verified ? '✅ Email Verified' : '❌ Email Unverified'}</div>
                         </td>
                         <td class="py-4 text-gray-600 font-mono text-sm px-2">
-                            <div>${l.license}</div>
+                            <div>${l.license || l.license_no || ''}</div>
                             <div class="text-[10px] text-gray-400 mt-0.5">${l.phone_verified ? '✅ Phone Verified' : '❌ Phone Unverified'}</div>
                         </td>
                         <td class="py-4 text-gray-500 px-2">${l.specialization || 'N/A'}</td>
@@ -1691,12 +1691,12 @@
                         <td class="py-4 px-2">${statusBadge}</td>
                         <td class="py-4 text-right px-2">
                             <div class="flex items-center justify-end gap-1.5 flex-wrap">
-                                <button onclick="editLawyerRegistration('${l.license}')" class="px-2 py-1 bg-blue-600 text-white rounded text-[10px] font-bold hover:bg-blue-700 transition shadow-sm">Edit</button>
-                                <button onclick="approveLawyerApplication('${l.license}')" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm">Approve</button>
-                                <button onclick="onHoldLawyerRegistration('${l.license}')" class="px-2 py-1 bg-amber-500 text-white rounded text-[10px] font-bold hover:bg-amber-600 transition shadow-sm">Hold</button>
-                                <button onclick="rejectLawyerApplication('${l.license}')" class="px-2 py-1 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-650 transition shadow-sm">Reject</button>
-                                <button onclick="requestMoreInfo('${l.license}')" class="px-2 py-1 bg-amber-600 text-white rounded text-[10px] font-bold hover:bg-amber-700 transition shadow-sm">Request Info</button>
-                                <button onclick="deleteLawyerRegistration('${l.id || l.license}')" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
+                                <button onclick="editLawyerRegistration('${l.license || l.license_no}')" class="px-2 py-1 bg-blue-600 text-white rounded text-[10px] font-bold hover:bg-blue-700 transition shadow-sm">Edit</button>
+                                <button onclick="approveLawyerApplication('${l.license || l.license_no}')" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm">Approve</button>
+                                <button onclick="onHoldLawyerRegistration('${l.license || l.license_no}')" class="px-2 py-1 bg-amber-500 text-white rounded text-[10px] font-bold hover:bg-amber-600 transition shadow-sm">Hold</button>
+                                <button onclick="rejectLawyerApplication('${l.license || l.license_no}')" class="px-2 py-1 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-650 transition shadow-sm">Reject</button>
+                                <button onclick="requestMoreInfo('${l.license || l.license_no}')" class="px-2 py-1 bg-amber-600 text-white rounded text-[10px] font-bold hover:bg-amber-700 transition shadow-sm">Request Info</button>
+                                <button onclick="deleteLawyerRegistration('${l.id || l.license || l.license_no}')" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
                             </div>
                         </td>
                     `;
@@ -1724,13 +1724,13 @@
             try {
                 const localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
                 localLawyers.forEach(localL => {
-                    if (!lawyers.some(dbL => dbL.license === localL.license)) {
+                    if (!lawyers.some(dbL => (dbL.license === localL.license || dbL.license_no === localL.license))) {
                         lawyers.push(localL);
                     }
                 });
             } catch(e) {}
 
-            const lawyer = lawyers.find(l => l.license === license);
+            const lawyer = lawyers.find(l => (l.license === license || l.license_no === license));
             if (!lawyer) {
                 alert("Lawyer registration not found.");
                 return;
@@ -1738,7 +1738,7 @@
 
             // Populate inputs in custom modal
             document.getElementById('editLawyerLicense').value = license;
-            document.getElementById('editLawyerName').value = lawyer.name || '';
+            document.getElementById('editLawyerName').value = lawyer.name || lawyer.full_name || '';
             document.getElementById('editLawyerUserId').value = lawyer.user_id || '';
             document.getElementById('editLawyerPassword').value = ''; // clear password input field
             document.getElementById('editLawyerSpecialization').value = lawyer.specialization || '';
@@ -1794,36 +1794,39 @@
 
             if (activeSupabase) {
                 try {
-                    // Get the lawyer's email to sync to users table
+                    // Get the lawyer's email to sync to users table using correct column license_no
                     let lawyerEmail = "";
                     const { data: emailData } = await activeSupabase
                         .from('lawyer_registration')
                         .select('email')
-                        .eq('license', license);
+                        .eq('license_no', license);
                     if (emailData && emailData.length > 0) {
                         lawyerEmail = emailData[0].email;
                     }
 
+                    const dbUpdatedData = {
+                        full_name: newName,
+                        specialization: newSpec,
+                        city: newCity,
+                        status: newStatus
+                    };
+
                     const { error } = await activeSupabase
                         .from('lawyer_registration')
-                        .update(updatedData)
-                        .eq('license', license);
+                        .update(dbUpdatedData)
+                        .eq('license_no', license);
                     if (error) throw error;
 
-                    // Sync to users table if email is found
+                    // Sync to users table if email is found (schema-safe)
                     if (lawyerEmail) {
                         const userPayload = {
                             full_name: newName,
-                            user_id: newUserId,
                             specialization: newSpec,
                             city: newCity,
                             account_status: (newStatus === 'Approved' || newStatus === 'Verified Lawyer') ? 'active' : 'pending',
                             user_role: 'lawyer',
                             role: 'lawyer'
                         };
-                        if (newPassword) {
-                            userPayload.password = newPassword;
-                        }
                         await activeSupabase
                             .from('users')
                             .update(userPayload)
@@ -1902,27 +1905,28 @@
                 });
             } catch(e) {}
 
-            const lawyer = lawyers.find(l => l.license === license);
+            const lawyer = lawyers.find(l => (l.license === license || l.license_no === license));
             if (!lawyer) {
                 alert("Lawyer not found.");
                 return;
             }
 
-            if (!confirm(`Are you sure you want to approve Advocate ${lawyer.name}?`)) return;
+            const lawyerName = lawyer.name || lawyer.full_name || '';
+            if (!confirm(`Are you sure you want to approve Advocate ${lawyerName}?`)) return;
 
             const updatedData = { status: 'Verified Lawyer' };
 
             if (activeSupabase) {
                 try {
-                    // Update lawyer_registration status
+                    // Update lawyer_registration status (schema-safe)
                     await activeSupabase
                         .from('lawyer_registration')
                         .update(updatedData)
-                        .eq('license', license);
+                        .eq('license_no', license);
 
-                    // Add user to users table as a Lawyer with Active status (copy user_id & password)
+                    // Add user to users table as a Lawyer with Active status (schema-safe)
                     const fullPayload = {
-                        full_name: lawyer.name,
+                        full_name: lawyerName,
                         email: lawyer.email,
                         phone: lawyer.phone,
                         profession: 'Lawyer',
@@ -1931,9 +1935,7 @@
                         account_status: 'active',
                         user_role: 'lawyer',
                         role: 'lawyer',
-                        user_id: lawyer.user_id || null,
-                        password: lawyer.password || null,
-                        working_court: lawyer.working_courts || '',
+                        working_court: lawyer.working_court || lawyer.working_courts || '',
                         project: 'Qanooni-Mushawarat'
                     };
 
@@ -2059,7 +2061,7 @@
                 });
             } catch(e) {}
 
-            const lawyer = lawyers.find(l => l.license === license);
+            const lawyer = lawyers.find(l => (l.license === license || l.license_no === license));
             if (!lawyer) {
                 alert("Lawyer not found.");
                 return;
@@ -2075,7 +2077,7 @@
                     await activeSupabase
                         .from('lawyer_registration')
                         .update(updatedData)
-                        .eq('license', license);
+                        .eq('license_no', license);
                 } catch (e) {
                     console.error("Failed to request info in Supabase:", e);
                 }
@@ -2112,8 +2114,8 @@
 
             if (activeSupabase) {
                 try {
-                    // Try to delete by ID first if it looks like an ID/number, otherwise delete by license
-                    const queryField = isNaN(identifier) ? 'license' : 'id';
+                    // Try to delete by ID first if it looks like an ID/number, otherwise delete by license_no
+                    const queryField = isNaN(identifier) ? 'license_no' : 'id';
                     const { error } = await activeSupabase
                         .from('lawyer_registration')
                         .delete()
