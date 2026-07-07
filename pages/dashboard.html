@@ -2207,6 +2207,15 @@
                 console.error("Error adapting role:", e);
             }
 
+            // Load lawyer profile details if role is lawyer
+            if (currentUser && (currentUser.role === 'lawyer' || currentUser.profession === 'Lawyer')) {
+                try {
+                    loadLawyerProfile();
+                } catch (e) {
+                    console.error("Error loading lawyer profile:", e);
+                }
+            }
+
             try {
                 loadLawyers();
             } catch (e) {
@@ -2740,12 +2749,16 @@
                             newTab.id = 'tab-' + t;
                             newTab.className = 'tab-content space-y-6';
                             let title = t.replace('-', ' ').toUpperCase();
-                            newTab.innerHTML = `
-                                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200/80">
-                                    <h3 class="text-xl font-bold text-primary mb-4">${title}</h3>
-                                    <p class="text-gray-500 text-sm">Welcome to your ${title.toLowerCase()} section. This area is dedicated to managing your professional services.</p>
-                                </div>
-                            `;
+                            if (t === 'lawyer-profile') {
+                                newTab.innerHTML = getLawyerProfileFormHtml();
+                            } else {
+                                newTab.innerHTML = `
+                                    <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200/80">
+                                        <h3 class="text-xl font-bold text-primary mb-4">${title}</h3>
+                                        <p class="text-gray-500 text-sm">Welcome to your ${title.toLowerCase()} section. This area is dedicated to managing your professional services.</p>
+                                    </div>
+                                `;
+                            }
                             contentArea.appendChild(newTab);
                         }
                     });
@@ -4181,6 +4194,483 @@
             } catch (err) {
                 console.error("Error approving rights slide:", err);
                 alert("Failed to approve slide: " + err.message);
+            }
+        }
+
+        // --- LAWYER PROFILE CUSTOM FORM GENERATION & LOGIC ---
+
+        function getLawyerProfileFormHtml() {
+            const languages = ['English', 'Urdu', 'Punjabi', 'Sindhi', 'Pashto', 'Balochi', 'Other'];
+            const practiceAreas = [
+                'Family Law', 'Criminal Law', 'Civil Litigation', 'Corporate Law', 
+                'Property Law', 'Tax Law', 'Labour Law', 'Banking Law', 
+                'Constitutional Law', 'Cyber Crime', 'Immigration', 'Intellectual Property', 
+                'Consumer Protection', 'Anti Narcotics', 'Arbitration', 'Environmental Law'
+            ];
+            const courts = [
+                'City Court', 'District Court', 'Session Court', 'Family Court', 
+                'Banking Court', 'Labour Court', 'Consumer Court', 'Special Court', 
+                'High Court', 'Supreme Court', 'Federal Shariat Court'
+            ];
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            let langHtml = languages.map(l => `
+                <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                    <input type="checkbox" name="profLanguages" value="${l}" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                    <span class="font-medium text-slate-700">${l}</span>
+                </label>
+            `).join('');
+
+            let practiceHtml = practiceAreas.map(p => `
+                <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                    <input type="checkbox" name="profPracticeAreas" value="${p}" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                    <span class="font-medium text-slate-700">${p}</span>
+                </label>
+            `).join('');
+
+            let courtHtml = courts.map(c => `
+                <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                    <input type="checkbox" name="profCourts" value="${c}" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                    <span class="font-medium text-slate-700">${c}</span>
+                </label>
+            `).join('');
+
+            let availabilityHtml = days.map(d => `
+                <div class="grid grid-cols-3 items-center gap-4 bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                    <span class="text-xs font-bold text-slate-700">${d}</span>
+                    <div>
+                        <label class="block text-[10px] text-slate-400">Start Time</label>
+                        <input type="time" id="availStart-${d}" class="w-full px-2 py-1 border border-slate-200 rounded text-xs bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-slate-400">End Time</label>
+                        <input type="time" id="availEnd-${d}" class="w-full px-2 py-1 border border-slate-200 rounded text-xs bg-white">
+                    </div>
+                </div>
+            `).join('');
+
+            return `
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200/80 max-w-4xl mx-auto space-y-6">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-primary">Edit Professional Profile</h3>
+                            <p class="text-xs text-gray-500">Update your personal, professional, and availability details for client bookings.</p>
+                        </div>
+                        <button onclick="saveLawyerProfile()" class="px-5 py-2.5 bg-primary text-white font-bold rounded-xl hover:bg-primary/20 shadow-md transition text-xs flex items-center gap-1.5" style="background-color: #1c325c;">
+                            <i class="fas fa-save"></i> Save Profile Changes
+                        </button>
+                    </div>
+
+                    <form id="lawyerProfileForm" class="space-y-8" onsubmit="event.preventDefault();">
+                        <!-- 1. PERSONAL INFORMATION -->
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-bold text-gray-700 border-l-4 border-primary pl-2 uppercase tracking-wider" style="border-color: #1c325c;">1. Personal Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Profile Photo URL</label>
+                                    <input type="text" id="profPhoto" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="https://example.com/photo.jpg">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Cover Photo URL (Optional)</label>
+                                    <input type="text" id="profCover" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="https://example.com/cover.jpg">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Date of Birth</label>
+                                    <input type="date" id="profDob" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Gender</label>
+                                    <select id="profGender" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20">
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">CNIC Number (Private - Admin Only)</label>
+                                    <input type="text" id="profCnic" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs bg-gray-50 text-gray-500 cursor-not-allowed" readonly>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Nationality</label>
+                                    <input type="text" id="profNationality" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Pakistani">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-2">Languages Spoken</label>
+                                <div class="flex flex-wrap gap-2">
+                                    ${langHtml}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. PROFESSIONAL INFORMATION -->
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-bold text-gray-700 border-l-4 border-primary pl-2 uppercase tracking-wider" style="border-color: #1c325c;">2. Professional Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="md:col-span-2">
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Lawyer Bio / About Me</label>
+                                    <textarea id="profBio" rows="4" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Write a short summary about your law career..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Years of Experience</label>
+                                    <input type="number" id="profExperience" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="5">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Bar Council Name</label>
+                                    <input type="text" id="profBarCouncil" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Punjab Bar Council">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Bar Membership Number</label>
+                                    <input type="text" id="profBarMembership" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="PBC-12345">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Date of Enrollment</label>
+                                    <input type="date" id="profEnrollDate" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Advocate Level</label>
+                                    <select id="profLevel" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20">
+                                        <option value="Advocate">Advocate</option>
+                                        <option value="Advocate High Court">Advocate High Court</option>
+                                        <option value="Advocate Supreme Court">Advocate Supreme Court</option>
+                                        <option value="Senior Advocate">Senior Advocate</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Current Law Firm</label>
+                                    <input type="text" id="profFirm" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Faisal & Associates">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Position</label>
+                                    <select id="profPosition" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20">
+                                        <option value="Associate">Associate</option>
+                                        <option value="Partner">Partner</option>
+                                        <option value="Independent Practitioner">Independent Practitioner</option>
+                                        <option value="Legal Advisor">Legal Advisor</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. PRACTICE AREAS -->
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-bold text-gray-700 border-l-4 border-primary pl-2 uppercase tracking-wider" style="border-color: #1c325c;">3. Practice Areas</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                ${practiceHtml}
+                            </div>
+                        </div>
+
+                        <!-- 4. COURT INFORMATION -->
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-bold text-gray-700 border-l-4 border-primary pl-2 uppercase tracking-wider" style="border-color: #1c325c;">4. Court Information</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                ${courtHtml}
+                            </div>
+                        </div>
+
+                        <!-- 5. OFFICE INFORMATION -->
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-bold text-gray-700 border-l-4 border-primary pl-2 uppercase tracking-wider" style="border-color: #1c325c;">5. Office Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Office Name</label>
+                                    <input type="text" id="profOfficeName" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Office No. 10">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Google Map Location Link</label>
+                                    <input type="text" id="profOfficeMap" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="https://maps.google.com/...">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Office Address</label>
+                                    <input type="text" id="profOfficeAddress" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="District Courts, Chowk Kutchery">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Area</label>
+                                    <input type="text" id="profOfficeArea" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Kutchery">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">City</label>
+                                    <input type="text" id="profOfficeCity" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Multan">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Province</label>
+                                    <input type="text" id="profOfficeProvince" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Punjab">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Postal Code</label>
+                                    <input type="text" id="profOfficePostal" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="60000">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Office Phone</label>
+                                    <input type="text" id="profOfficePhone" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="+92 61 1234567">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Alternate Phone</label>
+                                    <input type="text" id="profOfficeAltPhone" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="+92 300 1234567">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. CONSULTATION DETAILS -->
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-bold text-gray-700 border-l-4 border-primary pl-2 uppercase tracking-wider" style="border-color: #1c325c;">6. Consultation Details</h4>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-2">Consultation Mode</label>
+                                <div class="flex flex-wrap gap-2">
+                                    <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                                        <input type="checkbox" name="profConsultModes" value="Office Visit" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                                        <span class="font-medium text-slate-700">Office Visit</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                                        <input type="checkbox" name="profConsultModes" value="Phone" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                                        <span class="font-medium text-slate-700">Phone</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                                        <input type="checkbox" name="profConsultModes" value="WhatsApp" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                                        <span class="font-medium text-slate-700">WhatsApp</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                                        <input type="checkbox" name="profConsultModes" value="Video Call" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                                        <span class="font-medium text-slate-700">Video Call</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl text-xs hover:bg-slate-100 transition cursor-pointer select-none">
+                                        <input type="checkbox" name="profConsultModes" value="Home Visit" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20">
+                                        <span class="font-medium text-slate-700">Home Visit</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Emergency Consultation Available</label>
+                                    <select id="profEmergency" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20">
+                                        <option value="No">No</option>
+                                        <option value="Yes">Yes</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Response Time</label>
+                                    <input type="text" id="profResponseTime" class="w-full px-4 py-2 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-primary/20" placeholder="Within 2 hours">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 7. AVAILABILITY -->
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-bold text-gray-700 border-l-4 border-primary pl-2 uppercase tracking-wider" style="border-color: #1c325c;">7. Availability</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                ${availabilityHtml}
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="flex justify-end pt-4 border-t border-gray-100">
+                        <button onclick="saveLawyerProfile()" class="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/20 shadow-lg transition text-xs flex items-center gap-1.5" style="background-color: #1c325c;">
+                            <i class="fas fa-save"></i> Save Profile Details
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadLawyerProfile() {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            if (!activeSupabase || !currentUser || !currentUser.email) return;
+
+            try {
+                const { data, error } = await activeSupabase
+                    .from('lawyer_registration')
+                    .select('*')
+                    .eq('email', currentUser.email);
+
+                if (error) throw error;
+                if (!data || data.length === 0) return;
+
+                const lawyer = data[0];
+                
+                const cnicInput = document.getElementById('profCnic');
+                if (cnicInput) cnicInput.value = lawyer.cnic || '';
+
+                let profile = {};
+                try {
+                    if (lawyer.bio && (lawyer.bio.startsWith('{') || lawyer.bio.startsWith('['))) {
+                        profile = JSON.parse(lawyer.bio);
+                    } else {
+                        profile = { bioText: lawyer.bio || '' };
+                    }
+                } catch(e) {
+                    profile = { bioText: lawyer.bio || '' };
+                }
+
+                if (document.getElementById('profPhoto')) document.getElementById('profPhoto').value = profile.profilePhoto || lawyer.profile_image || '';
+                if (document.getElementById('profCover')) document.getElementById('profCover').value = profile.coverPhoto || '';
+                if (document.getElementById('profDob')) document.getElementById('profDob').value = profile.dob || '';
+                if (document.getElementById('profGender')) document.getElementById('profGender').value = profile.gender || '';
+                if (document.getElementById('profNationality')) document.getElementById('profNationality').value = profile.nationality || 'Pakistani';
+                if (document.getElementById('profBio')) document.getElementById('profBio').value = profile.bioText || lawyer.bio || '';
+                if (document.getElementById('profExperience')) document.getElementById('profExperience').value = profile.experience || lawyer.experience || '';
+                if (document.getElementById('profBarCouncil')) document.getElementById('profBarCouncil').value = profile.barCouncil || '';
+                if (document.getElementById('profBarMembership')) document.getElementById('profBarMembership').value = profile.barMembership || lawyer.license_no || '';
+                if (document.getElementById('profEnrollDate')) document.getElementById('profEnrollDate').value = profile.enrollDate || '';
+                if (document.getElementById('profLevel')) document.getElementById('profLevel').value = profile.advocateLevel || 'Advocate';
+                if (document.getElementById('profFirm')) document.getElementById('profFirm').value = profile.lawFirm || '';
+                if (document.getElementById('profPosition')) document.getElementById('profPosition').value = profile.position || 'Independent Practitioner';
+                if (document.getElementById('profOfficeName')) document.getElementById('profOfficeName').value = profile.officeName || '';
+                if (document.getElementById('profOfficeMap')) document.getElementById('profOfficeMap').value = profile.officeMap || '';
+                if (document.getElementById('profOfficeAddress')) document.getElementById('profOfficeAddress').value = profile.officeAddress || '';
+                if (document.getElementById('profOfficeArea')) document.getElementById('profOfficeArea').value = profile.officeArea || '';
+                if (document.getElementById('profOfficeCity')) document.getElementById('profOfficeCity').value = profile.officeCity || lawyer.city || '';
+                if (document.getElementById('profOfficeProvince')) document.getElementById('profOfficeProvince').value = profile.officeProvince || '';
+                if (document.getElementById('profOfficePostal')) document.getElementById('profOfficePostal').value = profile.officePostal || '';
+                if (document.getElementById('profOfficePhone')) document.getElementById('profOfficePhone').value = profile.officePhone || lawyer.phone || '';
+                if (document.getElementById('profOfficeAltPhone')) document.getElementById('profOfficeAltPhone').value = profile.officeAltPhone || '';
+                if (document.getElementById('profEmergency')) document.getElementById('profEmergency').value = profile.emergencyConsult || 'No';
+                if (document.getElementById('profResponseTime')) document.getElementById('profResponseTime').value = profile.responseTime || '';
+
+                const langValues = profile.languages || [];
+                document.querySelectorAll('input[name="profLanguages"]').forEach(cb => {
+                    cb.checked = langValues.includes(cb.value);
+                });
+
+                const practiceValues = profile.practiceAreas || (lawyer.specialization ? [lawyer.specialization] : []);
+                document.querySelectorAll('input[name="profPracticeAreas"]').forEach(cb => {
+                    cb.checked = practiceValues.includes(cb.value);
+                });
+
+                const courtValues = profile.courts || [];
+                document.querySelectorAll('input[name="profCourts"]').forEach(cb => {
+                    cb.checked = courtValues.includes(cb.value);
+                });
+
+                const consultValues = profile.consultationModes || [];
+                document.querySelectorAll('input[name="profConsultModes"]').forEach(cb => {
+                    cb.checked = consultValues.includes(cb.value);
+                });
+
+                const availability = profile.availability || {};
+                const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                days.forEach(d => {
+                    const times = availability[d] || {};
+                    const startEl = document.getElementById('availStart-' + d);
+                    const endEl = document.getElementById('availEnd-' + d);
+                    if (startEl) startEl.value = times.start || '';
+                    if (endEl) endEl.value = times.end || '';
+                });
+
+            } catch (e) {
+                console.error("Failed to load lawyer profile:", e);
+            }
+        }
+
+        async function saveLawyerProfile() {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            if (!activeSupabase || !currentUser || !currentUser.email) {
+                alert("Database connection offline. Unable to save profile.");
+                return;
+            }
+
+            try {
+                const languages = [];
+                document.querySelectorAll('input[name="profLanguages"]:checked').forEach(cb => {
+                    languages.push(cb.value);
+                });
+
+                const practiceAreas = [];
+                document.querySelectorAll('input[name="profPracticeAreas"]:checked').forEach(cb => {
+                    practiceAreas.push(cb.value);
+                });
+
+                const courts = [];
+                document.querySelectorAll('input[name="profCourts"]:checked').forEach(cb => {
+                    courts.push(cb.value);
+                });
+
+                const consultationModes = [];
+                document.querySelectorAll('input[name="profConsultModes"]:checked').forEach(cb => {
+                    consultationModes.push(cb.value);
+                });
+
+                const availability = {};
+                const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                days.forEach(d => {
+                    const startVal = document.getElementById('availStart-' + d).value;
+                    const endVal = document.getElementById('availEnd-' + d).value;
+                    availability[d] = {
+                        start: startVal,
+                        end: endVal
+                    };
+                });
+
+                const profileObj = {
+                    profilePhoto: document.getElementById('profPhoto').value,
+                    coverPhoto: document.getElementById('profCover').value,
+                    dob: document.getElementById('profDob').value,
+                    gender: document.getElementById('profGender').value,
+                    nationality: document.getElementById('profNationality').value,
+                    languages: languages,
+                    bioText: document.getElementById('profBio').value,
+                    experience: document.getElementById('profExperience').value,
+                    barCouncil: document.getElementById('profBarCouncil').value,
+                    barMembership: document.getElementById('profBarMembership').value,
+                    enrollDate: document.getElementById('profEnrollDate').value,
+                    advocateLevel: document.getElementById('profLevel').value,
+                    lawFirm: document.getElementById('profFirm').value,
+                    position: document.getElementById('profPosition').value,
+                    practiceAreas: practiceAreas,
+                    courts: courts,
+                    officeName: document.getElementById('profOfficeName').value,
+                    officeMap: document.getElementById('profOfficeMap').value,
+                    officeAddress: document.getElementById('profOfficeAddress').value,
+                    officeArea: document.getElementById('profOfficeArea').value,
+                    officeCity: document.getElementById('profOfficeCity').value,
+                    officeProvince: document.getElementById('profOfficeProvince').value,
+                    officePostal: document.getElementById('profOfficePostal').value,
+                    officePhone: document.getElementById('profOfficePhone').value,
+                    officeAltPhone: document.getElementById('profOfficeAltPhone').value,
+                    consultationModes: consultationModes,
+                    emergencyConsult: document.getElementById('profEmergency').value,
+                    responseTime: document.getElementById('profResponseTime').value,
+                    availability: availability
+                };
+
+                const serializedBio = JSON.stringify(profileObj);
+
+                const { error: regError } = await activeSupabase
+                    .from('lawyer_registration')
+                    .update({
+                        bio: serializedBio,
+                        specialization: practiceAreas[0] || '',
+                        experience: parseInt(profileObj.experience) || 0,
+                        city: profileObj.officeCity || ''
+                    })
+                    .eq('email', currentUser.email);
+                
+                if (regError) throw regError;
+
+                const userPayload = {
+                    full_name: currentUser.full_name,
+                    bio: serializedBio,
+                    specialization: practiceAreas[0] || '',
+                    city: profileObj.officeCity || '',
+                    phone: profileObj.officePhone || '',
+                    profile_image: profileObj.profilePhoto || '',
+                    company_name: profileObj.lawFirm || '',
+                    company_address: profileObj.officeAddress || '',
+                    working_court: courts.join(', ')
+                };
+
+                const { error: userError } = await activeSupabase
+                    .from('users')
+                    .update(userPayload)
+                    .eq('email', currentUser.email)
+                    .eq('project', 'Qanooni-Mushawarat');
+
+                if (userError) throw userError;
+
+                alert("Profile saved successfully to Supabase!");
+            } catch (e) {
+                console.error("Failed to save profile:", e);
+                alert("Failed to save profile: " + e.message);
             }
         }
     </script>
