@@ -1794,11 +1794,42 @@
 
             if (activeSupabase) {
                 try {
+                    // Get the lawyer's email to sync to users table
+                    let lawyerEmail = "";
+                    const { data: emailData } = await activeSupabase
+                        .from('lawyer_registration')
+                        .select('email')
+                        .eq('license', license);
+                    if (emailData && emailData.length > 0) {
+                        lawyerEmail = emailData[0].email;
+                    }
+
                     const { error } = await activeSupabase
                         .from('lawyer_registration')
                         .update(updatedData)
                         .eq('license', license);
                     if (error) throw error;
+
+                    // Sync to users table if email is found
+                    if (lawyerEmail) {
+                        const userPayload = {
+                            full_name: newName,
+                            user_id: newUserId,
+                            specialization: newSpec,
+                            city: newCity,
+                            account_status: (newStatus === 'Approved' || newStatus === 'Verified Lawyer') ? 'active' : 'pending',
+                            user_role: 'lawyer',
+                            role: 'lawyer'
+                        };
+                        if (newPassword) {
+                            userPayload.password = newPassword;
+                        }
+                        await activeSupabase
+                            .from('users')
+                            .update(userPayload)
+                            .eq('email', lawyerEmail)
+                            .eq('project', 'Qanooni-Mushawarat');
+                    }
                 } catch (e) {
                     console.error("Failed to edit lawyer in Supabase:", e);
                 }
@@ -1889,7 +1920,7 @@
                         .update(updatedData)
                         .eq('license', license);
 
-                    // Add user to users table as a Lawyer with Active status
+                    // Add user to users table as a Lawyer with Active status (copy user_id & password)
                     const fullPayload = {
                         full_name: lawyer.name,
                         email: lawyer.email,
@@ -1899,6 +1930,9 @@
                         specialization: lawyer.specialization || '',
                         account_status: 'active',
                         user_role: 'lawyer',
+                        role: 'lawyer',
+                        user_id: lawyer.user_id || null,
+                        password: lawyer.password || null,
                         working_court: lawyer.working_courts || '',
                         project: 'Qanooni-Mushawarat'
                     };
