@@ -4492,28 +4492,38 @@ async function handleLogin() {
         // 1. Query the 'users' table (matching email OR user_id)
         const { data: users, error: userError } = await supabase
             .from('users')
-            .select('account_status, role, full_name, profession, email')
+            .select('account_status, role, full_name, profession, email, user_id, password')
             .or(`email.eq."${inputVal}",user_id.eq."${inputVal}"`)
             .eq('project', 'Qanooni-Mushawarat');
 
         if (users && users.length > 0) {
-            userData = users[0];
+            const user = users[0];
+            if (user.password && user.password !== password) {
+                alert("Login failed: Invalid credentials.");
+                return;
+            }
+            userData = user;
         } else {
             // 2. Query the 'lawyer_registration' table (matching email OR user_id)
             const { data: lawyers, error: lawyerError } = await supabase
                 .from('lawyer_registration')
-                .select('status, name, specialization, email, user_id, assigned_tasks')
+                .select('status, name, specialization, email, user_id, password, assigned_tasks')
                 .or(`email.eq."${inputVal}",user_id.eq."${inputVal}"`)
                 .eq('project', 'Qanooni-Mushawarat');
 
             if (lawyers && lawyers.length > 0) {
                 const lawyer = lawyers[0];
+                if (lawyer.password && lawyer.password !== password) {
+                    alert("Login failed: Invalid credentials.");
+                    return;
+                }
                 userData = {
                     account_status: (lawyer.status === 'Verified Lawyer' || lawyer.status === 'Approved') ? 'active' : 'pending',
                     role: 'lawyer',
                     full_name: lawyer.name,
                     profession: 'Lawyer',
                     email: lawyer.email,
+                    password: lawyer.password || null,
                     assigned_tasks: lawyer.assigned_tasks || ''
                 };
             }
@@ -4522,6 +4532,24 @@ async function handleLogin() {
         if (!userData) {
             alert("Login failed: User not found or invalid credentials.");
             return;
+        }
+
+        // If no password is saved in DB, authenticate via Supabase Auth
+        if (!userData.password) {
+            try {
+                const { error: authError } = await supabase.auth.signInWithPassword({
+                    email: userData.email,
+                    password: password
+                });
+                if (authError) {
+                    alert("Login failed: " + authError.message);
+                    return;
+                }
+            } catch (authErr) {
+                console.error("Supabase Auth sign-in failed:", authErr);
+                alert("Login failed: Invalid credentials.");
+                return;
+            }
         }
 
         if (userData.account_status !== 'active') {
