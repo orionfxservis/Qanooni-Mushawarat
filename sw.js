@@ -1,4 +1,4 @@
-const CACHE_NAME = 'qanooni-mushawarat-v2';
+const CACHE_NAME = 'qanooni-mushawarat-v3';
 const ASSETS = [
     './index.html',
     './css/style.css',
@@ -6,6 +6,7 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (e) => {
+    self.skipWaiting();
     e.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(ASSETS).catch(() => {});
@@ -23,14 +24,26 @@ self.addEventListener('activate', (e) => {
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim())
     );
 });
 
+// Network-First Strategy: always fetch from network, fallback to cache if offline
 self.addEventListener('fetch', (e) => {
     e.respondWith(
-        caches.match(e.request).then((cachedResponse) => {
-            return cachedResponse || fetch(e.request);
-        })
+        fetch(e.request)
+            .then((response) => {
+                // If it is a valid response, cache a clone
+                if (response && response.status === 200) {
+                    const responseCopy = response.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(e.request, responseCopy);
+                    });
+                }
+                return response;
+            })
+            .catch(() => {
+                return caches.match(e.request);
+            })
     );
 });
