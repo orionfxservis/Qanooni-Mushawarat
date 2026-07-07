@@ -31,7 +31,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
     
-        body[dir="rtl"], body[dir="rtl"] * {
+        body[dir="rtl"], body[dir="rtl"] *:not(i):not(svg):not([class*="fa-"]) {
             font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
         }
     </style>
@@ -1209,6 +1209,108 @@
         </div>
     </div>
 
+    <!-- Edit Lawyer Modal -->
+    <div id="editLawyerModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Header -->
+            <div class="bg-primary text-white px-6 py-4 flex justify-between items-center shrink-0">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fas fa-user-tie text-secondary"></i>
+                    <span>Manage Lawyer Profile & Tasks</span>
+                </h3>
+                <button onclick="closeEditLawyerModal()" class="text-white hover:text-secondary text-xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <!-- Body -->
+            <div class="p-6 overflow-y-auto space-y-4">
+                <input type="hidden" id="editLawyerLicense">
+                
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">Professional Name</label>
+                    <input type="text" id="editLawyerName" class="w-full h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">User ID (for Login)</label>
+                        <input type="text" id="editLawyerUserId" class="w-full h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Password</label>
+                        <input type="text" id="editLawyerPassword" class="w-full h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary" placeholder="Enter new password to change">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Specialization</label>
+                        <input type="text" id="editLawyerSpecialization" class="w-full h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">City</label>
+                        <input type="text" id="editLawyerCity" class="w-full h-9 px-3 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">Account Status</label>
+                        <select id="editLawyerStatus" class="w-full h-9 px-2.5 text-xs rounded-lg border border-gray-300 bg-white text-gray-700 focus:outline-none focus:border-secondary">
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="On Hold">On Hold</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col justify-end space-y-1.5 pb-1">
+                        <label class="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                            <input type="checkbox" id="editLawyerEmailVerified" class="rounded border-gray-300 text-primary focus:ring-secondary">
+                            <span>Email Verified</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                            <input type="checkbox" id="editLawyerPhoneVerified" class="rounded border-gray-300 text-primary focus:ring-secondary">
+                            <span>Phone Verified</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Assigned Tasks -->
+                <div class="border-t border-gray-100 pt-4">
+                    <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">Assign Rights & Tasks</label>
+                    <p class="text-[10px] text-gray-400 mb-3">Select the sections of the dashboard this lawyer has permission to access:</p>
+                    <div class="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-gray-250">
+                        <label class="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                            <input type="checkbox" value="blogs" name="assignedTasks" class="rounded border-gray-300 text-primary focus:ring-secondary">
+                            <span>Manage Blogs</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                            <input type="checkbox" value="know-rights" name="assignedTasks" class="rounded border-gray-300 text-primary focus:ring-secondary">
+                            <span>Know Your Rights</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                            <input type="checkbox" value="know-laws" name="assignedTasks" class="rounded border-gray-300 text-primary focus:ring-secondary">
+                            <span>Know The Laws</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                            <input type="checkbox" value="services" name="assignedTasks" class="rounded border-gray-300 text-primary focus:ring-secondary">
+                            <span>Our Services</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="bg-slate-50 px-6 py-4 flex justify-end gap-2 shrink-0 border-t border-t-gray-150">
+                <button onclick="closeEditLawyerModal()" class="px-4 h-9 rounded-lg bg-gray-200 text-gray-700 font-bold text-xs hover:bg-gray-300 transition">
+                    Cancel
+                </button>
+                <button onclick="saveEditLawyerChanges()" class="px-5 h-9 rounded-lg bg-primary text-white font-bold text-xs shadow hover:bg-accent transition">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Cyber Crime Details Modal -->
     <div id="cyberDetailsModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col max-h-[92vh]">
@@ -1588,11 +1690,13 @@
                         </td>
                         <td class="py-4 px-2">${statusBadge}</td>
                         <td class="py-4 text-right px-2">
-                            <div class="flex items-center justify-end gap-1.5">
+                            <div class="flex items-center justify-end gap-1.5 flex-wrap">
+                                <button onclick="editLawyerRegistration('${l.license}')" class="px-2 py-1 bg-blue-600 text-white rounded text-[10px] font-bold hover:bg-blue-700 transition shadow-sm">Edit</button>
                                 <button onclick="approveLawyerApplication('${l.license}')" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm">Approve</button>
+                                <button onclick="onHoldLawyerRegistration('${l.license}')" class="px-2 py-1 bg-amber-500 text-white rounded text-[10px] font-bold hover:bg-amber-600 transition shadow-sm">Hold</button>
                                 <button onclick="rejectLawyerApplication('${l.license}')" class="px-2 py-1 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-650 transition shadow-sm">Reject</button>
-                                <button onclick="requestMoreInfo('${l.license}')" class="px-2 py-1 bg-amber-500 text-white rounded text-[10px] font-bold hover:bg-amber-600 transition shadow-sm">Request Info</button>
-                                <button onclick="deleteLawyerRegistration('${l.id || l.license}')" class="px-2 py-1 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-650 transition shadow-sm">Delete</button>
+                                <button onclick="requestMoreInfo('${l.license}')" class="px-2 py-1 bg-amber-600 text-white rounded text-[10px] font-bold hover:bg-amber-700 transition shadow-sm">Request Info</button>
+                                <button onclick="deleteLawyerRegistration('${l.id || l.license}')" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
                             </div>
                         </td>
                     `;
@@ -1602,6 +1706,11 @@
         }
 
         // Helper to edit lawyer details
+        function closeEditLawyerModal() {
+            document.getElementById('editLawyerModal').classList.add('hidden');
+            document.getElementById('editLawyerModal').classList.remove('flex');
+        }
+
         async function editLawyerRegistration(license) {
             const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
             
@@ -1627,21 +1736,61 @@
                 return;
             }
 
-            const newName = prompt("Edit Professional Name:", lawyer.name);
-            if (newName === null) return;
-            const newUserId = prompt("Edit User ID (for Login):", lawyer.user_id || '');
-            if (newUserId === null) return;
-            const newSpec = prompt("Edit Specialization:", lawyer.specialization || '');
-            if (newSpec === null) return;
-            const newCity = prompt("Edit City:", lawyer.city || '');
-            if (newCity === null) return;
+            // Populate inputs in custom modal
+            document.getElementById('editLawyerLicense').value = license;
+            document.getElementById('editLawyerName').value = lawyer.name || '';
+            document.getElementById('editLawyerUserId').value = lawyer.user_id || '';
+            document.getElementById('editLawyerPassword').value = ''; // clear password input field
+            document.getElementById('editLawyerSpecialization').value = lawyer.specialization || '';
+            document.getElementById('editLawyerCity').value = lawyer.city || '';
+            document.getElementById('editLawyerStatus').value = lawyer.status || 'Pending';
+            document.getElementById('editLawyerEmailVerified').checked = !!lawyer.email_verified;
+            document.getElementById('editLawyerPhoneVerified').checked = !!lawyer.phone_verified;
+
+            // Populate checkboxes for assigned tasks
+            const assignedList = (lawyer.assigned_tasks || '').split(',').map(s => s.trim().toLowerCase());
+            document.querySelectorAll('input[name="assignedTasks"]').forEach(cb => {
+                cb.checked = assignedList.includes(cb.value.toLowerCase());
+            });
+
+            // Show custom modal
+            document.getElementById('editLawyerModal').classList.remove('hidden');
+            document.getElementById('editLawyerModal').classList.add('flex');
+        }
+
+        async function saveEditLawyerChanges() {
+            const license = document.getElementById('editLawyerLicense').value;
+            const newName = document.getElementById('editLawyerName').value.trim();
+            const newUserId = document.getElementById('editLawyerUserId').value.trim();
+            const newSpec = document.getElementById('editLawyerSpecialization').value.trim();
+            const newCity = document.getElementById('editLawyerCity').value.trim();
+            const newStatus = document.getElementById('editLawyerStatus').value;
+            const verifyEmail = document.getElementById('editLawyerEmailVerified').checked;
+            const verifyPhone = document.getElementById('editLawyerPhoneVerified').checked;
+            const newPassword = document.getElementById('editLawyerPassword').value.trim();
+
+            // Gather selected checkboxes for assigned tasks
+            const selectedTasks = [];
+            document.querySelectorAll('input[name="assignedTasks"]:checked').forEach(cb => {
+                selectedTasks.push(cb.value);
+            });
+            const newTasks = selectedTasks.join(', ');
 
             const updatedData = {
-                name: newName.trim(),
-                user_id: newUserId.trim(),
-                specialization: newSpec.trim(),
-                city: newCity.trim()
+                name: newName,
+                user_id: newUserId,
+                specialization: newSpec,
+                city: newCity,
+                status: newStatus,
+                assigned_tasks: newTasks,
+                email_verified: verifyEmail,
+                phone_verified: verifyPhone
             };
+            if (newPassword) {
+                updatedData.password = newPassword;
+            }
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
 
             if (activeSupabase) {
                 try {
@@ -1668,6 +1817,7 @@
             } catch(e) {}
 
             alert("Lawyer registration updated successfully.");
+            closeEditLawyerModal();
             loadLawyers();
             populateLawyersDropdown();
         }
@@ -2415,9 +2565,40 @@
                 if (adminInfoName) adminInfoName.textContent = currentUser.full_name || 'Lawyer';
 
                 // Change Sidebar Menu dynamically to match Lawyer Dashboard items:
-                // Dashboard, My Profile, Incoming Cases, Appointments, Messages, Payments, Documents, Notifications, Settings
+                // Dashboard, My Profile, Incoming Cases, Appointments, Messages, Payments, Documents, Notifications, Settings + Assigned Tasks
                 const sidebarNav = document.querySelector('aside nav');
                 if (sidebarNav) {
+                    const assigned = (currentUser.assigned_tasks || '').split(',').map(s => s.trim().toLowerCase());
+                    let assignedHtml = '';
+                    if (assigned.includes('blogs')) {
+                        assignedHtml += `
+                        <button onclick="switchTab('blogs')" id="tab-btn-blogs" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-blog w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Manage Blogs</span>
+                        </button>`;
+                    }
+                    if (assigned.includes('know-rights') || assigned.includes('know_your_rights')) {
+                        assignedHtml += `
+                        <button onclick="switchTab('know-rights')" id="tab-btn-know-rights" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-gavel w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Know Your Rights</span>
+                        </button>`;
+                    }
+                    if (assigned.includes('know-laws') || assigned.includes('know_the_laws')) {
+                        assignedHtml += `
+                        <button onclick="switchTab('know-laws')" id="tab-btn-know-laws" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-book-open w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Know The Laws</span>
+                        </button>`;
+                    }
+                    if (assigned.includes('services')) {
+                        assignedHtml += `
+                        <button onclick="switchTab('services')" id="tab-btn-services" class="tab-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition hover:bg-white/10 text-left">
+                            <i class="fas fa-concierge-bell w-4 text-[12px]"></i>
+                            <span class="font-medium text-[11px]">Our Services</span>
+                        </button>`;
+                    }
+
                     sidebarNav.innerHTML = `
                         <div class="px-3 mb-2">
                             <span class="text-[8px] uppercase tracking-[1px] text-white/40 font-bold">Lawyer Menu</span>
@@ -2458,6 +2639,13 @@
                             <i class="fas fa-cog w-4 text-[12px]"></i>
                             <span class="font-medium text-[11px]">Settings</span>
                         </button>
+                        
+                        ${assignedHtml ? `
+                        <div class="px-3 mt-4 mb-2">
+                            <span class="text-[8px] uppercase tracking-[1px] text-white/40 font-bold">Assigned Tasks</span>
+                        </div>
+                        ${assignedHtml}
+                        ` : ''}
                     `;
                 }
 
@@ -3446,6 +3634,11 @@
                     categoryUr = parts[1];
                 }
 
+                let approveBtn = '';
+                if (currentUser.role === 'admin' && b.tags !== 'Publish') {
+                    approveBtn = `<button onclick="approveBlog(${b.id || '\'' + b.slug + '\''})" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm">Approve</button>`;
+                }
+
                 tr.innerHTML = `
                     <td class="py-3 px-2 font-medium text-gray-800">
                         <div>${titleEn}</div>
@@ -3462,6 +3655,7 @@
                     </td>
                     <td class="py-3 px-2 text-right">
                         <div class="flex items-center justify-end gap-1.5">
+                            ${approveBtn}
                             <button onclick="editBlog(${b.id || '\'' + b.slug + '\''})" class="px-2 py-1 bg-primary text-white rounded text-[10px] font-bold hover:bg-accent transition shadow-sm">Edit</button>
                             <button onclick="deleteBlog(${b.id || '\'' + b.slug + '\''})" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
                         </div>
@@ -3510,7 +3704,7 @@
                 image: imageUrl,
                 author: author,
                 focus_keyword: 'Qanooni-Mushawarat',
-                tags: status,
+                tags: currentUser.role === 'lawyer' ? 'Draft' : status,
                 date: formattedDate,
                 section_heading: 'Details',
                 section_content: 'Additional content details for the blog.',
@@ -3712,19 +3906,28 @@
 
             allRightsSlides.forEach(slide => {
                 const title = slide.title || '';
+                const slideStatus = slide.status || 'Live';
+                const statusBadge = `<span class="px-2 py-0.5 rounded text-[9px] font-bold ${slideStatus === 'Live' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">${slideStatus}</span>`;
+                
+                let approveBtn = '';
+                if (currentUser.role === 'admin' && slideStatus === 'Draft') {
+                    approveBtn = `<button onclick="approveRightsSlide(${slide.id || '\'' + slide.image_url.substring(0, 30) + '\''})" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm mr-1.5">Approve</button>`;
+                }
 
                 const div = document.createElement('div');
                 div.className = 'bg-white p-3 rounded-xl border border-gray-250 shadow-sm flex flex-col justify-between';
                 div.innerHTML = `
                     <div class="space-y-2">
-                        <div class="h-28 overflow-hidden rounded-lg bg-gray-100 flex items-center justify-center">
+                        <div class="h-28 overflow-hidden rounded-lg bg-gray-100 flex items-center justify-center relative">
                             <img src="${slide.image_url}" class="max-h-full max-w-full object-contain" alt="${title}">
+                            <div class="absolute top-2 right-2">${statusBadge}</div>
                         </div>
                         <div>
                             <div class="font-bold text-xs text-primary truncate">${title}</div>
                         </div>
                     </div>
                     <div class="mt-3 pt-2 border-t border-gray-100 flex justify-end">
+                        ${approveBtn}
                         <button onclick="deleteRightsSlide(${slide.id || '\'' + slide.image_url.substring(0, 30) + '\''})" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
                     </div>
                 `;
@@ -3754,7 +3957,8 @@
 
             const payload = {
                 title: title,
-                project_name: 'Qanooni-Mushawarat'
+                project_name: 'Qanooni-Mushawarat',
+                status: currentUser.role === 'lawyer' ? 'Draft' : 'Live'
             };
 
             const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
@@ -3830,7 +4034,53 @@
                 alert("Failed to delete slide: " + err.message);
             }
         }
+        // Approve Blog Post (Admin Action)
+        async function approveBlog(id) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('blogs')
+                        .update({ tags: 'Publish' })
+                        .eq('id', id)
+                        .eq('focus_keyword', 'Qanooni-Mushawarat');
+                    if (error) throw error;
+                } else {
+                    let localBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                    localBlogs = localBlogs.map(b => (b.id == id || b.slug == id) ? { ...b, tags: 'Publish' } : b);
+                    localStorage.setItem('registered_blogs', JSON.stringify(localBlogs));
+                }
+                alert("Blog approved and published successfully!");
+                fetchBlogs();
+            } catch (err) {
+                console.error("Error approving blog:", err);
+                alert("Failed to approve blog: " + err.message);
+            }
+        }
 
+        // Approve Rights Slide (Admin Action)
+        async function approveRightsSlide(id) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('know_your_rights')
+                        .update({ status: 'Live' })
+                        .eq('project_name', 'Qanooni-Mushawarat')
+                        .eq('id', id);
+                    if (error) throw error;
+                } else {
+                    let localSlides = JSON.parse(localStorage.getItem('rights_slides') || '[]');
+                    localSlides = localSlides.map(s => (s.id == id || s.image_url.substring(0, 30) == id) ? { ...s, status: 'Live' } : s);
+                    localStorage.setItem('rights_slides', JSON.stringify(localSlides));
+                }
+                alert("Rights slide approved successfully!");
+                fetchRightsSlides();
+            } catch (err) {
+                console.error("Error approving rights slide:", err);
+                alert("Failed to approve slide: " + err.message);
+            }
+        }
     </script>
 </body>
 </html>
