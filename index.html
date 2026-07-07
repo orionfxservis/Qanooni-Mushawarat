@@ -4247,7 +4247,17 @@ setInterval(nextSlide, 5000);
                     // Insert profile record into lawyer_registration
                     const { error } = await activeSupabase
                         .from('lawyer_registration')
-                        .insert([newLawyer]);
+                        .insert([{
+                            full_name: newLawyer.name,
+                            license_no: newLawyer.license,
+                            specialization: newLawyer.specialization,
+                            email: newLawyer.email,
+                            phone: newLawyer.phone,
+                            city: newLawyer.city,
+                            status: 'Pending Verification',
+                            created_at: newLawyer.created_at,
+                            project: 'Qanooni-Mushawarat'
+                        }]);
                     if (error) throw error;
                     console.log("Successfully saved lawyer to Supabase");
                 } catch (dbErr) {
@@ -4489,43 +4499,59 @@ async function handleLogin() {
 
         let userData = null;
 
-        // 1. Query the 'users' table (matching email OR user_id)
-        const { data: users, error: userError } = await supabase
-            .from('users')
-            .select('account_status, role, full_name, profession, email, user_id, password')
-            .or(`email.eq."${inputVal}",user_id.eq."${inputVal}"`)
-            .eq('project', 'Qanooni-Mushawarat');
-
-        if (users && users.length > 0) {
-            const user = users[0];
-            if (user.password && user.password !== password) {
-                alert("Login failed: Invalid credentials.");
-                return;
-            }
-            userData = user;
-        } else {
-            // 2. Query the 'lawyer_registration' table (matching email OR user_id)
-            const { data: lawyers, error: lawyerError } = await supabase
-                .from('lawyer_registration')
-                .select('status, name, specialization, email, user_id, password, assigned_tasks')
-                .or(`email.eq."${inputVal}",user_id.eq."${inputVal}"`)
-                .eq('project', 'Qanooni-Mushawarat');
-
-            if (lawyers && lawyers.length > 0) {
-                const lawyer = lawyers[0];
-                if (lawyer.password && lawyer.password !== password) {
-                    alert("Login failed: Invalid credentials.");
-                    return;
-                }
+        // Check local storage fallback first in case they are local only
+        try {
+            let localLawyers = JSON.parse(localStorage.getItem('registeredLawyers')) || [];
+            let localLawyer = localLawyers.find(l => l.user_id === inputVal || l.email === inputVal);
+            if (localLawyer && (!localLawyer.password || localLawyer.password === password)) {
                 userData = {
-                    account_status: (lawyer.status === 'Verified Lawyer' || lawyer.status === 'Approved') ? 'active' : 'pending',
+                    account_status: (localLawyer.status === 'Verified Lawyer' || localLawyer.status === 'Approved') ? 'active' : 'pending',
                     role: 'lawyer',
-                    full_name: lawyer.name,
+                    full_name: localLawyer.name,
                     profession: 'Lawyer',
-                    email: lawyer.email,
-                    password: lawyer.password || null,
-                    assigned_tasks: lawyer.assigned_tasks || ''
+                    email: localLawyer.email,
+                    assigned_tasks: localLawyer.assigned_tasks || '',
+                    is_local: true,
+                    local_password: localLawyer.password
                 };
+            }
+        } catch (e) {
+            console.error("Error loading local lawyer fallback:", e);
+        }
+
+        if (!userData) {
+            // Determine matching query for email (schema-safe)
+            let userQuery = supabase.from('users').select('account_status, role, full_name, profession, email');
+            let lawyerQuery = supabase.from('lawyer_registration').select('status, full_name, specialization, email, license_no');
+
+            if (inputVal.includes('@')) {
+                userQuery = userQuery.eq('email', inputVal);
+                lawyerQuery = lawyerQuery.eq('email', inputVal);
+            } else {
+                userQuery = userQuery.ilike('email', `${inputVal}@%`);
+                lawyerQuery = lawyerQuery.ilike('email', `${inputVal}@%`);
+            }
+
+            // 1. Query the 'users' table
+            const { data: users, error: userError } = await userQuery.eq('project', 'Qanooni-Mushawarat');
+
+            if (users && users.length > 0) {
+                userData = users[0];
+            } else {
+                // 2. Query the 'lawyer_registration' table
+                const { data: lawyers, error: lawyerError } = await lawyerQuery.eq('project', 'Qanooni-Mushawarat');
+
+                if (lawyers && lawyers.length > 0) {
+                    const lawyer = lawyers[0];
+                    userData = {
+                        account_status: (lawyer.status === 'Verified Lawyer' || lawyer.status === 'Approved') ? 'active' : 'pending',
+                        role: 'lawyer',
+                        full_name: lawyer.full_name,
+                        profession: 'Lawyer',
+                        email: lawyer.email,
+                        assigned_tasks: ''
+                    };
+                }
             }
         }
 
@@ -4534,8 +4560,8 @@ async function handleLogin() {
             return;
         }
 
-        // If no password is saved in DB, authenticate via Supabase Auth
-        if (!userData.password) {
+        // Authenticate via Supabase Auth (unless it's a verified local-only user with matching password)
+        if (!userData.is_local || !userData.local_password) {
             try {
                 const { error: authError } = await supabase.auth.signInWithPassword({
                     email: userData.email,
