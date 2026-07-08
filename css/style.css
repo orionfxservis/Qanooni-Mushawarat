@@ -1,5 +1,5 @@
 /* =========================================================
-   LEGALEASE / QANOONI MUSHARAT
+   QANOONI MUSHAWARAT
    MASTER THEME CSS FILE
    File Name: theme.css
 ========================================================= */
@@ -16,7 +16,7 @@
 
 @font-face{
     font-family:'JameelNoori';
-    src:url('./fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
 }
@@ -62,13 +62,54 @@
     scroll-behavior:smooth;
 }
 
+/* Body */
 body{
     font-family:'Inter',sans-serif;
-    background:var(--light);
-    color:var(--text-dark);
-    overflow-x:hidden;
-    text-rendering:optimizeLegibility;
-    -webkit-font-smoothing:antialiased;
+}
+
+/* English Headings */
+.heading-font{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+}
+
+.nav-font{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+}
+
+.nav-font{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+}
+
+/* Navigation */
+.nav-font{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.45rem;
+    font-weight:600;
+}
+
+/* Hero Title */
+.hero-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:3.8rem;
+    font-weight:700;
+    line-height:1.15;
+}
+
+/* Section Heading */
+.section-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.4rem;
+    font-weight:600;
+}
+
+/* Card Heading */
+.card-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem;
+    font-weight:600;
 }
 
 /* =========================
@@ -126,6 +167,57 @@ body{
 
 .urdu-ui{
     line-height:2.2;
+}
+
+/* Urdu */
+.urdu-font{
+    font-family:'JameelNoori', serif;
+    direction:rtl;
+}
+
+.urdu-menu{
+    font-family:'JameelNoori', serif;
+    font-size:1.75rem;
+    line-height:1.8;
+}
+
+.urdu-heading{
+    font-family:'JameelNoori', serif;
+    font-size:2.6rem;
+    line-height:2;
+}
+
+.urdu-title{
+    font-family:'JameelNoori', serif;
+    font-size:2rem;
+    line-height:1.9;
+}
+
+.urdu-text{
+    font-family:'JameelNoori', serif;
+    font-size:1.35rem;
+    line-height:2.3;
+}
+
+/* =========================
+   TOGGLE ENGLISH / URDU
+========================= */
+
+/* English Headings */
+.heading-font{
+    font-family:'Cormorant Garamond',serif;
+}
+
+/* English Body */
+.body-font{
+    font-family:'Inter',sans-serif;
+}
+
+/* Urdu */
+.urdu-mode .heading-font,
+.urdu-mode .body-font,
+.urdu-mode .nav-font{
+    font-family:'JameelNoori',serif;
 }
 
 /* =========================
