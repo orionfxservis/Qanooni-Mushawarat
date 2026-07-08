@@ -485,12 +485,6 @@
                 Consultation
             </a>
 
-            <a href="./pages/cyber-crime.html"
-                class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
-                <i class="fas fa-user-shield text-secondary text-[13px]"></i>
-                Cyber Crime
-            </a>
-
             <a 	href="#client-form"
 				class="flex items-center gap-3 px-5 py-3 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-primary transition border-t border-gray-100">
 				<i class="fas fa-file-signature text-secondary text-[13px]"></i>
@@ -2807,46 +2801,30 @@
         // Language Toggle
 function updateLanguageToggleUI() {
 
-    // Desktop Toggle
-    const langSlider = document.getElementById('langSlider');
-    const langTextEN = document.getElementById('langTextEN');
-    const langTextUR = document.getElementById('langTextUR');
+    // Mobile code
+    const mobileLangSlider = document.getElementById('mobileLangSlider');
+    const mobileLangTextEN = document.getElementById('mobileLangTextEN');
+    const mobileLangTextUR = document.getElementById('mobileLangTextUR');
 
-    if (langSlider && langTextEN && langTextUR) {
-
+    if (mobileLangSlider && mobileLangTextEN && mobileLangTextUR) {
         if (currentLanguage === 'en') {
-
-            // Toggle Position
-            langSlider.style.left = '2px';
-
-            // Colors
-            langTextEN.style.color = '#1e3a5f';
-            langTextUR.style.color = '#ffffff';
-
-            // Fonts
-            document.body.classList.remove('urdu-mode');
-            document.body.classList.add('english-mode');
-
-            document.documentElement.lang = "en";
-            document.documentElement.dir = "ltr";
-
+            mobileLangSlider.style.left = '2px';
+            mobileLangTextEN.style.color = '#1e3a5f';
+            mobileLangTextUR.style.color = '#ffffff';
         } else {
-
-            // Toggle Position
-            langSlider.style.left = '55px';
-
-            // Colors
-            langTextEN.style.color = '#ffffff';
-            langTextUR.style.color = '#1e3a5f';
-
-            // Fonts
-            document.body.classList.remove('english-mode');
-            document.body.classList.add('urdu-mode');
-
-            document.documentElement.lang = "ur";
-            document.documentElement.dir = "rtl";
+            mobileLangSlider.style.left = '55px';
+            mobileLangTextEN.style.color = '#ffffff';
+            mobileLangTextUR.style.color = '#1e3a5f';
         }
     }
+}
+
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (!mobileMenu) return;
+
+    mobileMenu.classList.toggle("hidden");
 }
 
             // Update mobile slider
