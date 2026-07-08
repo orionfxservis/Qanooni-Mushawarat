@@ -3411,9 +3411,9 @@ Litigation
             if (clientForm) clientForm.addEventListener('submit', handleClientSubmit);
 
             const lawyerForm = document.getElementById('lawyerForm');
-            if (lawyerForm) lawyerForm.addEventListener('submit', handleLawyerSubmit);
+            if (lawyerForm) lawyerForm.addEventListener('submit', handleLawyerRegistration);
 
-            const chatForm = document.getElementById('chatForm');
+			const chatForm = document.getElementById('chatForm');
             if (chatForm) chatForm.addEventListener('submit', handleChatSubmit);
             
             // File upload drag & drop
@@ -3440,6 +3440,12 @@ Litigation
             loadHomeBlogs();
         });
         
+		function handleClientSubmit(e){
+			e.preventDefault();
+			alert("Request Submitted Successfully.");
+			e.target.reset();
+			}
+			
         // Language Toggle
         // Language Toggle
 function updateLanguageToggleUI() {
@@ -3666,11 +3672,39 @@ function toggleMobileMenu() {
 
     });
 
-    updateLanguageToggleUI();
+    updateLanguageDirection();
+	updateLanguageToggleUI();
+	renderHomeBlogs();
 
 }
             
-            counters.forEach(counter => observer.observe(counter));
+            // Counter Animation
+
+const counters = document.querySelectorAll(".counter");
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            const counter = entry.target;
+
+            const target = parseInt(counter.dataset.target);
+
+            animateCounter(counter,target);
+
+            observer.unobserve(counter);
+
+        }
+
+    });
+
+},{
+    threshold:0.5
+});
+
+counters.forEach(counter=>observer.observe(counter));
         
         function animateCounter(element, target) {
             let current = 0;
@@ -4637,7 +4671,6 @@ async function handleRegister() {
     });
 
 });
-
     </script>
 </body>
 </html>
