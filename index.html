@@ -3613,6 +3613,12 @@ function toggleMobileMenu() {
             });
         }
 
+        function updateLanguageDirection() {
+            const direction = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+            document.documentElement.setAttribute('dir', direction);
+            document.body.setAttribute('dir', direction);
+        }
+
         function toggleLanguage() {
 
     currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
