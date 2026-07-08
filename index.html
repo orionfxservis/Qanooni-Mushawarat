@@ -3603,7 +3603,7 @@ function toggleMobileMenu() {
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition">
+                        <a href="./pages/blogs.html?id=${b.id || b.slug}" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition">
                             <span>${currentLanguage === 'ur' ? 'مزید پڑھیں' : 'Read More'}</span>
                             <i class="fas fa-arrow-right text-[12px] ${currentLanguage === 'ur' ? 'rotate-180' : ''}"></i>
                         </a>
