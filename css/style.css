@@ -16,7 +16,7 @@
 
 @font-face{
     font-family:'JameelNoori';
-    src: local('Jameel Noori Nastaleeq'), local('JameelNoori'), url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    src:url('./fonts/JameelNooriNastaleeq.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
 }
@@ -83,13 +83,17 @@ body{
     padding-right:16px;
 }
 
-//* =========================
+/* =========================
    URDU FONT
 ========================= */
 
+[dir="rtl"], [dir="rtl"] * {
+    font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif !important;
+}
+
 @font-face{
     font-family:'JameelNoori';
-    src: local('Jameel Noori Nastaleeq'), local('JameelNoori'), url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+    src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
 }
@@ -99,7 +103,7 @@ body{
 .urdu-text,
 .urdu-heading,
 .urdu-ui{
-    font-family:'JameelNoori', 'Inter', sans-serif !important;
+    font-family:'JameelNoori', serif !important;
     direction:rtl;
     font-weight:normal;
     letter-spacing:0;
@@ -644,8 +648,4 @@ body{
     align-items:center;
     gap:12px;
     z-index:999;
-}
-
-body[dir="rtl"], body[dir="rtl"] * {
-    font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
 }
