@@ -452,6 +452,44 @@ body{
     }
 }
 
+/* ===========================
+   Service Cards
+============================== */
+
+.service-card{
+    min-height:320px;
+}
+
+.service-card:hover{
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.service-card .fa-arrow-right{
+    transition:.3s;
+}
+
+.service-card:hover .fa-arrow-right{
+    transform:translateX(4px);
+}
+
+
+/* ===========================
+   Recommended Hover Animation
+============================== */
+
+.service-card{
+    transition:all .35s ease;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
+
+.service-card:hover .service-icon{
+    transform:scale(1.12) rotate(8deg);
+}
+
 /* =========================
    LAWYER CARDS
 ========================= */
