@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -50,7 +50,7 @@
         font-style: normal;
     }
 
-    [dir="rtl"], [dir="rtl"] * {
+    [dir="rtl"], [dir="rtl"] *:not(.fas):not(.fab):not(.far):not(.fa) {
         font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
     }
 
@@ -379,10 +379,9 @@
     #heroSlider img{
         width:100%;
         height:100%;
-        object-fit:contain;
+        object-fit:cover;
         object-position:center center;
         display:block;
-        background-color:#000;
     }
 
     @media(min-width:1400px){
@@ -442,7 +441,7 @@
 
     <!-- Header -->
     <header id="header" class="sticky-header fixed top-0 left-0 right-0 z-50 bg-primary">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
 
     <!-- Main Nav -->
     <nav class="flex justify-between items-center py-2" style="min-height: 72px;">
@@ -1099,7 +1098,7 @@
 
     <!-- Laws Carousel -->
     <section id="laws" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="KNOW THE LAWS" data-ur="قوانین جانیں">KNOW THE LAWS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Important Laws of Pakistan" data-ur="پاکستان کے اہم قوانین">Important Laws of Pakistan</h2>
@@ -1286,7 +1285,7 @@
     <!-- Services Section -->
 <section id="services" class="py-24 bg-gradient-to-b from-white to-gray-50">
 
-    <div class="container mx-auto px-4">
+    <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
 
         <!-- Section Heading -->
         <div class="text-center max-w-4xl mx-auto mb-16">
@@ -1355,7 +1354,7 @@
         </div>
 
         <!-- Mega Service Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
 		
 		<!-- ===========================
      CARD 1 : PERSONAL & FAMILY LAW
@@ -1443,11 +1442,9 @@ Personal
     </div>
 </div>
 
-</div>
-
         <!-- Button -->
         <a href="./pages/personal-family.html"
-           class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition">
+           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
 
             <span data-en="Explore Services"
                   data-ur="تمام خدمات دیکھیں">
@@ -1470,8 +1467,8 @@ Personal
 <div class="service-card group relative bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-secondary">
 
     <!-- Badge -->
-    <div class="absolute top-4 right-4 z-10">
-        <span class="bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full border border-secondary/20">
+    <div class="absolute top-5 right-5">
+        <span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
             Business
         </span>
     </div>
@@ -1479,12 +1476,12 @@ Personal
     <!-- Top Border -->
     <div class="absolute top-0 left-0 h-1 w-0 bg-secondary transition-all duration-500 group-hover:w-full"></div>
 
-    <div class="p-5 flex flex-col h-full">
+    <div class="p-6 flex flex-col h-full">
 
         <!-- Icon -->
-        <div class="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-4 transition-all duration-500 group-hover:bg-secondary group-hover:scale-110">
+        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
 
-            <i class="fas fa-briefcase text-2xl text-secondary group-hover:text-white"></i>
+            <i class="fas fa-briefcase text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
 
         </div>
 
@@ -1549,7 +1546,7 @@ Personal
 
         <!-- Button -->
         <a href="./pages/business-corporate.html"
-           class="mt-auto inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-secondary hover:bg-primary text-white text-sm font-medium transition-all duration-300">
+           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
 
             <span data-en="Explore Services"
                   data-ur="تمام خدمات دیکھیں">
@@ -1580,10 +1577,10 @@ Specialized
     <!-- Top Accent -->
     <div class="absolute top-0 left-0 h-1 w-0 bg-secondary transition-all duration-500 group-hover:w-full"></div>
 
-    <div class="p-8 flex flex-col h-full">
+    <div class="p-6 flex flex-col h-full">
 
         <!-- Icon -->
-        <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
 
             <i class="fas fa-shield-halved text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
         </div>
@@ -1650,7 +1647,7 @@ Specialized
 
         <!-- Button -->
         <a href="./pages/specialized-services.html"
-           class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition">
+           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
 
             <span data-en="Explore Services"
                   data-ur="تمام خدمات دیکھیں">
@@ -1678,10 +1675,10 @@ Litigation
     <!-- Top Accent -->
     <div class="absolute top-0 left-0 h-1 w-0 bg-secondary transition-all duration-500 group-hover:w-full"></div>
 
-    <div class="p-8 flex flex-col h-full">
+    <div class="p-6 flex flex-col h-full">
 
         <!-- Icon -->
-        <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
 
             <i class="fas fa-gavel text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
         </div>
@@ -1752,7 +1749,7 @@ Litigation
 
         <!-- Button -->
         <a href="./pages/litigation-rights.html"
-           class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition">
+           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
 
             <span data-en="Explore Services"
                   data-ur="تمام خدمات دیکھیں">
@@ -1772,7 +1769,7 @@ Litigation
 
     <!-- Client Submission Form -->
     <section id="client-form" class="py-20 bg-gradient-to-br from-primary to-dark">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <span class="bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="SUBMIT YOUR CASE" data-ur="اپنا کیس جمع کریں">SUBMIT YOUR CASE</span>
@@ -1982,7 +1979,7 @@ Litigation
 
     <!-- Statistics Section -->
     <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -2019,7 +2016,7 @@ Litigation
     <!-- Lawyers Network Section -->
 <section id="lawyers" class="py-20 bg-gradient-to-b from-slate-50 to-gray-100 overflow-hidden">
 
-    <div class="container mx-auto px-4">
+    <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
 
     <!-- Main Grid -->
         <!-- Top Heading (Moved Inside) -->
@@ -2640,71 +2637,381 @@ Litigation
 </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="FAQ" data-ur="عمومی سوالات">FAQ</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Frequently Asked Questions" data-ur="عمومی سوالات">Frequently Asked Questions</h2>
-                <p class="text-gray-600" data-en="Find answers to common questions about our services" data-ur="ہماری خدمات کے بارے میں عام سوالات کے جوابات تلاش کریں">Find answers to common questions about our services</p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto space-y-4">
-                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-primary pr-4" data-en="How do I submit my legal matter?" data-ur="میں اپنا قانونی معاملہ کیسے جمع کرواؤں؟">How do I submit my legal matter?</span>
-                        <i class="fas fa-plus text-secondary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden px-6 pb-6">
-                        <p class="text-gray-600" data-en="You can submit your legal matter through our online form by clicking the 'Submit Case' section. You can describe your matter in text, upload relevant documents, or even record your voice to explain your situation. Once submitted, our team will review it and contact you within 24 hours." data-ur="آپ 'کیس جمع کریں' سیکشن پر کلک کرکے آن لائن فارم کے ذریعے اپنا قانونی معاملہ جمع کرواسکتے ہیں۔ آپ اپنا معاملہ ٹیکسٹ میں بیان کر سکتے ہیں، متعلقہ دستاویزات اپلوڈ کر سکتے ہیں، یا اپنی صورتحال کی وضاحت کے لیے اپنی آواز بھی ریکارڈ کر سکتے ہیں۔ ایک بار جمع ہونے کے بعد، ہماری ٹیم اس کا جائزہ لے کر 24 گھنٹے کے اندر آپ سے رابطہ کرے گی۔">You can submit your legal matter through our online form by clicking the "Submit Case" section. You can describe your matter in text, upload relevant documents, or even record your voice to explain your situation. Once submitted, our team will review it and contact you within 24 hours.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-primary pr-4" data-en="Is my information kept confidential?" data-ur="کیا میری معلومات کو秘密 رکھا جاتا ہے؟">Is my information kept confidential?</span>
-                        <i class="fas fa-plus text-secondary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden px-6 pb-6">
-                        <p class="text-gray-600" data-en="Yes, absolutely. All information shared with Qanooni Mushawarat is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent." data-ur="جی ہاں، بلاشبہ۔ لیگل ایز کے ساتھ شیئر کی گئی تمام معلومات کو سختی سے خفیہ رکھا جاتا ہے۔ ہم سخت رازداری کے پروٹوکول فالو کرتے ہیں اور آپ کی ذاتی اور کیس کی تفصیلات کبھی بھی آپ کی واضح رضامندی کے بغیر کسی تیسرے فریق کے ساتھ شیئر نہیں کی جاتیں۔">Yes, absolutely. All information shared with Qanooni Mushawarat is kept strictly confidential. We follow strict privacy protocols and your personal and case details are never shared with third parties without your explicit consent.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-primary pr-4" data-en="How much does consultation cost?" data-ur="مشاورت کتنی لاگت ہے؟">How much does consultation cost?</span>
-                        <i class="fas fa-plus text-secondary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden px-6 pb-6">
-                        <p class="text-gray-600" data-en="Initial consultation fees vary depending on the type of legal matter and complexity. We offer competitive rates and provide a free initial assessment for most cases. You will be informed about applicable fees before any consultation begins." data-ur="ابتدائی مشاورت کی فیس قسم اور پیچیدگی کے لحاظ سے مختلف ہوتی ہے۔ ہم مسابقتی نرخ پیش کرتے ہیں اور زیادہ تر کیسز کے لیے مفت ابتدائی تشخیص فراہم کرتے ہیں۔ آپ کو مشاورت شروع ہونے سے پہلے لاگو فیس کے بارے میں بتایا جائے گا۔">Initial consultation fees vary depending on the type of legal matter and complexity. We offer competitive rates and provide a free initial assessment for most cases. You will be informed about applicable fees before any consultation begins.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-primary pr-4" data-en="How can I become a verified lawyer on your platform?" data-ur="میں آپ کے پلیٹ فارم پر تصدیق شدہ وکیل کیسے بن سکتا ہوں؟">How can I become a verified lawyer on your platform?</span>
-                        <i class="fas fa-plus text-secondary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden px-6 pb-6">
-                        <p class="text-gray-600" data-en="To become a verified lawyer, you need to complete the registration form in the 'Lawyers' section. Submit your bar license and credentials for verification. Once approved by our admin team, you will receive a verified badge and can start receiving client inquiries." data-ur="تصدیق شدہ وکیل بننے کے لیے، آپ کو 'وکلاء' سیکشن میں رجسٹریشن فارم مکمل کرنا ہوگا۔ تصدیق کے لیے اپنا بُرس لائسنس اور اسناد جمع کروائیں۔ ایک بار ہماری ایڈمن ٹیم کی منظوری کے بعد، آپ کو ایک تصدیق شدہ بیج ملے گا اور آپ کلائنٹ کی پوچھ گاہ حاصل کرنا شروع کر سکیں گے۔">To become a verified lawyer, you need to complete the registration form in the "Lawyers" section. Submit your bar license and credentials for verification. Once approved by our admin team, you will receive a verified badge and can start receiving client inquiries.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left">
-                        <span class="font-semibold text-primary pr-4" data-en="Do you handle international legal matters?" data-ur="کیا آپ بین الاقوامی قانونی معاملات سنبھالتے ہیں؟">Do you handle international legal matters?</span>
-                        <i class="fas fa-plus text-secondary transition-transform"></i>
-                    </button>
-                    <div class="faq-answer hidden px-6 pb-6">
-                        <p class="text-gray-600" data-en="Yes, we handle international legal matters including immigration cases, British law consultations, and international disputes. Our network includes experts in various international legal systems to provide comprehensive guidance." data-ur="جی ہاں، ہم بین الاقوامی قانونی معاملات کو سنبھالتے ہیں جن میں امیگریشن کیسز، برٹش قانون کی مشاورت، اور بین الاقوامی تنازعات شامل ہیں۔ ہمارے نیٹ ورک میں جامع رہنمائی فراہم کرنے کے لیے مختلف بین الاقوامی قانونی نظاموں میں ماہرین شامل ہیں۔">Yes, we handle international legal matters including immigration cases, British law consultations, and international disputes. Our network includes experts in various international legal systems to provide comprehensive guidance.</p>
-                    </div>
-                </div>
-            </div>
+    <section id="faq" class="py-24 bg-gray-50">
+
+		<div class="w-full max-w-[1800px] mx-auto px-8 lg:px-12">
+
+			<!-- Heading -->
+			<div class="text-center mb-12">
+
+				<span class="inline-block bg-secondary/10 text-secondary px-5 py-2 rounded-full text-sm font-semibold">
+					LEGAL HELP CENTER
+				</span>
+
+				<h2 class="text-4xl font-bold text-primary mt-4">
+					Latest Legal News & Frequently Asked Questions
+				</h2>
+
+				<p class="text-gray-600 mt-3 max-w-3xl mx-auto">
+					Stay updated with the latest legal developments while finding answers to the most common legal questions.
+				</p>
+			</div>
+
+			<div class="grid lg:grid-cols-5 gap-8">
+
+		<!-- ================= LEFT SIDE ================= -->
+			<div class="lg:col-span-2">
+				<!-- Put NEWS Cards here -->
+				<div class="bg-white rounded-3xl shadow-lg border border-gray-100 h-[720px] overflow-hidden">
+					<div class="bg-primary text-white p-5">
+						<h3 class="text-2xl font-bold">
+							Latest Legal News
+						</h3>
+
+						<p class="text-sm text-gray-200 mt-1">
+							Daily Legal Updates
+						</p>
+					</div>
+
+					<div class="overflow-y-auto h-[620px] p-5 space-y-5">
+
+						<!-- News 1 -->
+						<div class="border-b pb-4">
+							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
+								Family Law
+							</span>
+
+							<h4 class="font-bold text-primary mt-3">
+								New Family Court Rules Introduced
+							</h4>
+
+							<p class="text-sm text-gray-600 mt-2">
+								Important updates regarding Family Court procedures in Pakistan.
+							</p>
+
+							<a	href="./blogs/family-court-rules.html"
+								class="text-secondary font-semibold text-sm">
+									Read More →
+							</a>
+						</div>
+
+						<!-- News 2 -->
+						<div class="border-b pb-4">
+							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
+								Property
+							</span>
+
+							<h4 class="font-bold text-primary mt-3">
+								Property Registration Process Updated
+							</h4>
+
+							<p class="text-sm text-gray-600 mt-2">
+								Learn the latest property transfer regulations.
+							</p>
+
+							<a 	href="./blogs/property-registration.html"
+								class="text-secondary font-semibold text-sm">
+									Read More →
+							</a>
+						</div>
+
+						<!-- News 3 -->
+						<div class="border-b pb-4">
+							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
+								Criminal Law
+							</span>
+
+							<h4 class="font-bold text-primary mt-3">
+								Bail Procedure Explained
+							</h4>
+
+							<p class="text-sm text-gray-600 mt-2">
+								Everything you should know before applying for Bail.
+							</p>
+
+							<a 	href="./blogs/bail-procedure.html"
+								class="text-secondary font-semibold text-sm">
+									Read More →
+							</a>
+						</div>
+
+						<!-- News 4 -->
+						<div class="border-b pb-4">
+							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
+								Corporate Law
+							</span>
+
+							<h4 class="font-bold text-primary mt-3">
+								Company Registration Guide
+							</h4>
+
+							<p class="text-sm text-gray-600 mt-2">
+								New SECP requirements for startups and companies.
+							</p>
+
+							<a 	href="./blogs/company-registration.html"
+								class="text-secondary font-semibold text-sm">
+									Read More →
+							</a>
+						</div>
+
+						<!-- News 5 -->
+						<div>
+							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
+								Consumer Rights
+							</span>
+
+							<h4 class="font-bold text-primary mt-3">
+								Consumer Protection Laws
+							</h4>
+
+							<p class="text-sm text-gray-600 mt-2">
+								Know your legal rights before purchasing products.
+							</p>
+
+							<a 	href="./blogs/consumer-rights.html"
+								class="text-secondary font-semibold text-sm">
+									Read More →
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+        <!-- ================= RIGHT SIDE ================= -->
+
+        <div class="lg:col-span-3">
+
+            <!-- Paste your existing FAQ Accordion here -->
+			<div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
+
+				<!-- Paste ALL your current FAQ Questions here -->
+				<!-- FAQ Accordion -->
+				<div class="space-y-4">
+
+					<!-- FAQ 1 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="What Legal Services do you Provide in Family Law?"
+									data-ur="آپ خاندانی قانون میں کون سی قانونی خدمات فراہم کرتے ہیں؟">
+										What Legal Services do you Provide in Family Law?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="We provide legal assistance for divorce, khula, child custody, maintenance, inheritance, guardianship, family disputes and Nikah registration."
+								data-ur="ہم طلاق، خلع، بچوں کی حوالگی، نان نفقہ، وراثت، سرپرستی، خاندانی تنازعات اور نکاح رجسٹریشن سے متعلق مکمل قانونی خدمات فراہم کرتے ہیں۔">
+									We provide Legal Assistance for Divorce, Khula, Child Custody, Maintenance, Inheritance, Guardianship, Family Disputes & Nikah Registration.
+							</p>
+						</div>
+					</div>
+
+					<!-- FAQ 2 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="Can I consult a Lawyer Immediately After An FIR is Registered?"
+									data-ur="کیا ایف آئی آر درج ہونے کے بعد فوری وکیل سے رابطہ کیا جا سکتا ہے؟">
+										Can I consult a Lawyer Immediately After An FIR is Registered?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. It is highly recommended to contact a criminal lawyer immediately after an FIR is registered."
+								data-ur="جی ہاں، ایف آئی آر درج ہوتے ہی فوری طور پر وکیل سے مشورہ کرنا چاہیے تاکہ آپ کے قانونی حقوق محفوظ رہیں۔">
+									Yes. It is highly recommended to contact a Criminal Lawyer immediately after an FIR is Registered.
+							</p>
+						</div>
+					</div>
+
+					<!-- FAQ 3 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="Do you provide Legal Services for Property Disputes?"
+									data-ur="کیا آپ جائیداد کے تنازعات کے لیے قانونی خدمات فراہم کرتے ہیں؟">
+										Do you provide Legal Services for Property Disputes?
+							</span>
+
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We handle property transfers, ownership disputes, inheritance matters, land verification and litigation."
+								data-ur="جی ہاں، ہم جائیداد کی خرید و فروخت، انتقال، ملکیت کے تنازعات، وراثتی معاملات اور عدالتی کارروائی میں قانونی مدد فراہم کرتے ہیں۔">
+									Yes. We handle property transfers, ownership disputes, inheritance matters, land verification and litigation.
+							</p>
+						</div>
+					</div>
+
+					<!-- FAQ 4 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="Can you help Register A Company in Pakistan?"
+									data-ur="کیا آپ پاکستان میں کمپنی رجسٹر کروا سکتے ہیں؟">
+										Can you help Register A Company in Pakistan?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We assist with company registration, partnership agreements, legal documentation, contracts, SECP compliance, and corporate legal advisory."
+								data-ur="اردو: جی ہاں، ہم کمپنی رجسٹریشن، پارٹنرشپ، قانونی دستاویزات، معاہدوں اور SECP سے متعلق مکمل قانونی خدمات فراہم کرتے ہیں۔">
+									Yes. We assist with Company Registration, Partnership Agreements, Legal Documentation, Contracts, SECP Compliance & Corporate Legal Advisory.
+							</p>
+						</div>
+					</div>
+					
+					<!-- FAQ 5 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="Do you provide Assistance for FBR Notices & Tax Matters?"
+									data-ur="کیا آپ ایف بی آر نوٹس اور ٹیکس معاملات میں مدد فراہم کرتے ہیں؟">
+										Do you provide Assistance for FBR Notices & Tax Matters?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We assist with company registration, partnership agreements, legal documentation, contracts, SECP compliance, and corporate legal advisory."
+								data-ur="اردو: جی ہاں، ہم ایف بی آر نوٹس، اپیل، این ٹی این رجسٹریشن، سیلز ٹیکس اور دیگر ٹیکس معاملات میں قانونی رہنمائی فراہم کرتے ہیں۔">
+									Yes. Our legal experts assist with tax notices, appeals, NTN Registration, Sales Tax Matters & FBR Compliance.
+							</p>
+						</div>
+					</div>
+					
+					<!-- FAQ 6 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="Can your Lawyers Assist with Immigration Matters?"
+									data-ur="کیا آپ ایف بی آر نوٹس اور ٹیکس معاملات میں مدد فراہم کرتے ہیں؟">
+										Can your Lawyers Assist with Immigration Matters?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We assist with company registration, partnership agreements, legal documentation, contracts, SECP compliance, and corporate legal advisory."
+								data-ur="اردو: جی ہاں، ہم ویزا، امیگریشن، دستاویزات، اپیل اور بیرون ملک ملازمت سے متعلق قانونی رہنمائی فراہم کرتے ہیں۔">
+									We provide legal consultation for visas, immigration documentation, appeals, overseas employment, and residency matters.
+							</p>
+						</div>
+					</div>
+					
+					<!-- FAQ 7 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="What should I do if I become A Victim of Cybercrime?"
+									data-ur="اگر میں سائبر کرائم کا شکار ہو جاؤں تو کیا کروں؟">
+										What should I do if I become A Victim of Cybercrime?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We assist with company registration, partnership agreements, legal documentation, contracts, SECP compliance, and corporate legal advisory."
+								data-ur="اردو: تمام ڈیجیٹل ثبوت محفوظ کریں اور فوری طور پر سائبر کرائم وکیل سے رابطہ کریں۔ ہم شکایت درج کروانے اور قانونی کارروائی میں مدد فراہم کرتے ہیں۔">
+									Preserve all digital evidence and contact a cybercrime lawyer immediately. We assist in complaints, investigations, and legal proceedings.
+							</p>
+						</div>
+					</div>
+					
+					<!-- FAQ 8 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="Can I take Legal Action against Fraudulent Businesses?"
+									data-ur="کیا میں دھوکہ دہی کرنے والے کاروبار کے خلاف قانونی کارروائی کر سکتا ہوں؟">
+										Can I take Legal Action against Fraudulent Businesses?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We assist with company registration, partnership agreements, legal documentation, contracts, SECP compliance, and corporate legal advisory."
+								data-ur="اردو: جی ہاں، اگر کسی کاروبار نے صارف کے حقوق کی خلاف ورزی کی ہے یا دھوکہ دہی کی ہے تو ہم قانونی کارروائی میں آپ کی مدد کر سکتے ہیں۔">
+									Yes. If a business has violated consumer rights, committed fraud, or failed to provide promised services, we can help you pursue legal action.
+							</p>
+						</div>
+					</div>
+					
+					<!-- FAQ 9 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="How can I Book A Legal Consultation?"
+									data-ur="میں قانونی مشاورت کیسے حاصل کر سکتا ہوں؟">
+										How can I Book A Legal Consultation?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We assist with company registration, partnership agreements, legal documentation, contracts, SECP compliance, and corporate legal advisory."
+								data-ur="اردو: آپ ہماری ویب سائٹ، لائیو چیٹ، واٹس ایپ، فون کال یا آن لائن کیس جمع کروا کر قانونی مشاورت حاصل کر سکتے ہیں۔">
+									YYou can book a consultation through our website, live chat, WhatsApp, phone call, or by submitting your case online.
+							</p>
+						</div>
+					</div>
+					
+					<!-- FAQ 10 -->
+					<div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+						<button class="faq-btn w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition">
+
+							<span 	class="font-semibold text-primary"
+									data-en="How can I Book A Legal Consultation?"
+									data-ur="میں قانونی مشاورت کیسے حاصل کر سکتا ہوں؟">
+										How can I Book A Legal Consultation?
+							</span>
+								<i class="fas fa-plus text-secondary transition-transform"></i>
+						</button>
+
+						<div class="faq-content hidden px-6 pb-6 text-gray-600">
+
+							<p 	data-en="Yes. We assist with company registration, partnership agreements, legal documentation, contracts, SECP compliance, and corporate legal advisory."
+								data-ur="اردو: آپ ہماری ویب سائٹ، لائیو چیٹ، واٹس ایپ، فون کال یا آن لائن کیس جمع کروا کر قانونی مشاورت حاصل کر سکتے ہیں۔">
+									YYou can book a consultation through our website, live chat, WhatsApp, phone call, or by submitting your case online.
+							</p>
+						</div>
+					</div>
+
+</div>
+
+			</div>
         </div>
-    </section>
+    </div>
+</div>
+
+</section>
 
     <!-- Blogs Section -->
     <section id="blogs" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="BLOGS" data-ur="بلاگز">BLOGS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Legal Resources & Articles" data-ur="قانونی رہنمائی اور معلوماتی مضامین">Legal Resources & Articles</h2>
@@ -2723,7 +3030,7 @@ Litigation
     </section>
     <!-- Testimonials -->
     <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="TESTIMONIALS" data-ur="رائے / تبصرے">TESTIMONIALS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="What Our Clients Say" data-ur="ہمارے کلائنٹس کیا کہتے ہیں">What Our Clients Say</h2>
@@ -2789,7 +3096,7 @@ Litigation
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="CONTACT US" data-ur="ہم سے رابطہ کریں">CONTACT US</span>
@@ -2838,7 +3145,7 @@ Litigation
 
     <!-- Footer -->
     <footer class="bg-dark pt-16 pb-8">
-        <div class="container mx-auto px-4">
+        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                 <!-- About -->
                 <div>
@@ -4287,6 +4594,49 @@ async function handleRegister() {
                 loadRightsSlides();
             };
         }
+		
+		document.querySelectorAll('.faq-btn').forEach(button => {
+
+    button.addEventListener('click', function () {
+
+        const item = this.parentElement;
+        const content = item.querySelector('.faq-content');
+        const icon = this.querySelector('i');
+
+        // Close all other FAQs
+        document.querySelectorAll('.faq-item').forEach(faq => {
+
+            if (faq !== item) {
+
+                faq.querySelector('.faq-content').classList.add('hidden');
+
+                const otherIcon = faq.querySelector('i');
+
+                otherIcon.classList.remove('fa-minus','rotate-180');
+                otherIcon.classList.add('fa-plus');
+
+            }
+
+        });
+
+        // Toggle Current FAQ
+        content.classList.toggle('hidden');
+
+        if(content.classList.contains('hidden')){
+
+            icon.classList.remove('fa-minus','rotate-180');
+            icon.classList.add('fa-plus');
+
+        }else{
+
+            icon.classList.remove('fa-plus');
+            icon.classList.add('fa-minus','rotate-180');
+
+        }
+
+    });
+
+});
 
     </script>
 </body>
