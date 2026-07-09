@@ -3582,11 +3582,21 @@ function toggleMobileMenu() {
                 const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
                 const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
 
-                const currentDateStr = new Date(b.created_at || Date.now()).toLocaleDateString('en-GB', {
-                    day: '2-digit',
-                    month: 'short',
-                    year: '2-digit'
-                }).replace(/ /g, '-');
+                let currentDateStr = '';
+                try {
+                    const parsedDate = new Date(b.created_at || Date.now());
+                    if (!isNaN(parsedDate.getTime())) {
+                        currentDateStr = parsedDate.toLocaleDateString('en-GB', {
+                            day: '2-digit',
+                            month: 'short',
+                            year: '2-digit'
+                        }).replace(/ /g, '-');
+                    } else {
+                        currentDateStr = b.date || '';
+                    }
+                } catch (e) {
+                    currentDateStr = b.date || '';
+                }
 
                 const card = document.createElement('div');
                 card.className = 'bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col justify-between';
@@ -4276,6 +4286,37 @@ counters.forEach(counter=>observer.observe(counter));
             if (installBtn) {
                 installBtn.style.display = 'none';
                 installBtn.classList.add('hidden');
+            }
+        });
+
+        // Lawyer Registration Modal
+        function openLawyerModal() {
+            const modal = document.getElementById('lawyerModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeLawyerModal() {
+            const modal = document.getElementById('lawyerModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close on outside click
+        document.addEventListener('DOMContentLoaded', () => {
+            const lawyerModalEl = document.getElementById('lawyerModal');
+            if (lawyerModalEl) {
+                lawyerModalEl.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeLawyerModal();
+                    }
+                });
             }
         });
 		

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'qanooni-mushawarat-v6';
+const CACHE_NAME = 'qanooni-mushawarat-v7';
 const ASSETS = [
     './index.html',
     './css/style.css',
