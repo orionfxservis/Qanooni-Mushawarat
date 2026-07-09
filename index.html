@@ -441,7 +441,7 @@
 
     <!-- Header -->
     <header id="header" class="sticky-header fixed top-0 left-0 right-0 z-50 bg-primary">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
 
     <!-- Main Nav -->
     <nav class="flex justify-between items-center py-2" style="min-height: 72px;">
@@ -1098,7 +1098,7 @@
 
     <!-- Laws Carousel -->
     <section id="laws" class="py-20 bg-white">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="KNOW THE LAWS" data-ur="قوانین جانیں">KNOW THE LAWS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Important Laws of Pakistan" data-ur="پاکستان کے اہم قوانین">Important Laws of Pakistan</h2>
@@ -3508,7 +3508,7 @@ function toggleMobileMenu() {
                         slug: "starting-a-business-legal-requirements",
                         category: "Corporate Law ||| کارپوریٹ لاء",
                         short_description: "Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly. ||| آسانی سے کاروبار شروع کرنے کے لیے ضروری قانونی دستاویزات، کمپنی کی رجسٹریشن کے عمل، اور ٹیکس کی تعمیل کے بارے میں جانیں۔",
-                        image: "./images/bg-slide-show/law-liabrary.jpg",
+                        image: "./images/bg-slide-show/corporate.jpg",
                         date: "10-Oct-26",
                         author: "Corporate Team"
                     },
@@ -3518,7 +3518,7 @@ function toggleMobileMenu() {
                         slug: "how-to-verify-real-estate-property-titles",
                         category: "Property Law ||| پراپرٹی لاء",
                         short_description: "Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment. ||| سرمایہ کاری کرنے سے پہلے ملکیت کے ریکارڈ کو صحیح طریقے سے چیک کرنے اور پراپرٹی کے ٹائٹل کی تصدیق کرنے کا طریقہ سیکھ کر پراپرٹی کے فراڈ سے بچیں۔",
-                        image: "./images/bg-slide-show/property-law.jpg",
+                        image: "./images/bg-slide-show/property.jpg",
                         date: "05-Oct-26",
                         author: "Property Expert"
                     }
@@ -3603,7 +3603,7 @@ function toggleMobileMenu() {
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <a href="./pages/blogs.html?id=${b.id || b.slug}" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition">
+                        <a href="./pages/blogs.html" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition">
                             <span>${currentLanguage === 'ur' ? 'مزید پڑھیں' : 'Read More'}</span>
                             <i class="fas fa-arrow-right text-[12px] ${currentLanguage === 'ur' ? 'rotate-180' : ''}"></i>
                         </a>
@@ -3611,12 +3611,6 @@ function toggleMobileMenu() {
                 `;
                 grid.appendChild(card);
             });
-        }
-
-        function updateLanguageDirection() {
-            const direction = currentLanguage === 'ur' ? 'rtl' : 'ltr';
-            document.documentElement.setAttribute('dir', direction);
-            document.body.setAttribute('dir', direction);
         }
 
         function toggleLanguage() {
