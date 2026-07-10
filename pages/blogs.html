@@ -280,13 +280,13 @@ LANGUAGE & DYNAMIC BLOGS SCRIPT
             return params.get(name);
         }
 
-        await loadBlogs();
-
-        const slug = getQueryParameter("slug");
-
-        if (slug) {
-            viewBlogDetails(slug);
-        }
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadBlogs();
+            const slug = getQueryParameter("slug");
+            if (slug) {
+                viewBlogDetails(slug);
+            }
+        });
 
 
         let currentLanguage = 'en';
