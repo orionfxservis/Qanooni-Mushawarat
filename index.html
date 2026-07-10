@@ -3465,7 +3465,7 @@ function toggleMobileMenu() {
 
         async function loadHomeBlogs() {
             try {
-                const url = 'https://aywuxnimzuqmocjccvbv.supabase.co/rest/v1/blogs?select=*&focus_keyword=eq.Qanooni-Mushawarat&order=created_at.desc&limit=3';
+                const url = 'https://aywuxnimzuqmocjccvbv.supabase.co/rest/v1/blogs?select=*&focus_keyword=eq.Qanooni-Mushawarat&order=created_at.desc';
                 const anonKey = 'sb_publishable_rnxMaJuE7KAjchYt3VN53Q_lYuJQpW7';
 
                 const response = await fetch(url, {
@@ -3476,7 +3476,7 @@ function toggleMobileMenu() {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    homeBlogs = data || [];
+                    homeBlogs = (data || []).slice(0, 3);
                     if (homeBlogs.length === 0) {
                         homeBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
                     }
@@ -3612,19 +3612,23 @@ function toggleMobileMenu() {
             });
         }
 
+        function updateLanguageDirection() {
+            const html = document.documentElement;
+            const langDirSpan = document.getElementById('langDirection');
+            if (currentLanguage === 'ur') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ur');
+                if (langDirSpan) langDirSpan.textContent = 'rtl';
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+                if (langDirSpan) langDirSpan.textContent = 'ltr';
+            }
+        }
+
         function toggleLanguage() {
-
-    currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
-
-    const html = document.documentElement;
-
-    if (currentLanguage === 'ur') {
-        html.setAttribute('dir', 'rtl');
-        html.setAttribute('lang', 'ur');
-    } else {
-        html.setAttribute('dir', 'ltr');
-        html.setAttribute('lang', 'en');
-    }
+            currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+            updateLanguageDirection();
 
     // Update all translated text
     document.querySelectorAll('[data-en]').forEach(el => {
