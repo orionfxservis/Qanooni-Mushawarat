@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal News Details | Qanooni Mushawarat</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase SDK & Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #c9a227;
+        }
+        .bg-primary { background: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .bg-secondary { background: var(--secondary); }
+        .text-secondary { color: var(--secondary); }
+        
+        [dir="rtl"], [dir="rtl"] *:not(i):not(svg):not([class*="fa-"]) {
+            font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
+        }
+
+        .standard-footer {
+            background-color: #1e3a5f;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.875rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-primary shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between py-2">
+                <div class="flex items-center gap-5">
+                    <a href="../index.html" class="flex items-center">
+                        <img src="../images/logo/Qanooni Mushawarat logo.png" alt="Qanooni Mushawarat Logo" class="h-[48px] md:h-[60px] w-auto object-contain relative top-[5px]">
+                    </a>
+                    <a href="../index.html" class="text-white hover:text-secondary transition font-medium text-sm md:text-base" data-en="Home" data-ur="ہوم">Home</a>
+                </div>
+                <div class="absolute left-1/2 -translate-x-1/2">
+                    <h1 class="text-white font-semibold text-base md:text-lg" data-en="Legal News Detail" data-ur="قانونی خبر کی تفصیل">Legal News Detail</h1>
+                </div>
+                <button onclick="toggleLanguage()" id="langBtn" class="border border-secondary text-secondary px-4 py-1.5 rounded-lg hover:bg-secondary hover:text-primary transition font-medium text-sm">
+                    اردو
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="flex-grow container mx-auto px-4 py-10 max-w-4xl">
+        <div id="loading" class="text-center py-20 text-gray-500">
+            <i class="fas fa-spinner fa-spin text-3xl text-secondary mb-3"></i>
+            <p>Loading news details...</p>
+        </div>
+
+        <article id="newsArticle" class="bg-white rounded-3xl shadow-lg overflow-hidden hidden border border-gray-100">
+            <!-- Hero Image -->
+            <div class="h-64 md:h-96 w-full bg-slate-100 relative overflow-hidden flex items-center justify-center border-b border-gray-100">
+                <img id="newsHeroImage" src="" class="w-full h-full object-cover">
+                <div id="newsCategoryBadge" class="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-bold text-primary shadow-sm"></div>
+            </div>
+
+            <!-- Body -->
+            <div class="p-6 md:p-10">
+                <!-- Meta Info -->
+                <div class="flex flex-wrap items-center gap-4 text-xs text-gray-400 mb-6 border-b pb-4">
+                    <div>
+                        <i class="fas fa-calendar-alt mr-1"></i> <span id="newsPublishDate"></span>
+                    </div>
+                    <div id="newsSourceContainer" class="hidden">
+                        <i class="fas fa-link mr-1"></i> Source: <a id="newsSourceLink" href="" target="_blank" class="text-secondary font-bold hover:underline"></a>
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <h2 id="newsTitleText" class="text-2xl md:text-3xl font-extrabold text-primary mb-6 leading-tight"></h2>
+
+                <!-- Short Description / Full Text -->
+                <div id="newsBodyText" class="text-gray-700 leading-relaxed text-sm md:text-base space-y-4"></div>
+
+                <!-- Share Buttons -->
+                <div class="mt-10 pt-6 border-t border-gray-100 flex flex-wrap items-center gap-4">
+                    <span class="text-xs font-bold text-gray-500 uppercase" data-en="Share This Article:" data-ur="اس مضمون کو شیئر کریں:">Share This Article:</span>
+                    <button onclick="share('facebook')" class="w-9 h-9 rounded-full bg-[#1877f2] text-white flex items-center justify-center hover:opacity-90 transition"><i class="fab fa-facebook-f"></i></button>
+                    <button onclick="share('twitter')" class="w-9 h-9 rounded-full bg-[#1da1f2] text-white flex items-center justify-center hover:opacity-90 transition"><i class="fab fa-twitter"></i></button>
+                    <button onclick="share('whatsapp')" class="w-9 h-9 rounded-full bg-[#25d366] text-white flex items-center justify-center hover:opacity-90 transition"><i class="fab fa-whatsapp"></i></button>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="standard-footer">
+        <div class="container mx-auto px-4">
+            <p data-en="© 2026 Qanooni Mushawarat. All Rights Reserved." data-ur="© 2026 قانونی مشاورت۔ جملہ حقوق محفوظ ہیں۔">
+                © 2026 Qanooni Mushawarat. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- LOGIC -->
+    <script>
+        let currentLanguage = 'en';
+        let newsData = null;
+
+        function getQueryParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        async function fetchNewsDetails() {
+            const id = getQueryParameter('id');
+            if (!id) {
+                showError("No news ID provided in the URL.");
+                return;
+            }
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('legal_news')
+                        .select('*')
+                        .eq('id', id)
+                        .eq('project_name', 'Qanooni-Mushawarat')
+                        .single();
+                    if (error) throw error;
+                    newsData = data;
+                } else {
+                    const local = JSON.parse(localStorage.getItem('qanooni_mushawarat_legal_news') || '[]');
+                    newsData = local.find(n => n.id == id);
+                }
+            } catch (err) {
+                console.error("Error loading details:", err);
+                const local = JSON.parse(localStorage.getItem('qanooni_mushawarat_legal_news') || '[]');
+                newsData = local.find(n => n.id == id);
+            }
+
+            if (!newsData) {
+                // Try fallback static mock data
+                if (id == 991) {
+                    newsData = {
+                        id: 991,
+                        title: "New Family Court Rules Introduced",
+                        title_ur: "خاندانی قوانین میں نئی ترمیم متعارف",
+                        category: "Family Law",
+                        short_description: "Important updates regarding Family Court procedures in Pakistan.",
+                        short_description_ur: "پاکستان میں فیملی کورٹ کے طریقہ کار کے حوالے سے اہم اپ ڈیٹس۔",
+                        publish_date: "2026-07-10",
+                        image: "../images/bg-slide-show/family-law.jpg"
+                    };
+                } else if (id == 992) {
+                    newsData = {
+                        id: 992,
+                        title: "Property Registration Process Updated",
+                        title_ur: "جائیداد کی رجسٹریشن کا عمل تبدیل",
+                        category: "Property Law",
+                        short_description: "Learn the latest property transfer regulations.",
+                        short_description_ur: "جائیداد کی منتقلی کے نئے قواعد کے بارے میں جانیں۔",
+                        publish_date: "2026-07-08",
+                        image: "../images/bg-slide-show/property.jpg"
+                    };
+                }
+            }
+
+            if (!newsData) {
+                showError("Legal News post not found.");
+                return;
+            }
+
+            renderDetails();
+        }
+
+        function renderDetails() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('newsArticle').classList.remove('hidden');
+
+            const title = currentLanguage === 'ur' && newsData.title_ur ? newsData.title_ur : newsData.title;
+            const desc = currentLanguage === 'ur' && newsData.short_description_ur ? newsData.short_description_ur : newsData.short_description;
+
+            document.getElementById('newsHeroImage').src = newsData.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600';
+            document.getElementById('newsCategoryBadge').textContent = newsData.category;
+            document.getElementById('newsPublishDate').textContent = new Date(newsData.publish_date).toLocaleDateString('en-GB', {
+                day: '2-digit', month: 'short', year: 'numeric'
+            });
+
+            if (newsData.source) {
+                document.getElementById('newsSourceContainer').classList.remove('hidden');
+                const srcLink = document.getElementById('newsSourceLink');
+                srcLink.textContent = newsData.source;
+                srcLink.href = newsData.source_url || '#';
+            }
+
+            document.getElementById('newsTitleText').textContent = title;
+            document.getElementById('newsBodyText').textContent = desc;
+
+            if (currentLanguage === 'ur') {
+                document.getElementById('newsTitleText').classList.add('text-right', 'font-urdu');
+                document.getElementById('newsBodyText').classList.add('text-right', 'font-urdu');
+                document.getElementById('newsTitleText').dir = 'rtl';
+                document.getElementById('newsBodyText').dir = 'rtl';
+            } else {
+                document.getElementById('newsTitleText').classList.remove('text-right', 'font-urdu');
+                document.getElementById('newsBodyText').classList.remove('text-right', 'font-urdu');
+                document.getElementById('newsTitleText').dir = 'ltr';
+                document.getElementById('newsBodyText').dir = 'ltr';
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('loading').innerHTML = `
+                <div class="text-red-500">
+                    <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+                    <p class="font-bold">${msg}</p>
+                </div>
+            `;
+        }
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+            document.getElementById('langBtn').textContent = currentLanguage === 'ur' ? 'English' : 'اردو';
+            
+            // Translate header title and footer
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const trans = el.getAttribute('data-' + currentLanguage);
+                if (trans) el.textContent = trans;
+            });
+
+            if (newsData) renderDetails();
+        }
+
+        function share(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(newsData ? newsData.title : 'Legal News');
+            let shareUrl = '';
+            if (platform === 'facebook') shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            else if (platform === 'twitter') shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+            else if (platform === 'whatsapp') shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchNewsDetails);
+    </script>
+</body>
+</html>

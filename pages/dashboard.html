@@ -31,7 +31,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
     
-        body[dir="rtl"], body[dir="rtl"] *:not(i):not(svg):not([class*="fa-"]) {
+        [dir="rtl"], [dir="rtl"] *:not(i):not(svg):not([class*="fa-"]) {
             font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
         }
     </style>
@@ -162,11 +162,13 @@
 
         </button>
 
-        <button onclick="switchTab('cyber-crime-complaints')" id="tab-btn-cyber-crime-complaints"
+        </button>
+
+        <button onclick="switchTab('legal-news')" id="tab-btn-legal-news"
             class="tab-btn w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-white/10 text-left">
 
-            <i class="fas fa-user-shield w-5 text-center"></i>
-            <span class="font-medium text-[11px]">Cyber Crime Complaints</span>
+            <i class="fas fa-gavel w-5 text-center"></i>
+            <span class="font-medium text-[11px]">Manage Legal News</span>
 
         </button>
 
@@ -305,8 +307,28 @@
             <div class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
                 <i class="fas fa-clock text-red-500 text-lg"></i>
             </div>
-        </div>
     </div>
+</div>
+
+				<!-- LEGAL NEWS CARD -->
+				<div class="bg-[#eaeef3] rounded-xl p-4 border border-indigo-200/60 shadow-sm hover:shadow-md transition">
+					<div class="flex items-center justify-between mb-2">
+						<div>
+							<p class="text-[11px] font-bold text-gray-500 uppercase tracking-wide">
+								Legal News
+							</p>
+						</div>
+						<div class="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center">
+							<i class="fas fa-newspaper text-indigo-600 text-sm"></i>
+						</div>
+					</div>
+					<div class="grid grid-cols-2 gap-2 text-[10px] text-gray-600 mt-2 font-medium">
+						<div>Published: <span id="dash-news-published" class="font-bold text-indigo-600">0</span></div>
+						<div>Draft: <span id="dash-news-draft" class="font-bold text-gray-500">0</span></div>
+						<div>Today: <span id="dash-news-today" class="font-bold text-green-600">0</span></div>
+						<div>Featured: <span id="dash-news-featured" class="font-bold text-amber-600">0</span></div>
+					</div>
+				</div>
 </div>
 
     <!-- QUICK ACTIONS -->
@@ -811,7 +833,156 @@
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Manage Legal News Tab -->
+            <div id="tab-legal-news" class="tab-content">
+                <!-- Add New Legal News Form -->
+                <div class="bg-[#eaeef3] rounded-2xl p-5 shadow-sm border border-gray-200/80 mb-6">
+                    <h3 class="text-xs font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2" id="newsFormHeader">
+                        <i class="fas fa-plus-circle text-secondary"></i>
+                        Add Legal News
+                    </h3>
+                    
+                    <form id="addNewsForm" class="space-y-4" onsubmit="qanooni_mushawarat_saveNews(event)">
+                        <input type="hidden" id="newsId">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Category -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Category</label>
+                                <select id="newsCategory" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition bg-white">
+                                    <option value="Family Law">Family Law</option>
+                                    <option value="Property Law">Property Law</option>
+                                    <option value="Corporate Law">Corporate Law</option>
+                                    <option value="Criminal Law">Criminal Law</option>
+                                    <option value="Tax Law">Tax Law</option>
+                                    <option value="Cyber Crime">Cyber Crime</option>
+                                    <option value="Consumer Law">Consumer Law</option>
+                                    <option value="Immigration Law">Immigration Law</option>
+                                    <option value="Constitutional Law">Constitutional Law</option>
+                                </select>
+                            </div>
+                            <!-- Publish Date -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Publish Date</label>
+                                <input type="date" id="newsPublishDate" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition">
+                            </div>
+                            <!-- Status -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Status</label>
+                                <select id="newsStatus" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition bg-white">
+                                    <option value="Draft">Draft</option>
+                                    <option value="Publish">Publish</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Title EN -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">News Title (English)</label>
+                                <input type="text" id="newsTitle" required placeholder="Enter English Title" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition">
+                            </div>
+                            <!-- Title UR -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">News Title (Urdu)</label>
+                                <input type="text" id="newsTitleUr" required placeholder="اردو عنوان درج کریں" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu text-right" dir="rtl">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Short Description EN -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Short Description (English)</label>
+                                <textarea id="newsShortDescription" required rows="3" placeholder="Enter Short Description in English" class="w-full p-2 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition"></textarea>
+                            </div>
+                            <!-- Short Description UR -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Short Description (Urdu)</label>
+                                <textarea id="newsShortDescriptionUr" required rows="3" placeholder="اردو میں مختصر تفصیل درج کریں" class="w-full p-2 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition font-urdu text-right" dir="rtl"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Image URL -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Image URL</label>
+                                <input type="text" id="newsImage" placeholder="https://example.com/image.jpg" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition">
+                            </div>
+                            <!-- Source Name -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Source Name</label>
+                                <input type="text" id="newsSource" placeholder="e.g. Dawn News" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition">
+                            </div>
+                            <!-- Source URL -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Source URL</label>
+                                <input type="url" id="newsSourceUrl" placeholder="https://dawn.com/news/123" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <label class="flex items-center gap-2 text-xs font-bold text-gray-700 uppercase cursor-pointer">
+                                <input type="checkbox" id="newsFeatured" class="rounded border-gray-300 text-secondary focus:ring-secondary">
+                                Featured News
+                            </label>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <button type="submit" id="btnSaveNews" class="bg-secondary text-primary px-6 h-8 text-xs font-bold rounded-lg hover:bg-white border-2 border-secondary hover:text-primary transition flex items-center gap-1.5 shadow-sm">
+                                <i class="fas fa-save"></i> Save News
+                            </button>
+                            <button type="button" onclick="qanooni_mushawarat_cancelNewsEdit()" id="btnCancelNews" class="bg-gray-500 text-white px-4 h-8 text-xs font-bold rounded-lg hover:bg-gray-600 transition hidden">
+                                Cancel Edit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Existing Legal News Table -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+                        <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                            <i class="fas fa-list text-secondary"></i>
+                            Qanooni Mushawarat Legal News
+                        </h3>
+                        <div class="flex flex-wrap gap-3">
+                            <input type="text" id="newsSearchInput" oninput="qanooni_mushawarat_filterNews()" placeholder="Search news..." class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition text-sm">
+                            <select id="newsCategoryFilter" onchange="qanooni_mushawarat_filterNews()" class="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition text-sm bg-white">
+                                <option value="All">All Categories</option>
+                                <option value="Family Law">Family Law</option>
+                                <option value="Property Law">Property Law</option>
+                                <option value="Corporate Law">Corporate Law</option>
+                                <option value="Criminal Law">Criminal Law</option>
+                                <option value="Tax Law">Tax Law</option>
+                                <option value="Cyber Crime">Cyber Crime</option>
+                                <option value="Consumer Law">Consumer Law</option>
+                                <option value="Immigration Law">Immigration Law</option>
+                                <option value="Constitutional Law">Constitutional Law</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-gray-100 bg-gray-50/50 text-[13px] text-gray-500">
+                                    <th class="py-3 px-2 font-semibold w-16">Image</th>
+                                    <th class="py-3 px-4 font-semibold">Title</th>
+                                    <th class="py-3 px-4 font-semibold">Category</th>
+                                    <th class="py-3 px-4 font-semibold">Date</th>
+                                    <th class="py-3 px-4 font-semibold">Status</th>
+                                    <th class="py-3 px-4 font-semibold">Featured</th>
+                                    <th class="py-3 px-4 font-semibold rounded-tr-xl text-right w-24">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newsTableBody">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- Know Your Rights Tab -->
             <div id="tab-know-rights" class="tab-content">
                 <!-- Add New Slide Form -->
@@ -1501,14 +1672,9 @@
     </div>
 
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-	<script src="../js/supabase.js"></script>
+	<script src="../js/qanooni-mushawarat.js"></script>
 	<script src="../js/custom-alert.js"></script>
 	<script src="../js/dashboard.js"></script>
-
-    <!-- Supabase Core Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- Our Custom Supabase Config -->
-    <script src="../js/supabase-config.js"></script>
 
     <script>
         // Tab Switching Logic
@@ -1548,7 +1714,8 @@
                 'payments': 'Payment History',
                 'documents': 'Legal Documents',
                 'notifications': 'Notifications Hub',
-                'settings': 'Account Settings'
+                'settings': 'Account Settings',
+                'legal-news': 'Manage Legal News'
             };
             document.getElementById('pageTitle').textContent = titles[tabId] || tabId.replace('-', ' ').toUpperCase();
             
@@ -1556,6 +1723,7 @@
             if(tabId === 'ai-support' || tabId === 'dashboard') fetchAiSupportChats();
             if(tabId === 'cyber-crime-complaints' || tabId === 'dashboard') fetchCyberComplaints();
             if(tabId === 'blogs' || tabId === 'dashboard') fetchBlogs();
+            if(tabId === 'legal-news' || tabId === 'dashboard') qanooni_mushawarat_fetchNews();
         }
 
         // Load Lawyers from Supabase & LocalStorage Fallback
@@ -2198,6 +2366,7 @@
 
         // Initial load
         window.onload = function() {
+            QanooniMushawarat.init();
             try {
                 const sessionUser = JSON.parse(localStorage.getItem('currentUser'));
                 if (sessionUser) {
@@ -4484,43 +4653,24 @@
         }
 
         async function loadLawyerProfile() {
-            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
-            if (!activeSupabase || !currentUser || !currentUser.email) return;
+            if (!currentUser || !currentUser.email) return;
 
             try {
-                const { data, error } = await activeSupabase
-                    .from('lawyer_registration')
-                    .select('*')
-                    .eq('email', currentUser.email);
+                const profile = await QanooniMushawarat.loadLawyerProfile(currentUser.email);
+                if (!profile) return;
 
-                if (error) throw error;
-                if (!data || data.length === 0) return;
-
-                const lawyer = data[0];
-                
                 const cnicInput = document.getElementById('profCnic');
-                if (cnicInput) cnicInput.value = lawyer.cnic || '';
+                if (cnicInput) cnicInput.value = profile.cnic || '';
 
-                let profile = {};
-                try {
-                    if (lawyer.bio && (lawyer.bio.startsWith('{') || lawyer.bio.startsWith('['))) {
-                        profile = JSON.parse(lawyer.bio);
-                    } else {
-                        profile = { bioText: lawyer.bio || '' };
-                    }
-                } catch(e) {
-                    profile = { bioText: lawyer.bio || '' };
-                }
-
-                if (document.getElementById('profPhoto')) document.getElementById('profPhoto').value = profile.profilePhoto || lawyer.profile_image || '';
+                if (document.getElementById('profPhoto')) document.getElementById('profPhoto').value = profile.profilePhoto || '';
                 if (document.getElementById('profCover')) document.getElementById('profCover').value = profile.coverPhoto || '';
                 if (document.getElementById('profDob')) document.getElementById('profDob').value = profile.dob || '';
                 if (document.getElementById('profGender')) document.getElementById('profGender').value = profile.gender || '';
                 if (document.getElementById('profNationality')) document.getElementById('profNationality').value = profile.nationality || 'Pakistani';
-                if (document.getElementById('profBio')) document.getElementById('profBio').value = profile.bioText || lawyer.bio || '';
-                if (document.getElementById('profExperience')) document.getElementById('profExperience').value = profile.experience || lawyer.experience || '';
+                if (document.getElementById('profBio')) document.getElementById('profBio').value = profile.bioText || '';
+                if (document.getElementById('profExperience')) document.getElementById('profExperience').value = profile.experience || '';
                 if (document.getElementById('profBarCouncil')) document.getElementById('profBarCouncil').value = profile.barCouncil || '';
-                if (document.getElementById('profBarMembership')) document.getElementById('profBarMembership').value = profile.barMembership || lawyer.license_no || '';
+                if (document.getElementById('profBarMembership')) document.getElementById('profBarMembership').value = profile.barMembership || '';
                 if (document.getElementById('profEnrollDate')) document.getElementById('profEnrollDate').value = profile.enrollDate || '';
                 if (document.getElementById('profLevel')) document.getElementById('profLevel').value = profile.advocateLevel || 'Advocate';
                 if (document.getElementById('profFirm')) document.getElementById('profFirm').value = profile.lawFirm || '';
@@ -4529,53 +4679,52 @@
                 if (document.getElementById('profOfficeMap')) document.getElementById('profOfficeMap').value = profile.officeMap || '';
                 if (document.getElementById('profOfficeAddress')) document.getElementById('profOfficeAddress').value = profile.officeAddress || '';
                 if (document.getElementById('profOfficeArea')) document.getElementById('profOfficeArea').value = profile.officeArea || '';
-                if (document.getElementById('profOfficeCity')) document.getElementById('profOfficeCity').value = profile.officeCity || lawyer.city || '';
+                if (document.getElementById('profOfficeCity')) document.getElementById('profOfficeCity').value = profile.officeCity || '';
                 if (document.getElementById('profOfficeProvince')) document.getElementById('profOfficeProvince').value = profile.officeProvince || '';
                 if (document.getElementById('profOfficePostal')) document.getElementById('profOfficePostal').value = profile.officePostal || '';
-                if (document.getElementById('profOfficePhone')) document.getElementById('profOfficePhone').value = profile.officePhone || lawyer.phone || '';
+                if (document.getElementById('profOfficePhone')) document.getElementById('profOfficePhone').value = profile.officePhone || '';
                 if (document.getElementById('profOfficeAltPhone')) document.getElementById('profOfficeAltPhone').value = profile.officeAltPhone || '';
                 if (document.getElementById('profEmergency')) document.getElementById('profEmergency').value = profile.emergencyConsult || 'No';
-                if (document.getElementById('profResponseTime')) document.getElementById('profResponseTime').value = profile.responseTime || '';
+                if (document.getElementById('profResponseTime')) document.getElementById('profResponseTime').value = profile.responseTime || 'Within 24 Hours';
 
-                const langValues = profile.languages || [];
+                // Checkboxes
+                const languages = profile.languages || [];
                 document.querySelectorAll('input[name="profLanguages"]').forEach(cb => {
-                    cb.checked = langValues.includes(cb.value);
+                    cb.checked = languages.includes(cb.value);
                 });
 
-                const practiceValues = profile.practiceAreas || (lawyer.specialization ? [lawyer.specialization] : []);
+                const practiceAreas = profile.practiceAreas || [];
                 document.querySelectorAll('input[name="profPracticeAreas"]').forEach(cb => {
-                    cb.checked = practiceValues.includes(cb.value);
+                    cb.checked = practiceAreas.includes(cb.value);
                 });
 
-                const courtValues = profile.courts || [];
+                const courts = profile.courts || [];
                 document.querySelectorAll('input[name="profCourts"]').forEach(cb => {
-                    cb.checked = courtValues.includes(cb.value);
+                    cb.checked = courts.includes(cb.value);
                 });
 
-                const consultValues = profile.consultationModes || [];
+                const consultModes = profile.consultationModes || [];
                 document.querySelectorAll('input[name="profConsultModes"]').forEach(cb => {
-                    cb.checked = consultValues.includes(cb.value);
+                    cb.checked = consultModes.includes(cb.value);
                 });
 
-                const availability = profile.availability || {};
+                // Availability start/end grid
+                const avail = profile.availability || {};
                 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                 days.forEach(d => {
-                    const times = availability[d] || {};
-                    const startEl = document.getElementById('availStart-' + d);
-                    const endEl = document.getElementById('availEnd-' + d);
-                    if (startEl) startEl.value = times.start || '';
-                    if (endEl) endEl.value = times.end || '';
+                    if (avail[d]) {
+                        if (document.getElementById('availStart-' + d)) document.getElementById('availStart-' + d).value = avail[d].start || '09:00';
+                        if (document.getElementById('availEnd-' + d)) document.getElementById('availEnd-' + d).value = avail[d].end || '17:00';
+                    }
                 });
-
             } catch (e) {
                 console.error("Failed to load lawyer profile:", e);
             }
         }
 
         async function saveLawyerProfile() {
-            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
-            if (!activeSupabase || !currentUser || !currentUser.email) {
-                alert("Database connection offline. Unable to save profile.");
+            if (!currentUser || !currentUser.email) {
+                alert("Database offline. Unable to save profile.");
                 return;
             }
 
@@ -4612,6 +4761,7 @@
                 });
 
                 const profileObj = {
+                    full_name: currentUser.full_name,
                     profilePhoto: document.getElementById('profPhoto').value,
                     coverPhoto: document.getElementById('profCover').value,
                     dob: document.getElementById('profDob').value,
@@ -4643,46 +4793,264 @@
                     availability: availability
                 };
 
-                const serializedBio = JSON.stringify(profileObj);
-
-                const { error: regError } = await activeSupabase
-                    .from('lawyer_registration')
-                    .update({
-                        bio: serializedBio,
-                        specialization: practiceAreas[0] || '',
-                        experience: parseInt(profileObj.experience) || 0,
-                        city: profileObj.officeCity || ''
-                    })
-                    .eq('email', currentUser.email);
-                
-                if (regError) throw regError;
-
-                const userPayload = {
-                    full_name: currentUser.full_name,
-                    bio: serializedBio,
-                    specialization: practiceAreas[0] || '',
-                    city: profileObj.officeCity || '',
-                    phone: profileObj.officePhone || '',
-                    profile_image: profileObj.profilePhoto || '',
-                    company_name: profileObj.lawFirm || '',
-                    company_address: profileObj.officeAddress || '',
-                    working_court: courts.join(', ')
-                };
-
-                const { error: userError } = await activeSupabase
-                    .from('users')
-                    .update(userPayload)
-                    .eq('email', currentUser.email)
-                    .eq('project', 'Qanooni-Mushawarat');
-
-                if (userError) throw userError;
-
+                await QanooniMushawarat.saveLawyerProfile(currentUser.email, profileObj);
                 alert("Profile saved successfully to Supabase!");
             } catch (e) {
                 console.error("Failed to save profile:", e);
                 alert("Failed to save profile: " + e.message);
             }
         }
-    </script>
+
+        // ==========================================
+        // QANOONI MUSHAWARAT - LEGAL NEWS MANAGEMENT
+        // ==========================================
+        let qanooni_mushawarat_allNews = [];
+
+        async function qanooni_mushawarat_fetchNews() {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('legal_news')
+                        .select('*')
+                        .eq('project_name', 'Qanooni-Mushawarat')
+                        .order('publish_date', { ascending: false });
+                    if (error) throw error;
+                    qanooni_mushawarat_allNews = data || [];
+                } else {
+                    qanooni_mushawarat_allNews = JSON.parse(localStorage.getItem('qanooni_mushawarat_legal_news') || '[]');
+                }
+            } catch (err) {
+                console.error("Error fetching news:", err);
+                qanooni_mushawarat_allNews = JSON.parse(localStorage.getItem('qanooni_mushawarat_legal_news') || '[]');
+            }
+
+            qanooni_mushawarat_renderNewsTable(qanooni_mushawarat_allNews);
+            qanooni_mushawarat_updateStats();
+        }
+
+        function qanooni_mushawarat_updateStats() {
+            let published = 0;
+            let draft = 0;
+            let today = 0;
+            let featured = 0;
+
+            const todayStr = new Date().toISOString().split('T')[0];
+
+            qanooni_mushawarat_allNews.forEach(item => {
+                if (item.status === 'Publish') published++;
+                else if (item.status === 'Draft') draft++;
+
+                if (item.featured) featured++;
+
+                if (item.publish_date === todayStr || (item.created_at && item.created_at.startsWith(todayStr))) {
+                    today++;
+                }
+            });
+
+            const elPub = document.getElementById('dash-news-published');
+            const elDraft = document.getElementById('dash-news-draft');
+            const elToday = document.getElementById('dash-news-today');
+            const elFeat = document.getElementById('dash-news-featured');
+
+            if (elPub) elPub.textContent = published;
+            if (elDraft) elDraft.textContent = draft;
+            if (elToday) elToday.textContent = today;
+            if (elFeat) elFeat.textContent = featured;
+        }
+
+        async function qanooni_mushawarat_saveNews(event) {
+            event.preventDefault();
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            const id = document.getElementById('newsId').value;
+            const category = document.getElementById('newsCategory').value;
+            const publishDate = document.getElementById('newsPublishDate').value;
+            const status = document.getElementById('newsStatus').value;
+            const title = document.getElementById('newsTitle').value;
+            const titleUr = document.getElementById('newsTitleUr').value;
+            const shortDescription = document.getElementById('newsShortDescription').value;
+            const shortDescriptionUr = document.getElementById('newsShortDescriptionUr').value;
+            const image = document.getElementById('newsImage').value || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600';
+            const source = document.getElementById('newsSource').value;
+            const sourceUrl = document.getElementById('newsSourceUrl').value;
+            const featured = document.getElementById('newsFeatured').checked;
+
+            const payload = {
+                category,
+                publish_date: publishDate,
+                status,
+                title,
+                title_ur: titleUr,
+                short_description: shortDescription,
+                short_description_ur: shortDescriptionUr,
+                image,
+                source,
+                source_url: sourceUrl,
+                featured,
+                project_name: 'Qanooni-Mushawarat'
+            };
+
+            try {
+                if (activeSupabase) {
+                    if (id) {
+                        // Update
+                        const { error } = await activeSupabase
+                            .from('legal_news')
+                            .update(payload)
+                            .eq('id', id)
+                            .eq('project_name', 'Qanooni-Mushawarat');
+                        if (error) throw error;
+                        alert("News updated successfully!");
+                    } else {
+                        // Insert
+                        const { error } = await activeSupabase
+                            .from('legal_news')
+                            .insert([payload]);
+                        if (error) throw error;
+                        alert("News created successfully!");
+                    }
+                } else {
+                    // Local Storage Fallback
+                    let localNews = JSON.parse(localStorage.getItem('qanooni_mushawarat_legal_news') || '[]');
+                    if (id) {
+                        const idx = localNews.findIndex(n => n.id == id);
+                        if (idx !== -1) {
+                            localNews[idx] = { ...localNews[idx], ...payload };
+                        }
+                    } else {
+                        payload.id = Date.now();
+                        payload.created_at = new Date().toISOString();
+                        localNews.push(payload);
+                    }
+                    localStorage.setItem('qanooni_mushawarat_legal_news', JSON.stringify(localNews));
+                    alert("News saved to LocalStorage successfully!");
+                }
+
+                qanooni_mushawarat_cancelNewsEdit();
+                await qanooni_mushawarat_fetchNews();
+            } catch (err) {
+                console.error("Error saving news:", err);
+                alert("Failed to save news: " + err.message);
+            }
+        }
+
+        function qanooni_mushawarat_renderNewsTable(newsItems) {
+            const tbody = document.getElementById('newsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (newsItems.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-xs text-gray-500">No news found.</td></tr>`;
+                return;
+            }
+
+            newsItems.forEach(n => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-gray-50 hover:bg-gray-50/50 transition text-xs';
+                tr.innerHTML = `
+                    <td class="py-3 px-2">
+                        <div class="w-10 h-10 rounded overflow-hidden bg-gray-100">
+                            <img src="${n.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
+                        </div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <p class="font-semibold text-gray-800">${n.title}</p>
+                        <p class="text-[10px] text-gray-500 font-urdu" dir="rtl">${n.title_ur || ''}</p>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-medium">${n.category}</span>
+                    </td>
+                    <td class="py-3 px-4 text-gray-600">${n.publish_date}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 rounded font-bold text-[10px] ${n.status === 'Publish' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}">${n.status}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 rounded font-bold text-[10px] ${n.featured ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-400'}">${n.featured ? 'Yes' : 'No'}</span>
+                    </td>
+                    <td class="py-3 px-4 text-right space-x-2">
+                        <button onclick="qanooni_mushawarat_editNews(${n.id})" class="text-blue-500 hover:text-blue-700 transition" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button onclick="qanooni_mushawarat_deleteNews(${n.id})" class="text-red-500 hover:text-red-700 transition" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                        <a href="news-details.html?id=${n.id}" target="_blank" class="text-green-500 hover:text-green-700 transition" title="View"><i class="fas fa-external-link-alt"></i></a>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function qanooni_mushawarat_filterNews() {
+            const query = document.getElementById('newsSearchInput').value.toLowerCase();
+            const category = document.getElementById('newsCategoryFilter').value;
+
+            const filtered = qanooni_mushawarat_allNews.filter(n => {
+                const matchesQuery = n.title.toLowerCase().includes(query) || 
+                                     (n.title_ur && n.title_ur.toLowerCase().includes(query)) ||
+                                     (n.short_description && n.short_description.toLowerCase().includes(query));
+                const matchesCategory = category === 'All' || n.category === category;
+                return matchesQuery && matchesCategory;
+            });
+
+            qanooni_mushawarat_renderNewsTable(filtered);
+        }
+
+        function qanooni_mushawarat_editNews(id) {
+            const item = qanooni_mushawarat_allNews.find(n => n.id == id);
+            if (!item) return;
+
+            document.getElementById('newsId').value = item.id;
+            document.getElementById('newsCategory').value = item.category;
+            document.getElementById('newsPublishDate').value = item.publish_date;
+            document.getElementById('newsStatus').value = item.status;
+            document.getElementById('newsTitle').value = item.title;
+            document.getElementById('newsTitleUr').value = item.title_ur || '';
+            document.getElementById('newsShortDescription').value = item.short_description;
+            document.getElementById('newsShortDescriptionUr').value = item.short_description_ur || '';
+            document.getElementById('newsImage').value = item.image || '';
+            document.getElementById('newsSource').value = item.source || '';
+            document.getElementById('newsSourceUrl').value = item.source_url || '';
+            document.getElementById('newsFeatured').checked = item.featured || false;
+
+            document.getElementById('newsFormHeader').innerHTML = `<i class="fas fa-edit text-secondary"></i> Edit Legal News`;
+            document.getElementById('btnCancelNews').classList.remove('hidden');
+            document.getElementById('tab-legal-news').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function qanooni_mushawarat_deleteNews(id) {
+            if (!confirm("Are you sure you want to delete this legal news?")) return;
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('legal_news')
+                        .delete()
+                        .eq('id', id)
+                        .eq('project_name', 'Qanooni-Mushawarat');
+                    if (error) throw error;
+                } else {
+                    let localNews = JSON.parse(localStorage.getItem('qanooni_mushawarat_legal_news') || '[]');
+                    localNews = localNews.filter(n => n.id != id);
+                    localStorage.setItem('qanooni_mushawarat_legal_news', JSON.stringify(localNews));
+                }
+                alert("News deleted successfully!");
+                await qanooni_mushawarat_fetchNews();
+            } catch (err) {
+                console.error("Error deleting news:", err);
+                alert("Failed to delete news: " + err.message);
+            }
+        }
+
+        function qanooni_mushawarat_cancelNewsEdit() {
+            document.getElementById('newsId').value = '';
+            document.getElementById('addNewsForm').reset();
+            document.getElementById('newsFormHeader').innerHTML = `<i class="fas fa-plus-circle text-secondary"></i> Add Legal News`;
+            document.getElementById('btnCancelNews').classList.add('hidden');
+        }
+        
+        // Load news statistics on load
+        document.addEventListener('DOMContentLoaded', () => {
+            qanooni_mushawarat_fetchNews();
+        });
+</script>
 </body>
 </html>
