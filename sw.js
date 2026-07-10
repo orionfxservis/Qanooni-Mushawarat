@@ -1,4 +1,4 @@
-const CACHE_NAME = 'qanooni-mushawarat-v7';
+const CACHE_NAME = 'qanooni-mushawarat-v22';
 const ASSETS = [
     './index.html',
     './css/style.css',
@@ -9,7 +9,7 @@ self.addEventListener('install', (e) => {
     self.skipWaiting();
     e.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(ASSETS).catch(() => {});
+            return cache.addAll(ASSETS).catch(() => { });
         })
     );
 });
