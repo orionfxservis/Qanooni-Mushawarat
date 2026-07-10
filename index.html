@@ -2638,107 +2638,22 @@ Litigation
 						</p>
 					</div>
 
-					<div class="overflow-y-auto h-[620px] p-5 space-y-5">
+					<!-- News Category Filters (Wrapped, Smaller Buttons) -->
+					<div class="flex flex-wrap gap-1.5 px-5 py-3 border-b border-gray-100" id="newsCategoryFilters">
+						<button onclick="qanooni_mushawarat_filterHomeNews('All')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary text-primary transition">All</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Family Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Family</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Property Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Property</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Corporate Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Corporate</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Criminal Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Criminal</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Tax Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Tax</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Cyber Crime')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Cyber Crime</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Consumer Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Consumer</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Immigration Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Immigration</button>
+						<button onclick="qanooni_mushawarat_filterHomeNews('Constitutional Law')" class="news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition">Constitutional</button>
+					</div>
 
-						<!-- News 1 -->
-						<div class="border-b pb-4">
-							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
-								Family Law
-							</span>
-
-							<h4 class="font-bold text-primary mt-3">
-								New Family Court Rules Introduced
-							</h4>
-
-							<p class="text-sm text-gray-600 mt-2">
-								Important updates regarding Family Court procedures in Pakistan.
-							</p>
-
-							<a	href="./blogs/family-court-rules.html"
-								class="text-secondary font-semibold text-sm">
-									Read More →
-							</a>
-						</div>
-
-						<!-- News 2 -->
-						<div class="border-b pb-4">
-							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
-								Property
-							</span>
-
-							<h4 class="font-bold text-primary mt-3">
-								Property Registration Process Updated
-							</h4>
-
-							<p class="text-sm text-gray-600 mt-2">
-								Learn the latest property transfer regulations.
-							</p>
-
-							<a 	href="./blogs/property-registration.html"
-								class="text-secondary font-semibold text-sm">
-									Read More →
-							</a>
-						</div>
-
-						<!-- News 3 -->
-						<div class="border-b pb-4">
-							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
-								Criminal Law
-							</span>
-
-							<h4 class="font-bold text-primary mt-3">
-								Bail Procedure Explained
-							</h4>
-
-							<p class="text-sm text-gray-600 mt-2">
-								Everything you should know before applying for Bail.
-							</p>
-
-							<a 	href="./blogs/bail-procedure.html"
-								class="text-secondary font-semibold text-sm">
-									Read More →
-							</a>
-						</div>
-
-						<!-- News 4 -->
-						<div class="border-b pb-4">
-							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
-								Corporate Law
-							</span>
-
-							<h4 class="font-bold text-primary mt-3">
-								Company Registration Guide
-							</h4>
-
-							<p class="text-sm text-gray-600 mt-2">
-								New SECP requirements for startups and companies.
-							</p>
-
-							<a 	href="./blogs/company-registration.html"
-								class="text-secondary font-semibold text-sm">
-									Read More →
-							</a>
-						</div>
-
-						<!-- News 5 -->
-						<div>
-							<span class="text-xs bg-secondary/10 text-secondary px-3 py-1 rounded-full">
-								Consumer Rights
-							</span>
-
-							<h4 class="font-bold text-primary mt-3">
-								Consumer Protection Laws
-							</h4>
-
-							<p class="text-sm text-gray-600 mt-2">
-								Know your legal rights before purchasing products.
-							</p>
-
-							<a 	href="./blogs/consumer-rights.html"
-								class="text-secondary font-semibold text-sm">
-									Read More →
-							</a>
-						</div>
+					<div class="overflow-y-auto h-[570px] p-5 space-y-5" id="homeNewsGrid">
+						<!-- Dynamic Legal News items will load here -->
 					</div>
 				</div>
 			</div>
@@ -3406,6 +3321,7 @@ Litigation
     console.log("Supabase:", window.supabaseClient);
     console.log("Supabase2:", typeof supabase);
             loadHomeBlogs();
+            qanooni_mushawarat_loadHomeNews();
         });
         
 		function handleClientSubmit(e){
@@ -3613,6 +3529,140 @@ function toggleMobileMenu() {
                     </div>
                 `;
                 grid.appendChild(card);
+            });
+        }
+
+        // ==========================================
+        // DYNAMIC HOMEPAGE LEGAL NEWS
+        // ==========================================
+        let qanooni_mushawarat_homeNews = [];
+        let qanooni_mushawarat_filteredHomeNews = [];
+
+        async function qanooni_mushawarat_loadHomeNews() {
+            try {
+                const url = 'https://aywuxnimzuqmocjccvbv.supabase.co/rest/v1/legal_news?select=*&project_name=eq.Qanooni-Mushawarat&status=eq.Publish&order=publish_date.desc';
+                const anonKey = 'sb_publishable_rnxMaJuE7KAjchYt3VN53Q_lYuJQpW7';
+
+                const response = await fetch(url, {
+                    headers: {
+                        'apikey': anonKey,
+                        'Authorization': 'Bearer ' + anonKey
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    qanooni_mushawarat_homeNews = (data || []).slice(0, 10);
+                } else {
+                    throw new Error("HTTP " + response.status);
+                }
+            } catch (err) {
+                console.error("Error loading homepage news:", err);
+                const local = JSON.parse(localStorage.getItem('qanooni_mushawarat_legal_news') || '[]');
+                qanooni_mushawarat_homeNews = local.filter(n => n.status === 'Publish').slice(0, 10);
+            }
+
+            // Fill default fallback news items if empty
+            if (qanooni_mushawarat_homeNews.length === 0) {
+                qanooni_mushawarat_homeNews = [
+                    {
+                        id: 991,
+                        title: "New Family Court Rules Introduced",
+                        title_ur: "خاندانی قوانین میں نئی ترمیم متعارف",
+                        category: "Family Law",
+                        short_description: "Important updates regarding Family Court procedures in Pakistan.",
+                        short_description_ur: "پاکستان میں فیملی کورٹ کے طریقہ کار کے حوالے سے اہم اپ ڈیٹس۔",
+                        publish_date: "2026-07-10",
+                        image: "./images/bg-slide-show/family-law.jpg"
+                    },
+                    {
+                        id: 992,
+                        title: "Property Registration Process Updated",
+                        title_ur: "جائیداد کی رجسٹریشن کا عمل تبدیل",
+                        category: "Property Law",
+                        short_description: "Learn the latest property transfer regulations.",
+                        short_description_ur: "جائیداد کی منتقلی کے نئے قواعد کے بارے میں جانیں۔",
+                        publish_date: "2026-07-08",
+                        image: "./images/bg-slide-show/property.jpg"
+                    }
+                ];
+            }
+
+            qanooni_mushawarat_filteredHomeNews = [...qanooni_mushawarat_homeNews];
+            qanooni_mushawarat_renderHomeNews();
+        }
+
+        function qanooni_mushawarat_filterHomeNews(category) {
+            // Update active styling on category buttons
+            const buttons = document.querySelectorAll('#newsCategoryFilters button');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(`'${category}'`)) {
+                    btn.className = 'news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary text-primary transition';
+                } else {
+                    btn.className = 'news-filter-btn px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600 hover:bg-secondary/15 transition';
+                }
+            });
+
+            if (category === 'All') {
+                qanooni_mushawarat_filteredHomeNews = [...qanooni_mushawarat_homeNews];
+            } else {
+                qanooni_mushawarat_filteredHomeNews = qanooni_mushawarat_homeNews.filter(n => n.category === category);
+            }
+            qanooni_mushawarat_renderHomeNews();
+        }
+
+        function qanooni_mushawarat_renderHomeNews() {
+            const grid = document.getElementById('homeNewsGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (qanooni_mushawarat_filteredHomeNews.length === 0) {
+                grid.innerHTML = `<div class="text-center py-10 text-xs text-gray-400">No news found for this category.</div>`;
+                return;
+            }
+
+            qanooni_mushawarat_filteredHomeNews.forEach(n => {
+                const title = currentLanguage === 'ur' && n.title_ur ? n.title_ur : n.title;
+                const desc = currentLanguage === 'ur' && n.short_description_ur ? n.short_description_ur : n.short_description;
+                const categoryLabel = n.category;
+
+                const formattedDate = new Date(n.publish_date).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'border-b pb-4 last:border-0';
+                itemDiv.innerHTML = `
+                    <div class="flex gap-4 items-start">
+                        ${n.image ? `
+                        <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-gray-100">
+                            <img src="${n.image}" class="w-full h-full object-cover" onerror="this.remove()">
+                        </div>` : ''}
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                                <span class="text-[10px] bg-secondary/10 text-secondary px-2.5 py-0.5 rounded-full font-bold">
+                                    ${categoryLabel}
+                                </span>
+                                <span class="text-[10px] text-gray-400">${formattedDate}</span>
+                            </div>
+
+                            <h4 class="font-bold text-primary text-sm leading-snug">
+                                ${title}
+                            </h4>
+
+                            <p class="text-xs text-gray-600 mt-1 line-clamp-2">
+                                ${desc}
+                            </p>
+
+                            <a href="./pages/news-details.html?id=${n.id}" class="text-secondary font-bold text-xs inline-flex items-center gap-1 mt-2 hover:text-primary transition">
+                                <span>${currentLanguage === 'ur' ? 'مزید پڑھیں' : 'Read More'}</span>
+                                <i class="fas fa-arrow-right text-[10px] ${currentLanguage === 'ur' ? 'rotate-180' : ''}"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(itemDiv);
             });
         }
 
