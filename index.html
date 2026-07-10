@@ -1285,7 +1285,7 @@
     <!-- Services Section -->
 <section id="services" class="py-24 bg-gradient-to-b from-white to-gray-50">
 
-    <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+    <div class="w-full px-4 lg:px-6">
 
         <!-- Section Heading -->
         <div class="text-center max-w-4xl mx-auto mb-16">
@@ -1314,7 +1314,7 @@
 
         <!-- Statistics Section -->
     <section class="py-20 bg-white">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1764,7 +1764,7 @@ Litigation
 
     <!-- Client Submission Form -->
     <section id="client-form" class="py-20 bg-gradient-to-br from-primary to-dark">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <span class="bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="SUBMIT YOUR CASE" data-ur="اپنا کیس جمع کریں">SUBMIT YOUR CASE</span>
@@ -1977,7 +1977,7 @@ Litigation
     <!-- Lawyers Network Section -->
 <section id="lawyers" class="py-20 bg-gradient-to-b from-slate-50 to-gray-100 overflow-hidden">
 
-    <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+    <div class="w-full px-4 lg:px-6">
 
     <!-- Main Grid -->
         <!-- Top Heading (Moved Inside) -->
@@ -2972,7 +2972,7 @@ Litigation
 
     <!-- Blogs Section -->
     <section id="blogs" class="py-20 bg-white">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="BLOGS" data-ur="بلاگز">BLOGS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="Legal Resources & Articles" data-ur="قانونی رہنمائی اور معلوماتی مضامین">Legal Resources & Articles</h2>
@@ -2991,7 +2991,7 @@ Litigation
     </section>
     <!-- Testimonials -->
     <section class="py-20 bg-gray-50">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
             <div class="text-center mb-12">
                 <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="TESTIMONIALS" data-ur="رائے / تبصرے">TESTIMONIALS</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="What Our Clients Say" data-ur="ہمارے کلائنٹس کیا کہتے ہیں">What Our Clients Say</h2>
@@ -3057,7 +3057,7 @@ Litigation
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <span class="bg-secondary/20 text-primary px-5 py-2 rounded-lg text-sm font-semibold" data-en="CONTACT US" data-ur="ہم سے رابطہ کریں">CONTACT US</span>
@@ -3106,7 +3106,7 @@ Litigation
 
     <!-- Footer -->
     <footer class="bg-dark pt-16 pb-8">
-        <div class="w-full max-w-[1920px] mx-auto px-10 lg:px-16">
+        <div class="w-full px-4 lg:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                 <!-- About -->
                 <div>
@@ -3464,25 +3464,24 @@ function toggleMobileMenu() {
         let homeBlogs = [];
 
         async function loadHomeBlogs() {
-            const activeSupabase = window.supabaseClient || (typeof supabase !== 'undefined' && typeof supabase.from === 'function' ? supabase : null);
-            console.log("[DEBUG] activeSupabase resolved to:", activeSupabase);
-
             try {
-                if (activeSupabase) {
-                    console.log("[DEBUG] Querying Supabase for focus_keyword = Qanooni-Mushawarat...");
-                    const { data, error } = await activeSupabase
-                        .from('blogs')
-                        .select('*')
-                        .eq('focus_keyword', 'Qanooni-Mushawarat')
-                        .order('created_at', { ascending: false })
-                        .limit(3);
+                const url = 'https://aywuxnimzuqmocjccvbv.supabase.co/rest/v1/blogs?select=*&focus_keyword=eq.Qanooni-Mushawarat&order=created_at.desc&limit=3';
+                const anonKey = 'sb_publishable_rnxMaJuE7KAjchYt3VN53Q_lYuJQpW7';
 
-                    if (error) throw error;
-                    console.log("[DEBUG] Successfully fetched blogs:", data);
+                const response = await fetch(url, {
+                    headers: {
+                        'apikey': anonKey,
+                        'Authorization': 'Bearer ' + anonKey
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
                     homeBlogs = data || [];
+                    if (homeBlogs.length === 0) {
+                        homeBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                    }
                 } else {
-                    console.log("[DEBUG] No activeSupabase client found. Falling back to local storage...");
-                    homeBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                    throw new Error("HTTP " + response.status);
                 }
             } catch (err) {
                 console.error("Error loading homepage blogs:", err);
@@ -3582,21 +3581,11 @@ function toggleMobileMenu() {
                 const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
                 const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
 
-                let currentDateStr = '';
-                try {
-                    const parsedDate = new Date(b.created_at || Date.now());
-                    if (!isNaN(parsedDate.getTime())) {
-                        currentDateStr = parsedDate.toLocaleDateString('en-GB', {
-                            day: '2-digit',
-                            month: 'short',
-                            year: '2-digit'
-                        }).replace(/ /g, '-');
-                    } else {
-                        currentDateStr = b.date || '';
-                    }
-                } catch (e) {
-                    currentDateStr = b.date || '';
-                }
+                const currentDateStr = new Date(b.created_at || Date.now()).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: '2-digit'
+                }).replace(/ /g, '-');
 
                 const card = document.createElement('div');
                 card.className = 'bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col justify-between';
@@ -4286,37 +4275,6 @@ counters.forEach(counter=>observer.observe(counter));
             if (installBtn) {
                 installBtn.style.display = 'none';
                 installBtn.classList.add('hidden');
-            }
-        });
-
-        // Lawyer Registration Modal
-        function openLawyerModal() {
-            const modal = document.getElementById('lawyerModal');
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeLawyerModal() {
-            const modal = document.getElementById('lawyerModal');
-            if (modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Close on outside click
-        document.addEventListener('DOMContentLoaded', () => {
-            const lawyerModalEl = document.getElementById('lawyerModal');
-            if (lawyerModalEl) {
-                lawyerModalEl.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeLawyerModal();
-                    }
-                });
             }
         });
 		
