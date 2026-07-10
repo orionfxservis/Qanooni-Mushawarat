@@ -16,18 +16,16 @@
     <script src="../js/custom-alert.js"></script>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <style>
-
-        body{
-            font-family:'Inter',sans-serif;
-            background:#f8fafc;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
         }
 
         /* URDU FONT */
@@ -40,51 +38,52 @@
 
         .urdu-text,
         .urdu-heading,
-        .urdu-ui{
-            font-family:'JameelNoori', 'Inter', sans-serif !important;
-            direction:rtl;
+        .urdu-ui {
+            font-family: 'JameelNoori', 'Inter', sans-serif !important;
+            direction: rtl;
         }
 
-        .urdu-text{
-            line-height:2.4;
-            font-size:1.15rem;
+        .urdu-text {
+            line-height: 2.4;
+            font-size: 1.15rem;
         }
 
-        .urdu-heading{
-            line-height:2.6;
+        .urdu-heading {
+            line-height: 2.6;
         }
 
-        :root{
-            --primary:#1e3a5f;
-            --secondary:#c9a227;
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #c9a227;
         }
 
-        .bg-primary{
-            background:var(--primary);
+        .bg-primary {
+            background: var(--primary);
         }
 
-        .text-primary{
-            color:var(--primary);
+        .text-primary {
+            color: var(--primary);
         }
 
-        .bg-secondary{
-            background:var(--secondary);
+        .bg-secondary {
+            background: var(--secondary);
         }
 
-        .text-secondary{
-            color:var(--secondary);
+        .text-secondary {
+            color: var(--secondary);
         }
 
-        .hover-lift{
-            transition:all .3s ease;
+        .hover-lift {
+            transition: all .3s ease;
         }
 
-        .hover-lift:hover{
-            transform:translateY(-10px);
-            box-shadow:0 20px 40px rgba(0,0,0,.1);
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .1);
         }
-    
-        [dir="rtl"], [dir="rtl"] *:not(i):not(svg):not([class*="fa-"]) {
+
+        [dir="rtl"],
+        [dir="rtl"] *:not(i):not(svg):not([class*="fa-"]) {
             font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
         }
     </style>
@@ -92,398 +91,306 @@
 
 <body>
 
-<!-- =========================
+    <!-- =========================
 HEADER
 ========================= -->
 
-<header class="bg-primary shadow-lg sticky top-0 z-50">
+    <header class="bg-primary shadow-lg sticky top-0 z-50">
 
-    <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4">
 
-        <nav class="flex items-center justify-between py-2">
+            <nav class="flex items-center justify-between py-2">
 
-            <!-- LEFT -->
-            <div class="flex items-center gap-5">
+                <!-- LEFT -->
+                <div class="flex items-center gap-5">
 
-                <!-- LOGO -->
-                <a href="../index.html" class="flex items-center">
-                    <img src="../images/logo/logo-02.png"
-                         alt="Qanooni Mushawarat Logo"
-                         class="h-[48px] md:h-[60px] w-auto object-contain relative top-[5px]">
-                </a>
+                    <!-- LOGO -->
+                    <a href="../index.html" class="flex items-center">
+                        <img src="../images/logo/logo-02.png" alt="Qanooni Mushawarat Logo"
+                            class="h-[48px] md:h-[60px] w-auto object-contain relative top-[5px]">
+                    </a>
 
-                <!-- HOME -->
-                <a href="../index.html"
-                   class="text-white hover:text-secondary transition font-medium text-sm md:text-base"
-                   data-en="Home"
-                   data-ur="ہوم">
-                    Home
-                </a>
+                    <!-- HOME -->
+                    <a href="../index.html"
+                        class="text-white hover:text-secondary transition font-medium text-sm md:text-base"
+                        data-en="Home" data-ur="ہوم">
+                        Home
+                    </a>
 
-            </div>
+                </div>
 
-            <!-- CENTER -->
-            <div class="absolute left-1/2 -translate-x-1/2">
+                <!-- CENTER -->
+                <div class="absolute left-1/2 -translate-x-1/2">
 
-                <h1 class="text-white font-semibold text-base md:text-lg"
-                    data-en="Blogs & Articles"
-                    data-ur="بلاگز اور مضامین">
-                    Blogs & Articles
-                </h1>
+                    <h1 class="text-white font-semibold text-base md:text-lg" data-en="Blogs & Articles"
+                        data-ur="بلاگز اور مضامین">
+                        Blogs & Articles
+                    </h1>
 
-            </div>
+                </div>
 
-            <!-- RIGHT -->
-            <button onclick="toggleLanguage()"
-                    id="langBtn"
+                <!-- RIGHT -->
+                <button onclick="toggleLanguage()" id="langBtn"
                     class="border border-secondary text-secondary px-4 py-1.5 rounded-lg hover:bg-secondary hover:text-primary transition font-medium text-sm">
-                اردو
-            </button>
+                    اردو
+                </button>
 
-        </nav>
+            </nav>
 
-    </div>
+        </div>
 
-</header>
+    </header>
 
-<!-- =========================
+    <!-- =========================
 HERO
 ========================= -->
 
-<section class="relative py-20 bg-primary overflow-hidden">
+    <section class="relative py-20 bg-primary overflow-hidden">
 
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute -top-10 -left-10 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
-    </div>
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute -top-10 -left-10 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+        </div>
 
-    <div class="container mx-auto px-4 relative z-10 text-center">
+        <div class="container mx-auto px-4 relative z-10 text-center">
 
-        <span class="inline-block bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider mb-6"
-              data-en="Legal Resources"
-              data-ur="قانونی وسائل">
-            Legal Resources
-        </span>
+            <span
+                class="inline-block bg-secondary text-primary px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider mb-6"
+                data-en="Legal Resources" data-ur="قانونی وسائل">
+                Legal Resources
+            </span>
 
-        <h2 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6"
-            data-en="Explore Our Legal Articles"
-            data-ur="ہمارے قانونی مضامین دریافت کریں۔">
-            Explore Our Legal Articles
-        </h2>
+            <h2 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6"
+                data-en="Explore Our Legal Articles" data-ur="ہمارے قانونی مضامین دریافت کریں۔">
+                Explore Our Legal Articles
+            </h2>
 
-        <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-200 leading-relaxed"
-           data-en="Read the latest news, guides, and advice from experienced legal professionals in Pakistan."
-           data-ur="پاکستان میں تجربہ کار قانونی ماہرین سے تازہ ترین خبریں، گائیڈز اور مشورے پڑھیں۔">
-            Read the latest news, guides, and advice from experienced legal professionals in Pakistan.
-        </p>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-200 leading-relaxed"
+                data-en="Read the latest news, guides, and advice from experienced legal professionals in Pakistan."
+                data-ur="پاکستان میں تجربہ کار قانونی ماہرین سے تازہ ترین خبریں، گائیڈز اور مشورے پڑھیں۔">
+                Read the latest news, guides, and advice from experienced legal professionals in Pakistan.
+            </p>
 
-    </div>
+        </div>
 
-</section>
+    </section>
 
-<!-- =========================
+    <!-- =========================
 BLOGS GRID
 ========================= -->
 
-<section class="py-20 bg-white min-h-screen">
+    <section class="py-20 bg-white min-h-screen">
 
-    <div class="container mx-auto px-4">
-        
-        <!-- Category Filter -->
-        <div class="flex flex-wrap gap-3 justify-center mb-12">
-            <button class="bg-primary text-white px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">All</button>
-            <button class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Family Law</button>
-            <button class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Corporate Law</button>
-            <button class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Property Law</button>
-        </div>
+        <div class="container mx-auto px-4">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogsGrid">
-            
-            <!-- Blog Card 1 -->
-            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                <div class="h-48 w-full bg-gray-200 relative">
-                    <img src="../images/bg-slide-show/family-law.jpg" class="w-full h-full object-cover">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Family Law</div>
-                </div>
-                <div class="p-6 flex flex-col h-full">
-                    <p class="text-xs text-gray-500 mb-2">October 15, 2026</p>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Understanding Child Custody Laws in Pakistan" data-ur="پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا">Understanding Child Custody Laws in Pakistan</h3>
-                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision." data-ur="فیملی کورٹس کس طرح بچوں کی تحویل کا تعین کرتی ہیں، دونوں والدین کے حقوق، اور حتمی فیصلے کو کون سے عوامل متاثر کرتے ہیں، اس کے بارے میں ایک جامع گائیڈ۔">A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision.</p>
-                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition"><span data-en="Read More" data-ur="مزید پڑھیں">Read More</span> <i class="fas fa-arrow-right text-[12px]"></i></a>
-                </div>
+            <!-- Category Filter -->
+            <div class="flex flex-wrap gap-3 justify-center mb-12">
+                <button
+                    class="bg-primary text-white px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">All</button>
+                <button
+                    class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Family
+                    Law</button>
+                <button
+                    class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Corporate
+                    Law</button>
+                <button
+                    class="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-semibold text-sm transition hover:bg-secondary hover:text-primary">Property
+                    Law</button>
             </div>
 
-            <!-- Blog Card 2 -->
-            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                <div class="h-48 w-full bg-gray-200 relative">
-                    <img src="../images/bg-slide-show/law-liabrary.jpg" class="w-full h-full object-cover">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Corporate Law</div>
-                </div>
-                <div class="p-6 flex flex-col h-full">
-                    <p class="text-xs text-gray-500 mb-2">October 10, 2026</p>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Starting a Business: Legal Requirements" data-ur="کاروبار شروع کرنا: قانونی تقاضے">Starting a Business: Legal Requirements</h3>
-                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly." data-ur="آسانی سے کاروبار شروع کرنے کے لیے ضروری قانونی دستاویزات، کمپنی کی رجسٹریشن کے عمل، اور ٹیکس کی تعمیل کے بارے میں جانیں۔">Learn about the essential legal documents, company registration processes, and tax compliance needed to start a business smoothly.</p>
-                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition"><span data-en="Read More" data-ur="مزید پڑھیں">Read More</span> <i class="fas fa-arrow-right text-[12px]"></i></a>
-                </div>
-            </div>
-
-            <!-- Blog Card 3 -->
-            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                <div class="h-48 w-full bg-gray-200 relative">
-                    <img src="../images/bg-slide-show/property-law.jpg" class="w-full h-full object-cover">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Property Law</div>
-                </div>
-                <div class="p-6 flex flex-col h-full">
-                    <p class="text-xs text-gray-500 mb-2">October 05, 2026</p>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="How to Verify Real Estate Property Titles" data-ur="رئیل اسٹیٹ پراپرٹی کے ٹائٹل کی تصدیق کیسے کریں">How to Verify Real Estate Property Titles</h3>
-                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment." data-ur="سرمایہ کاری کرنے سے پہلے ملکیت کے ریکارڈ کو صحیح طریقے سے چیک کرنے اور پراپرٹی کے ٹائٹلز کی تصدیق کرنے کا طریقہ سیکھ کر پراپرٹی کے فراڈ سے بچیں۔">Avoid property fraud by learning how to properly check ownership records and verify property titles before making an investment.</p>
-                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition"><span data-en="Read More" data-ur="مزید پڑھیں">Read More</span> <i class="fas fa-arrow-right text-[12px]"></i></a>
-                </div>
-            </div>
-
-            <!-- Blog Card 4 -->
-            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                <div class="h-48 w-full bg-gray-200 relative">
-                    <img src="../images/bg-slide-show/criminal-law.jpg" onerror="this.src='https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600'" class="w-full h-full object-cover">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Criminal Defense</div>
-                </div>
-                <div class="p-6 flex flex-col h-full">
-                    <p class="text-xs text-gray-500 mb-2">September 28, 2026</p>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Your Rights During a Police Investigation" data-ur="پولیس تفتیش کے دوران آپ کے حقوق">Your Rights During a Police Investigation</h3>
-                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Understand your fundamental rights when dealing with law enforcement, including the right to legal counsel and remain silent." data-ur="قانون نافذ کرنے والے اداروں سے نمٹنے کے دوران اپنے بنیادی حقوق کو سمجھیں، بشمول قانونی مشورے اور خاموش رہنے کا حق۔">Understand your fundamental rights when dealing with law enforcement, including the right to legal counsel and remain silent.</p>
-                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition"><span data-en="Read More" data-ur="مزید پڑھیں">Read More</span> <i class="fas fa-arrow-right text-[12px]"></i></a>
-                </div>
-            </div>
-
-            <!-- Blog Card 5 -->
-            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                <div class="h-48 w-full bg-gray-200 relative">
-                    <img src="https://images.unsplash.com/photo-1505664159623-1d0abfc9f3cb?q=80&w=600" class="w-full h-full object-cover">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">General Advice</div>
-                </div>
-                <div class="p-6 flex flex-col h-full">
-                    <p class="text-xs text-gray-500 mb-2">September 20, 2026</p>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Why Everyone Needs a Basic Will" data-ur="ہر کسی کو بنیادی وصیت کی ضرورت کیوں ہے">Why Everyone Needs a Basic Will</h3>
-                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="A basic overview of why estate planning isn't just for the wealthy and how creating a simple will protects your family's future." data-ur="ایک بنیادی جائزہ کہ جائیداد کی منصوبہ بندی صرف امیروں کے لیے کیوں نہیں ہے اور کس طرح ایک سادہ وصیت بنانا آپ کے خاندان کے مستقبل کی حفاظت کرتا ہے۔">A basic overview of why estate planning isn't just for the wealthy and how creating a simple will protects your family's future.</p>
-                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition"><span data-en="Read More" data-ur="مزید پڑھیں">Read More</span> <i class="fas fa-arrow-right text-[12px]"></i></a>
-                </div>
-            </div>
-
-            <!-- Blog Card 6 -->
-            <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100">
-                <div class="h-48 w-full bg-gray-200 relative">
-                    <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?q=80&w=600" class="w-full h-full object-cover">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">Corporate Law</div>
-                </div>
-                <div class="p-6 flex flex-col h-full">
-                    <p class="text-xs text-gray-500 mb-2">September 12, 2026</p>
-                    <h3 class="text-xl font-bold text-primary mb-3" data-en="Drafting Employment Contracts" data-ur="ملازمت کے معاہدوں کا مسودہ تیار کرنا">Drafting Employment Contracts</h3>
-                    <p class="text-gray-600 text-sm mb-4 flex-1" data-en="Key clauses every employer must include in an employment contract to protect their business and follow local labor laws." data-ur="ہر آجر کو اپنے کاروبار کی حفاظت اور مقامی لیبر قوانین کی پیروی کرنے کے لیے ملازمت کے معاہدے میں کلیدی شقیں شامل کرنی چاہئیں۔">Key clauses every employer must include in an employment contract to protect their business and follow local labor laws.</p>
-                    <a href="javascript:void(0)" class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition"><span data-en="Read More" data-ur="مزید پڑھیں">Read More</span> <i class="fas fa-arrow-right text-[12px]"></i></a>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogsGrid">
+                <!-- Blogs will load here dynamically from Supabase/localStorage -->
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
-
-<!-- =========================
+    <!-- =========================
 FOOTER
 ========================= -->
 
-<footer class="bg-primary py-4 mt-10">
+    <footer class="bg-primary py-4 mt-10">
 
-    <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto px-4 text-center">
 
-        <p class="text-white text-sm"
-           data-en="© 2026 Qanooni Mushawarat. All Rights Reserved."
-           data-ur="© 2026 قانونی مشاورت۔ جملہ حقوق محفوظ ہیں۔">
+            <p class="text-white text-sm" data-en="© 2026 Qanooni Mushawarat. All Rights Reserved."
+                data-ur="© 2026 قانونی مشاورت۔ جملہ حقوق محفوظ ہیں۔">
 
-            © 2026 Qanooni Mushawarat. All Rights Reserved.
+                © 2026 Qanooni Mushawarat. All Rights Reserved.
 
-        </p>
+            </p>
 
-    </div>
+        </div>
 
-</footer>
+    </footer>
 
-<!-- =========================
+    <!-- =========================
 BLOG DETAIL MODAL
 ========================= -->
-<div id="blogDetailModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col max-h-[90vh]">
-        <!-- Header -->
-        <div class="bg-primary text-white px-6 py-4 flex justify-between items-center shrink-0">
-            <h3 id="modalBlogCategory" class="text-sm font-bold text-secondary uppercase tracking-wider">Legal Guide</h3>
-            <button onclick="closeBlogModal()" class="text-white/80 hover:text-white text-xl font-bold transition">&times;</button>
-        </div>
-        
-        <!-- Content Area -->
-        <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
-            <div class="flex items-center justify-center w-full">
-                <img id="modalBlogImage" src="" class="max-w-full max-h-[250px] md:max-h-[350px] object-contain rounded-xl shadow-sm">
-            </div>
-            
-            <div class="flex items-center gap-2">
-                <span id="modalBlogDate" class="text-xs text-gray-500"></span>
-                <span class="text-gray-300">|</span>
-                <span class="text-xs text-gray-500 font-medium">By <span id="modalBlogAuthor"></span></span>
+    <div id="blogDetailModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-[9999] p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Header -->
+            <div class="bg-primary text-white px-6 py-4 flex justify-between items-center shrink-0">
+                <h3 id="modalBlogCategory" class="text-sm font-bold text-secondary uppercase tracking-wider">Legal Guide
+                </h3>
+                <button onclick="closeBlogModal()"
+                    class="text-white/80 hover:text-white text-xl font-bold transition">&times;</button>
             </div>
 
-            <h2 id="modalBlogTitle" class="text-2xl md:text-3xl font-black text-primary leading-tight"></h2>
-            
-            <p id="modalBlogShortDesc" class="text-gray-600 font-semibold italic border-l-4 border-secondary pl-4 py-1"></p>
+            <!-- Content Area -->
+            <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+                <div class="flex items-center justify-center w-full">
+                    <img id="modalBlogImage" src=""
+                        class="max-w-full max-h-[250px] md:max-h-[350px] object-contain rounded-xl shadow-sm">
+                </div>
 
-            <div id="modalBlogContent" class="text-gray-750 text-sm md:text-base space-y-4 leading-relaxed whitespace-pre-line"></div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="border-t border-gray-150 px-6 py-4 flex justify-end shrink-0 bg-gray-50">
-            <button onclick="closeBlogModal()" class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-xl text-sm transition">
-                Close
-            </button>
+                <div class="flex items-center gap-2">
+                    <span id="modalBlogDate" class="text-xs text-gray-500"></span>
+                    <span class="text-gray-300">|</span>
+                    <span class="text-xs text-gray-500 font-medium">By <span id="modalBlogAuthor"></span></span>
+                </div>
+
+                <h2 id="modalBlogTitle" class="text-2xl md:text-3xl font-black text-primary leading-tight"></h2>
+
+                <p id="modalBlogShortDesc"
+                    class="text-gray-600 font-semibold italic border-l-4 border-secondary pl-4 py-1"></p>
+
+                <div id="modalBlogContent"
+                    class="text-gray-750 text-sm md:text-base space-y-4 leading-relaxed whitespace-pre-line"></div>
+            </div>
+
+            <!-- Footer -->
+            <div class="border-t border-gray-150 px-6 py-4 flex justify-end shrink-0 bg-gray-50">
+                <button onclick="closeBlogModal()"
+                    class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-xl text-sm transition">
+                    Close
+                </button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- =========================
+    <!-- =========================
 LANGUAGE & DYNAMIC BLOGS SCRIPT
 ========================= -->
-<script>
-function getQueryParameter(name) {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(name);
-}
-
-await loadBlogs();
-
-const slug = getQueryParameter("slug");
-
-if (slug) {
-    viewBlogDetails(slug);
-}
-
-
-let currentLanguage = 'en';
-let allBlogs = [];
-let activeCategory = 'All';
-
-// Fetch from Supabase / localStorage
-async function loadBlogs() {
-    const activeSupabase = (typeof supabaseClient !== 'undefined') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
-
-    try {
-        if (activeSupabase) {
-            const { data, error } = await activeSupabase
-                .from('blogs')
-                .select('*')
-                .eq('focus_keyword', 'Qanooni-Mushawarat')
-                .order('created_at', { ascending: false });
-
-            if (error) throw error;
-            allBlogs = data || [];
-        } else {
-            allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+    <script>
+        function getQueryParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
         }
-    } catch (err) {
-        console.error("Error loading blogs from database:", err);
-        allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
-    }
 
-    // Fallback static list so page has default quality content
-    if (allBlogs.length === 0) {
-        allBlogs = [
-            {
-                id: 1,
-                title: "Understanding Child Custody Laws in Pakistan ||| پاکستان میں بچوں کی تحویل کے قوانین کو سمجھنا",
-                slug: "understanding-child-custody-laws",
-                category: "Family Law ||| فیملی لاء",
-                short_description: "A comprehensive guide to how family courts determine child custody, the rights of both parents, and what factors influence the final decision. ||| فیملی کورٹس کس طرح بچوں کی تحویل کا تعین کرتی ہیں، دونوں والدین کے حقوق، اور حتمی فیصلے کو کون سے عوامل متاثر کرتے ہیں، اس کے بارے میں ایک جامع گائیڈ۔",
-                article: "Under Pakistani family law, child custody is determined strictly based on the welfare of the minor. Mothers usually hold the right of Hizanat (custody) for boys under 7 and girls until puberty. However, the father remains the natural guardian. ||| فیملی لا کے تحت، نابالغ کی فلاح و بہبود کو اولین ترجیح دی جاتی ہے۔ عام طور پر ماں کو 7 سال سے کم عمر لڑکے اور بلوغت تک لڑکی کی تحویل کا حق حاصل ہوتا ہے۔",
-                image: "../images/bg-slide-show/family-law.jpg",
-                date: "15-Oct-26",
-                author: "Legal Expert",
-                tags: "Publish"
-            },
-            {
-                id: 2,
-                title: "Property Dispute Resolution: A Step-by-Step Guide ||| جائیداد کے تنازعات کا حل: ایک مرحلہ وار گائیڈ",
-                slug: "property-dispute-resolution",
-                category: "Property Law ||| پراپرٹی لاء",
-                short_description: "Learn how to handle illegal possession, title disputes, and mutation fraud under Pakistani civil laws. ||| پاکستانی سول قوانین کے تحت غیر قانونی قبضے، ٹائٹل کے تنازعات، اور انتقال کے فراڈ سے نمٹنے کا طریقہ سیکھیں۔",
-                article: "Property disputes can be lengthy in civil courts. Actions include filing a suit for declaration, partition, or partition of joint property. Under the Specific Relief Act, a suit for possession is also vital. ||| جائیداد کے تنازعات طویل ہو سکتے ہیں۔ ان سے نمٹنے کے لیے قانونی چارہ جوئی اور ٹائٹل دستاویزات کا معائنہ لازمی ہے۔",
-                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600",
-                date: "05-Oct-26",
-                author: "Admin Team",
-                tags: "Publish"
+        await loadBlogs();
+
+        const slug = getQueryParameter("slug");
+
+        if (slug) {
+            viewBlogDetails(slug);
+        }
+
+
+        let currentLanguage = 'en';
+        let allBlogs = [];
+        let activeCategory = 'All';
+
+        // Fetch from Supabase / localStorage
+        async function loadBlogs() {
+            try {
+                const url = 'https://aywuxnimzuqmocjccvbv.supabase.co/rest/v1/blogs?select=*&focus_keyword=eq.Qanooni-Mushawarat&order=created_at.desc';
+                const anonKey = 'sb_publishable_rnxMaJuE7KAjchYt3VN53Q_lYuJQpW7';
+
+                const response = await fetch(url, {
+                    headers: {
+                        'apikey': anonKey,
+                        'Authorization': 'Bearer ' + anonKey
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    allBlogs = data || [];
+                    if (allBlogs.length === 0) {
+                        allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
+                    }
+                } else {
+                    throw new Error("HTTP " + response.status);
+                }
+            } catch (err) {
+                console.error("Error loading blogs from database:", err);
+                allBlogs = JSON.parse(localStorage.getItem('registered_blogs') || '[]');
             }
-        ];
-    }
 
-    renderBlogsGrid();
-}
-
-function renderBlogsGrid() {
-    const grid = document.getElementById('blogsGrid');
-    if (!grid) return;
-
-    grid.innerHTML = '';
-
-    const filtered = allBlogs.filter(b => {
-        if (activeCategory === 'All') return true;
-        
-        let categoryEn = b.category || '';
-        if (categoryEn.includes(' ||| ')) {
-            categoryEn = categoryEn.split(' ||| ')[0];
-        }
-        return categoryEn.toLowerCase() === activeCategory.toLowerCase();
-    });
-
-    if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500 font-semibold" data-en="No blogs found in this category." data-ur="اس زمرے میں کوئی بلاگ نہیں ملا۔">No blogs found in this category.</div>`;
-        return;
-    }
-
-    filtered.forEach(b => {
-        let titleEn = b.title || '';
-        let titleUr = '';
-        if (titleEn.includes(' ||| ')) {
-            const parts = titleEn.split(' ||| ');
-            titleEn = parts[0];
-            titleUr = parts[1];
+            renderBlogsGrid();
         }
 
-        let categoryEn = b.category || '';
-        let categoryUr = '';
-        if (categoryEn.includes(' ||| ')) {
-            const parts = categoryEn.split(' ||| ');
-            categoryEn = parts[0];
-            categoryUr = parts[1];
-        }
+        function renderBlogsGrid() {
+            const grid = document.getElementById('blogsGrid');
+            if (!grid) return;
 
-        let descEn = b.short_description || '';
-        let descUr = '';
-        if (descEn.includes(' ||| ')) {
-            const parts = descEn.split(' ||| ');
-            descEn = parts[0];
-            descUr = parts[1];
-        }
+            grid.innerHTML = '';
 
-        const currentTitle = currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
-        const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
-        const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
+            const filtered = allBlogs.filter(b => {
+                if (activeCategory === 'All') return true;
 
-        const currentDateStr = new Date(b.created_at || Date.now()).toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: 'short',
-            year: '2-digit'
-        }).replace(/ /g, '-');
+                let categoryEn = b.category || '';
+                if (categoryEn.includes(' ||| ')) {
+                    categoryEn = categoryEn.split(' ||| ')[0];
+                }
+                return categoryEn.toLowerCase() === activeCategory.toLowerCase();
+            });
 
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col justify-between';
-        card.innerHTML = `
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500 font-semibold" data-en="No blogs found in this category." data-ur="اس زمرے میں کوئی بلاگ نہیں ملا۔">No blogs found in this category.</div>`;
+                return;
+            }
+
+            filtered.forEach(b => {
+                let titleEn = b.title || '';
+                let titleUr = '';
+                if (titleEn.includes(' ||| ')) {
+                    const parts = titleEn.split(' ||| ');
+                    titleEn = parts[0];
+                    titleUr = parts[1];
+                }
+
+                let categoryEn = b.category || '';
+                let categoryUr = '';
+                if (categoryEn.includes(' ||| ')) {
+                    const parts = categoryEn.split(' ||| ');
+                    categoryEn = parts[0];
+                    categoryUr = parts[1];
+                }
+
+                let descEn = b.short_description || '';
+                let descUr = '';
+                if (descEn.includes(' ||| ')) {
+                    const parts = descEn.split(' ||| ');
+                    descEn = parts[0];
+                    descUr = parts[1];
+                }
+
+                const currentTitle = currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
+                const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
+                const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
+
+                let currentDateStr = '';
+                try {
+                    const parsedDate = new Date(b.created_at || Date.now());
+                    if (!isNaN(parsedDate.getTime())) {
+                        currentDateStr = parsedDate.toLocaleDateString('en-GB', {
+                            day: '2-digit',
+                            month: 'short',
+                            year: '2-digit'
+                        }).replace(/ /g, '-');
+                    } else {
+                        currentDateStr = b.date || '';
+                    }
+                } catch (e) {
+                    currentDateStr = b.date || '';
+                }
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col justify-between';
+                card.innerHTML = `
             <div>
                 <div class="h-48 w-full bg-slate-50 relative overflow-hidden flex items-center justify-center border-b border-gray-100">
                     <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
@@ -502,121 +409,131 @@ function renderBlogsGrid() {
                 </button>
             </div>
         `;
-        grid.appendChild(card);
-    });
-
-    applyLanguageStyles();
-}
-
-function viewBlogDetails(id) {
-    const blog = allBlogs.find(b => b.id == id || b.slug == id);
-    if (!blog) return;
-
-    let titleEn = blog.title || '';
-    let titleUr = '';
-    if (titleEn.includes(' ||| ')) {
-        const parts = titleEn.split(' ||| ');
-        titleEn = parts[0];
-        titleUr = parts[1];
-    }
-
-    let categoryEn = blog.category || '';
-    let categoryUr = '';
-    if (categoryEn.includes(' ||| ')) {
-        const parts = categoryEn.split(' ||| ');
-        categoryEn = parts[0];
-        categoryUr = parts[1];
-    }
-
-    let descEn = blog.short_description || '';
-    let descUr = '';
-    if (descEn.includes(' ||| ')) {
-        const parts = descEn.split(' ||| ');
-        descEn = parts[0];
-        descUr = parts[1];
-    }
-
-    let contentEn = blog.article || '';
-    let contentUr = '';
-    if (contentEn.includes(' ||| ')) {
-        const parts = contentEn.split(' ||| ');
-        contentEn = parts[0];
-        contentUr = parts[1];
-    }
-
-    const currentDateStr = new Date(blog.created_at || Date.now()).toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: '2-digit'
-    }).replace(/ /g, '-');
-
-    const currentTitle = currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
-    const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
-    const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
-    const currentContent = currentLanguage === 'ur' && contentUr ? contentUr : contentEn;
-
-    document.getElementById('modalBlogCategory').textContent = currentCategory;
-    document.getElementById('modalBlogImage').src = blog.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600';
-    document.getElementById('modalBlogDate').textContent = blog.date || currentDateStr;
-    document.getElementById('modalBlogAuthor').textContent = blog.author || 'Author';
-    document.getElementById('modalBlogTitle').textContent = currentTitle;
-    document.getElementById('modalBlogShortDesc').textContent = currentDesc;
-    document.getElementById('modalBlogContent').innerHTML = currentContent;
-
-    const modal = document.getElementById('blogDetailModal');
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    
-    if (currentLanguage === 'ur') {
-        modal.querySelector('.bg-white').setAttribute('dir', 'rtl');
-        modal.querySelector('.bg-white').classList.add('urdu-text');
-    } else {
-        modal.querySelector('.bg-white').setAttribute('dir', 'ltr');
-        modal.querySelector('.bg-white').classList.remove('urdu-text');
-    }
-}
-
-function closeBlogModal() {
-    const modal = document.getElementById('blogDetailModal');
-    modal.classList.remove('flex');
-    modal.classList.add('hidden');
-}
-
-function setupCategoryFilters() {
-    const buttons = document.querySelectorAll('.flex.flex-wrap.gap-3.justify-center button');
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buttons.forEach(b => {
-                b.classList.remove('bg-primary', 'text-white');
-                b.classList.add('bg-gray-100', 'text-gray-600');
+                grid.appendChild(card);
             });
-            btn.classList.remove('bg-gray-100', 'text-gray-600');
-            btn.classList.add('bg-primary', 'text-white');
-            activeCategory = btn.textContent;
-            renderBlogsGrid();
-        });
-    });
-}
 
-function applyLanguageStyles() {
-    if (currentLanguage === 'ur') {
-        document.querySelectorAll('h1, h2, h3, h4, p, a, button, span').forEach(el => {
-            el.classList.add('urdu-text');
-        });
-    } else {
-        document.querySelectorAll('h1, h2, h3, h4, p, a, button, span').forEach(el => {
-            el.classList.remove('urdu-text');
-        });
-    }
-}
+            applyLanguageStyles();
+        }
 
-function toggleLanguage() {
-    currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+        function viewBlogDetails(id) {
+            const blog = allBlogs.find(b => b.id == id || b.slug == id);
+            if (!blog) return;
 
-    document.documentElement.lang = currentLanguage;
-    document.documentElement.dir = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+            let titleEn = blog.title || '';
+            let titleUr = '';
+            if (titleEn.includes(' ||| ')) {
+                const parts = titleEn.split(' ||| ');
+                titleEn = parts[0];
+                titleUr = parts[1];
+            }
 
-                // Update all translatable elements
+            let categoryEn = blog.category || '';
+            let categoryUr = '';
+            if (categoryEn.includes(' ||| ')) {
+                const parts = categoryEn.split(' ||| ');
+                categoryEn = parts[0];
+                categoryUr = parts[1];
+            }
+
+            let descEn = blog.short_description || '';
+            let descUr = '';
+            if (descEn.includes(' ||| ')) {
+                const parts = descEn.split(' ||| ');
+                descEn = parts[0];
+                descUr = parts[1];
+            }
+
+            let contentEn = blog.article || '';
+            let contentUr = '';
+            if (contentEn.includes(' ||| ')) {
+                const parts = contentEn.split(' ||| ');
+                contentEn = parts[0];
+                contentUr = parts[1];
+            }
+
+            let currentDateStr = '';
+            try {
+                const parsedDate = new Date(blog.created_at || Date.now());
+                if (!isNaN(parsedDate.getTime())) {
+                    currentDateStr = parsedDate.toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: '2-digit'
+                    }).replace(/ /g, '-');
+                } else {
+                    currentDateStr = blog.date || '';
+                }
+            } catch (e) {
+                currentDateStr = blog.date || '';
+            }
+
+            const currentTitle = currentLanguage === 'ur' && titleUr ? titleUr : titleEn;
+            const currentCategory = currentLanguage === 'ur' && categoryUr ? categoryUr : categoryEn;
+            const currentDesc = currentLanguage === 'ur' && descUr ? descUr : descEn;
+            const currentContent = currentLanguage === 'ur' && contentUr ? contentUr : contentEn;
+
+            document.getElementById('modalBlogCategory').textContent = currentCategory;
+            document.getElementById('modalBlogImage').src = blog.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600';
+            document.getElementById('modalBlogDate').textContent = blog.date || currentDateStr;
+            document.getElementById('modalBlogAuthor').textContent = blog.author || 'Author';
+            document.getElementById('modalBlogTitle').textContent = currentTitle;
+            document.getElementById('modalBlogShortDesc').textContent = currentDesc;
+            document.getElementById('modalBlogContent').innerHTML = currentContent;
+
+            const modal = document.getElementById('blogDetailModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if (currentLanguage === 'ur') {
+                modal.querySelector('.bg-white').setAttribute('dir', 'rtl');
+                modal.querySelector('.bg-white').classList.add('urdu-text');
+            } else {
+                modal.querySelector('.bg-white').setAttribute('dir', 'ltr');
+                modal.querySelector('.bg-white').classList.remove('urdu-text');
+            }
+        }
+
+        function closeBlogModal() {
+            const modal = document.getElementById('blogDetailModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function setupCategoryFilters() {
+            const buttons = document.querySelectorAll('.flex.flex-wrap.gap-3.justify-center button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-white');
+                        b.classList.add('bg-gray-100', 'text-gray-600');
+                    });
+                    btn.classList.remove('bg-gray-100', 'text-gray-600');
+                    btn.classList.add('bg-primary', 'text-white');
+                    activeCategory = btn.textContent;
+                    renderBlogsGrid();
+                });
+            });
+        }
+
+        function applyLanguageStyles() {
+            if (currentLanguage === 'ur') {
+                document.querySelectorAll('h1, h2, h3, h4, p, a, button, span').forEach(el => {
+                    el.classList.add('urdu-text');
+                });
+            } else {
+                document.querySelectorAll('h1, h2, h3, h4, p, a, button, span').forEach(el => {
+                    el.classList.remove('urdu-text');
+                });
+            }
+        }
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+
+            document.documentElement.lang = currentLanguage;
+            document.documentElement.dir = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+
+            // Update all translatable elements
             document.querySelectorAll('[data-en]').forEach(el => {
                 const translation = el.getAttribute('data-' + currentLanguage);
                 if (translation) {
@@ -624,18 +541,49 @@ function toggleLanguage() {
                 }
             });
 
-    document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+            document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
 
-    renderBlogsGrid();
-}
+            renderBlogsGrid();
+        }
 
-window.onload = async () => {
-    setupCategoryFilters();
-    await loadBlogs();
-};
-</script>
+        window.onload = async () => {
+            setupCategoryFilters();
+            await loadBlogs();
+        };
+    </script>
 </body>
+
 </html>
 
 
 
+}
+}
+
+function toggleLanguage() {
+currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
+
+document.documentElement.lang = currentLanguage;
+document.documentElement.dir = currentLanguage === 'ur' ? 'rtl' : 'ltr';
+
+// Update all translatable elements
+document.querySelectorAll('[data-en]').forEach(el => {
+const translation = el.getAttribute('data-' + currentLanguage);
+if (translation) {
+el.textContent = translation;
+}
+});
+
+document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
+
+renderBlogsGrid();
+}
+
+window.onload = async () => {
+setupCategoryFilters();
+await loadBlogs();
+};
+</script>
+</body>
+
+</html>
