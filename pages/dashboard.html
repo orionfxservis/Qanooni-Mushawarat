@@ -4267,8 +4267,7 @@
 
             const payload = {
                 title: title,
-                project_name: 'Qanooni-Mushawarat',
-                status: currentUser.role === 'lawyer' ? 'Draft' : 'Live'
+                project_name: 'Qanooni-Mushawarat'
             };
 
             const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
@@ -4286,6 +4285,7 @@
                         let localSlides = JSON.parse(localStorage.getItem('rights_slides') || '[]');
                         payload.id = Date.now();
                         payload.created_at = new Date().toISOString();
+                        payload.status = currentUser.role === 'lawyer' ? 'Draft' : 'Live';
                         localSlides.push(payload);
                         localStorage.setItem('rights_slides', JSON.stringify(localSlides));
                     }
@@ -4373,18 +4373,14 @@
             const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
             try {
                 if (activeSupabase) {
-                    const { error } = await activeSupabase
-                        .from('know_your_rights')
-                        .update({ status: 'Live' })
-                        .eq('project_name', 'Qanooni-Mushawarat')
-                        .eq('id', id);
-                    if (error) throw error;
+                    // Since the know_your_rights schema does not have a status column, database slides are auto-live
+                    alert("Rights slide is already live on the database!");
                 } else {
                     let localSlides = JSON.parse(localStorage.getItem('rights_slides') || '[]');
                     localSlides = localSlides.map(s => (s.id == id || s.image_url.substring(0, 30) == id) ? { ...s, status: 'Live' } : s);
                     localStorage.setItem('rights_slides', JSON.stringify(localSlides));
+                    alert("Rights slide approved successfully!");
                 }
-                alert("Rights slide approved successfully!");
                 fetchRightsSlides();
             } catch (err) {
                 console.error("Error approving rights slide:", err);
