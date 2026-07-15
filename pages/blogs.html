@@ -106,7 +106,7 @@ HEADER
 
                     <!-- LOGO -->
                     <a href="../index.html" class="flex items-center">
-                        <img src="../images/logo/logo-02.png" alt="Qanooni Mushawarat Logo"
+                        <img src="../images/logo/Qanooni Mushawarat logo.png" alt="Qanooni Mushawarat Logo"
                             class="h-[48px] md:h-[60px] w-auto object-contain relative top-[5px]">
                     </a>
 
@@ -210,20 +210,21 @@ BLOGS GRID
 FOOTER
 ========================= -->
 
-    <footer class="bg-primary py-4 mt-10">
+<footer class="bg-primary py-4 mt-10">
 
-        <div class="container mx-auto px-4 text-center">
+    <div class="container mx-auto px-4 text-center">
 
-            <p class="text-white text-sm" data-en="© 2026 Qanooni Mushawarat. All Rights Reserved."
-                data-ur="© 2026 قانونی مشاورت۔ جملہ حقوق محفوظ ہیں۔">
+        <p class="text-white text-sm"
+           data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
+           data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
 
-                © 2026 Qanooni Mushawarat. All Rights Reserved.
+            © 2026 LegalEase Pakistan. All Rights Reserved.
 
-            </p>
+        </p>
 
-        </div>
+    </div>
 
-    </footer>
+</footer>
 
     <!-- =========================
 BLOG DETAIL MODAL
@@ -393,7 +394,7 @@ LANGUAGE & DYNAMIC BLOGS SCRIPT
                 card.innerHTML = `
             <div>
                 <div class="h-48 w-full bg-slate-50 relative overflow-hidden flex items-center justify-center border-b border-gray-100">
-                    <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
+                    <img src="${b.image || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600'">
                     <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[11px] font-bold text-primary">${currentCategory}</div>
                 </div>
                 <div class="p-6">
@@ -551,39 +552,6 @@ LANGUAGE & DYNAMIC BLOGS SCRIPT
             await loadBlogs();
         };
     </script>
-</body>
-
-</html>
-
-
-
-}
-}
-
-function toggleLanguage() {
-currentLanguage = currentLanguage === 'en' ? 'ur' : 'en';
-
-document.documentElement.lang = currentLanguage;
-document.documentElement.dir = currentLanguage === 'ur' ? 'rtl' : 'ltr';
-
-// Update all translatable elements
-document.querySelectorAll('[data-en]').forEach(el => {
-const translation = el.getAttribute('data-' + currentLanguage);
-if (translation) {
-el.textContent = translation;
-}
-});
-
-document.getElementById('langBtn').textContent = currentLanguage === 'en' ? 'اردو' : 'English';
-
-renderBlogsGrid();
-}
-
-window.onload = async () => {
-setupCategoryFilters();
-await loadBlogs();
-};
-</script>
 </body>
 
 </html>
