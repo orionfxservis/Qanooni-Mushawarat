@@ -1678,11 +1678,20 @@
     </div>
 
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+	<script src="../js/supabase-config.js"></script>
 	<script src="../js/qanooni-mushawarat.js"></script>
 	<script src="../js/custom-alert.js"></script>
 	<script src="../js/dashboard.js"></script>
 
     <script>
+        // Define Supabase config locally if not already loaded to prevent ReferenceErrors
+        if (typeof SUPABASE_URL === 'undefined') {
+            var SUPABASE_URL = window.SUPABASE_URL || 'https://aywuxnimzuqmocjccvbv.supabase.co';
+        }
+        if (typeof SUPABASE_ANON_KEY === 'undefined') {
+            var SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'sb_publishable_rnxMaJuE7KAjchYt3VN53Q_lYuJQpW7';
+        }
+
         // Tab Switching Logic
         function switchTab(tabId) {
             // Hide all contents
