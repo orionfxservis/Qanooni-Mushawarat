@@ -1354,7 +1354,7 @@
 		=========================== -->
 		<div class="service-card group relative bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-secondary">
 
-			<div class="absolute top-5 right-5">
+			<div class="absolute top-5 right-5 md:block hidden">
 				<span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
 					Personal
 				</span>
@@ -1364,80 +1364,87 @@
 		<div class="absolute top-0 left-0 h-1 w-0 bg-secondary transition-all duration-500 group-hover:w-full"></div>
 			<div class="p-6 flex flex-col h-full">
 
-				<!-- Icon -->
-				<div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
-					<i class="fas fa-people-roof text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
+				<!-- Clickable Header on Mobile -->
+				<div class="flex items-center justify-between cursor-pointer md:cursor-default" onclick="toggleServiceCard(this)">
+					<!-- Title -->
+					<h3 class="text-lg lg:text-xl font-bold text-primary leading-tight"
+						data-en="Personal & Family Law"
+						data-ur="ذاتی اور خاندانی قانون">
+								Personal & Family Law
+					</h3>
+					<!-- Toggle Icon (Mobile Only) -->
+					<i class="fas fa-chevron-down text-primary md:hidden transition-transform duration-300"></i>
 				</div>
 
-        <!-- Title -->
-        <h3 class="text-lg lg:text-xl font-bold text-primary mb-2 leading-tight"
-            data-en="Personal & Family Law"
-            data-ur="ذاتی اور خاندانی قانون">
-					Personal & Family Law
-        </h3>
+				<div class="service-card-body mt-4 hidden md:flex flex-col flex-grow">
+					<!-- Icon -->
+					<div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+						<i class="fas fa-people-roof text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
+					</div>
 
-        <!-- Description -->
-        <p class="text-sm text-gray-600 leading-6 mb-4 flex-grow"
-           data-en="Expert legal solutions for individuals and families, including divorce, criminal defence and property matters."
-           data-ur="افراد اور خاندانوں کے لیے ماہر قانونی خدمات، جن میں خلع، فوجداری دفاع اور جائیداد کے معاملات شامل ہیں۔">
+					<!-- Description -->
+					<p class="text-sm text-gray-600 leading-6 mb-4 flex-grow"
+					   data-en="Expert legal solutions for individuals and families, including divorce, criminal defence and property matters."
+					   data-ur="افراد اور خاندانوں کے لیے ماہر قانونی خدمات، جن میں خلع، فوجداری دفاع اور جائیداد کے معاملات شامل ہیں۔">
 
-					Expert legal solutions for individuals and families, including divorce, criminal defence and property matters.
-        </p>
+								Expert legal solutions for individuals and families, including divorce, criminal defence and property matters.
+					</p>
 
-        <!-- Services -->
-		<div class="space-y-2 mb-4">
+					<!-- Services -->
+					<div class="space-y-2 mb-4">
 
-			<!-- Family Law -->
-			<a href="./pages/family-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-				<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-					<i class="fas fa-heart text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+						<!-- Family Law -->
+						<a href="./pages/family-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-heart text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
+
+							<span 		class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+									data-en="Family Law"
+									data-ur="خاندانی قانون">
+										Family Law
+							</span>
+						</a>
+
+						<!-- Criminal Law -->
+						<a href="./pages/criminal-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-gavel text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
+
+							<span 		class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+									data-en="Criminal Law"
+									data-ur="فوجداری قانون">
+										Criminal Law
+							</span>
+						</a>
+
+						<!-- Property Law -->
+						<a href="./pages/property-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-house text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
+
+							<span 		class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+									data-en="Property Law"
+									data-ur="جائیداد کا قانون">
+										Property Law
+							</span>
+						</a>
+					</div>
+
+					<!-- Button -->
+					<a href="./pages/family-law.html"
+					   class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
+						<span data-en="Explore Services"
+							  data-ur="تمام خدمات دیکھیں">
+							  Explore Services
+						</span>
+						<i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
+					</a>
 				</div>
-
-				<span 		class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-						data-en="Family Law"
-						data-ur="خاندانی قانون">
-							Family Law
-				</span>
-			</a>
-
-			<!-- Criminal Law -->
-			<a href="./pages/criminal-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-				<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-					<i class="fas fa-gavel text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-				</div>
-
-				<span 		class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-						data-en="Criminal Law"
-						data-ur="فوجداری قانون">
-							Criminal Law
-				</span>
-			</a>
-
-			<!-- Property Law -->
-			<a href="./pages/property-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-				<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-					<i class="fas fa-house text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-				</div>
-
-				<span 		class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-						data-en="Property Law"
-						data-ur="جائیداد کا قانون">
-							Property Law
-				</span>
-			</a>
+			</div>
 		</div>
-
-        <!-- Button -->
-        <a href="./pages/family-law.html"
-           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
-            <span data-en="Explore Services"
-                  data-ur="تمام خدمات دیکھیں">
-                  Explore Services
-            </span>
-            <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
-        </a>
-    </div>
-</div>
 
 
 	<!-- ===========================
@@ -1446,7 +1453,7 @@
 	<div class="service-card group relative bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-secondary">
 
     <!-- Badge -->
-    <div class="absolute top-5 right-5">
+    <div class="absolute top-5 right-5 md:block hidden">
         <span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
             Business
         </span>
@@ -1457,85 +1464,82 @@
 
     <div class="p-6 flex flex-col h-full">
 
-        <!-- Icon -->
-        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+				<!-- Clickable Header on Mobile -->
+				<div class="flex items-center justify-between cursor-pointer md:cursor-default" onclick="toggleServiceCard(this)">
+					<!-- Title -->
+					<h3 class="text-lg font-bold text-primary leading-tight"
+						data-en="Business & Corporate Law"
+						data-ur="کاروباری اور کارپوریٹ قانون">
+						Business & Corporate Law
+					</h3>
+					<!-- Toggle Icon (Mobile Only) -->
+					<i class="fas fa-chevron-down text-primary md:hidden transition-transform duration-300"></i>
+				</div>
 
-            <i class="fas fa-briefcase text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
+				<div class="service-card-body mt-4 hidden md:flex flex-col flex-grow">
+					<!-- Icon -->
+					<div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+						<i class="fas fa-briefcase text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
+					</div>
 
-        </div>
+					<!-- Description -->
+					<p class="text-sm text-gray-600 leading-5 mb-4 flex-grow"
+					   data-en="Corporate, banking and tax legal solutions for businesses."
+					   data-ur="کاروبار، بینکنگ اور ٹیکس سے متعلق قانونی خدمات۔">
 
-        <!-- Title -->
-        <h3 class="text-lg font-bold text-primary mb-2 leading-tight"
-            data-en="Business & Corporate Law"
-            data-ur="کاروباری اور کارپوریٹ قانون">
+						Corporate, banking and tax legal solutions for businesses.
+					</p>
 
-            Business & Corporate Law
+					<!-- Services -->
+					<div class="space-y-2 mb-5">
 
-        </h3>
+						<a href="./pages/corporate-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-building text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-        <!-- Description -->
-        <p class="text-sm text-gray-600 leading-5 mb-4 flex-grow"
-           data-en="Corporate, banking and tax legal solutions for businesses."
-           data-ur="کاروبار، بینکنگ اور ٹیکس سے متعلق قانونی خدمات۔">
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Corporate Law"
+								  data-ur="کارپوریٹ قانون">
+								Corporate Law
+							</span>
+						</a>
 
-            Corporate, banking and tax legal solutions for businesses.
+						<a href="./pages/banking-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-landmark text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-        </p>
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Banking & Finance"
+								  data-ur="بینکنگ اور مالیاتی قانون">
+								Banking & Finance
+							</span>
+						</a>
 
-        <!-- Services -->
-        <div class="space-y-2 mb-5">
+						<a href="./pages/tax-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-receipt text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-            <a href="./pages/corporate-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-                <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-                    <i class="fas fa-building text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-                </div>
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Tax & FBR Matters"
+								  data-ur="ٹیکس اور ایف بی آر معاملات">
+								Tax & FBR Matters
+							</span>
+						</a>
+					</div>
 
-                <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-                      data-en="Corporate Law"
-                      data-ur="کارپوریٹ قانون">
-                    Corporate Law
-                </span>
-            </a>
-
-            <a href="./pages/banking-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-                <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-                    <i class="fas fa-landmark text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-                </div>
-
-                <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-                      data-en="Banking & Finance"
-                      data-ur="بینکنگ اور مالیاتی قانون">
-                    Banking & Finance
-                </span>
-            </a>
-
-            <a href="./pages/tax-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-                <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-                    <i class="fas fa-receipt text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-                </div>
-
-                <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-                      data-en="Tax & FBR Matters"
-                      data-ur="ٹیکس اور ایف بی آر معاملات">
-                    Tax & FBR Matters
-                </span>
-            </a>
-
-        </div>
-
-        <!-- Button -->
-        <a href="./pages/corporate-law.html"
-           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
-
-            <span data-en="Explore Services"
-                  data-ur="تمام خدمات دیکھیں">
-                Explore Services
-            </span>
-
-            <i class="fas fa-arrow-right ml-2"></i>
-
-        </a>
-
+					<!-- Button -->
+					<a href="./pages/corporate-law.html"
+					   class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
+						<span data-en="Explore Services"
+							  data-ur="تمام خدمات دیکھیں">
+							Explore Services
+						</span>
+						<i class="fas fa-arrow-right ml-2"></i>
+					</a>
+				</div>
     </div>
 
 </div>
@@ -1545,12 +1549,10 @@
 =========================== -->
 <div class="service-card group relative bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-secondary">
 
-<div class="absolute top-5 right-5">
-
-<span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
-Specialized
-</span>
-
+<div class="absolute top-5 right-5 md:block hidden">
+	<span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
+		Specialized
+	</span>
 </div>
 
     <!-- Top Accent -->
@@ -1558,83 +1560,85 @@ Specialized
 
     <div class="p-6 flex flex-col h-full">
 
-        <!-- Icon -->
-        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+				<!-- Clickable Header on Mobile -->
+				<div class="flex items-center justify-between cursor-pointer md:cursor-default" onclick="toggleServiceCard(this)">
+					<!-- Title -->
+					<h3 class="text-lg lg:text-xl font-bold text-primary leading-tight"
+						data-en="Specialized Legal Services"
+						data-ur="خصوصی قانونی خدمات">
+						Specialized Legal Services
+					</h3>
+					<!-- Toggle Icon (Mobile Only) -->
+					<i class="fas fa-chevron-down text-primary md:hidden transition-transform duration-300"></i>
+				</div>
 
-            <i class="fas fa-shield-halved text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
-        </div>
+				<div class="service-card-body mt-4 hidden md:flex flex-col flex-grow">
+					<!-- Icon -->
+					<div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+						<i class="fas fa-shield-halved text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
+					</div>
 
-        <!-- Title -->
-        <h3 class="text-lg lg:text-xl font-bold text-primary mb-2 leading-tight"
-            data-en="Specialized Legal Services"
-            data-ur="خصوصی قانونی خدمات">
+					<!-- Description -->
+					<p class="text-sm text-gray-600 leading-6 mb-4 flex-grow"
+					   data-en="Professional legal assistance for cyber crime, immigration, anti-narcotics and other specialized legal matters."
+					   data-ur="سائبر کرائم، امیگریشن، انسدادِ منشیات اور دیگر خصوصی قانونی معاملات کے لیے پیشہ ورانہ قانونی معاونت۔">
 
-            Specialized Legal Services
-        </h3>
+						Professional legal assistance for cyber crime, immigration, anti-narcotics and other specialized legal matters.
+					</p>
 
-        <!-- Description -->
-        <p class="text-sm text-gray-600 leading-6 mb-4 flex-grow"
-           data-en="Professional legal assistance for cyber crime, immigration, anti-narcotics and other specialized legal matters."
-           data-ur="سائبر کرائم، امیگریشن، انسدادِ منشیات اور دیگر خصوصی قانونی معاملات کے لیے پیشہ ورانہ قانونی معاونت۔">
+					<!-- Services -->
+					<div class="space-y-2 mb-4">
 
-            Professional legal assistance for cyber crime, immigration, anti-narcotics and other specialized legal matters.
-        </p>
+						<!-- Cyber Crime -->
+						<a href="./pages/cyber-crime.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-shield-halved text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-        <!-- Services -->
-<div class="space-y-2 mb-4">
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Cyber Crime"
+								  data-ur="سائبر کرائم">
+								Cyber Crime
+							</span>
+						</a>
 
-    <!-- Cyber Crime -->
-    <a href="./pages/cyber-crime.html" class="flex items-center group/item hover:text-secondary transition-colors">
-        <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-            <i class="fas fa-shield-halved text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-        </div>
+						<!-- Immigration Law -->
+						<a href="./pages/immigration-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-earth-asia text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-        <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-              data-en="Cyber Crime"
-              data-ur="سائبر کرائم">
-            Cyber Crime
-        </span>
-    </a>
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Immigration Law"
+								  data-ur="امیگریشن قانون">
+								Immigration Law
+							</span>
+						</a>
 
-    <!-- Immigration Law -->
-    <a href="./pages/immigration-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-        <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-            <i class="fas fa-earth-asia text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-        </div>
+						<!-- Anti-Narcotics Law -->
+						<a href="./pages/anti-narcotics.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-handcuffs text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-        <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-              data-en="Immigration Law"
-              data-ur="امیگریشن قانون">
-            Immigration Law
-        </span>
-    </a>
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Anti-Narcotics Law"
+								  data-ur="انسدادِ منشیات قانون">
+								Anti-Narcotics Law
+							</span>
+						</a>
+					</div>
 
-    <!-- Anti-Narcotics Law -->
-    <a href="./pages/anti-narcotics.html" class="flex items-center group/item hover:text-secondary transition-colors">
-        <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-            <i class="fas fa-handcuffs text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-        </div>
-
-        <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-              data-en="Anti-Narcotics Law"
-              data-ur="انسدادِ منشیات قانون">
-            Anti-Narcotics Law
-        </span>
-    </a>
-
-</div>
-
-        <!-- Button -->
-        <a href="./pages/cyber-crime.html"
-           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
-
-            <span data-en="Explore Services"
-                  data-ur="تمام خدمات دیکھیں">
-                Explore Services
-            </span>
-
-            <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
-        </a>
+					<!-- Button -->
+					<a href="./pages/cyber-crime.html"
+					   class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
+						<span data-en="Explore Services"
+							  data-ur="تمام خدمات دیکھیں">
+							Explore Services
+						</span>
+						<i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
+					</a>
+				</div>
     </div>
 </div>
 
@@ -1643,12 +1647,10 @@ Specialized
 =========================== -->
 <div class="service-card group relative bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-secondary">
 
-<div class="absolute top-5 right-5">
-
-<span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
-Litigation
-</span>
-
+<div class="absolute top-5 right-5 md:block hidden">
+	<span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
+		Litigation
+	</span>
 </div>
 
     <!-- Top Accent -->
@@ -1656,91 +1658,94 @@ Litigation
 
     <div class="p-6 flex flex-col h-full">
 
-        <!-- Icon -->
-        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+				<!-- Clickable Header on Mobile -->
+				<div class="flex items-center justify-between cursor-pointer md:cursor-default" onclick="toggleServiceCard(this)">
+					<!-- Title -->
+					<h3 class="text-lg lg:text-xl font-bold text-primary leading-tight"
+						data-en="Litigation & Constitutional Rights"
+						data-ur="عدالتی مقدمات اور آئینی حقوق">
+						Litigation & Constitutional Rights
+					</h3>
+					<!-- Toggle Icon (Mobile Only) -->
+					<i class="fas fa-chevron-down text-primary md:hidden transition-transform duration-300"></i>
+				</div>
 
-            <i class="fas fa-gavel text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
-        </div>
+				<div class="service-card-body mt-4 hidden md:flex flex-col flex-grow">
+					<!-- Icon -->
+					<div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-secondary group-hover:rotate-6 group-hover:scale-110">
+						<i class="fas fa-gavel text-2xl text-secondary group-hover:text-white transition-all duration-500"></i>
+					</div>
 
-        <!-- Title -->
-        <h3 class="text-lg lg:text-xl font-bold text-primary mb-2 leading-tight"
-            data-en="Litigation & Constitutional Rights"
-            data-ur="عدالتی مقدمات اور آئینی حقوق">
+					<!-- Description -->
+					<p class="text-sm text-gray-600 leading-6 mb-4 flex-grow"
+					   data-en="Expert court representation for civil disputes, employment matters, consumer rights and constitutional petitions."
+					   data-ur="دیوانی مقدمات، لیبر قوانین، صارفین کے حقوق اور آئینی درخواستوں کے لیے ماہر قانونی نمائندگی۔">
 
-            Litigation & Constitutional Rights
-        </h3>
+						Expert court representation for civil disputes, employment matters, consumer rights and constitutional petitions.
+					</p>
 
-        <!-- Description -->
-        <p class="text-sm text-gray-600 leading-6 mb-4 flex-grow"
-           data-en="Expert court representation for civil disputes, employment matters, consumer rights and constitutional petitions."
-           data-ur="دیوانی مقدمات، لیبر قوانین، صارفین کے حقوق اور آئینی درخواستوں کے لیے ماہر قانونی نمائندگی۔">
+					<!-- Services -->
+					<div class="space-y-2 mb-4">
 
-            Expert court representation for civil disputes, employment matters, consumer rights and constitutional petitions.
-        </p>
+						<a href="./pages/civil-litigation.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-scale-balanced text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-        <!-- Services -->
-        <div class="space-y-2 mb-4">
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Civil Litigation"
+								  data-ur="دیوانی مقدمات">
+								Civil Litigation
+							</span>
+						</a>
 
-            <a href="./pages/civil-litigation.html" class="flex items-center group/item hover:text-secondary transition-colors">
-                <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-                    <i class="fas fa-scale-balanced text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-                </div>
+						<a href="./pages/labour-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-user-tie text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-                <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-                      data-en="Civil Litigation"
-                      data-ur="دیوانی مقدمات">
-                    Civil Litigation
-                </span>
-            </a>
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Employment & Labour Law"
+								  data-ur="ملازمت اور لیبر قانون">
+								Employment & Labour Law
+							</span>
+						</a>
 
-            <a href="./pages/labour-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-                <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-                    <i class="fas fa-user-tie text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-                </div>
+						<a href="./pages/consumer-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-cart-shopping text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-                <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-                      data-en="Employment & Labour Law"
-                      data-ur="ملازمت اور لیبر قانون">
-                    Employment & Labour Law
-                </span>
-            </a>
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Consumer Protection"
+								  data-ur="صارفین کے حقوق">
+								Consumer Protection
+							</span>
+						</a>
 
-            <a href="./pages/consumer-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-                <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-                    <i class="fas fa-cart-shopping text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-                </div>
+						<a href="./pages/constitutional-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
+							<div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
+								<i class="fas fa-landmark-dome text-secondary text-xs group-hover/item:text-white transition-colors"></i>
+							</div>
 
-                <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-                      data-en="Consumer Protection"
-                      data-ur="صارفین کے حقوق">
-                    Consumer Protection
-                </span>
-            </a>
+							<span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
+								  data-en="Constitutional Matters"
+								  data-ur="آئینی معاملات">
+								Constitutional Matters
+							</span>
+						</a>
+					</div>
 
-            <a href="./pages/constitutional-law.html" class="flex items-center group/item hover:text-secondary transition-colors">
-                <div class="w-7 h-7 rounded-md bg-secondary/10 flex items-center justify-center mr-2 flex-shrink-0 group-hover/item:bg-secondary transition-colors">
-                    <i class="fas fa-landmark-dome text-secondary text-xs group-hover/item:text-white transition-colors"></i>
-                </div>
-
-                <span class="text-sm font-medium text-gray-700 group-hover/item:text-secondary transition-colors"
-                      data-en="Constitutional Matters"
-                      data-ur="آئینی معاملات">
-                    Constitutional Matters
-                </span>
-            </a>
-        </div>
-
-        <!-- Button -->
-        <a href="./pages/civil-litigation.html"
-           class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
-
-            <span data-en="Explore Services"
-                  data-ur="تمام خدمات دیکھیں">
-                Explore Services
-            </span>
-
-            <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
-        </a>
+					<!-- Button -->
+					<a href="./pages/civil-litigation.html"
+					   class="mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-secondary text-white font-semibold hover:bg-primary transition w-full">
+						<span data-en="Explore Services"
+							  data-ur="تمام خدمات دیکھیں">
+							Explore Services
+						</span>
+						<i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
+					</a>
+				</div>
     </div>
 </div>
 
@@ -4414,6 +4419,41 @@ window.addEventListener("click", function(e) {
         closeLawyerModal();
     }
 });
+
+function toggleServiceCard(headerElement) {
+    if (window.innerWidth >= 768) return; // Only run on mobile (under md breakpoint)
+
+    const card = headerElement.closest('.service-card');
+    const body = card.querySelector('.service-card-body');
+    const icon = headerElement.querySelector('.fa-chevron-down');
+    const isExpanded = !body.classList.contains('hidden');
+
+    // Close all other service cards
+    document.querySelectorAll('.service-card').forEach(otherCard => {
+        if (otherCard !== card) {
+            const otherBody = otherCard.querySelector('.service-card-body');
+            const otherIcon = otherCard.querySelector('.fa-chevron-down');
+            if (otherBody) {
+                otherBody.classList.add('hidden');
+                otherBody.classList.remove('flex');
+            }
+            if (otherIcon) {
+                otherIcon.classList.remove('rotate-180');
+            }
+        }
+    });
+
+    // Toggle current card
+    if (isExpanded) {
+        body.classList.add('hidden');
+        body.classList.remove('flex');
+        if (icon) icon.classList.remove('rotate-180');
+    } else {
+        body.classList.remove('hidden');
+        body.classList.add('flex');
+        if (icon) icon.classList.add('rotate-180');
+    }
+}
 
 // Registration Model
 function openRegisterModal() {
