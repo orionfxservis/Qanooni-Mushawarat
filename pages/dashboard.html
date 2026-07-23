@@ -1037,9 +1037,63 @@
 
             <!-- Know The Laws Tab -->
             <div id="tab-know-laws" class="tab-content">
-                <div class="bg-[#eaeef3] rounded-2xl p-8 shadow-sm border border-gray-200/80">
-                    <h3 class="text-xl font-bold text-primary mb-4">Know The Laws</h3>
-                    <p class="text-gray-500">Manage 'Know The Laws' content here.</p>
+                <!-- Add New Slide Form -->
+                <div class="bg-[#eaeef3] rounded-2xl p-5 shadow-sm border border-gray-200/80 mb-6">
+                    <h3 class="text-xs font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fas fa-plus-circle text-secondary"></i>
+                        Add New Law Slide
+                    </h3>
+                    
+                    <form id="addLawForm" class="space-y-4" onsubmit="saveLawSlide(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Title (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="lawTitleEn" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. Constitution of Pakistan">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Title (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="lawTitleUr" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. پاکستان کا آئین">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Description (English) <span class="text-red-500">*</span></label>
+                                <input type="text" id="lawDescEn" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. The supreme law of the land">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Description (Urdu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="lawDescUr" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="e.g. ملک کا اعلیٰ ترین قانون">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Read More URL / Link <span class="text-red-500">*</span></label>
+                                <input type="url" id="lawLink" required class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="https://pakistancode.gov.pk/...">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Image URL</label>
+                                <input type="url" id="lawImageUrl" class="w-full h-8 px-2.5 text-xs rounded-lg border border-gray-300 bg-white placeholder-gray-400 text-gray-700 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/20 transition" placeholder="https://images.unsplash.com/...">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-gray-500 mb-1">Or Upload Image File</label>
+                                <input type="file" id="lawImageFile" accept="image/*" class="w-full text-xs text-gray-500 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-primary file:text-white hover:file:bg-accent file:cursor-pointer transition">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-2 pt-2">
+                            <button type="submit" id="btnSaveLaw" class="px-5 py-1.5 bg-secondary text-primary font-bold rounded-lg text-xs hover:bg-white transition shadow-sm">Save Slide</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Existing Slides List -->
+                <div class="bg-[#eaeef3] rounded-2xl p-5 shadow-sm border border-gray-200/80">
+                    <h3 class="text-xs font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fas fa-images text-secondary"></i>
+                        Manage Slides
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="lawsSlidesContainer">
+                        <!-- Loaded dynamically -->
+                    </div>
                 </div>
             </div>
 
@@ -2452,6 +2506,11 @@
                 fetchRightsSlides();
             } catch (e) {
                 console.error("Error fetching rights slides on load:", e);
+            }
+            try {
+                fetchLawsSlides();
+            } catch (e) {
+                console.error("Error fetching laws slides on load:", e);
             }
         };
 
@@ -4387,6 +4446,205 @@
                 alert("Failed to approve slide: " + err.message);
             }
         }
+
+        let allLawsSlides = [];
+
+        // Fetch Laws Slides
+        async function fetchLawsSlides() {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('know_the_laws')
+                        .select('*')
+                        .eq('project_name', 'Qanooni-Mushawarat')
+                        .order('created_at', { ascending: false });
+
+                    if (error) throw error;
+                    allLawsSlides = data || [];
+                } else {
+                    allLawsSlides = JSON.parse(localStorage.getItem('laws_slides') || '[]');
+                }
+                renderLawsSlides();
+            } catch (err) {
+                console.error("Error fetching laws slides:", err);
+                allLawsSlides = JSON.parse(localStorage.getItem('laws_slides') || '[]');
+                renderLawsSlides();
+            }
+        }
+
+        // Render Laws Slides
+        function renderLawsSlides() {
+            const container = document.getElementById('lawsSlidesContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (allLawsSlides.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-6 text-gray-400 text-xs">No slides found. Upload or link an image to get started.</div>`;
+                return;
+            }
+
+            allLawsSlides.forEach(slide => {
+                const titleEn = slide.title_en || '';
+                const titleUr = slide.title_ur || '';
+                const slideStatus = slide.status || 'Live';
+                const statusBadge = `<span class="px-2 py-0.5 rounded text-[9px] font-bold ${slideStatus === 'Live' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">${slideStatus}</span>`;
+                
+                let approveBtn = '';
+                if (currentUser.role === 'admin' && slideStatus === 'Draft') {
+                    approveBtn = `<button onclick="approveLawSlide(${slide.id || '\'' + slide.image_url.substring(0, 30) + '\''})" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700 transition shadow-sm mr-1.5">Approve</button>`;
+                }
+
+                const div = document.createElement('div');
+                div.className = 'bg-white p-3 rounded-xl border border-gray-250 shadow-sm flex flex-col justify-between';
+                div.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="h-28 overflow-hidden rounded-lg bg-gray-100 flex items-center justify-center relative">
+                            <img src="${slide.image_url}" class="max-h-full max-w-full object-contain" alt="${titleEn}">
+                            <div class="absolute top-2 right-2">${statusBadge}</div>
+                        </div>
+                        <div>
+                            <div class="font-bold text-xs text-primary truncate">${titleEn} / ${titleUr}</div>
+                            <div class="text-[10px] text-gray-500 line-clamp-2 mt-1">${slide.desc_en || ''}</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-gray-100 flex justify-end">
+                        ${approveBtn}
+                        <button onclick="deleteLawSlide(${slide.id || '\'' + slide.image_url.substring(0, 30) + '\''})" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Save Law Slide
+        async function saveLawSlide(event) {
+            if (event) event.preventDefault();
+
+            const titleEn = document.getElementById('lawTitleEn').value.trim();
+            const titleUr = document.getElementById('lawTitleUr').value.trim();
+            const descEn = document.getElementById('lawDescEn').value.trim();
+            const descUr = document.getElementById('lawDescUr').value.trim();
+            const link = document.getElementById('lawLink').value.trim();
+            const imageUrlInput = document.getElementById('lawImageUrl');
+            const fileInput = document.getElementById('lawImageFile');
+            const submitBtn = document.getElementById('btnSaveLaw');
+            const originalText = submitBtn.innerHTML;
+
+            let finalImageUrl = imageUrlInput.value.trim();
+
+            if (!finalImageUrl && fileInput.files.length === 0) {
+                alert("Please provide an Image URL or upload an Image File.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "Saving...";
+
+            const payload = {
+                title_en: titleEn,
+                title_ur: titleUr,
+                desc_en: descEn,
+                desc_ur: descUr,
+                link: link,
+                project_name: 'Qanooni-Mushawarat'
+            };
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            const performSave = async () => {
+                payload.image_url = finalImageUrl;
+
+                try {
+                    if (activeSupabase) {
+                        const { error } = await activeSupabase
+                            .from('know_the_laws')
+                            .insert([payload]);
+                        if (error) throw error;
+                    } else {
+                        let localSlides = JSON.parse(localStorage.getItem('laws_slides') || '[]');
+                        payload.id = Date.now();
+                        payload.created_at = new Date().toISOString();
+                        payload.status = currentUser.role === 'lawyer' ? 'Draft' : 'Live';
+                        localSlides.push(payload);
+                        localStorage.setItem('laws_slides', JSON.stringify(localSlides));
+                    }
+                    alert("Law slide saved successfully!");
+                    document.getElementById('addLawForm').reset();
+                    fetchLawsSlides();
+                } catch (err) {
+                    console.error("Error saving law slide:", err);
+                    alert("Failed to save slide: " + err.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            };
+
+            if (fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    finalImageUrl = e.target.result; // base64 Data URI
+                    await performSave();
+                };
+                reader.onerror = function() {
+                    alert("Failed to read the uploaded file.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                await performSave();
+            }
+        }
+
+        // Delete Law Slide
+        async function deleteLawSlide(id) {
+            if (!confirm("Are you sure you want to delete this law slide?")) return;
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('know_the_laws')
+                        .delete()
+                        .eq('project_name', 'Qanooni-Mushawarat')
+                        .eq('id', id);
+                    if (error) throw error;
+                } else {
+                    let localSlides = JSON.parse(localStorage.getItem('laws_slides') || '[]');
+                    localSlides = localSlides.filter(s => s.id != id && s.image_url.substring(0, 30) != id);
+                    localStorage.setItem('laws_slides', JSON.stringify(localSlides));
+                }
+                alert("Law slide deleted successfully!");
+                fetchLawsSlides();
+            } catch (err) {
+                console.error("Error deleting slide:", err);
+                alert("Failed to delete slide: " + err.message);
+            }
+        }
+
+        // Approve Law Slide (Admin Action)
+        async function approveLawSlide(id) {
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            try {
+                if (activeSupabase) {
+                    alert("Law slide is already live on the database!");
+                } else {
+                    let localSlides = JSON.parse(localStorage.getItem('laws_slides') || '[]');
+                    localSlides = localSlides.map(s => (s.id == id || s.image_url.substring(0, 30) == id) ? { ...s, status: 'Live' } : s);
+                    localStorage.setItem('laws_slides', JSON.stringify(localSlides));
+                    alert("Law slide approved successfully!");
+                }
+                fetchLawsSlides();
+            } catch (err) {
+                console.error("Error approving law slide:", err);
+                alert("Failed to approve slide: " + err.message);
+            }
+        }
+
 
         // --- LAWYER PROFILE CUSTOM FORM GENERATION & LOGIC ---
 
