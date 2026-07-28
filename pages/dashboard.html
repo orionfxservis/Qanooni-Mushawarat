@@ -1045,6 +1045,7 @@
                     </h3>
                     
                     <form id="addLawForm" class="space-y-4" onsubmit="saveLawSlide(event)">
+                        <input type="hidden" id="lawSlideId" value="">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[11px] font-semibold text-gray-500 mb-1">Title (English) <span class="text-red-500">*</span></label>
@@ -4509,8 +4510,9 @@
                             <div class="text-[10px] text-gray-500 line-clamp-2 mt-1">${slide.desc_en || ''}</div>
                         </div>
                     </div>
-                    <div class="mt-3 pt-2 border-t border-gray-100 flex justify-end">
+                    <div class="mt-3 pt-2 border-t border-gray-100 flex justify-end gap-1.5">
                         ${approveBtn}
+                        <button onclick="editLawSlide(${slide.id || '\'' + slide.image_url.substring(0, 30) + '\''})" class="px-2 py-1 bg-blue-600 text-white rounded text-[10px] font-bold hover:bg-blue-700 transition shadow-sm">Edit</button>
                         <button onclick="deleteLawSlide(${slide.id || '\'' + slide.image_url.substring(0, 30) + '\''})" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold hover:bg-red-700 transition shadow-sm">Delete</button>
                     </div>
                 `;
@@ -4522,6 +4524,7 @@
         async function saveLawSlide(event) {
             if (event) event.preventDefault();
 
+            const slideId = document.getElementById('lawSlideId').value;
             const titleEn = document.getElementById('lawTitleEn').value.trim();
             const titleUr = document.getElementById('lawTitleUr').value.trim();
             const descEn = document.getElementById('lawDescEn').value.trim();
@@ -4558,27 +4561,48 @@
 
                 try {
                     if (activeSupabase) {
-                        const { error } = await activeSupabase
-                            .from('know_the_laws')
-                            .insert([payload]);
-                        if (error) throw error;
+                        if (slideId) {
+                            const { error } = await activeSupabase
+                                .from('know_the_laws')
+                                .update(payload)
+                                .eq('project_name', 'Qanooni-Mushawarat')
+                                .eq('id', slideId);
+                            if (error) throw error;
+                        } else {
+                            const { error } = await activeSupabase
+                                .from('know_the_laws')
+                                .insert([payload]);
+                            if (error) throw error;
+                        }
                     } else {
                         let localSlides = JSON.parse(localStorage.getItem('laws_slides') || '[]');
-                        payload.id = Date.now();
-                        payload.created_at = new Date().toISOString();
-                        payload.status = currentUser.role === 'lawyer' ? 'Draft' : 'Live';
-                        localSlides.push(payload);
+                        if (slideId) {
+                            const index = localSlides.findIndex(s => s.id == slideId || s.image_url.substring(0, 30) == slideId);
+                            if (index !== -1) {
+                                payload.id = localSlides[index].id;
+                                payload.created_at = localSlides[index].created_at;
+                                payload.status = localSlides[index].status;
+                                localSlides[index] = payload;
+                            }
+                        } else {
+                            payload.id = Date.now();
+                            payload.created_at = new Date().toISOString();
+                            payload.status = currentUser.role === 'lawyer' ? 'Draft' : 'Live';
+                            localSlides.push(payload);
+                        }
                         localStorage.setItem('laws_slides', JSON.stringify(localSlides));
                     }
-                    alert("Law slide saved successfully!");
+                    alert(slideId ? "Law slide updated successfully!" : "Law slide saved successfully!");
                     document.getElementById('addLawForm').reset();
+                    document.getElementById('lawSlideId').value = '';
+                    document.getElementById('btnSaveLaw').innerHTML = 'Save Slide';
                     fetchLawsSlides();
                 } catch (err) {
                     console.error("Error saving law slide:", err);
                     alert("Failed to save slide: " + err.message);
                 } finally {
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalText;
+                    if (!slideId) submitBtn.innerHTML = originalText;
                 }
             };
 
@@ -4597,6 +4621,23 @@
             } else {
                 await performSave();
             }
+        }
+
+        // Edit Law Slide
+        function editLawSlide(id) {
+            const slide = allLawsSlides.find(s => s.id == id || s.image_url.substring(0, 30) == id);
+            if (!slide) return;
+            
+            document.getElementById('lawSlideId').value = slide.id || slide.image_url.substring(0, 30);
+            document.getElementById('lawTitleEn').value = slide.title_en || '';
+            document.getElementById('lawTitleUr').value = slide.title_ur || '';
+            document.getElementById('lawDescEn').value = slide.desc_en || '';
+            document.getElementById('lawDescUr').value = slide.desc_ur || '';
+            document.getElementById('lawLink').value = slide.link || '';
+            document.getElementById('lawImageUrl').value = slide.image_url || '';
+            
+            document.getElementById('addLawForm').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('btnSaveLaw').innerHTML = 'Update Slide';
         }
 
         // Delete Law Slide
