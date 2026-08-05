@@ -2944,7 +2944,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4 mb-2" data-en="What Our Clients Say" data-ur="ہمارے کلائنٹس کیا کہتے ہیں">What Our Clients Say</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonialsContainer">
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover-lift">
                     <div class="flex items-center gap-1 mb-4">
                         <i class="fas fa-star text-secondary"></i>
@@ -2998,6 +2998,14 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button onclick="openTestimonialModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-white px-8 py-3.5 rounded-2xl font-bold text-sm shadow-lg border border-primary/20 hover:from-secondary hover:to-secondary hover:text-primary transition duration-300 transform hover:-translate-y-0.5">
+                    <span class="text-amber-400">★★★★★</span>
+                    <span data-en="Share Your Experience" data-ur="اپنا تجربہ شیئر کریں">Share Your Experience</span>
+                </button>
+                <p class="text-xs text-gray-500 mt-2" data-en="Tell us about your experience with our legal services." data-ur="ہماری قانونی خدمات کے بارے میں اپنے تجربے کے بارے میں بتائیں۔">Tell us about your experience with our legal services.</p>
             </div>
         </div>
     </section>
@@ -3269,6 +3277,68 @@
             </div>
         </div>
     </div>
+
+    <!-- Testimonial Submission Modal -->
+    <div id="testimonialModal" class="fixed inset-0 z-[99999] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-primary text-white p-5 flex items-center justify-between">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fas fa-star text-secondary"></i>
+                    <span data-en="Share Your Experience" data-ur="اپنا تجربہ شیئر کریں">Share Your Experience</span>
+                </h3>
+                <button onclick="closeTestimonialModal()" class="text-white hover:text-secondary text-xl transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Form -->
+            <form id="testimonialForm" onsubmit="handleTestimonialSubmit(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1" data-en="Name *" data-ur="نام *">Name *</label>
+                    <input type="text" id="testName" required placeholder="Your full name" class="w-full px-4 py-2 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-secondary">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1" data-en="City" data-ur="شہر">City</label>
+                    <input type="text" id="testCity" placeholder="Your city (e.g. Lahore)" class="w-full px-4 py-2 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-secondary">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1" data-en="Email (optional)" data-ur="ای میل (اختیاری)">Email (optional)</label>
+                    <input type="email" id="testEmail" placeholder="your@email.com" class="w-full px-4 py-2 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-secondary">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-2" data-en="Rating *" data-ur="ریٹنگ *">Rating *</label>
+                    <div class="flex items-center gap-1.5" id="starRatingSelect">
+                        <i class="fas fa-star text-2xl text-secondary cursor-pointer star-btn" data-value="1"></i>
+                        <i class="fas fa-star text-2xl text-secondary cursor-pointer star-btn" data-value="2"></i>
+                        <i class="fas fa-star text-2xl text-secondary cursor-pointer star-btn" data-value="3"></i>
+                        <i class="fas fa-star text-2xl text-secondary cursor-pointer star-btn" data-value="4"></i>
+                        <i class="fas fa-star text-2xl text-secondary cursor-pointer star-btn" data-value="5"></i>
+                    </div>
+                    <input type="hidden" id="testRating" value="5">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1" data-en="Message *" data-ur="پیغام *">Message *</label>
+                    <textarea id="testMessage" required rows="4" placeholder="Tell us about your experience with our legal services..." class="w-full px-4 py-2 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-secondary resize-none"></textarea>
+                </div>
+                
+                <button type="submit" id="btnSubmitTestimonial" class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:bg-secondary hover:text-primary transition duration-300 flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-en="Submit Testimonial" data-ur="رائے جمع کریں">Submit Testimonial</span>
+                </button>
+            </form>
+
+            <!-- Success State -->
+            <div id="testimonialSuccessState" class="hidden p-8 text-center space-y-4">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                    <i class="fas fa-check text-green-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-primary" data-en="Thank you!" data-ur="شکریہ!">Thank you!</h3>
+                <p class="text-sm text-gray-600" data-en="Your testimonial has been received and will appear after administrator approval." data-ur="آپ کی رائے موصول ہو گئی ہے اور ایڈمنسٹریٹر کی منظوری کے بعد ظاہر ہوگی۔">Your testimonial has been received and will appear after administrator approval.</p>
+                <button onclick="closeTestimonialModal()" class="w-full bg-primary text-white font-bold py-2.5 rounded-xl hover:bg-secondary hover:text-primary transition" data-en="Close" data-ur="بند کریں">Close</button>
+            </div>
+        </div>
+    </div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 	
@@ -3350,6 +3420,7 @@
     console.log("Supabase2:", typeof supabase);
             loadHomeBlogs();
             qanooni_mushawarat_loadHomeNews();
+            loadHomeTestimonials();
         });
         
 		function handleClientSubmit(e){
@@ -3357,6 +3428,167 @@
 			alert("Request Submitted Successfully.");
 			e.target.reset();
 			}
+
+        // Testimonial Form Handlers
+        function openTestimonialModal() {
+            document.getElementById('testimonialModal').classList.remove('hidden');
+            document.getElementById('testimonialModal').classList.add('flex');
+            document.getElementById('testimonialForm').classList.remove('hidden');
+            document.getElementById('testimonialSuccessState').classList.add('hidden');
+            document.body.style.overflow = 'hidden';
+            resetTestimonialStars();
+        }
+
+        function closeTestimonialModal() {
+            document.getElementById('testimonialModal').classList.add('hidden');
+            document.getElementById('testimonialModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        function resetTestimonialStars() {
+            setTestimonialRating(5);
+        }
+
+        function setTestimonialRating(rating) {
+            document.getElementById('testRating').value = rating;
+            const stars = document.querySelectorAll('#starRatingSelect .star-btn');
+            stars.forEach((star, idx) => {
+                if (idx < rating) {
+                    star.className = 'fas fa-star text-2xl text-secondary cursor-pointer star-btn';
+                } else {
+                    star.className = 'fas fa-star text-2xl text-gray-300 cursor-pointer star-btn';
+                }
+            });
+        }
+
+        // Add event listeners for stars once DOM loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('#starRatingSelect .star-btn');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-value'));
+                    setTestimonialRating(rating);
+                });
+            });
+            // Outside click modal close
+            const tModal = document.getElementById('testimonialModal');
+            if (tModal) {
+                tModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeTestimonialModal();
+                    }
+                });
+            }
+        });
+
+        async function handleTestimonialSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('btnSubmitTestimonial');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            const payload = {
+                name: document.getElementById('testName').value.trim(),
+                city: document.getElementById('testCity').value.trim(),
+                email: document.getElementById('testEmail').value.trim() || null,
+                rating: parseInt(document.getElementById('testRating').value),
+                message: document.getElementById('testMessage').value.trim(),
+                status: 'Pending',
+                project: 'Qanooni-Mushawarat'
+            };
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && window.SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('testimonials')
+                        .insert([payload]);
+                    if (error) throw error;
+                } else {
+                    // Fallback to localStorage
+                    let localTestimonials = JSON.parse(localStorage.getItem('local_testimonials') || '[]');
+                    payload.id = 'temp-' + Date.now();
+                    payload.created_at = new Date().toISOString();
+                    localTestimonials.push(payload);
+                    localStorage.setItem('local_testimonials', JSON.stringify(localTestimonials));
+                }
+
+                document.getElementById('testimonialForm').classList.add('hidden');
+                document.getElementById('testimonialSuccessState').classList.remove('hidden');
+                document.getElementById('testimonialForm').reset();
+            } catch (err) {
+                console.error("Error submitting testimonial:", err);
+                alert("Failed to submit testimonial: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }
+
+        async function loadHomeTestimonials() {
+            const container = document.getElementById('testimonialsContainer');
+            if (!container) return;
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && window.SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+            let testimonials = [];
+
+            try {
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('testimonials')
+                        .select('*')
+                        .eq('project', 'Qanooni-Mushawarat')
+                        .eq('status', 'Approved')
+                        .order('created_at', { ascending: false })
+                        .limit(10);
+                    if (error) throw error;
+                    testimonials = data || [];
+                } else {
+                    // Fallback local storage
+                    const local = JSON.parse(localStorage.getItem('local_testimonials') || '[]');
+                    testimonials = local.filter(t => t.status === 'Approved' && t.project === 'Qanooni-Mushawarat');
+                }
+            } catch (err) {
+                console.error("Error fetching testimonials:", err);
+            }
+
+            if (testimonials.length > 0) {
+                container.innerHTML = '';
+                testimonials.forEach(t => {
+                    let starsHtml = '';
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= t.rating) {
+                            starsHtml += '<i class="fas fa-star text-secondary"></i>';
+                        } else {
+                            starsHtml += '<i class="fas fa-star text-gray-300"></i>';
+                        }
+                    }
+
+                    const initial = t.name ? t.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'C';
+
+                    const card = document.createElement('div');
+                    card.className = 'bg-white p-8 rounded-2xl shadow-lg hover-lift flex flex-col justify-between';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center gap-1 mb-4">
+                                ${starsHtml}
+                            </div>
+                            <p class="text-gray-600 mb-6 font-italic">"${t.message}"</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">${initial}</div>
+                            <div>
+                                <h4 class="font-semibold text-primary">${t.name}</h4>
+                                <p class="text-sm text-gray-500">${t.city || ''}</p>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        }
 			
         // Language Toggle
         // Language Toggle
