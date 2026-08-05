@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="./theme.css">
+    <link rel="stylesheet" href="../css/style.css">
 	
 	<style>
 
@@ -25,16 +25,26 @@
         }
 
         /* URDU FONT */
-        @font-face{
-            font-family:'JameelNoori';
-            src:url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+        @font-face {
+            font-family: 'JameelNoori';
+            src: local('Jameel Noori Nastaleeq'), local('JameelNoori'), url('../fonts/JameelNooriNastaleeq.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
-        .urdu-text,
-        .urdu-heading,
-        .urdu-ui{
-            font-family:'JameelNoori', serif !important;
+        html[lang="ur"] .urdu-text,
+        html[lang="ur"] .urdu-heading,
+        html[lang="ur"] .urdu-ui {
+            font-family:'JameelNoori', 'Inter', sans-serif !important;
             direction:rtl;
+            text-align: right;
+        }
+        html[lang="en"] .urdu-text,
+        html[lang="en"] .urdu-heading,
+        html[lang="en"] .urdu-ui {
+            font-family:'Inter', sans-serif !important;
+            direction:ltr;
+            text-align: left;
         }
 
         .urdu-text{
@@ -67,6 +77,10 @@
             color:var(--secondary);
         }
 
+    
+        [dir="rtl"], [dir="rtl"] *:not(i):not(svg):not([class*="fa-"]) {
+            font-family: 'JameelNoori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Inter', sans-serif !important;
+        }
     </style>
 
     <script>
@@ -101,8 +115,8 @@
 				<!-- LOGO -->
                 <a href="../index.html" class="flex items-center">
                     <img src="../images/logo/logo-02.png"
-                         alt="LegalEase Logo"
-                         class="h-8 md:h-10 w-auto object-contain">
+                         alt="Qanooni Mushawarat Logo"
+                         class="h-[48px] md:h-[60px] w-auto object-contain relative top-[5px]">
                 </a>
 
                 <!-- HOME -->
@@ -167,8 +181,8 @@
 
             <!-- Description -->
             <p class="text-white/80 text-lg md:text-xl leading-relaxed urdu-text"
-               data-en="Your privacy and legal confidentiality are important to us. Learn how LegalEase Pakistan collects, uses, and protects your information."
-               data-ur="آپ کی رازداری اور قانونی معلومات کی حفاظت ہمارے لیے انتہائی اہم ہے۔ جانیں کہ لیگل ایز پاکستان آپ کی معلومات کو کیسے جمع، استعمال اور محفوظ رکھتا ہے۔">
+               data-en="Your privacy and legal confidentiality are important to us. Learn how Qanooni Mushawarat Pakistan collects, uses, and protects your information."
+               data-ur="آپ کی رازداری اور قانونی معلومات کی حفاظت ہمارے لیے انتہائی اہم ہے۔ جانیں کہ قانونی مشاورت پاکستان آپ کی معلومات کو کیسے جمع، استعمال اور محفوظ رکھتا ہے۔">
                 Your privacy and legal confidentiality are important to us.
             </p>
         </div>
@@ -207,10 +221,10 @@
                     </div>
 
                     <p class="text-gray-600 leading-8 urdu-text"
-                       data-en="LegalEase Pakistan values your trust and privacy. This Privacy Policy explains how we collect, use, protect, and manage your personal information while using our legal consultancy platform."
-                       data-ur="لیگل ایز پاکستان آپ کے اعتماد اور رازداری کی قدر کرتا ہے۔ یہ رازداری پالیسی وضاحت کرتی ہے کہ ہم آپ کی معلومات کو کیسے جمع، استعمال، محفوظ اور منظم کرتے ہیں۔">
+                       data-en="Qanooni Mushawarat Pakistan values your trust and privacy. This Privacy Policy explains how we collect, use, protect, and manage your personal information while using our legal consultancy platform."
+                       data-ur="قانونی مشاورت پاکستان آپ کے اعتماد اور رازداری کی قدر کرتا ہے۔ یہ رازداری پالیسی وضاحت کرتی ہے کہ ہم آپ کی معلومات کو کیسے جمع، استعمال، محفوظ اور منظم کرتے ہیں۔">
 
-                        LegalEase Pakistan values your trust and privacy.
+                        Qanooni Mushawarat Pakistan values your trust and privacy.
                     </p>
                 </div>
 
@@ -256,8 +270,8 @@
                         </h3>
 
                         <p class="text-gray-600 leading-8 urdu-text"
-                           data-en="All legal information shared through LegalEase Pakistan is treated confidentially and securely."
-                           data-ur="لیگل ایز پاکستان کے ذریعے شیئر کی گئی تمام قانونی معلومات کو مکمل رازداری اور تحفظ کے ساتھ رکھا جاتا ہے۔">
+                           data-en="All legal information shared through Qanooni Mushawarat Pakistan is treated confidentially and securely."
+                           data-ur="قانونی مشاورت پاکستان کے ذریعے شیئر کی گئی تمام قانونی معلومات کو مکمل رازداری اور تحفظ کے ساتھ رکھا جاتا ہے۔">
 
                             All legal information shared...
 
@@ -331,10 +345,10 @@
                         </h3>
 
                         <p class="text-gray-600 leading-8 urdu-text"
-                           data-en="LegalEase Pakistan may update this Privacy Policy at any time without prior notice."
-                           data-ur="لیگل ایز پاکستان اس رازداری پالیسی کو کسی بھی وقت بغیر پیشگی اطلاع کے اپڈیٹ کر سکتا ہے۔">
+                           data-en="Qanooni Mushawarat Pakistan may update this Privacy Policy at any time without prior notice."
+                           data-ur="قانونی مشاورت پاکستان اس رازداری پالیسی کو کسی بھی وقت بغیر پیشگی اطلاع کے اپڈیٹ کر سکتا ہے۔">
 
-                            LegalEase Pakistan may update...
+                            Qanooni Mushawarat Pakistan may update...
 
                         </p>
 
@@ -356,8 +370,8 @@
                         </h3>
 
                         <p class="text-gray-600 leading-8 urdu-text"
-                           data-en="For privacy related questions, contact LegalEase Pakistan support team."
-                           data-ur="رازداری سے متعلق سوالات کے لیے لیگل ایز پاکستان سپورٹ ٹیم سے رابطہ کریں۔">
+                           data-en="For privacy related questions, contact Qanooni Mushawarat Pakistan support team."
+                           data-ur="رازداری سے متعلق سوالات کے لیے قانونی مشاورت پاکستان سپورٹ ٹیم سے رابطہ کریں۔">
 
                             For privacy related questions...
 
@@ -375,15 +389,20 @@
 
 </section>
 
-<!-- SIMPLE INNER PAGE FOOTER -->
-<footer class="bg-primary border-t border-secondary/20 py-3">
+<!-- =========================
+FOOTER
+========================= -->
 
-    <div class="container mx-auto px-4">
+<footer class="bg-primary py-4 mt-10">
 
-        <p class="text-center text-white/70 text-xs md:text-sm urdu-text"
-           data-en="© 2026 LegalEase Pakistan. All Rights Reserved."
-           data-ur="© 2026 لیگل ایز پاکستان۔ جملہ حقوق محفوظ ہیں۔">
+    <div class="container mx-auto px-4 text-center">
+
+        <p class="text-white text-sm"
+           data-en="© 2026 Qanooni Mushawarat Pakistan. All Rights Reserved."
+           data-ur="© 2026 قانونی مشاورت پاکستان۔ جملہ حقوق محفوظ ہیں۔">
+
             © 2026 Qanooni Mushawarat Pakistan. All Rights Reserved.
+
         </p>
 
     </div>
@@ -417,12 +436,13 @@ function toggleLanguage(){
 
     }
 
-    document.querySelectorAll('[data-en]').forEach(el => {
-
-        el.textContent =
-            el.getAttribute(`data-${currentLanguage}`);
-
-    });
+                // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const translation = el.getAttribute('data-' + currentLanguage);
+                if (translation) {
+                    el.textContent = translation;
+                }
+            });
 
     document.getElementById('langBtn').textContent =
         currentLanguage === 'en'
@@ -435,3 +455,5 @@ function toggleLanguage(){
 
 </body>
 </html>
+
+
