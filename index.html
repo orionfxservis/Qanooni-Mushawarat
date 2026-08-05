@@ -3047,13 +3047,38 @@
                 </div>
                 
                 <!-- Newsletter -->
-                <div class="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 md:p-12 text-center text-white">
-                    <h3 class="text-2xl font-bold mb-4" data-en="Subscribe to Our Newsletter" data-ur="ہمارے نیوز لیٹر کو سبسکرائب کریں">Subscribe to Our Newsletter</h3>
-                    <p class="text-white/70 mb-6" data-en="Get latest legal updates, news, and tips delivered to your inbox" data-ur="تازہ ترین قانونی اپڈیٹس، خبریں اور تجاویز اپنے ان باکس میں حاصل کریں">Get latest legal updates, news, and tips delivered to your inbox</p>
-                    <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-full text-primary focus:outline-none">
-                        <button type="submit" class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold hover:bg-white transition" data-en="Subscribe" data-ur="سبسکرائب کریں">Subscribe</button>
-                    </form>
+                <div class="bg-gradient-to-r from-primary to-accent rounded-3xl p-8 md:p-12 text-center text-white shadow-xl relative overflow-hidden">
+                    <div id="newsletter-form-container">
+                        <h3 class="text-2xl md:text-3xl font-extrabold mb-4 tracking-tight" data-en="Subscribe to Our Newsletter" data-ur="ہمارے نیوز لیٹر کو سبسکرائب کریں">Subscribe to Our Newsletter</h3>
+                        <p class="text-white/80 max-w-2xl mx-auto mb-8 text-sm md:text-base leading-relaxed" data-en="Stay updated with the latest legal articles, court decisions, legal tips, and important updates delivered directly to your inbox." data-ur="تازہ ترین قانونی مضامین، عدالتی فیصلوں، قانونی تجاویز اور اہم اپ ڈیٹس کو براہ راست اپنے ان باکس میں حاصل کریں۔">Stay updated with the latest legal articles, court decisions, legal tips, and important updates delivered directly to your inbox.</p>
+                        
+                        <form id="newsletter-form" onsubmit="handleNewsletterSubmit(event)" class="max-w-md mx-auto space-y-4">
+                            <div class="relative text-left">
+                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-white/50 text-sm">
+                                    📧
+                                </span>
+                                <input type="email" id="newsletter-email" required placeholder="Email Address" class="w-full pl-10 pr-6 py-3.5 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:bg-white focus:text-primary transition duration-300">
+                            </div>
+                            
+                            <div class="flex items-center justify-center gap-2.5 text-xs text-white/80">
+                                <input type="checkbox" id="newsletter-agree" required class="rounded border-white/20 text-secondary focus:ring-secondary bg-white/10 w-4 h-4 cursor-pointer">
+                                <label for="newsletter-agree" class="cursor-pointer select-none" data-en="I agree to receive legal updates and newsletters." data-ur="میں قانونی اپ ڈیٹس اور نیوز لیٹر حاصل کرنے سے اتفاق کرتا ہوں۔">I agree to receive legal updates and newsletters.</label>
+                            </div>
+
+                            <button type="submit" id="newsletter-submit-btn" class="w-full bg-secondary text-primary font-bold py-3.5 rounded-2xl shadow-lg hover:bg-white hover:text-primary transition duration-300 transform active:scale-95 flex items-center justify-center gap-2">
+                                <span data-en="Subscribe" data-ur="سبسکرائب کریں">Subscribe</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success State -->
+                    <div id="newsletter-success-state" class="hidden py-6 space-y-4">
+                        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto text-2xl">
+                            🎉
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white" data-en="Thank you for subscribing!" data-ur="سبسکرائب کرنے کا شکریہ!">Thank you for subscribing!</h3>
+                        <p class="text-white/80 max-w-md mx-auto text-sm" data-en="You'll receive our latest legal updates and newsletters." data-ur="آپ کو ہماری تازہ ترین قانونی اپ ڈیٹس اور نیوز لیٹر موصول ہوں گے۔">You'll receive our latest legal updates and newsletters.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3587,6 +3612,81 @@
                     `;
                     container.appendChild(card);
                 });
+            }
+        }
+
+        async function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const submitBtn = document.getElementById('newsletter-submit-btn');
+            const email = emailInput.value.trim().toLowerCase();
+
+            if (!email) return;
+
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="animate-pulse">Checking...</span>';
+
+            const activeSupabase = (typeof supabaseClient !== 'undefined' && window.SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') ? supabaseClient : ((typeof supabase !== 'undefined') ? supabase : null);
+
+            try {
+                let alreadyExists = false;
+
+                if (activeSupabase) {
+                    const { data, error } = await activeSupabase
+                        .from('newsletter_subscribers')
+                        .select('id')
+                        .eq('email', email)
+                        .eq('project', 'Qanooni-Mushawarat');
+                    
+                    if (error) throw error;
+                    if (data && data.length > 0) {
+                        alreadyExists = true;
+                    }
+                } else {
+                    const localSubs = JSON.parse(localStorage.getItem('local_newsletter_subscribers') || '[]');
+                    const exists = localSubs.some(s => s.email === email && s.project === 'Qanooni-Mushawarat');
+                    if (exists) {
+                        alreadyExists = true;
+                    }
+                }
+
+                if (alreadyExists) {
+                    alert(currentLanguage === 'ur' ? 'آپ پہلے ہی سبسکرائب کر چکے ہیں۔' : 'You are already subscribed.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                    return;
+                }
+
+                const payload = {
+                    email: email,
+                    status: 'Active',
+                    source: 'Homepage',
+                    subscribed_at: new Date().toISOString(),
+                    project: 'Qanooni-Mushawarat'
+                };
+
+                if (activeSupabase) {
+                    const { error } = await activeSupabase
+                        .from('newsletter_subscribers')
+                        .insert([payload]);
+                    if (error) throw error;
+                } else {
+                    let localSubs = JSON.parse(localStorage.getItem('local_newsletter_subscribers') || '[]');
+                    payload.id = 'temp-' + Date.now();
+                    localSubs.push(payload);
+                    localStorage.setItem('local_newsletter_subscribers', JSON.stringify(localSubs));
+                }
+
+                document.getElementById('newsletter-form-container').classList.add('hidden');
+                document.getElementById('newsletter-success-state').classList.remove('hidden');
+
+            } catch (err) {
+                console.error("Subscription error:", err);
+                alert("Subscription failed: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
             }
         }
 			
